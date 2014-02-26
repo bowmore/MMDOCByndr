@@ -3,5 +3,6 @@ package be.degreyt.byndr.datamodel;
 /**
  * Created by WDH on 26/02/14.
  */
-public enum SpellType {
+public interface StandardAbility {
+    String getName();
 }
