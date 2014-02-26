@@ -1,6 +1,6 @@
-package be.degreyt.byndr.services;
+package be.degreyt.mmdoc.byndr.services;
 
-import be.degreyt.byndr.datamodel.Card;
+import be.degreyt.mmdoc.datamodel.Card;
 
 public interface CardOwnership {
 

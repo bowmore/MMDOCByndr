@@ -1,4 +1,4 @@
-package be.degreyt.byndr.datamodel;
+package be.degreyt.mmdoc.datamodel;
 
 import java.util.Set;
 

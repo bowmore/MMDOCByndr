@@ -1,4 +1,4 @@
-package be.degreyt.byndr.services;
+package be.degreyt.mmdoc.byndr.services;
 
 public interface ByndrService {
 

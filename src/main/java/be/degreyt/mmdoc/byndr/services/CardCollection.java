@@ -1,7 +1,7 @@
-package be.degreyt.byndr.services;
+package be.degreyt.mmdoc.byndr.services;
 
-import be.degreyt.byndr.datamodel.Expansion;
-import be.degreyt.byndr.datamodel.Rarity;
+import be.degreyt.mmdoc.datamodel.Expansion;
+import be.degreyt.mmdoc.datamodel.Rarity;
 
 import java.util.Set;
 
