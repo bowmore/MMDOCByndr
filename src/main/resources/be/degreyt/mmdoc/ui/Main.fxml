@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="936.0" prefWidth="1254.0" xmlns:fx="http://javafx.com/fxml">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="936.0" prefWidth="1254.0" xmlns:fx="http://javafx.com/fxml" fx:controller="be.degreyt.mmdoc.ui.MainController">
   <center>
     <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
   </center>

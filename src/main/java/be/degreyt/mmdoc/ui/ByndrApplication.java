@@ -19,11 +19,7 @@ public class ByndrApplication extends Application {
     public void start(Stage primaryStage) throws Exception {
         try {
             URL resource = ByndrApplication.class.getResource("/be/degreyt/mmdoc/ui/Main.fxml");
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(resource);
-            fxmlLoader.setController(new MainController());
-            fxmlLoader.setBuilderFactory(new JavaFXBuilderFactory());
-            BorderPane page = (BorderPane) fxmlLoader.load(resource.openStream());
+            BorderPane page = FXMLLoader.load(resource);
             Scene scene = new Scene(page);
             primaryStage.setScene(scene);
             primaryStage.setTitle("MMDOCByndr");
