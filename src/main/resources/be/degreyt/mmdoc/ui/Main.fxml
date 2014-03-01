@@ -6,24 +6,24 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="936.0" prefWidth="1254.0" xmlns:fx="http://javafx.com/fxml" fx:controller="be.degreyt.mmdoc.ui.MainController">
   <center>
-    <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+    <StackPane fx:id="stackPane" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
   </center>
   <top>
     <GridPane BorderPane.alignment="CENTER">
       <children>
         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
           <center>
-            <Button mnemonicParsing="false" onAction="#collectionSelected" text="Collection" BorderPane.alignment="CENTER" />
+            <Button mnemonicParsing="false" onAction="#showCollection" text="Collection" BorderPane.alignment="CENTER" />
           </center>
         </BorderPane>
         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
           <center>
-            <Button mnemonicParsing="false" text="Wildcards" BorderPane.alignment="CENTER" />
+            <Button mnemonicParsing="false" onAction="#showWildcards" text="Wildcards" BorderPane.alignment="CENTER" />
           </center>
         </BorderPane>
         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
           <center>
-            <Button mnemonicParsing="false" text="Wish List" BorderPane.alignment="CENTER" />
+            <Button mnemonicParsing="false" onAction="#showWishList" text="Wish List" BorderPane.alignment="CENTER" />
           </center>
         </BorderPane>
         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="3">

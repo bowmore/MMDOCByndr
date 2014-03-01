@@ -3,6 +3,7 @@ package be.degreyt.mmdoc.ui;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -18,11 +19,14 @@ public class ByndrApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         try {
+            FXMLLoader myLoader = new FXMLLoader(getClass().getResource("/be/degreyt/mmdoc/ui/Main.fxml"));
+            Parent page = (Parent) myLoader.load();
             URL resource = ByndrApplication.class.getResource("/be/degreyt/mmdoc/ui/Main.fxml");
-            BorderPane page = FXMLLoader.load(resource);
+            MainController mainController = myLoader.getController();
             Scene scene = new Scene(page);
             primaryStage.setScene(scene);
             primaryStage.setTitle("MMDOCByndr");
+            mainController.showInitialScreen();
             primaryStage.show();
         } catch (Exception ex) {
             ex.printStackTrace();
