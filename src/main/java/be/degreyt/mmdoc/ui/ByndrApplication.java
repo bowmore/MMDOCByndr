@@ -24,6 +24,7 @@ public class ByndrApplication extends Application {
             URL resource = ByndrApplication.class.getResource("/be/degreyt/mmdoc/ui/Main.fxml");
             MainController mainController = myLoader.getController();
             Scene scene = new Scene(page);
+            scene.getStylesheets().add("/be/degreyt/mmdoc/ui/Byndr.css");
             primaryStage.setScene(scene);
             primaryStage.setTitle("MMDOCByndr");
             mainController.showInitialScreen();
