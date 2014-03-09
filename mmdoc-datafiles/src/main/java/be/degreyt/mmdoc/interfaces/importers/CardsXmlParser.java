@@ -1,54 +1,60 @@
 package be.degreyt.mmdoc.interfaces.importers;
 
+import be.degreyt.mmdoc.interfaces.importers.data.*;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.StaxDriver;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Pattern;
 
 public class CardsXmlParser {
 
     private XStream xStream;
+    private String rootPath;
+    private Pattern fileNamePattern = Pattern.compile(".*\\.xml");
+
+    public CardsXmlParser() {
+        this(".\\mmdoc-datafiles\\src\\main\\resources\\gamedata");
+    }
+
+    public CardsXmlParser(String rootPath) {
+        this.rootPath = rootPath;
+    }
+
+    public List<XCard> parse() {
+        XStream xStream = new CardsXmlParser().getXStream();
+        File rootDirectory = new File(rootPath);
+        if (!rootDirectory.isDirectory()) {
+            throw new RuntimeException("Invalid path");
+        }
+        FilenameFilter filenameFilter = new FilenameFilter() {
+            @Override
+            public boolean accept(File dir, String name) {
+                return name != null && fileNamePattern.matcher(name).matches();
+            }
+        };
+        File[] files = rootDirectory.listFiles(filenameFilter);
+        List<XCard> cards = new ArrayList<XCard>();
+        for (File file : files) {
+            Cards parsedFile = (Cards) xStream.fromXML(file);
+            List<XCard> cardsInFile = parsedFile.getCards();
+
+            if (cardsInFile != null) {
+                cards.addAll(cardsInFile);
+            }
+        }
+        return cards;
+    }
+
 
     public static void main(String[] args) {
-        try {
-            XStream xStream = new CardsXmlParser().getXStream();
-
-            Cards c = new Cards();
-            XCard xCard = new XCard();
-            xCard.setRarity("Common");
-            c.add(xCard);
-            System.out.println(xStream.toXML(c));
-
-            Cards cards;
-            cards = (Cards) xStream.fromXML(new FileInputStream(new File(".\\mmdoc-datafiles\\src\\main\\resources\\gamedata\\cards_b01.xml")));
-            cards = (Cards) xStream.fromXML(new FileInputStream(new File(".\\mmdoc-datafiles\\\\src\\main\\resources\\gamedata\\cards_b01_1.xml")));
-            cards = (Cards) xStream.fromXML(new FileInputStream(new File(".\\mmdoc-datafiles\\\\src\\main\\resources\\gamedata\\cards_b01_2.xml")));
-            cards = (Cards) xStream.fromXML(new FileInputStream(new File(".\\mmdoc-datafiles\\\\src\\main\\resources\\gamedata\\cards_b01_3.xml")));
-            cards = (Cards) xStream.fromXML(new FileInputStream(new File(".\\mmdoc-datafiles\\\\src\\main\\resources\\gamedata\\cards_rew.xml")));
-            cards = (Cards) xStream.fromXML(new FileInputStream(new File(".\\mmdoc-datafiles\\\\src\\main\\resources\\gamedata\\cards_s01.xml")));
-            cards = (Cards) xStream.fromXML(new FileInputStream(new File(".\\mmdoc-datafiles\\\\src\\main\\resources\\gamedata\\cards_s01_1.xml")));
-            cards = (Cards) xStream.fromXML(new FileInputStream(new File(".\\mmdoc-datafiles\\\\src\\main\\resources\\gamedata\\cards_s01_2.xml")));
-            cards = (Cards) xStream.fromXML(new FileInputStream(new File(".\\mmdoc-datafiles\\\\src\\main\\resources\\gamedata\\cards_s01_3.xml")));
-            cards = (Cards) xStream.fromXML(new FileInputStream(new File(".\\mmdoc-datafiles\\\\src\\main\\resources\\gamedata\\cards_s02.xml")));
-            cards = (Cards) xStream.fromXML(new FileInputStream(new File(".\\mmdoc-datafiles\\\\src\\main\\resources\\gamedata\\cards_s02_1.xml")));
-            cards = (Cards) xStream.fromXML(new FileInputStream(new File(".\\mmdoc-datafiles\\\\src\\main\\resources\\gamedata\\cards_s02_2.xml")));
-            cards = (Cards) xStream.fromXML(new FileInputStream(new File(".\\mmdoc-datafiles\\\\src\\main\\resources\\gamedata\\cards_s02_3.xml")));
-            cards = (Cards) xStream.fromXML(new FileInputStream(new File(".\\mmdoc-datafiles\\\\src\\main\\resources\\gamedata\\cards_s03.xml")));
-            cards = (Cards) xStream.fromXML(new FileInputStream(new File(".\\mmdoc-datafiles\\\\src\\main\\resources\\gamedata\\cards_s03_1.xml")));
-            cards = (Cards) xStream.fromXML(new FileInputStream(new File(".\\mmdoc-datafiles\\\\src\\main\\resources\\gamedata\\cards_s03_2.xml")));
-            cards = (Cards) xStream.fromXML(new FileInputStream(new File(".\\mmdoc-datafiles\\\\src\\main\\resources\\gamedata\\cards_s03_3.xml")));
-            cards = (Cards) xStream.fromXML(new FileInputStream(new File(".\\mmdoc-datafiles\\\\src\\main\\resources\\gamedata\\cards_s04.xml")));
-            cards = (Cards) xStream.fromXML(new FileInputStream(new File(".\\mmdoc-datafiles\\\\src\\main\\resources\\gamedata\\cards_s04_1.xml")));
-            cards = (Cards) xStream.fromXML(new FileInputStream(new File(".\\mmdoc-datafiles\\\\src\\main\\resources\\gamedata\\cards_s04_2.xml")));
-            cards = (Cards) xStream.fromXML(new FileInputStream(new File(".\\mmdoc-datafiles\\\\src\\main\\resources\\gamedata\\cards_s04_3.xml")));
-            System.out.println(cards);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        List<XCard> cards = new CardsXmlParser().parse();
+        System.out.println(cards.size());
+        for (XCard xCard : cards) {
+            System.out.println(xCard.getName());
         }
-
     }
 
     private XStream getXStream() {
@@ -99,9 +105,5 @@ public class CardsXmlParser {
         xStream.useAttributeFor(XCard.class, "Attack");
         xStream.useAttributeFor(XCard.class, "Retaliate");
         xStream.useAttributeFor(XCard.class, "HP");
-    }
-
-    public Cards parse(InputStream inputStream) {
-        return (Cards) getXStream().fromXML(inputStream);
     }
 }

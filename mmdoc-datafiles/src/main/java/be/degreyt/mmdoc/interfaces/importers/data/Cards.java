@@ -1,4 +1,4 @@
-package be.degreyt.mmdoc.interfaces.importers;
+package be.degreyt.mmdoc.interfaces.importers.data;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,5 +11,9 @@ public class Cards {
 
     public void add(XCard xCard) {
         cards.add(xCard);
+    }
+
+    public List<XCard> getCards() {
+        return cards;
     }
 }
