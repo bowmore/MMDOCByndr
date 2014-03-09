@@ -8,4 +8,6 @@ public interface Card {
     Set<ExpansionInfo> getExpansionInfo();
     int getWildCardCost();
     Set<Format> getAllowedFormats();
+
+    String getDescription();
 }
