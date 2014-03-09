@@ -22,16 +22,16 @@ public class ByndrApplication extends Application {
     public void start(Stage primaryStage) throws Exception {
         try {
             FXMLLoader myLoader = new FXMLLoader(getClass().getResource("/be/degreyt/mmdoc/ui/MMDOCByndr.fxml"));
-            Injector injector = Guice.createInjector(new DataModelModule(), new ByndrServicesModule());
+            Injector injector = Guice.createInjector(new DataModelModule(), new MockByndrServicesModule());
             myLoader.setControllerFactory(new GuiceControllerFactory(injector));
             Parent page = (Parent) myLoader.load();
-//            MainController mainController = myLoader.getController();
+            MainController mainController = myLoader.getController();
             Scene scene = new Scene(page);
             scene.getStylesheets().add("/be/degreyt/mmdoc/ui/Byndr.css");
             primaryStage.setScene(scene);
             primaryStage.setTitle("MMDOCByndr");
-//            mainController.showInitialScreen();
             primaryStage.show();
+            mainController.initScreen();
         } catch (Exception ex) {
             ex.printStackTrace();
             System.exit(-1);

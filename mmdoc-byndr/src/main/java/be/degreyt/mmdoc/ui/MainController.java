@@ -1,6 +1,9 @@
 package be.degreyt.mmdoc.ui;
 
 import be.degreyt.mmdoc.byndr.services.ByndrService;
+import be.degreyt.mmdoc.byndr.services.CardCollection;
+import be.degreyt.mmdoc.byndr.services.CardOwnership;
+import be.degreyt.mmdoc.exceptions.UnderlyingIOException;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -12,18 +15,21 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
 import javax.inject.Inject;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class MainController {
 
     private final ByndrService byndrService;
 
-    @FXML private StackPane stackPane;
+    @FXML private FlowPane resultPane;
 
     private final Map<String, Node> screens = new HashMap<>();
 
@@ -32,19 +38,20 @@ public class MainController {
         this.byndrService = byndrService;
     }
 
+    public void initScreen() {
+        CardCollection cardCollection = byndrService.load();
+        Set<CardOwnership> ownerships = cardCollection.ownerships();
+        for (CardOwnership ownership : ownerships) {
+            try {
+                FXMLLoader myLoader = new FXMLLoader(getClass().getResource("/be/degreyt/mmdoc/ui/CardGlyph.fxml"));
+                Parent loadScreen = (Parent) myLoader.load();
+                resultPane.getChildren().add(loadScreen);
+                GlyphController contentController = ((GlyphController) myLoader.getController());
+                contentController.set(ownership);
+            } catch (IOException e) {
+                throw new UnderlyingIOException(e);
+            }
+        }
+    }
 
-
-//    public boolean loadScreen(String name, String resource) {
-//        try {
-//            FXMLLoader myLoader = new FXMLLoader(getClass().getResource(resource));
-//            Parent loadScreen = (Parent) myLoader.load();
-//            screens.put(name, loadScreen);
-//            ContentController contentController = ((ContentController) myLoader.getController());
-//            contentController.setScreenParent(stackPane);
-//            return true;
-//        }catch(Exception e) {
-//            System.out.println(e.getMessage());
-//            return false;
-//        }
-//    }
 }
