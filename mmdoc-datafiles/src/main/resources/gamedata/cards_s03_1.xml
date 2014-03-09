@@ -1,0 +1,794 @@
+<!-- Define all cards of the third serie in this document. XML is case sensitive. -->
+<Cards>
+    <!--...............................................................................-->
+    <!-- //	 ####   ####    #####    ###    #####   ##  #   ####    #####   #####
+         //	##      #   #   ##      ##  #    ##     ##  #   #   #   ##      ##
+         //	##      ####    ####    #####    ##     ##  #   ####    ####    #####
+         //	##      ## #    ##      ##  #    ##     ##  #   ## #    ##         ##
+         //	 ####   ##  #   #####   ##  #    ##     #####   ##  #   #####   ##### -->
+    <!--...............................................................................-->
+    <!-- Abilities Template -->
+    <!--...............................................................................-->
+    <TemplateEffect Name="AirHeal">
+        <Target Zone="Battleground" CardType="Unit" Amount="Self" Side="Friendly" >
+            <Effect Type="ModifyDamage" Value="1.0x" DamageIncludeFlags="Air" Reverse="True" OwnerAbility="Air"/>
+        </Target>
+    </TemplateEffect>
+    <TemplateEffect Name="SpellResist">
+        <Target Zone="Battleground" CardType="Unit" Amount="Self" Side="Friendly" >
+            <Effect Type="ModifyDamage" Value="0.5xd" DamageIncludeFlags="Spell" OwnerAbility="SpellResist"/>
+        </Target>
+    </TemplateEffect>
+    <TemplateEffect Name="MagicGuard">
+        <Target Zone="Battleground" CardType="Unit" Amount="Self" Side="Friendly" Shape="SelfAndAdjacent">
+            <Variable Type="AbilityValue" Ability="MagicGuard" ValueModifier="-1.0x" />
+            <Effect Type="ModifyDamage" Value="Variable" DamageIncludeFlags="Magic" OwnerAbility="MagicGuard" />
+        </Target>
+    </TemplateEffect>
+    <TemplateEffect Name="MeleeBlast">
+        <Trigger Type="OnThisAttackUnit" ExecuteOncePerTransaction="True" >
+            <CardFilter IncludeUnitType="Melee" IncludeCardType="Unit"/>
+            <Target Zone="Battleground" CardType="Unit" Side="Enemy" Amount="All" ExceptFromTrigger="True" >
+                <CardFilter IncludeUnitType="Melee" />
+                <Variable Type="AbilityValue" Ability="MeleeBlast" />
+                <Effect Type="Damage" Value="Variable" />
+            </Target>
+        </Trigger>
+    </TemplateEffect>
+	
+	<!--...............................................................................-->
+    <!-- Creatures - Academy -->
+    <!--...............................................................................-->
+    <Card Rarity="Common" Type="Unit" Name="Cre_Aca_001" DisplayName="Dancing Dervish" Faction="Academy" SubType="Melee" Cost="2" MightLevel="2" Attack="2" Retaliate="0" HP="3" ID="456">
+	    <Ability Type="RangeReflect" Value="1" />
+    </Card>
+    <Card Rarity="Common" Type="Unit" Name="Cre_Aca_002" DisplayName="Scholar" Faction="Academy" SubType="Melee" Cost="1" MightLevel="1" Attack="1" Retaliate="0" HP="3" ID="457">
+        <Ability Type="MagicChannel" Value="1" />
+        <Ability Type="SpellResist" />
+    </Card>
+    <Card Rarity="Common" Type="Unit" Name="Cre_Aca_003" DisplayName="Rakshasa" Faction="Academy" SubType="Melee" Cost="3" MightLevel="3" Attack="2" Retaliate="2" HP="5" ID="458">
+        <Ability Type="Evade" />
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Aca_004" DisplayName="Dragon Golem" Faction="Academy" SubType="Magic|Melee" Cost="5" MightLevel="3" MagicLevel="5" Attack="3" Retaliate="1" HP="7" ID="459">
+        <Trigger Type="OnThisCardDeploy">
+            <Target Zone="Graveyard" Side="Friendly" Amount="1" Random="True" Cancelable="False" >
+                <CardFilter IncludeCardType="Spell" ExcludeUnique="True" />
+                <Effect Type="MoveCardTo" Destination="Hand" />
+            </Target>
+        </Trigger>
+        <Description>When [THIS] enters the battleground, take a non-unique spell at random from your graveyard and put it into your hand.</Description>
+    </Card>
+    <Card Rarity="Common" Type="Unit" Name="Cre_Aca_005" DisplayName="Minotaur Brute" Faction="Academy" SubType="Magic|Melee" Cost="3" MightLevel="3" MagicLevel="2" Attack="2" Retaliate="2" HP="5" ID="460">
+        <Ability Type="Shockwave" Value="1" />
+    </Card>
+    <Card Rarity="Common" Type="Unit" Name="Cre_Aca_006" DisplayName="Gargoyle" Faction="Academy" SubType="Magic|Flyer" Cost="2" MightLevel="1" MagicLevel="1" Attack="0" Retaliate="1" HP="5" ID="461">
+        <Ability Type="MagicResist" />
+        <Ability Type="CannotAttack" />
+    </Card>
+    <Card Rarity="Common" Type="Unit" Name="Cre_Aca_007" DisplayName="Enslaved Harpy" Faction="Academy" SubType="Flyer" Cost="2" MightLevel="2" Attack="1" Retaliate="0" HP="6" ID="462">
+    </Card>
+    <Card Rarity="Common" Type="Unit" Name="Cre_Aca_008" DisplayName="Spirit-Bound Djinn" Faction="Academy" SubType="Magic|Flyer" Cost="2" MightLevel="2" MagicLevel="3" Attack="2" Retaliate="2" HP="6" ID="463">
+        <Trigger Type="OnThisCardDeath" >
+            <Target Zone="Hero" Side="Friendly" Amount="All" >
+                <Variable Type="CardAttack" />
+                <Effect Type="Damage" Value="Variable" />
+            </Target>
+        </Trigger>
+
+        <Description>When [THIS] dies, deal damage equal to its [ATK] to your hero.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Aca_009" DisplayName="Wizard Apprentice" Faction="Academy" SubType="Magic|Shooter" Cost="3" MightLevel="2" MagicLevel="1" Attack="2" Retaliate="1" HP="2" ID="464">
+        <Ability Type="ImmuneToRetaliate" />
+        <Ability Type="Phased" />
+        <Ability Type="AttackAnywhere" />
+    </Card>
+    <Card Rarity="Common" Type="Unit" Name="Cre_Aca_010" DisplayName="Wizard Tutor" Faction="Academy" SubType="Magic|Shooter" Cost="2" MightLevel="1" MagicLevel="2" Attack="1" Retaliate="0" HP="5" ID="465">
+        <Ability Type="ImmuneToRetaliate" />
+        <Ability Type="MagicChannel" Value="1" />
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Aca_011" DisplayName="Unstable Djinn" Faction="Academy" SubType="Magic|Shooter" Cost="3" MightLevel="4" MagicLevel="3" Attack="4" Retaliate="2" HP="6" ID="466">
+        <Ability Type="ImmuneToRetaliate" />
+        <Trigger Type="OnThisAttack" >            
+            <Target Zone="Battleground" Amount="Self">
+                <Variable Type="Resources" Side="Friendly" />
+                <Condition Operator="LesserThan" ValueA="Variable" ValueB="2" />
+                <Effect Type="Damage" Value="2" />
+            </Target>
+            <Target Zone="None" Side="Friendly">
+                <Variable Type="Resources" Side="Friendly" />
+                <Condition Operator="GreaterThan" ValueA="Variable" ValueB="1" />
+                <Effect Type="GainResources" Value="-2" />
+            </Target>
+        </Trigger>
+        <Description>Whenever [THIS] attacks, pay [2:RESOURCES]. If you cannot, deal 2 damage to [THIS].</Description>
+    </Card>
+    <Card Rarity="Common" Type="Unit" Name="Cre_Aca_012" DisplayName="Wizard Disciple" Faction="Academy" SubType="Magic|Shooter" Cost="3" MightLevel="3" MagicLevel="2" Attack="2" Retaliate="0" HP="6" ID="467">
+        <Ability Type="ImmuneToRetaliate" />
+        <Ability Type="Phased" />
+        <Ability Type="FocusedBlast" Value="1" />
+    </Card>
+    <Card Rarity="Common" Type="Unit" Name="Cre_Aca_013" DisplayName="Djinn" Faction="Academy" SubType="Magic|Shooter" Cost="5" MightLevel="3" MagicLevel="4" Attack="3" Retaliate="3" HP="6" ID="468">
+        <Ability Type="ImmuneToRetaliate" />
+        <Ability Type="MagicChannel" Value="2" />
+        <Ability Type="SpellResist" />
+    </Card>
+    <Card Rarity="Common" Type="Unit" Name="Cre_Aca_014" DisplayName="Spinning Dervish" Faction="Academy" SubType="Melee" Cost="4" MightLevel="4" Attack="2" Retaliate="0" HP="4" ID="469">
+        <Ability Type="RangeReflect" Value="2" />
+        <Ability Type="Evade" />
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Aca_015" DisplayName="Blade Mage" Faction="Academy" SubType="Magic|Melee" Cost="6" MightLevel="3" MagicLevel="5" Attack="3" Retaliate="2" HP="6" ID="470">
+        <Trigger Type="OnThisKillUnit" Side="Friendly" >
+            <Target Zone="Graveyard" Side="Friendly" Amount="1" >
+                <CardFilter IncludeCardType="Spell" ExcludeUnique="True" />
+                <Effect Type="MoveCardTo" Destination="Hand" />
+            </Target>
+        </Trigger>
+        <Description>When [THIS] kills a creature during your turn, take a non-unique spell card in your graveyard and put it in your hand.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Aca_016" DisplayName="Guardian Golem" Faction="Academy" SubType="Magic|Melee" Cost="3" MightLevel="1" MagicLevel="3" Attack="2" Retaliate="1" HP="4" ID="471">
+        <Target Zone="Battleground" Amount="Self" >
+            <Effect Type="PlayEffect" PlayEffectType="Decoy">
+                <CardFilter IncludeCardType="All" Side="Enemy" />
+            </Effect>
+        </Target>
+        <Description>When opponent plays a spell card or use an ability targeting a single creature, it must target [THIS] if possible.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Aca_017" DisplayName="Rakshasa Raja" Faction="Academy" SubType="Melee" Cost="4" MightLevel="4" Attack="5" Retaliate="5" HP="5" ID="472">
+        <Ability Type="Evade" />
+        <Ability Type="CannotAttackHero" />
+        <Description>[THIS] cannot attack a hero.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Aca_018" DisplayName="Titan" Faction="Academy" SubType="Magic|Melee" Cost="4" MightLevel="4" MagicLevel="4" Attack="3" Retaliate="3" HP="6" ID="473">
+        <Ability Type="Towering" />
+        <Ability Type="Shockwave" Value="2" />
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Aca_019" DisplayName="Djinn Catalyst" Faction="Academy" SubType="Magic|Flyer" Cost="2" MightLevel="1" MagicLevel="2" Attack="1" Retaliate="1" HP="4" ID="474">
+        <Variable Type="CardChildrenCount" IncludeSchool="Fire" ValueModifier="-1.0x"/>
+        <Variable2 Type="CardChildrenCount" IncludeSchool="Air" ValueModifier="-1.0x"/>
+        <Variable3 Type="CardChildrenCount" IncludeSchool="Water" ValueModifier="-1.0x"/>
+        <Variable4 Type="CardChildrenCount" IncludeSchool="Earth" ValueModifier="-1.0x"/>
+        <Variable5 Type="CardChildrenCount" IncludeSchool="Dark" ValueModifier="-1.0x"/>
+        <Variable6 Type="CardChildrenCount" IncludeSchool="Light" ValueModifier="-1.0x"/>
+        <Variable7 Type="CardChildrenCount" IncludeSchool="Prime" ValueModifier="-1.0x"/>
+        <Target Zone="Hero" Amount="All" Side="Friendly" >            
+            <Effect Type="GlobalEffect" GlobalEffectType="ModifyCost" Value="Variable" >
+                <CardFilter IncludeSchool="Fire" />
+            </Effect>
+        </Target>
+        <Target Zone="Hero" Amount="All" Side="Friendly" >            
+            <Effect Type="GlobalEffect" GlobalEffectType="ModifyCost" Value="Variable2" >
+                <CardFilter IncludeSchool="Air" />
+            </Effect>
+        </Target>
+        <Target Zone="Hero" Amount="All" Side="Friendly" >            
+            <Effect Type="GlobalEffect" GlobalEffectType="ModifyCost" Value="Variable3" >
+                <CardFilter IncludeSchool="Water" />
+            </Effect>
+        </Target>
+        <Target Zone="Hero" Amount="All" Side="Friendly" >            
+            <Effect Type="GlobalEffect" GlobalEffectType="ModifyCost" Value="Variable4" >
+                <CardFilter IncludeSchool="Earth" />
+            </Effect>
+        </Target>
+        <Target Zone="Hero" Amount="All" Side="Friendly" >            
+            <Effect Type="GlobalEffect" GlobalEffectType="ModifyCost" Value="Variable5" >
+                <CardFilter IncludeSchool="Dark" />
+            </Effect>
+        </Target>
+        <Target Zone="Hero" Amount="All" Side="Friendly" >            
+            <Effect Type="GlobalEffect" GlobalEffectType="ModifyCost" Value="Variable6" >
+                <CardFilter IncludeSchool="Light" />
+            </Effect>
+        </Target>
+        <Target Zone="Hero" Amount="All" Side="Friendly" >            
+            <Effect Type="GlobalEffect" GlobalEffectType="ModifyCost" Value="Variable7" >
+                <CardFilter IncludeSchool="Prime" />
+            </Effect>
+        </Target>
+        <Description>Spells in your hand cost [1:RESOURCES] less for every spell of the same school enchanting [THIS].</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Aca_020" DisplayName="Obsidian Gargoyle" Faction="Academy" SubType="Magic|Flyer" Cost="4" MightLevel="3" MagicLevel="4" Attack="2" Retaliate="2" HP="6" ID="475">
+        <Ability Type="MagicGuard" Value="1" />
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Aca_021" DisplayName="Nethermancer" Faction="Academy" SubType="Magic|Shooter" Cost="2" MightLevel="2" MagicLevel="1" DestinyLevel="1" Attack="1" Retaliate="0" HP="4" ID="476">
+        <Ability Type="ImmuneToRetaliate" />
+        <Trigger Type="OnThisDamageHero" Side="Enemy">
+            <Target Zone="Library" Side="Enemy" Amount="3" AutoTakeFirstInputs="True">
+                <Effect Type="MoveCardTo" Destination="Graveyard" />
+            </Target>
+        </Trigger>
+        <Description>When [THIS] deals combat damage to the enemy Hero, put the top 3 cards of your opponent's library into their graveyard.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Aca_022" DisplayName="Spellstealer Wizard" Faction="Academy" SubType="Magic|Shooter" Cost="5" MightLevel="4" MagicLevel="3" Attack="2" Retaliate="1" HP="5" ID="477">
+        <Ability Type="ImmuneToRetaliate" />
+        <Trigger Type="OnThisCardDeploy" >
+            <Target Zone="Battleground" Side="Enemy" CardType="Spell" Amount="1" Cancelable="False" >
+                <Effect Type="PlayFree" />
+            </Target>
+        </Trigger>
+        <Description>When [THIS] enters play, take target enemy Ongoing spell on the battleground and play it for free.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Aca_023" DisplayName="Void-Tainted Djinn" Faction="Academy" SubType="Magic|Shooter" Cost="4" MightLevel="4" MagicLevel="1" DestinyLevel="1" Attack="3" Retaliate="0" HP="6" ID="478">
+        <Ability Type="ImmuneToRetaliate" />
+        <Ability Type="MagicChannel" Value="2" />
+        <Trigger Type="OnThisKillUnit" >
+            <Target Zone="Library" Side="Enemy" Amount="5" AutoTakeFirstInputs="True">
+                <Effect Type="MoveCardTo" Destination="Graveyard" />
+            </Target>
+        </Trigger>
+        <Description>When [THIS] kills a creature, put the top 5 cards of your opponent's library into their graveyard.</Description>
+    </Card>
+    <Card Rarity="Common" Type="Unit" Name="Cre_Aca_024" DisplayName="Arcane Archer" Faction="Academy" SubType="Magic|Shooter" Cost="4" MightLevel="3" MagicLevel="2" Attack="3" Retaliate="3" HP="6" ID="479">
+        <Ability Type="ImmuneToRetaliate" />
+    </Card>
+    <Card Rarity="Common" Type="Unit" Name="Cre_Aca_025" DisplayName="Sellspell Djinn" Faction="Academy" SubType="Magic|Shooter" Cost="3" MightLevel="3" MagicLevel="3" Attack="3" Retaliate="3" HP="5" ID="480">
+        <Ability Type="ImmuneToRetaliate" />
+        <Trigger Type="OnTurnEnd" Side="Friendly" >
+            <Target Zone="Hero" Amount="All" Side="Friendly" >
+                <Variable Type="Resources" Side="Friendly" />
+                <Condition Operator="LesserThan" ValueA="Variable" ValueB="1" />
+                <Effect Type="Damage" Value="1" />
+            </Target>
+        </Trigger>
+        <Description>At the end of your turn, if you have 0 [RESOURCES], deal 1 damage to your hero.</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Unit" Name="Cre_Aca_026" DisplayName="Shantiri Titan" Faction="Academy" SubType="Magic|Melee" Cost="5" MagicLevel="5" MightLevel="5" Attack="5" Retaliate="2" HP="11" ID="481">
+        <Ability Type="Shockwave" Value="2" />
+        <Target Zone="Battleground" Amount="Self" >
+            <Variable Type="CardDamage" />
+            <Condition Operator="LesserThan" ValueA="Variable" ValueB="1" />
+            <Effect Type="Modifier" >
+                <Ability Type="CannotAttack" />
+            </Effect>
+        </Target>
+        <Description>While [THIS] has no damage, it cannot attack.</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Unit" Name="Cre_Aca_027" DisplayName="Rakshasa Scout" Faction="Academy" SubType="Melee" Cost="4" MightLevel="4" Attack="3" Retaliate="0" HP="5" ID="482">
+        <Ability Type="Swift" />
+        <Ability Type="Evade" />
+    </Card>
+    <Card Rarity="Rare" Type="Unit" Name="Cre_Aca_028" DisplayName="Taweret Warrior" Faction="Academy" SubType="Melee" Cost="5" MightLevel="5" Attack="4" Retaliate="2" HP="7" ID="483">
+        <Target Zone="Battleground" Amount="Self" >
+            <Effect Type="PlayEffect" PlayEffectType="AttackBonus" Value="3" >
+                <CardFilter IncludeUnitType="Melee" IncludeCardType="Unit"/>
+            </Effect>
+        </Target>
+        <Description>Taweret Warrior deals 3 more attack damage when attacking a melee creature.</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Unit" Name="Cre_Aca_029" DisplayName="Djinn Mentor" Faction="Academy" SubType="Magic|Flyer" Cost="5" MightLevel="3" MagicLevel="2" DestinyLevel="1" Attack="3" Retaliate="3" HP="7" ID="484">
+        <Trigger Type="OnThisCardDeploy">
+            <Target Zone="None" Side="Friendly" Cancelable="False" >
+                <Effect Type="IncreaseLevel" Value="2" LevelType="Magic" />
+            </Target>
+        </Trigger>
+        <Description>When [THIS] come into play, raise your [MAGIC] level by 2.</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Unit" Name="Cre_Aca_030" DisplayName="Void Sycophant" Faction="Academy" SubType="Magic|Shooter" Cost="4" MightLevel="2" MagicLevel="1" DestinyLevel="3" Attack="2" Retaliate="0" HP="6" ID="485">
+        <Ability Type="ImmuneToRetaliate" />
+        <Trigger Type="OnCardMill" Side="Enemy" ExecuteOncePerTurn="True" >
+            <Target Zone="None" Side="Friendly" >
+                <Effect Type="Draw" Value="1" />
+            </Target>
+        </Trigger>
+        <Description>The first time a card goes into enemy graveyard from their library during a turn, draw a card.</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Unit" Name="Cre_Aca_031" DisplayName="Void Shade" Faction="Academy" SubType="Magic|Shooter" Cost="3" MightLevel="2" MagicLevel="1" DestinyLevel="2" Attack="2" Retaliate="0" HP="4" ID="486">
+        <Ability Type="ImmuneToRetaliate" />
+        <Ability Type="Anchored" />
+        <Trigger Type="OnThisCardDeploy" >
+            <Target Zone="Library" Side="Enemy" Amount="3" AutoTakeFirstInputs="True" Cancelable="False" >
+                <Effect Type="MoveCardTo" Destination="Graveyard" />
+            </Target>
+        </Trigger>
+        <Trigger Type="OnThisCardLeavePlay" >
+            <Target Zone="Library" Side="Enemy" Amount="3" AutoTakeFirstInputs="True" Cancelable="False" >
+                <Effect Type="MoveCardTo" Destination="Graveyard" />
+            </Target>
+        </Trigger>
+        <Description>When [THIS] comes into the battleground or leaves the battleground, puts the top 3 card of opponent's library into their graveyard.</Description>
+    </Card>
+    <Card Rarity="Epic" Type="Unit" Name="Cre_Aca_032" DisplayName="Hasafah, the Unseen Arrow" Faction="Academy" SubType="Magic|Shooter" Unique="True" Cost="4" MightLevel="3" MagicLevel="1" Attack="2" Retaliate="2" HP="6" ID="487">
+        <Ability Type="ImmuneToRetaliate" />
+        <Ability Type="FocusedBlast" Value="2" />
+        <Trigger Type="OnThisCardDeploy" >
+            <Target Zone="Battleground" CardType="Unit" Amount="1" Side="Enemy" Cancelable="False" >
+                <Effect Type="AddCounter" CounterType="Crippling" Value="1" />
+            </Target>
+        </Trigger>
+        <Trigger Type="OnThisAttack" >
+            <Target Zone="Battleground" CardType="Unit" Amount="1" Side="Enemy" Cancelable="False" >
+                <Effect Type="AddCounter" CounterType="Crippling" Value="1" />
+            </Target>
+        </Trigger>
+        <Description>When [THIS] enters the battleground or attacks, put a crippling counter on another target enemy creature.</Description>
+    </Card>
+    <Card Rarity="Epic" Type="Unit" Name="Cre_Aca_033" DisplayName="Glyph-Carved Golem" Faction="Academy" SubType="Magic|Melee" Cost="4" MightLevel="4" MagicLevel="4" Attack="2" Retaliate="2" HP="6" ID="488">
+        <Target Zone="Battleground" Amount="Self">
+            <Variable Type="TargetCount" >
+                <Target Zone="Graveyard" Side="Friendly" Amount="All">
+                    <CardFilter IncludeCardType="Spell" IncludeSchool="Fire" />
+                </Target>
+            </Variable>
+            <Condition Operator="GreaterThan" ValueA="Variable" ValueB="0" />
+            <Effect Type="Modifier" >
+                <Ability Type="FireWard" />
+            </Effect>
+        </Target>
+        <Target Zone="Battleground" Amount="Self">
+            <Variable Type="TargetCount" >
+                <Target Zone="Graveyard" Side="Friendly" Amount="All">
+                    <CardFilter IncludeCardType="Spell" IncludeSchool="Air" />
+                </Target>
+            </Variable>
+            <Condition Operator="GreaterThan" ValueA="Variable" ValueB="0" />
+            <Effect Type="Modifier" >
+                <Ability Type="AirWard" />
+            </Effect>
+        </Target>
+        <Target Zone="Battleground" Amount="Self">
+            <Variable Type="TargetCount" >
+                <Target Zone="Graveyard" Side="Friendly" Amount="All">
+                    <CardFilter IncludeCardType="Spell" IncludeSchool="Water" />
+                </Target>
+            </Variable>
+            <Condition Operator="GreaterThan" ValueA="Variable" ValueB="0" />
+            <Effect Type="Modifier" >
+                <Ability Type="WaterWard" />
+            </Effect>
+        </Target>
+        <Target Zone="Battleground" Amount="Self">
+            <Variable Type="TargetCount" >
+                <Target Zone="Graveyard" Side="Friendly" Amount="All">
+                    <CardFilter IncludeCardType="Spell" IncludeSchool="Earth" />
+                </Target>
+            </Variable>
+            <Condition Operator="GreaterThan" ValueA="Variable" ValueB="0" />
+            <Effect Type="Modifier" >
+                <Ability Type="EarthWard" />
+            </Effect>
+        </Target>
+        <Target Zone="Battleground" Amount="Self">
+            <Variable Type="TargetCount" >
+                <Target Zone="Graveyard" Side="Friendly" Amount="All">
+                    <CardFilter IncludeCardType="Spell" IncludeSchool="Dark" />
+                </Target>
+            </Variable>
+            <Condition Operator="GreaterThan" ValueA="Variable" ValueB="0" />
+            <Effect Type="Modifier" >
+                <Ability Type="DarkWard" />
+            </Effect>
+        </Target>
+        <Target Zone="Battleground" Amount="Self">
+            <Variable Type="TargetCount" >
+                <Target Zone="Graveyard" Side="Friendly" Amount="All">
+                    <CardFilter IncludeCardType="Spell" IncludeSchool="Light" />
+                </Target>
+            </Variable>
+            <Condition Operator="GreaterThan" ValueA="Variable" ValueB="0" />
+            <Effect Type="Modifier" >
+                <Ability Type="LightWard" />
+            </Effect>
+        </Target>
+        <Target Zone="Battleground" Amount="Self">
+            <Variable Type="TargetCount" >
+                <Target Zone="Graveyard" Side="Friendly" Amount="All">
+                    <CardFilter IncludeCardType="Spell" IncludeSchool="Prime" />
+                </Target>
+            </Variable>
+            <Condition Operator="GreaterThan" ValueA="Variable" ValueB="0" />
+            <Effect Type="Modifier" >
+                <Ability Type="PrimeWard" />
+            </Effect>
+        </Target>
+        <Description>For every spell in your graveyard, [THIS] gains Ward from that spell school.</Description>
+    </Card>
+    <Card Rarity="Epic" Type="Unit" Name="Cre_Aca_034" DisplayName="Surging Titan" Faction="Academy" SubType="Magic|Shooter" Cost="5" MightLevel="5" MagicLevel="5" Attack="4" Retaliate="4" HP="7" ID="489">
+        <Ability Type="ImmuneToRetaliate" />
+        <Ability Type="Shockwave" Value="3" />
+        <Ability Type="FocusedBlast" Value="3" />
+    </Card>
+    <Card Rarity="Epic" Type="Unit" Name="Cre_Aca_035" DisplayName="Dervish Master" Faction="Academy" SubType="Magic|Melee" Cost="5" MightLevel="4" MagicLevel="1" Attack="3" Retaliate="0" HP="5" ID="490">
+        <Ability Type="Swift" />
+        <Ability Type="RangeReflect" Value="2" />
+        <Trigger Type="OnThisKillUnit" ExecuteOncePerTurn="True" >
+            <Target Zone="Battleground" Amount="Self" >
+                <Effect Type="RestoreAttack" />
+            </Target>
+        </Trigger>
+        <Description>The first time THIS kills a creature durig your turn, THIS gain an additional attack.</Description>
+    </Card>
+    <Card Rarity="Epic" Type="Unit" Name="Cre_Aca_036" DisplayName="Nur, Spellweaver" Faction="Academy" SubType="Magic|Shooter" Unique="True" Cost="5" MightLevel="4" MagicLevel="2" Attack="3" Retaliate="3" HP="6" ID="491">
+        <Ability Type="ImmuneToRetaliate" />
+        <Ability Type="MagicChannel" Value="3" />
+        <Ability Type="SpellResist" />
+        <Trigger Type="OnCardPlay" Side="Friendly" >
+            <CardFilter IncludeCardType="Spell" IncludeOngoingType="Immediate" />
+            <Target Zone="None" Side="Friendly" >
+                <Effect Type="Draw" Value="1" />
+            </Target>
+        </Trigger>
+        <Description>When you play an Instant spell, draw a card.</Description>
+    </Card>
+    <!--...............................................................................-->
+    <!-- Creatures - Haven -->
+    <!--...............................................................................-->
+    <Card Rarity="Common" Type="Unit" Name="Cre_Hav_050" DisplayName="Crusader Commander" Faction="Haven" SubType="Melee" Cost="5" MightLevel="5" Attack="4" Retaliate="5" HP="8" ID="492">
+    </Card>
+    <Card Rarity="Common" Type="Unit" Name="Cre_Hav_051" DisplayName="Crusader Watchman" Faction="Haven" SubType="Magic|Shooter" Cost="2" MightLevel="2" MagicLevel="1" Attack="0" Retaliate="1" HP="5" ID="493">
+        <Ability Type="ImmuneToRetaliate" />
+        <Variable Type="CardDamage" />
+        <Target Zone="Battleground" Amount="Self" >
+            <Condition Operator="LesserThan" ValueA="Variable" ValueB="1" />
+            <Effect Type="ModifyAttack" Value="2" />
+        </Target>
+        <Target Zone="Battleground" Amount="Self" >
+            <Condition Operator="LesserThan" ValueA="Variable" ValueB="1" />
+            <Effect Type="ModifyRetaliate" Value="1" />
+        </Target>
+        <Description>While Crusader Watchman have no damage, it gains +[2:ATK] and +[1:RET].</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Hav_052" DisplayName="Crusader Treasurer" Faction="Haven" SubType="Melee" Cost="4" MightLevel="4" DestinyLevel="1" Attack="2" Retaliate="2" HP="6" ID="494">
+        <Ability Type="Income" Value="2" />
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Hav_053" DisplayName="Scattershot Marksman" Faction="Haven" SubType="Shooter" Cost="5" MightLevel="4" Attack="3" Retaliate="2" HP="7" ID="495">
+        <Ability Type="ImmuneToRetaliate" />
+        <Ability Type="MeleeBlast" Value="2" />
+        <Description>When [THIS] attacks a melee creature, deal 2 damage to all other enemy melee creatures.</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Unit" Name="Cre_Hav_054" DisplayName="Crusader Chaplain" Faction="Haven" SubType="Magic|Melee" Cost="3" MightLevel="3" MagicLevel="1" DestinyLevel="1" Attack="2" Retaliate="2" HP="5" ID="496">
+        <Target Zone="Battleground" Amount="Self" >
+            <Variable Type="CardDamage" />
+            <Condition Operator="LesserThan" ValueA="Variable" ValueB="1" />
+            <Effect Type="PlayEffect" PlayEffectType="CannotTarget" />
+        </Target>
+        <Target Zone="Hero" Amount="All" Side="Any" >
+            <Effect Type="GlobalEffect" GlobalEffectType="CantTargetInGraveyard" />
+        </Target>
+        <Description>Cards in graveyard can't be targetted.
+While Crusader Chaplain has no damage, it gains Dark Ward.</Description>
+    </Card>
+    <Card Rarity="Epic" Type="Unit" Name="Cre_Hav_055" DisplayName="Anael, Angel of Redemption" Faction="Haven" SubType="Magic|Flyer" Unique="True" Cost="4" MightLevel="4" MagicLevel="1" Attack="3" Retaliate="3" HP="6" ID="497">
+        <Ability Type="ImmuneToRetaliate" />
+        <Ability Type="Charge" />
+        <Trigger Type="OnThisCardDeploy" >
+            <Target Zone="Battleground" CardType="Unit" Amount="1" Side="Friendly" CantTargetSelf="True" Cancelable="False" >
+                <Effect Type="Heal" Value="infinite" />
+                <Effect Type="RemoveCounter" CounterType="Any" Value="infinite" Duration="Immediate" />
+            </Target>
+        </Trigger>
+        <Trigger Type="OnThisAttack" >
+            <Target Zone="Battleground" CardType="Unit" Amount="1" Side="Friendly" CantTargetSelf="True" Cancelable="False" >
+                <Effect Type="Heal" Value="infinite" />
+                <Effect Type="RemoveCounter" CounterType="Any" Value="infinite" Duration="Immediate" />
+            </Target>
+        </Trigger>
+        <Description>When Anael, Angel of Redemption enters the battleground or attacks, heal all damage and remove all counter from another target friendly creature.</Description>
+    </Card>
+    <!--...............................................................................-->
+    <!-- Creatures - Inferno -->
+    <!--...............................................................................-->
+    <Card Rarity="Common" Type="Unit" Name="Cre_Inf_050" DisplayName="Lashing Lilim" Faction="Inferno" SubType="Magic|Shooter" Cost="4" MightLevel="4" MagicLevel="1" Attack="2" Retaliate="2" HP="6" ID="498">
+        <Ability Type="ImmuneToRetaliate" />
+        <Ability Type="SweepAttack" />
+    </Card>
+    <Card Rarity="Common" Type="Unit" Name="Cre_Inf_051" DisplayName="Demon Thrall" Faction="Inferno" SubType="Melee" Cost="4" MightLevel="3" Attack="3" Retaliate="3" HP="5" ID="499">
+        <Ability Type="ImmuneToRetaliate" />
+        <Ability Type="SweepAttack" />
+        <Target Zone="Battleground" Amount="Self" >
+            <Variable Type="TargetCount">
+                <Target Zone="Battleground" CardType="Unit" Side="Friendly" Amount="Self" Shape="AdjacentOnly"/>
+            </Variable>
+            <Condition Operator="LesserThan" ValueA="Variable" ValueB="1" />
+            <Effect Type="Modifier">
+                <Ability Type="CannotAttack" />
+            </Effect>
+        </Target>
+        <Description>[THIS] cannot attack unless it has an adjacent friendly creature.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Inf_052" DisplayName="Frenzied Maniac" Faction="Inferno" SubType="Melee" Cost="2" MightLevel="3" Attack="3" Retaliate="3" HP="3" ID="500">
+        <Trigger Type="OnTurnEnd" Side="Friendly">
+            <Target Zone="Hero" Amount="All" Side="Friendly" >
+                <Variable Type="UnitAttackCount" />
+                <Condition Operator="LesserThan" ValueA="Variable" ValueB="1" />
+                <Effect Type="Damage" Value="2" />
+            </Target>              
+        </Trigger>
+        <Description>At the end of your turn, if [THIS] did not attack, deal 2 damage to your hero.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Inf_053" DisplayName="Imp Jester" Faction="Inferno" SubType="Flyer" Cost="2" MightLevel="1" DestinyLevel="1" Attack="2" Retaliate="1" HP="2" ID="501">
+        <Target Zone="Battleground" Amount="Self" >
+            <Effect Type="PlayEffect" PlayEffectType="Decoy" >
+                <CardFilter IncludeCardType="All" />
+            </Effect>
+        </Target>
+        <Description>When a spell has a single target, it must target [THIS] if it can.</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Unit" Name="Cre_Inf_054" DisplayName="Abyssal Worm" Faction="Inferno" SubType="Melee" Cost="6" MightLevel="6" Attack="8" Retaliate="4" HP="8" ID="502">
+        <Ability Type="AttackAnywhere" />
+        <Target Zone="Hero" Amount="All" Side="Friendly" >
+            <Effect Type="ModifyResourcesProduction" Value="3mi" EvaluateLast="True" />
+        </Target>
+        <Description>You cannot produce more than [3:RESOURCES] during your supply phase.</Description>
+    </Card>
+    <Card Rarity="Epic" Type="Unit" Name="Cre_Inf_055" DisplayName="Hikyu, Fists of Fury" Faction="Inferno" SubType="Magic|Shooter" Unique="True" Cost="6" MightLevel="5" MagicLevel="1" Attack="4" Retaliate="3" HP="6" ID="503">
+        <Ability Type="ImmuneToRetaliate" />
+        <Ability Type="AttackAnywhere" />
+        <Trigger Type="OnThisCardDeploy" >
+            <Target Zone="Battleground" CardType="Unit" Amount="1" Side="Friendly" CantTargetSelf="True" ForceExecute="True" Persistent="True" Cancelable="False">
+                <Effect Type="ModifyAttack" Value="1" Duration="UntilEndOfTurn" />
+            </Target>
+        </Trigger>
+        <Trigger Type="OnThisAttack" >
+            <Target Zone="Battleground" CardType="Unit" Amount="1" Side="Friendly" CantTargetSelf="True" ForceExecute="True" Persistent="True" Cancelable="False">
+                <Effect Type="ModifyAttack" Value="1" Duration="UntilEndOfTurn" />
+            </Target>
+        </Trigger>
+        <Description>When [THIS] enters the battleground or attacks, another friendly target creature gains +[1:ATK] until end of turn.</Description>
+    </Card>
+
+    <!--...............................................................................-->
+    <!-- Creatures - Necropolis -->
+    <!--...............................................................................-->
+    <Card Rarity="Common" Type="Unit" Name="Cre_Nec_050" DisplayName="Al-Betyl Ghoul" Faction="Necropolis" SubType="Melee" Cost="5" MightLevel="5" Attack="3" Retaliate="3" HP="8" ID="504">
+    </Card>
+    <Card Rarity="Common" Type="Unit" Name="Cre_Nec_051" DisplayName="Rotting Zombie" Faction="Necropolis" SubType="Magic|Melee" Cost="4" MightLevel="3" MagicLevel="1" Attack="1" Retaliate="2" HP="5" ID="505">
+        <Trigger Type="OnThisCardDeath" Side="Enemy" >
+            <Target Zone="BattlegroundColumn" Amount="FromTrigger" >
+                <CardFilter IncludeCardType="Unit" />
+                <Effect Type="AddCounter" CounterType="Poison" Value="1" />
+            </Target>
+        </Trigger>           
+        <Description>When [THIS] dies during your opponent's turn, put 1 Poison counter on all creatures in the same row.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Nec_052" DisplayName="Defiled Mummy" Faction="Necropolis" SubType="Melee" Cost="4" MightLevel="3" MagicLevel="0" Attack="0" Retaliate="0" HP="7" ID="506">
+        <Trigger Type="OnTurnBegin" Side="Friendly">
+            <Target Zone="Battleground" CardType="Unit" Amount="Self" >
+                <Effect Type="AddCounter" CounterType="Poison" Value="1" />
+            </Target>
+        </Trigger>
+        <Target Zone="Battleground" CardType="Unit" Amount="Self" >
+            <Variable Type="CounterCount" CounterType="Poison" />
+            <Effect Type="ModifyAttack" Value="Variable" />
+        </Target>
+        <Description>At the begining of your turn, put a poison counter on [THIS]. Its [ATK] is equal to the number of poison counter on it.</Description>        
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Nec_053" DisplayName="Sahaar Mummy" Faction="Necropolis" SubType="Melee" Cost="2" MightLevel="1" Attack="1" Retaliate="0" HP="3" ID="507">
+        <Trigger Type="OnSupplyPhaseBegin" Side="Friendly" Location="Graveyard" >
+            <Target Zone="Graveyard" Amount="Self" >
+                <Variable Type="TargetCount">
+                    <Target Zone="Graveyard" Amount="All" Side="Friendly" />
+                </Variable>
+                <Condition Operator="LesserThan" ValueA="Variable" ValueB="6" />
+                <Effect Type="MoveCardTo" Destination="Hand" />
+            </Target>
+        </Trigger>
+        <Description>At the beginning of your supply phase, if [THIS] is in your graveyard and you have 5 cards or less in your graveyard, return [THIS] to your hand.</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Unit" Name="Cre_Nec_054" DisplayName="Rotting Mummy" Faction="Necropolis" SubType="Melee" Cost="2" MightLevel="2" Attack="1" Retaliate="0" HP="4" ID="508">
+        <Trigger Type="OnThisCardDeploy" >
+            <Target Zone="Battleground" Amount="Self">
+                <Effect Type="AddCounter" CounterType="Poison" Value="1" />
+            </Target>
+        </Trigger>
+        <Trigger Type="OnThisCardDeathDuringSupplyPhase" Side="Friendly" >
+            <Target Zone="Battleground" CardType="Unit" Amount="All" Side="Enemy" >
+                <Effect Type="AddCounter" CounterType="Poison" Value="1" />
+            </Target>
+        </Trigger>
+        <Description>When [THIS] enters the battleground, put a Poison counter on it. If [THIS] dies during your supply phase, put a Poison counter on every enemy creature.</Description>
+    </Card>
+    <Card Rarity="Epic" Type="Unit" Name="Cre_Nec_055" DisplayName="Damran, the Tainted" Faction="Necropolis" SubType="Melee" Unique="True" Cost="6" MightLevel="5" Attack="3" Retaliate="3" HP="7" ID="509">
+        <Ability Type="Infect" Value="2" />
+        <Trigger Type="OnThisCardDeploy" >
+            <Target Zone="Battleground" CardType="Unit" Amount="1" Side="Friendly" CantTargetSelf="True" ForceExecute="True" Persistent="True" Cancelable="False" >
+                <Effect Type="Modifier" Duration="UntilEndOfTurn" >
+                    <Ability Type="Infect" Value="1" />
+                </Effect>
+            </Target>
+        </Trigger>
+        <Trigger Type="OnThisAttack" >
+            <Target Zone="Battleground" CardType="Unit" Amount="1" Side="Friendly" CantTargetSelf="True" ForceExecute="True" Persistent="True" Cancelable="False" >
+                <Effect Type="Modifier" Duration="UntilEndOfTurn" >
+                    <Ability Type="Infect" Value="1" />
+                </Effect>
+            </Target>
+        </Trigger>
+        <Description>When [THIS] enters the battleground or attacks, another target friendly creature gains Infect 1 until end of turn.</Description>
+    </Card>
+	
+    <!--...............................................................................-->
+    <!-- Creatures - Sanctuary -->
+    <!--...............................................................................-->
+    <Card Rarity="Common" Type="Unit" Name="Cre_San_050" DisplayName="Sayama Spy" Faction="Sanctuary" SubType="Melee" Cost="3" MightLevel="2" DestinyLevel="1" Attack="2" Retaliate="0" HP="5" ID="510">
+        <Trigger Type="OnThisPostAttack">
+            <Target Zone="None" Side="Friendly">
+                <Effect Type="Draw" Value="1" />
+            </Target>
+        </Trigger>
+        <Description>When [THIS] attacks, draw a card.</Description>
+    </Card>
+    <Card Rarity="Common" Type="Unit" Name="Cre_San_051" DisplayName="Sayama Stalker" Faction="Sanctuary" SubType="Shooter" Cost="2" MightLevel="2" Attack="2" Retaliate="0" HP="3" ID="511">
+        <Ability Type="ImmuneToRetaliate" />
+        <Ability Type="Ambush" />
+        <Trigger Type="OnAmbush" Side="Enemy">
+            <Target Zone="Battleground" Amount="FromTrigger" CardType="Unit">
+                <Effect Type="Damage" Value="2" />
+            </Target>
+        </Trigger>
+        <Description>Ambush: Deals 2 damage to ambushed creature.
+(Ambush abilities trigger when an enemy creature enters the battleground in the same row.)
+        </Description>
+    </Card>
+    <Card Rarity="Rare" Type="Unit" Name="Cre_San_052" DisplayName="Sayama Champion" Faction="Sanctuary" SubType="Melee" Cost="3" MightLevel="2" Attack="2" Retaliate="1" HP="6" ID="512">
+        <Variable Type="TargetCount">
+            <Target Zone="Battleground" CardType="Unit" Amount="All" Side="Friendly" />
+        </Variable>
+        <Variable2 Type="TargetCount">
+            <Target Zone="Battleground" CardType="Unit" Amount="All" Side="Enemy" />
+        </Variable2>
+        <Target Zone="Battleground" Amount="Self" >
+            <Condition Operator="LesserOrEqual" ValueA="Variable" ValueB="Variable2" />
+            <Effect Type="ModifyRetaliate" Value="2" />
+        </Target>
+        <Target Zone="Battleground" Amount="Self" >
+            <Condition Operator="LesserOrEqual" ValueA="Variable" ValueB="Variable2" />
+            <Effect Type="ModifyAttack" Value="1" />
+        </Target>
+        <Description>If you have equal or less creatures on the battleground than your opponent, [THIS] gets +[1:ATK] and +[2:RET].</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_San_053" DisplayName="Sayama Warden" Faction="Sanctuary" SubType="Magic|Shooter" Cost="4" MightLevel="3" MagicLevel="1" DestinyLevel="3" Attack="2" Retaliate="2" HP="7" ID="513">
+        <Ability Type="ImmuneToRetaliate" />
+        <Trigger Type="OnCardReturnToHandFromPlay" Side="Friendly" >
+            <CardFilter IncludeCardType="Unit" IncludeFaction="Sanctuary" />
+            <Target Zone="Hand" CardType="Unit" Amount="FromTrigger" ForceExecute="True" >
+                <Effect Type="ModifyCost" Value="-2" Duration="UntilEndOfTurn" Persistent="True" />
+            </Target>
+        </Trigger>
+        <Description>When another friendly Sanctuary creature is returned to your hand, that creature costs [2:RESOURCES] less to play until end of turn.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_San_054" DisplayName="Sayama Dune Prowler" Faction="Sanctuary" SubType="Melee" Cost="4" MightLevel="4" Attack="3" Retaliate="0" HP="5" ID="514">
+        <Ability Type="Outmaneuver" />
+        <Ability Type="Ambush" />
+        <Trigger Type="OnAmbush" Side="Enemy">
+            <Target Zone="Battleground" Amount="FromTrigger" CardType="Unit">
+                <Effect Type="Damage" Value="2" />
+            </Target>
+        </Trigger>
+        <Description>Ambush: Deals 2 damage to ambushed creature.
+(Ambush abilities trigger when an enemy creature enters the battleground in the same row.)
+        </Description>
+    </Card>
+    <Card Rarity="Epic" Type="Unit" Name="Cre_San_055" DisplayName="Raya, Sibilant Seductress" Faction="Sanctuary" SubType="Magic|Shooter" Unique="True" Cost="5" MightLevel="4" MagicLevel="1" Attack="3" Retaliate="2" HP="6" ID="515">
+        <Ability Type="ImmuneToRetaliate" />
+        <Ability Type="Hypnotize" />
+        <Trigger Type="OnThisCardDeploy" >
+            <Target Zone="Battleground" CardType="Unit" Amount="1" Side="Enemy" ForceExecute="True" Persistent="True" Cancelable="False">
+                <Effect Type="Modifier" Duration="UntilYourNextTurn" >
+                    <Ability Type="CannotAttack" />
+                </Effect>
+            </Target>
+        </Trigger>
+        <Trigger Type="OnThisAttack" >
+            <Target Zone="Battleground" CardType="Unit" Amount="1" Side="Enemy" ForceExecute="True" Persistent="True" Cancelable="False">
+                <Effect Type="Modifier" Duration="UntilYourNextTurn" >
+                    <Ability Type="CannotAttack" />
+                </Effect>
+            </Target>
+        </Trigger>
+        <Description>When [THIS] enters the battleground or attacks, target enemy creature cannot attack until your next turn.</Description>
+    </Card>
+	
+    <!--...............................................................................-->
+    <!-- Creatures - Stronghold -->
+    <!--...............................................................................-->
+    <Card Rarity="Common" Type="Unit" Name="Cre_Str_050" DisplayName="Coward Gnoll" Faction="Stronghold" SubType="Melee" Cost="3" MightLevel="4" Attack="4" Retaliate="3" HP="5" ID="516">
+        <Variable Type="TargetCount">
+            <Target Zone="Battleground" CardType="Unit" Side="Friendly" Amount="All" />
+        </Variable>
+        <Ongoing Duration="FromCondition" >
+            <Condition Operator="GreaterThan" ValueA="Variable" ValueB="1" />
+        </Ongoing>        
+        <Description>If there are no other friendly creatures in play, destroy [THIS].</Description>
+    </Card>
+    <Card Rarity="Common" Type="Unit" Name="Cre_Str_051" DisplayName="Sahaar Marauder" Faction="Stronghold" SubType="Shooter" Cost="4" MightLevel="4" Attack="2" Retaliate="1" HP="6" ID="517">
+        <Ability Type="ImmuneToRetaliate" />
+        <Ability Type="Swift" />
+        <Ability Type="Ambush" />
+        <Trigger Type="OnAmbush" Side="Enemy">
+            <Target Zone="Battleground" Amount="FromTrigger" CardType="Unit">
+                <Effect Type="Damage" Value="1" />
+            </Target>
+        </Trigger>
+        <Description>Ambush: Deals 1 damage to ambushed creature.
+(Ambush abilities trigger when an enemy creature enters the battleground in the same row.)
+        </Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Str_052" DisplayName="Sahaar Brute" Faction="Stronghold" SubType="Melee" Cost="3" MightLevel="3" Attack="2" Retaliate="2" HP="5" ID="518">
+        <Ability Type="Bloodthirst" Value="1" />
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Str_053" DisplayName="Sahaar Harpy" Faction="Stronghold" SubType="Flyer" Cost="3" MightLevel="2" Attack="1" Retaliate="0" HP="3" ID="519">
+        <Ability Type="QuickAttack" />
+        <Trigger Type="OnTurnBegin" Side="Friendly" >
+            <Target Zone="Battleground" Amount="Self" >
+                <Effect Type="MoveCardTo" Destination="Hand" />
+            </Target>
+        </Trigger>
+        <Description>At the beginning of your turn, return [THIS] to your hand.</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Unit" Name="Cre_Str_054" DisplayName="Sahaar Hunter" Faction="Stronghold" SubType="Melee" Cost="3" MightLevel="3" Attack="2" Retaliate="0" HP="4" ID="520">
+        <Ability Type="Ambush" />
+        <Trigger Type="OnAmbush" Side="Enemy">
+            <Target Zone="Battleground" Amount="FromTrigger" CardType="Unit">
+                <Effect Type="Damage" Value="3" />
+            </Target>
+        </Trigger>
+        <Description>Ambush: Deals 3 damage to ambushed creature.
+(Ambush abilities trigger when an enemy creature enters the battleground in the same row.)
+        </Description>
+    </Card>
+    <Card Rarity="Epic" Type="Unit" Name="Cre_Str_055" DisplayName="Air Dragon Knight Padawan" Faction="Stronghold" SubType="Magic|Melee" Unique="True" Cost="5" MightLevel="4" MagicLevel="1" Attack="3" Retaliate="3" HP="6" ID="521">
+        <Ability Type="MagicResist" />
+        <Trigger Type="OnThisCardDeploy" >
+            <Target Zone="Battleground" CardType="Unit" Amount="1" Side="Friendly" CantTargetSelf="True" ForceExecute="True" Persistent="True" Cancelable="False">
+                <Effect Type="Modifier" Duration="UntilEndOfTurn" >
+                    <Ability Type="Swift" />
+                </Effect>
+            </Target>
+        </Trigger>
+        <Trigger Type="OnThisAttack" >
+            <Target Zone="Battleground" CardType="Unit" Amount="1" Side="Friendly" CantTargetSelf="True" ForceExecute="True" Persistent="True" Cancelable="False">
+                <Effect Type="Modifier" Duration="UntilEndOfTurn" >
+                    <Ability Type="Swift" />
+                </Effect>
+            </Target>
+        </Trigger>
+        <Description>When [THIS] enters the battleground or attacks, another target friendly creature gains Swift until end of turn.</Description>
+    </Card>
+
+    <!--...............................................................................-->
+    <!-- Creatures - Neutral -->
+    <!--...............................................................................-->
+    <Card Rarity="Common" Type="Unit" Name="Cre_Neu_050" DisplayName="Burning Sand Elemental" Faction="Neutral" SubType="Magic|Melee" Cost="5" MightLevel="2" MagicLevel="3" Attack="2" Retaliate="0" HP="4" ID="522">
+        <Ability Type="FireBurst" Value="3" />
+    </Card>
+    <Card Rarity="Common" Type="Unit" Name="Cre_Neu_051" DisplayName="Sahaar Bedouin" Faction="Neutral" SubType="Melee" Cost="3" MightLevel="3" Attack="2" Retaliate="2" HP="4" ID="523">
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Neu_052" DisplayName="Soothsayer" Faction="Neutral" SubType="Melee" Cost="2" MightLevel="2" DestinyLevel="1" Attack="1" Retaliate="0" HP="1" ID="524">
+        <Trigger Type="OnThisCardDeploy">
+            <Target Zone="Library" Side="Friendly" Amount="1" RevealToOther="True" >
+                <CardFilter IncludeCardType="Fortune" IncludeUnique="True"/>
+                <Effect Type="MoveCardTo" Destination="Hand" />
+            </Target>
+            <Target Side="Friendly">
+                <Effect Type="Shuffle" CardHolder="Library" />
+            </Target>
+        </Trigger>
+        <Description>When [THIS] enters the battleground, search your library for a unique fortune and put that fortune into your hand.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Neu_053" DisplayName="Cactus Thing" Faction="Neutral" SubType="Melee" Cost="2" MightLevel="2" Attack="0" Retaliate="3" HP="2" ID="525">
+        <Ability Type="CannotAttack" />
+        <Ability Type="PreemptiveStrike" />
+    </Card>
+    <Card Rarity="Rare" Type="Unit" Name="Cre_Neu_054" DisplayName="Greater Air Elemental" Faction="Neutral" SubType="Magic|Flyer" Cost="6" MightLevel="5" MagicLevel="1" Attack="3" Retaliate="3" HP="6" ID="526">
+        <Ability Type="Swift" />
+        <Ability Type="AirHeal" />
+    </Card>
+    <Card Rarity="Epic" Type="Unit" Name="Cre_Neu_055" DisplayName="Moon Phoenix" Faction="Neutral" SubType="Magic|Flyer" Cost="2" MightLevel="3" MagicLevel="2" Attack="3" Retaliate="0" HP="3" ID="527">
+        <AdditionalCost>
+            <Target Zone="Graveyard" Side="Friendly" Amount="3" CantTargetSelf="True" >
+                <Effect Type="Banish" />
+            </Target>
+        </AdditionalCost>        
+        <Trigger Type="OnThisCardDeath" >
+            <Target Zone="Graveyard" Amount="Self" >
+                <Effect Type="MoveCardTo" Destination="Hand" />
+            </Target>
+        </Trigger>
+        <Description>To play [THIS], you must banish 3 cards from your graveyard. When [THIS] dies, return it to your hand.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Neu_056" DisplayName="Sahaar Skirmisher" Faction="Neutral" SubType="Shooter" Cost="5" MightLevel="4" MagicLevel="0" Attack="2" Retaliate="2" HP="5" ID="598">
+        <Ability Type="ImmuneToRetaliate" />
+        <Ability Type="Unblockable" />
+        <Description>[This] can attack enemy hero even if there is creatures in front of it.</Description>
+    </Card>
+</Cards>

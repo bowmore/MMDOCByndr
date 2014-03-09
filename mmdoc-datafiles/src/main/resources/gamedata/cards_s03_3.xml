@@ -1,0 +1,311 @@
+<!-- Define all cards of the third serie in this document. XML is case sensitive. -->
+<Cards>
+    <!--....................................................................-->
+    <!-- //	#####   ####    #####   ##      ##      #####
+         //	##      ##  #   ##      ##      ##      ##
+         //	#####   ####    ####    ##      ##      #####
+         //	   ##   ##      ##      ##      ##         ##
+         //	#####   ##      #####   #####   #####   ##### -->
+    <!--....................................................................-->
+    <!-- Spells - Air -->
+    <!--....................................................................-->
+    <Card Rarity="Common" Type="Spell" Name="Spe_Air_050" DisplayName="Air Trap" School="Air" Cost="1" MagicLevel="3" ID="573">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="BattlegroundLine" Amount="1" />
+        <Trigger Type="OnDeployThisLine">
+            <CardFilter IncludeUnitType="Flyer" />
+            <Target Zone="Battleground" Amount="FromTrigger" CardType="Unit" >
+                <Effect Type="Kill" />
+            </Target>
+            <Target Zone="Battleground" Amount="Self" >
+                <Effect Type="Kill" />
+            </Target>
+        </Trigger>
+        <Description>Enchant line. Permanent:
+When a flyer is deployed in enchanted line, destroy it, then destroy [THIS].</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Spell" Name="Spe_Air_051" DisplayName="Homebound Winds" School="Air" Cost="5" MagicLevel="4" ID="574">
+        <Target Zone="Battleground" CardType="Unit" Amount="1" >
+            <Effect Type="ShuffleCardToLibrary" />
+        </Target>
+        <Description>Shuffle target creature into its owner's library.</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Spell" Name="Spe_Air_052" DisplayName="Forked Lightning" School="Air" Cost="6" MagicLevel="6" ID="575">
+        <Target Zone="BattlegroundPosition" Amount="1" BattlegroundPositionState="NoUnit" Shape="AdjacentOnly">
+            <Effect Type="Damage" Value="5" />
+        </Target>
+        <Target Zone="BattlegroundPosition" Amount="1" BattlegroundPositionState="NoUnit" Shape="AdjacentOnly" CantTargetPrevious="True" >
+            <Effect Type="Damage" Value="5" />
+        </Target>
+        <Description>Target two empty battleground positions. For each of those positions, deal 5 damage to every adjacent creature.</Description>
+    </Card>
+
+    <!--....................................................................-->
+    <!-- Spells - Dark -->
+    <!--....................................................................-->
+    <Card Rarity="Common" Type="Spell" Name="Spe_Dar_050" DisplayName="Shared Agony" School="Dark" Cost="2" MagicLevel="2" ID="576">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" CardType="Unit" Amount="1" />
+        <Trigger Type="OnDamageHero" Side="Friendly" >
+            <Target Zone="Battleground" CardType="Unit" Amount="Parent" >
+                <Effect Type="Damage" Value="FromTrigger" />
+            </Target>
+        </Trigger>
+        <Description>Enchant Creature, Permanent: Every time your hero receives damage, deal that much damage to enchanted creature.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Spell" Name="Spe_Dar_051" DisplayName="Cursed Bound" School="Dark" Cost="3" MagicLevel="3" ID="577">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" CardType="Unit" Amount="1" />
+        <Trigger Type="OnThisAttack" >
+            <Target Zone="Hero" Amount="ParentHero" >
+                <Variable Type="CardAttack" UseParent="True" />
+                <Effect Type="Damage" Value="Variable" />
+            </Target>
+        </Trigger>
+        <Description>Enchant Creature. Permanent:
+When enchanged creature attacks, it deals damage equal to its [ATK] to its controller.</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Spell" Name="Spe_Dar_052" DisplayName="Enthrall" School="Dark" Cost="5" MagicLevel="6" ID="578">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" CardType="Unit" Amount="1" Side="Enemy">
+            <Effect Type="Relocate" Side="Friendly" />
+        </Target>
+        <Target Zone="Battleground" CardType="Unit" Amount="Same" ForceExecute="True" >
+            <Effect Type="RestoreAttack" />
+            <Effect Type="RestoreMove" />
+        </Target>
+        <Trigger Type="OnThisDetach" >
+            <Target Zone="Battleground" Amount="Parent" >
+                <Effect Type="MoveCardTo" Destination="Hand" />
+            </Target>
+        </Trigger>
+        <Description>Enchant creature. Permanent:
+Take control of enchanted creature. If THIS leaves play, return creature to owner hand.
+        </Description>
+    </Card>
+
+    <!--....................................................................-->
+    <!-- Spells - Earth -->
+    <!--....................................................................-->
+    <Card Rarity="Common" Type="Spell" Name="Spe_Ear_050" DisplayName="Sand Shield" School="Earth" Cost="2" MagicLevel="1" ID="579">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" Amount="1" CardType="Unit" >
+            <Effect Type="ModifyDamage" Value="-1" />
+        </Target>
+        <Description>Enchant creature. Permanent:
+Whenever enchanted creature takes damage, prevent 1 of that damage.
+        </Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Spell" Name="Spe_Ear_051" DisplayName="Mass Earth Bound" School="Earth" Cost="4" MagicLevel="4" ID="580">
+        <Ongoing Duration="UntilYourNextTurn" />
+        <Target Zone="Battleground" Amount="All" CardType="Unit" Side="Friendly" >
+            <Effect Type="Modifier" >
+                <Ability Type="Anchored" />
+            </Effect>
+        </Target>
+        <Description>Until your next turn:
+Creatures you control have Anchored.
+        </Description>
+    </Card>
+    <Card Rarity="Rare" Type="Spell" Name="Spe_Ear_052" DisplayName="Deep Roots" School="Earth" Cost="4" MagicLevel="4" ID="581">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" Amount="All" CardType="Unit" >
+            <CardFilter IncludeUnitType="Melee" />
+            <Effect Type="Modifier" >
+                <Ability Type="Anchored" />
+            </Effect>
+        </Target>
+        <Description>Permanent:
+All melee creatures gain Anchored.
+        </Description>
+    </Card>
+
+    <!--....................................................................-->
+    <!-- Spells - Fire -->
+    <!--....................................................................-->
+    <Card Rarity="Common" Type="Spell" Name="Spe_Fir_050" DisplayName="Fiery Death" School="Fire" Cost="2" MagicLevel="2" ID="582">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" Amount="1" CardType="Unit" />
+        <Trigger Type="OnEnchantedCardDeath" >
+            <Target Zone="BattlegroundPosition" CardType="Unit" Amount="FromTrigger" Shape="AdjacentOnly" >
+                <Effect Type="Damage" Value="2" />
+            </Target>
+        </Trigger>
+        <Description>Enchant creature. Permanent:
+When enchanted creature dies, deal 2 damage to every adjacent creature.
+        </Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Spell" Name="Spe_Fir_051" DisplayName="Fire Blast" School="Fire" Cost="3" MagicLevel="3" ID="583">
+        <Target Zone="BattlegroundLine" Amount="1" >
+            <Effect Type="Damage" Value="2" />
+        </Target>
+        <Description>Deal 2 damage to all creatures of target line.</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Spell" Name="Spe_Fir_052" DisplayName="Mass Rage" School="Fire" Cost="3" MagicLevel="3" ID="584">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" Amount="All" CardType="Unit" >
+            <Effect Type="Modifier" >
+                <Ability Type="Berserk" />
+            </Effect>
+        </Target>
+        <Description>Permanent: All creatures gain Berserk.</Description>
+    </Card>
+
+    <!--....................................................................-->
+    <!-- Spells - Light -->
+    <!--....................................................................-->
+    <Card Rarity="Common" Type="Spell" Name="Spe_Lig_050" DisplayName="Aura of Healing" School="Light" Cost="3" MagicLevel="3" ID="585">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" Amount="1" CardType="Unit" >
+            <Effect Type="Modifier" >
+                <Ability Type="Heal" Value="2" />
+            </Effect>
+        </Target>
+        <Description>Enchant creature. Permanent:
+Enchanted creature gains Heal 2.
+        </Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Spell" Name="Spe_Lig_051" DisplayName="Divine Judgment" School="Light" Cost="3" MagicLevel="3" ID="586">
+        <Target Zone="Battleground" Amount="All" CardType="Unit" Side="Enemy" >
+            <CardFilter AttackHeroLastTurn="True" />
+            <Effect Type="Damage" Value="3" />
+        </Target>
+        <Description>Deal 3 damage to all creature that attacked your hero since your last turn.</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Spell" Name="Spe_Lig_052" DisplayName="Lay of Hands" School="Light" Cost="3" MagicLevel="1" ID="587">
+        <Target Zone="Battleground" Amount="All" CardType="Unit" Side="Friendly" >
+            <Variable Type="Level" LevelType="Magic" Side="Friendly" />
+            <Effect Type="Heal" Value="Variable" />
+        </Target>
+        <Description>Heal all your creatures of an amount damage equal to your [MAGIC] level.</Description>
+    </Card>
+
+    <!--....................................................................-->
+    <!-- Spells - Prime -->
+    <!--....................................................................-->
+    <Card Rarity="Common" Type="Spell" Name="Spe_Pri_050" DisplayName="Spirited Away" School="Prime" Cost="2" MagicLevel="2" ID="588">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" CardType="Unit" Amount="1">
+            <CardFilter IncludeUnitType="Shooter" />
+            <Effect Type="Modifier" >
+                <Ability Type="Phased" />
+            </Effect>
+        </Target>
+        <Description>Enchant shooter creature. Permanent:
+This creature gains Phased.
+        </Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Spell" Name="Spe_Pri_051" DisplayName="Nether Soul" School="Prime" Cost="3" MagicLevel="3" ID="589">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" CardType="Unit" Amount="1" EvaluateLast="True">
+            <Effect Type="ModifyAttack" Value="0.0x" />
+            <Effect Type="ModifyRetaliate" Value="0.0x" />
+        </Target>
+        <Trigger Type="OnEnchantedDamaged" DamageIncludeFlags="Combat">
+            <Target Zone="Battleground" CardType="Unit" Amount="FromTrigger" >
+                <Effect Type="Damage" Value="2" />
+            </Target>
+        </Trigger>
+        <Description>Echant creature. Permanent:
+Enchanted creature [ATK] and [RET] is always 0. All creatures that deal combat damage to enchanted creature receive 2 damage.
+        </Description>
+    </Card>
+    <Card Rarity="Rare" Type="Spell" Name="Spe_Pri_052" DisplayName="Void Ripple" School="Prime" Cost="6" MagicLevel="6" ID="590">
+        <Target Zone="Battleground" Amount="1">
+            <CardFilter IncludeCardType="Fortune|Spell|Unit|Building" />
+            <Effect Type="Banish" />
+        </Target>
+        <Description>Banish target non-hero, non-event card from the battleground.</Description>
+    </Card>
+
+    <!--....................................................................-->
+    <!-- Spells - Water -->
+    <!--....................................................................-->
+    <Card Rarity="Common" Type="Spell" Name="Spe_Wat_050" DisplayName="Cold Fear" School="Water" Cost="2" MagicLevel="2" ID="591">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="BattlegroundColumn" Amount="1" >
+            <Variable Type="CardAttack" UseCurrentTarget="True" />
+            <Condition Operator="LesserThan" ValueA="Variable" ValueB="3" />
+            <Effect Type="Modifier">
+                <Ability Type="CannotAttack" />
+            </Effect>
+        </Target>
+        <Description>Enchant row. Permanent:
+Creatures from enchanted row with 2 or less [ATK] cannot attack.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Spell" Name="Spe_Wat_051" DisplayName="Focused Mind" School="Water" Cost="2" MagicLevel="3" ID="592">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" CardType="Unit" Side="Friendly" Amount="All" >
+            <Effect Type="Modifier" >
+                <Ability Type="Berserk" Remove="True" />
+                <Ability Type="CannotAttack" Remove="True" />
+            </Effect>
+        </Target>
+        <Description>Permanent:
+Friendly creatures cannot be prevented from attacking and are unaffected by Berserk.</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Spell" Name="Spe_Wat_052" DisplayName="Ink Warrior" School="Water" Cost="5" MagicLevel="4" ID="593">
+        <Target Zone="Battleground" CardType="Unit" Side="Friendly" Amount="1" >
+            <CardFilter ExcludeUnique="True" />
+            <Effect Type="Clone" />
+        </Target>
+        <Description>Deploy a copy of target non-unique friendly creature.</Description>
+    </Card>
+
+    <!--....................................................................-->
+    <!-- //	#####   ##  #   #####   #   #   #####   #####
+         //	##      ##  #   ##      ##  #    ##     ##
+         //	####    ##  #   ####    # # #    ##     #####
+         //	##      ##  #   ##      #  ##    ##        ##
+         //	#####     ##    #####   #   #    ##     ##### -->
+    <!--....................................................................-->
+    <Card Rarity="Common" Type="Event" Name="Eve_Neu_050" DisplayName="Week of Training" Cost="2" Faction="Neutral" ID="594">
+        <Ongoing Duration="UntilEndOfTurn" />
+        <Target Zone="Battleground" Side="Any" CardType="Unit" Amount="All" NeedActivation="True" Persistent="True" >
+            <Variable Type="CardUnmodifiedAttack" UseCurrentTarget="True" />
+            <Condition Operator="LesserThan" ValueA="Variable" ValueB="2" />
+            <Effect Type="ModifyAttack" Value="1" />
+        </Target>
+        <Description>[2:RESOURCES]: Creature with base [1:ATK] or less get +[1:ATK]</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Event" Name="Eve_Neu_051" DisplayName="Eye of the Mana Storm" Cost="4" Faction="Neutral" ID="595">
+        <Target Zone="Battleground" CardType="Unit" Amount="1" ForceExecute="True" Persistent="True">
+            <Effect Type="Modifier" Duration="UntilYourNextTurn">
+                <Ability Type="MagicShield" />
+            </Effect>
+        </Target>
+        <Description>[4:RESOURCES]: Until your next turn, target creature gets Magic Shield.</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Event" Name="Eve_Neu_052" DisplayName="Graduation Day" Cost="1" Faction="Neutral" ID="596">
+        <Ongoing Duration="UntilEndOfTurn" />
+        <Target Zone="Hero" Amount="All" Side="Friendly" NeedActivation="True" Persistent="True" >
+            <Effect Type="GlobalEffect" GlobalEffectType="RevealLibraryTop" />
+        </Target>
+        <Target Zone="Hero" Amount="All" Side="Friendly" NeedActivation="True" Persistent="True">
+            <Variable Type="LibraryTopCard" Side="Friendly" >
+                <CardFilter IncludeCardType="Spell" />
+            </Variable>
+            <Condition Operator="GreaterThan" ValueA="Variable" ValueB="0" />
+            <Effect Type="GlobalEffect" GlobalEffectType="ModifyCost" Value="-1" >
+                <CardFilter IncludeCardType="Spell" />
+            </Effect>
+        </Target>
+        <Description>[1:RESOURCES]: Reveal the top card of your library. If it’s a spell card, all your spell costs are reduced by 1.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Event" Name="Eve_Neu_053" DisplayName="Rise of the Nethermancer" Cost="1" Faction="Neutral" ID="597">
+        <Target Zone="None" Side="Friendly" ForceExecute="True" >
+            <Effect Type="ChoiceOption" />
+            <Subgroup>
+                <Target Zone="Graveyard" Side="Friendly" Amount="1" >
+                    <Option Value="0" DisplayText="Friendly Graveyard" />
+                    <Effect Type="Banish" />
+                </Target>
+                <Target Zone="Graveyard" Side="Enemy" Amount="1" >
+                    <Option Value="1" DisplayText="Enemy Graveyard" />
+                    <Effect Type="Banish" />
+                </Target>
+            </Subgroup>
+        </Target>
+        <Description>[1:RESOURCES]: Banish target card from a graveyard of your choice.</Description>
+    </Card>
+</Cards>

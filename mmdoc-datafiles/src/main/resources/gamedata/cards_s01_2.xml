@@ -1,0 +1,394 @@
+<!-- Define all cards of the second serie in this document. XML is case sensitive. -->
+<Cards>
+    <!--....................................................................-->
+    <!-- //	#####    ###    ####    #####   ##  #   #   #   #####   #####
+         //	##      ##  #   #   #    ##     ##  #   ##  #   ##      ##
+         //	####    ##  #   ####     ##     ##  #   # # #   ####    #####
+         //	##      ##  #   ## #     ##     ##  #   #  ##   ##         ##
+         //	##       ###    ##  #    ##     #####   #   #   #####   ##### -->
+    <!--....................................................................-->
+    <!-- Fortune - Haven -->
+    <!--....................................................................-->
+    <Card Rarity="Common" Type="Fortune" Name="For_Hav_030" DisplayName="Tree of Truth" Faction="Haven" Cost="1" DestinyLevel="2" ID="285">
+        <Target Zone="Battleground" CardType="Fortune" Amount="1">
+            <Effect Type="Kill" />
+        </Target>
+        <Description>Remove target Ongoing fortune from the battleground.</Description>
+    </Card>
+    <Card Rarity="Common" Type="Fortune" Name="For_Hav_031" DisplayName="Truce of Elrath" Faction="Haven" Cost="2" DestinyLevel="2" ID="286">
+      <Ongoing Duration="UntilYourNextTurn" />
+      <Target Zone="Battleground" CardType="Unit" Amount="All" Side="Any" >
+        <Effect Type="Modifier">
+          <Ability Type="AttackWithRetaliate" />
+        </Effect>
+      </Target>
+      <Description>Until your next turn: All creatures' [ATK] are equal to their [RET] value.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Fortune" Name="For_Hav_032" DisplayName="Imperial Phalanx" Faction="Haven" Cost="2" DestinyLevel="2" ID="287">
+        <Ongoing Duration="UntilYourNextTurn" />
+        <Target Zone="Battleground" CardType="Unit" Amount="All" Side="Friendly" >
+            <Variable Type="AttackerCount" Side="Friendly" UnitType="Melee" />
+            <Condition Operator="LesserThan" ValueA="Variable" ValueB="1" />
+            <Effect Type="ModifyRetaliate" Value="1" />
+            <Effect Type="Modifier">
+                <Ability Type="Retribution" />
+            </Effect>
+        </Target>
+        <Description>Until your next turn.  If no melee creature has attacked this turn, all friendly units gain Retribution.</Description>
+    </Card>
+    <!--....................................................................-->
+    <!-- Fortune - Inferno -->
+    <!--....................................................................-->
+    <Card Rarity="Common" Type="Fortune" Name="For_Inf_030" DisplayName="Halls of Amnesia" Faction="Inferno" Cost="1" DestinyLevel="1" ID="288">
+        <Target Zone="None" Side="Friendly">
+            <Effect Type="ChoiceOption" />
+            <Subgroup>
+                <Target Zone="Hand" Side="Enemy" Amount="1">
+                    <Option Value="0" DisplayText="From hand." />
+                    <CardFilter IncludeCardType="Spell" />
+                    <Effect Type="MoveCardTo" Destination="Graveyard"/>
+                </Target>
+                <Target Zone="Library" Side="Enemy" Amount="1">
+                    <Option Value="1" DisplayText="From library." />
+                    <CardFilter IncludeCardType="Spell" />
+                    <Effect Type="MoveCardTo" Destination="Graveyard"/>
+                </Target>
+                 <Target Side="Enemy">
+                     <Option Value="1"/>
+                     <Effect Type="Shuffle" CardHolder="Library" />
+                 </Target>
+            </Subgroup>
+        </Target>
+        <Description>Look at opponent hand and discard a spell card from it. OR Search opponent's library for a target spell card and put it in his graveyard.</Description>
+    </Card>
+    <Card Rarity="Common" Type="Fortune" Name="For_Inf_032" DisplayName="Maws of Chaos" Faction="Inferno" Cost="1" DestinyLevel="1" ID="290">
+        <Target Zone="None" Side="Friendly">
+            <Effect Type="ChoiceOption" />
+            <Subgroup>
+                <Target Zone="Hand" Side="Enemy" Amount="1">
+                    <Option Value="0" DisplayText="From hand." />
+                    <CardFilter IncludeCardType="Fortune" />
+                    <Effect Type="MoveCardTo" Destination="Graveyard" />
+                </Target>
+                <Target Zone="Library" Side="Enemy" Amount="1">
+                    <Option Value="1" DisplayText="From library." />
+                    <CardFilter IncludeCardType="Fortune" />
+                    <Effect Type="MoveCardTo" Destination="Graveyard" />
+                </Target>
+                <Target Side="Enemy">
+                    <Option Value="1"/>
+                    <Effect Type="Shuffle" CardHolder="Library" />
+                </Target>
+            </Subgroup>
+        </Target>
+        <Description>Look at opponent hand and discard a fortune card from it. OR Search opponent's library for a target fortune card and put it in his graveyard.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Fortune" Name="For_Inf_031" DisplayName="Hellfire Bridge" Faction="Inferno" Cost="3" DestinyLevel="3" ID="289">
+        <Target Zone="Hand" Side="Friendly" Amount="AllOther">
+            <Effect Type="MoveCardTo" Destination="Graveyard"/>
+        </Target>
+        <Target Zone="None" Side="Friendly">
+            <Effect Type="Draw" Value="3" />
+        </Target>
+        <Description>Discard your hand. Draw 3 cards.</Description>
+    </Card>
+    <!--....................................................................-->
+    <!-- Fortune - Necropolis -->
+    <!--....................................................................-->
+    <Card Rarity="Common" Type="Fortune" Name="For_Nec_030" DisplayName="Rite of Necromantic Transfer" Faction="Necropolis" Cost="1" DestinyLevel="2" ID="291">
+        <Target Zone="Battleground" CardType="Unit" Side="Friendly" Amount="1">
+            <Effect Type="Kill" />
+        </Target>
+        <Target Zone="Graveyard" CardType="Unit" Side="Friendly" Amount="1">
+            <Variable Type="BaseCardCost" UseCurrentTarget="True" />
+            <Variable2 Type="BaseCardCost" UseLastTarget="True" />
+            <Condition Operator="LesserThan" ValueA="Variable" ValueB="Variable2" />
+            <Effect Type="Deploy" Side="Friendly" />
+        </Target>
+        <Description>Kill a friendly creature.  Put a creature of lower cost from your graveyard to the battleground.</Description>
+    </Card>
+    <Card Rarity="Common" Type="Fortune" Name="For_Nec_031" DisplayName="Ariana's Lair" Faction="Necropolis" Cost="2" DestinyLevel="2" ID="292">
+        <Target Zone="Hand" Side="Friendly" Amount="1">
+            <CardType Include="Unit" />
+            <Effect Type="MoveCardTo" Destination="Graveyard" />
+        </Target>
+        <Target Zone="Graveyard" Side="Friendly" Amount="1">
+            <CardType Include="Unit" />
+            <Effect Type="MoveCardTo" Destination="Hand" />
+        </Target>
+        <Description>Discard a creature card.  Take a creature card from your graveyard and put it in your hand.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Fortune" Name="For_Nec_032" DisplayName="Altar of the Spider Goddess" Faction="Necropolis" Cost="3" DestinyLevel="2" ID="293">
+        <Target Zone="Battleground" CardType="Unit" Side="Friendly" Amount="1">
+            <Variable Type="CardHealth" UseCurrentTarget="True" ValueModifier="0.5xu"/>
+            <Effect Type="Draw" Value="Variable" />
+        </Target>
+        <Target Zone="Battleground" CardType="Unit" Side="Friendly" Amount="Same">
+            <Effect Type="Kill" />
+        </Target>
+        <Description>Kill a friendly creature.  Draw cards equal to half the remaining health of the sacrified creature, rounded up.</Description>
+    </Card>
+    <!--....................................................................-->
+    <!-- Fortune - Sanctuary -->
+    <!--....................................................................-->
+    <Card Rarity="Uncommon" Type="Fortune" Name="For_San_007" DisplayName="Whirlpool" Faction="Sanctuary" Cost="2" DestinyLevel="2" ID="147">
+        <Target Zone="Battleground" CardType="Unit" Side="Friendly" Amount="1">
+            <Effect Type="MoveCardTo" Destination="Hand" />
+        </Target>
+        <Target Zone="None" Side="Friendly">
+            <Effect Type="GainResources" Value="2" />
+        </Target>
+        <Description>Return target friendly unit card in your hand, then gain 2[RESOURCES].</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Fortune" Name="For_San_006" DisplayName="Underwater Fortress" Faction="Sanctuary" Cost="2" DestinyLevel="2" ID="148">
+        <Target Zone="Battleground" CardType="Unit" Side="Friendly" Amount="1" SkipNextTargetValidation="True"/>
+        <Target Zone="Library" CardType="Unit" Side="Friendly" Amount="1" SkipNextTargetValidation="True" RevealToOther="True" >
+            <CardFilter SameGPID="True"/>
+            <Effect Type="MoveCardTo" Destination="Hand" />
+        </Target>
+        <Target Zone="None" Amount="Same" ForceExecute="True" Persistent="True">
+            <Effect Type="ModifyCost" Value="-2" Duration="UntilEndOfTurn" />
+        </Target>
+        <Target Side="Friendly">
+            <Effect Type="Shuffle" CardHolder="Library" />
+        </Target>
+        <Description>Choose a friendly unit in play, search your library for a unit with the same name and put it in your hand. Until end of turn, this unit cost 2 less to play. Shuffle your library.</Description>
+    </Card>
+    <Card Rarity="Common" Type="Fortune" Name="For_San_001" DisplayName="Challenge Hall" Faction="Sanctuary" Cost="2" DestinyLevel="2" ID="149">
+        <Ongoing Duration="UntilYourNextTurn" />
+        <Target Zone="Battleground" CardType="Unit" Amount="All" Side="Enemy" >
+            <Variable Type="AttackerCountPerLine" UseCurrentTarget="True" />
+            <Condition Operator="GreaterThan" ValueA="Variable" ValueB="0" />
+            <Effect Type="Modifier" >
+                <Ability Type="CannotAttack" />
+            </Effect>
+        </Target>
+        <Description>Only one enemy unit can attack per line.</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Fortune" Name="For_San_002" DisplayName="Honoured Land" Faction="Sanctuary" Cost="2" DestinyLevel="3" ID="150">
+        <Ongoing Duration="UntilYourNextTurn" />
+        <Target Zone="Battleground" CardType="Unit" Amount="All" Side="Friendly"  >
+            <Variable Type="AbilityValue" Ability="Honor" UseCurrentTarget="True"/>
+            <CardFilter IncludeAbility="Honor" />
+            <Effect Type="ModifyAttack" Value="Variable" />
+            <Effect Type="ModifyRetaliate" Value="Variable" />
+        </Target>
+        <Description>Until your next turn, friendly creatures with Honor gains +X [ATK] and +X [RET], where X is their Honor value.</Description>
+    </Card>
+    <Card Rarity="Common" Type="Fortune" Name="For_San_004" DisplayName="Temple Tower" Faction="Sanctuary" Cost="2" DestinyLevel="2" ID="151">
+        <Target Zone="None" Side="Friendly">
+            <Effect Type="ChoiceOption" />
+            <Subgroup>
+                <Target Zone="None" Side="Friendly" Option="0">
+                    <Option Value="0" DisplayText="Draw a card." />
+                    <Effect Type="Draw" Value="1" />
+                </Target>
+                <Target Zone="None" Side="Friendly">
+                    <Option Value="1" DisplayText="Increase a level." />
+                    <Variable Type="TargetCount">
+                        <Target Zone="Battleground" CardType="Unit" Amount="All" Side="Friendly" />
+                    </Variable>
+                    <Variable2 Type="TargetCount">
+                        <Target Zone="Battleground" CardType="Unit" Amount="All" Side="Enemy" />
+                    </Variable2>
+                    <Condition Operator="GreaterThan" ValueA="Variable2" ValueB="Variable" />
+                    <Effect Type="ChoiceOption" />
+                    <Subgroup>
+                        <Target Zone="None" Side="Friendly">
+                            <Option Value="0" DisplayText="Increase [MIGHT] level." />
+                            <Effect Type="IncreaseLevel" Value="1" LevelType="Might" />
+                        </Target>
+                        <Target Zone="None" Side="Friendly">
+                            <Option Value="1" DisplayText="Increase [MAGIC] level." />
+                            <Effect Type="IncreaseLevel" Value="1" LevelType="Magic" />
+                        </Target>
+                        <Target Zone="None" Side="Friendly">
+                            <Option Value="2" DisplayText="Increase [DESTINY] level." />
+                            <Effect Type="IncreaseLevel" Value="1" LevelType="Destiny" />
+                        </Target>
+                    </Subgroup>
+                </Target>
+            </Subgroup>
+        </Target>
+        <Description>Draw a card. OR If your enemy has more unit than you on the battleground, increase one level of your choice.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Fortune" Name="For_San_005" DisplayName="Hidden Temple" Faction="Sanctuary" Cost="1" DestinyLevel="1" ID="152">
+        <Ongoing Duration="UntilEndOfTurn" />
+        <Target Zone="Hero" Amount="All" Side="Friendly" >
+            <Effect Type="GlobalEffect" GlobalEffectType="ModifyCost" Value="-1" >
+                <CardFilter IncludeCardType="Unit" />
+            </Effect>
+        </Target>
+        <Target Zone="Hand" Side="Friendly" Amount="1">
+            <Effect Type="MoveCardTo" Destination="Library" Duration="Immediate" />
+        </Target>
+        <Description>Take a card from your hand and put it facedown on the top of your library. If you do, all unit card cost 1 less[SPACE][RESOURCES] to play.</Description>
+    </Card>
+    <Card Rarity="Epic" Type="Fortune" Name="For_San_003" DisplayName="Yukiko's Shrine" Faction="Sanctuary" Cost="0" DestinyLevel="2" Unique="True" ID="153">
+        <Ongoing Duration="UntilEndOfTurn" />
+         <Target Zone="Hero" Amount="All" Side="Friendly" >
+            <Variable Type="TargetCount">
+                <Target Zone="Battleground" CardType="Unit" Amount="All" Side="Friendly" />
+            </Variable>
+            <Variable2 Type="TargetCount">
+                <Target Zone="Battleground" CardType="Unit" Amount="All" Side="Enemy" />
+            </Variable2>
+            <Condition Operator="LesserThan" ValueA="Variable" ValueB="Variable2" />
+            <Effect Type="GlobalEffect" GlobalEffectType="ModifyCost" Value="2mi" >
+                <CardFilter IncludeCardType="Unit" ExcludeUnique="True" />
+            </Effect>
+        </Target>
+        <Description>Until the end of your turn, as long as you have less units than your enemy on the battleground, you can deploy non-Unique Units for 2 [RESOURCES].</Description>
+    </Card>
+    <Card Rarity="Common" Type="Fortune" Name="For_San_030" DisplayName="Pillar of Foresight" Faction="Sanctuary" Cost="1" DestinyLevel="1" ID="294">
+        <Target Zone="Hand" Side="Enemy" Amount="All">
+            <Effect Type="Look" />
+        </Target>
+        <Target Zone="None" Side="Friendly">
+            <Effect Type="Draw" Value="1" />
+        </Target>
+        <Description>Look at opponent hand. Draw a card.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Fortune" Name="For_San_031" DisplayName="Avalanche" Faction="Sanctuary" Cost="4" DestinyLevel="4" ID="295">
+        <Ongoing Duration="UntilYourNextTurn" />
+        <Target Zone="Hero" Amount="All" Side="Enemy" >
+            <Effect Type="GlobalEffect" GlobalEffectType="CantDeploy" />
+        </Target>
+        <Description>Opponent cannot deploy creatures.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Fortune" Name="For_San_032" DisplayName="The Frozen Maze" Faction="Sanctuary" Cost="2" DestinyLevel="2" ID="296">
+        <Ongoing Duration="UntilYourNextTurn" />
+        <Target Zone="Battleground" Side="Enemy" Amount="2" CardType="Unit" ForceExecute="True">
+            <Effect Type="Modifier">
+                <Ability Type="CannotAttack" />
+            </Effect>
+        </Target>
+        <Description>Two target enemy creatures cannot attack until your next turn.</Description>
+    </Card>
+    <!--....................................................................-->
+    <!-- Fortune - Stronghold -->
+    <!--....................................................................-->
+    <Card Rarity="Common" Type="Fortune" Name="For_Str_030" DisplayName="Ritual of the Blood Feathers" Faction="Stronghold" Cost="1" DestinyLevel="2" ID="297">
+        <Target Zone="Battleground" Side="Friendly" CardType="Unit" Amount="1">
+            <Variable Type="CounterCount" CounterType="Any" UseCurrentTarget="True" />
+            <Effect Type="Heal" Value="Variable" />
+            <Effect Type="RemoveCounter" CounterType="Any" Value="Variable" />
+        </Target>
+        <Description>Remove all counter from target friendly creature.  Heal this creature of that many damage.</Description>
+    </Card>
+
+    <Card Rarity="Common" Type="Fortune" Name="For_Str_032" DisplayName="Call of the Bloodhorn" Faction="Stronghold" Cost="2" DestinyLevel="2" ID="299">
+        <Ongoing Duration="UntilEndOfTurn" />
+        <Target Zone="Battleground" CardType="Unit" Amount="All" >
+            <Effect Type="PlayEffect" PlayEffectType="KeepEnrage" />
+        </Target>
+        <Description>Until end of turn, creatures with Enrage don't loose their Enrage counter when they attack.</Description>
+    </Card>
+
+    <Card Rarity="Uncommon" Type="Fortune" Name="For_Str_031" DisplayName="Surprise Attack" Faction="Stronghold" Cost="3" DestinyLevel="3" ID="298">
+        <Target Zone="Battleground" CardType="Unit" Amount="1" Side="Friendly" />
+        <Target Zone="Battleground" CardType="Unit" Amount="1" Side="Enemy">
+            <Variable Type="CardAttack" UseLastTarget="True" />
+            <Effect Type="Damage" Value="Variable" />
+        </Target>
+        <Description>Choose target friendly creature, then deal damage to an enemy creature equal to the first creature's attack.</Description>
+    </Card>
+    <!--....................................................................-->
+    <!--  Fortune - Neutral -->
+    <!--....................................................................-->
+    <Card Rarity="Uncommon" Type="Fortune" Name="For_Neu_030" DisplayName="Inheritance" Faction="Neutral" Cost="0" DestinyLevel="3" ID="300">
+        <Variable Type="Resources" Side="Friendly" />
+        <PlayabilityCondition Operator="LesserThan" ValueA="Variable" ValueB="1" />
+        <Target Zone="Graveyard" Amount="1" CardType="Unit" Side="Friendly">
+            <Effect Type="Banish" />
+        </Target>
+        <Target Zone="None" Side="Friendly">
+            <Effect Type="GainResources" Value="3" />
+        </Target>
+        <Description>Remove a creature card from your graveyard, then gain [3:RESOURCES]. Inheritance can only be played if you have [0:RESOURCES] left.</Description>
+    </Card>
+    <Card Rarity="Common" Type="Fortune" Name="For_Neu_031" DisplayName="Curse of Negation" Faction="Neutral" Cost="2" DestinyLevel="2" ID="301">
+        <Target Zone="None" Side="Enemy">
+            <Effect Type="ChoiceOption" />
+            <Subgroup>
+                <Target Zone="None" Side="Enemy">
+                    <Variable Type="Level" Side="Enemy" LevelType="Might" />
+                    <Condition Operator="GreaterThan" ValueA="Variable" ValueB="0" />
+                    <Option Value="0" DisplayText="Decrease [MIGHT] level." />
+                    <Effect Type="IncreaseLevel" Value="-1" LevelType="Might" />
+                </Target>
+                <Target Zone="None" Side="Enemy">
+                    <Variable Type="Level" Side="Enemy" LevelType="Magic" />
+                    <Condition Operator="GreaterThan" ValueA="Variable" ValueB="0" />
+                    <Option Value="1" DisplayText="Decrease [MAGIC] level." />
+                    <Effect Type="IncreaseLevel" Value="-1" LevelType="Magic" />
+                </Target>
+                <Target Zone="None" Side="Enemy">
+                    <Variable Type="Level" Side="Enemy" LevelType="Destiny" />
+                    <Condition Operator="GreaterThan" ValueA="Variable" ValueB="0" />
+                    <Option Value="2" DisplayText="Decrease [DESTINY] level." />
+                    <Effect Type="IncreaseLevel" Value="-1" LevelType="Destiny" />
+                </Target>
+            </Subgroup>
+        </Target>
+        <Description>Remove a level of your choice to your enemy.</Description>
+    </Card>
+    <Card Rarity="Common" Type="Fortune" Name="For_Neu_032" DisplayName="Stolen Supplies" Faction="Neutral" Cost="1" DestinyLevel="3" ID="302">
+        <Target Zone="None" Side="Friendly">
+            <Variable Type="Resources" Side="Enemy" />
+            <Effect Type="GainResources" Value="Variable" />
+        </Target>
+        <Target Zone="None" Side="Enemy">
+            <Variable Type="Resources" Side="Enemy" ValueModifier="-1.0x" />
+            <Effect Type="GainResources" Value="Variable" />
+        </Target>
+        <Description>Take all unused Resources left by Opponent on his last turn and add them to yours for the turn</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Fortune" Name="For_Neu_033" DisplayName="Pillage" Faction="Neutral" Cost="3" DestinyLevel="3" ID="303">
+        <Ongoing Duration="UntilEnemyEndOfTurn" />
+        <Target Zone="Hero" Amount="All" Side="Enemy" >
+            <Effect Type="ModifyResourcesProduction" Value="0.5xd" />
+        </Target>
+        <Description>Opponent receives half his amount of Resources round down on his next turn</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Fortune" Name="For_Neu_034" DisplayName="Monastery of Helexia" Faction="Neutral" Cost="1" DestinyLevel="1" ID="304">
+        <Target Side="Friendly">
+            <Effect Type="Shuffle" CardHolder="Events" />
+        </Target>
+        <Description>Shuffle all event cards and draw 2 new.</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Fortune" Name="For_Neu_035" DisplayName="Cosmic Realignment" Faction="Neutral" Cost="4" DestinyLevel="4" ID="305">
+        <Target Zone="Hand" Side="Any" Amount="AllOther">
+            <Effect Type="MoveCardTo" Destination="Graveyard"/>
+        </Target>
+        <Target Zone="None" Side="Any">
+            <Effect Type="Draw" Value="5" />
+        </Target>
+        <Description>Both players discard their hand and draw 5 new cards.</Description>
+    </Card>
+    <Card Rarity="Epic" Type="Fortune" Name="For_Neu_036" DisplayName="Throne of Renewal" Faction="Neutral" Cost="5" DestinyLevel="5" ID="306">
+        <Target Zone="Battleground" Side="Any" Amount="All">
+            <CardType Exclude="Hero" />
+            <Effect Type="MoveCardTo" Destination="Hand" />
+        </Target>
+        <Target Zone="Hero" Amount="All" Side="Friendly">
+            <Effect Type="GainResources" Value="0x" />
+        </Target>
+        <Description>Return every card on the battlefield to their owner's hand, then lose all resources.</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Fortune" Name="For_Neu_037" DisplayName="Tower of Oblivion" Faction="Neutral" Cost="4" DestinyLevel="3" ID="335">
+        <Target Zone="Hero" Amount="All" Side="Any" >
+            <Variable Type="CardInHandCount" ValueModifier="-6" Side="Context"/>
+            <Effect Type="Damage" Value="Variable" Duration="Immediate" />
+        </Target>
+        <Target Zone="Hand" Amount="Variable" Side="Friendly" InputOnExec="True" Random="True" >
+            <Variable Type="CardInHandCount" ValueModifier="-6" Side="Friendly"/>
+            <Effect Type="MoveCardTo" Destination="Graveyard"/>
+        </Target>
+        <Target Zone="Hand" Amount="Variable" Side="Enemy" InputOnExec="True" Random="True">
+            <Variable Type="CardInHandCount" ValueModifier="-6" Side="Enemy"/>
+            <Effect Type="MoveCardTo" Destination="Graveyard"/>
+        </Target>
+        <Description>Each player choose 6 cards at random from their hand and discard the rest. Deal damage to each Hero equal to the number of cards discarded this way.</Description>
+    </Card>
+</Cards>

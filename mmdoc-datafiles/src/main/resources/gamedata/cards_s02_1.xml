@@ -1,0 +1,355 @@
+<!-- Define all cards of the second serie in this document. XML is case sensitive. -->
+<Cards>
+    <!--...............................................................................-->
+    <!-- //	 ####   ####    #####    ###    #####   ##  #   ####    #####   #####
+         //	##      #   #   ##      ##  #    ##     ##  #   #   #   ##      ##
+         //	##      ####    ####    #####    ##     ##  #   ####    ####    #####
+         //	##      ## #    ##      ##  #    ##     ##  #   ## #    ##         ##
+         //	 ####   ##  #   #####   ##  #    ##     #####   ##  #   #####   ##### -->
+    <!--...............................................................................-->
+    <!-- Abilities Template -->
+    <!--...............................................................................-->
+    <TemplateEffect Name="FlyerGuard">
+        <Target Zone="Battleground" CardType="Unit" Amount="Self" Side="Friendly"  Shape="SelfAndAdjacent">
+            <Variable Type="AbilityValue" Ability="FlyerGuard" ValueModifier="-1.0x"/>
+            <Effect Type="ModifyDamage" Value="Variable" DamageIncludeFlags="Combat|Flyer" OwnerAbility="FlyerGuard" />
+        </Target>
+    </TemplateEffect>
+    <TemplateEffect Name="EarthHeal">
+        <Target Zone="Battleground" CardType="Unit" Amount="Self" Side="Friendly" >
+            <Effect Type="ModifyDamage" Value="1.0x" DamageIncludeFlags="Earth" Reverse="True" OwnerAbility="EarthHeal" />
+        </Target>
+    </TemplateEffect>
+    <TemplateEffect Name="FortuneWard">
+        <Target Zone="Battleground" CardType="Unit" Amount="Self" Side="Friendly" >
+            <Effect Type="PlayEffect" PlayEffectType="Ward" OwnerAbility="FortuneWard" >
+                <CardFilter IncludeCardType="Fortune" />
+            </Effect>
+        </Target>
+    </TemplateEffect>
+    <TemplateEffect Name="EnemySpellWard">
+        <Target Zone="Battleground" CardType="Unit" Amount="Self" Side="Friendly" >
+            <Effect Type="PlayEffect" PlayEffectType="Ward" OwnerAbility="EnemySpellWard" >
+                <CardFilter IncludeCardType="Spell" Side="Enemy" />
+            </Effect>
+        </Target>
+    </TemplateEffect>
+    <TemplateEffect Name="Mending">
+        <Trigger Type="OnTurnEnd" Side="Friendly">
+            <Target Zone="Battleground" CardType="Unit" Amount="Self" Side="Friendly">
+                <Variable Type="UnitAttackCount" />
+                <Condition Operator="LesserThan" ValueA="Variable" ValueB="1" />
+                <Effect Type="Heal" Value="infinite" OwnerAbility="Mending"/>
+            </Target>
+        </Trigger>
+    </TemplateEffect>
+    <TemplateEffect Name="Berserk">
+        <Trigger Type="OnActionPhaseBegin" Side="Friendly">
+            <Target Zone="Battleground" CardType="Unit" Amount="Self" Side="Friendly">
+                <Effect Type="AutoAttack" OwnerAbility="Berserk" />
+            </Target>
+        </Trigger>
+    </TemplateEffect>
+
+    <!--...............................................................................-->
+    <!-- Creatures - Haven -->
+    <!--...............................................................................-->
+    <Card Rarity="Common" Type="Unit" Name="Cre_Hav_040" DisplayName="Wolf Guard" Faction="Haven" SubType="Melee" Cost="2" MightLevel="1" Attack="0" Retaliate="2" HP="5" ID="345">
+        <Ability Type="CannotAttack" />
+        <Ability Type="Retribution" />
+    </Card>
+    <Card Rarity="Common" Type="Unit" Name="Cre_Hav_041" DisplayName="Griffin Marksman" Faction="Haven" SubType="Shooter" Cost="4" MightLevel="4" Attack="3" Retaliate="3" HP="6" ID="346">
+        <Ability Type="ImmuneToRetaliate" />
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Hav_042" DisplayName="Griffin Mounted Spearman" Faction="Haven" SubType="Melee" Cost="4" MightLevel="4" Attack="2" Retaliate="3" HP="6" ID="347">
+        <Ability Type="Swift" />
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Hav_043" DisplayName="Griffin Knight" Faction="Haven" SubType="Flyer" Cost="3" MightLevel="3" Attack="1" Retaliate="2" HP="5" ID="348">
+        <Ability Type="FlyerGuard" Value="2" />
+    </Card>
+    <Card Rarity="Rare" Type="Unit" Name="Cre_Hav_044" DisplayName="Immaculate Glory" Faction="Haven" SubType="Magic|Flyer" Cost="5" MightLevel="4" MagicLevel="2" Attack="3" Retaliate="3" HP="6" ID="349">
+        <Ability Type="DarkWard" />
+        <Target Zone="Battleground" CardType="Unit" Amount="Self" >
+            <Effect Type="PlayEffect" PlayEffectType="CannotPutCounter" Duration="Static" />
+        </Target>
+        <Description>Immaculate Glory cannot receive counters.</Description>
+    </Card>
+    <Card Rarity="Epic" Type="Unit" Name="Cre_Hav_045" DisplayName="Griffin Battle Priest" Faction="Haven" SubType="Magic|Shooter" Cost="3" MightLevel="2" MagicLevel="3" Attack="1" Retaliate="2" HP="4" ID="350">
+        <Ability Type="ImmuneToRetaliate" />
+        <Ability Type="Heal" Value="2" />
+        <Trigger Type="OnTurnBegin" Side="Friendly">
+            <Target Zone="Hero" Amount="All" Side="Friendly">
+                <Effect Type="Heal" Value="1" />
+            </Target>
+        </Trigger>
+        <Description>At the beginning of your turn, heal 1 damage from your hero.</Description>
+    </Card>
+    <!--...............................................................................-->
+    <!-- Creatures - Inferno -->
+    <!--...............................................................................-->
+    <Card Rarity="Common" Type="Unit" Name="Cre_Inf_040" DisplayName="Hellfire Bloater" Faction="Inferno" SubType="Magic|Melee" Cost="2" MightLevel="1" MagicLevel="2" Attack="0" Retaliate="0" HP="2" ID="351">
+        <Ability Type="CannotAttack" />
+        <Ability Type="FireBurst" Value="4" />
+    </Card>
+    <Card Rarity="Common" Type="Unit" Name="Cre_Inf_041" DisplayName="Hellfire Slave" Faction="Inferno" SubType="Shooter" Cost="4" MightLevel="4" Attack="4" Retaliate="4" HP="4" ID="352">
+        <Ability Type="ImmuneToRetaliate" />
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Inf_042" DisplayName="Chaos Lacerator" Faction="Inferno" SubType="Magic|Melee" Cost="2" MightLevel="2" MagicLevel="1" DestinyLevel="1" Attack="2" Retaliate="0" HP="3" ID="353">
+        <Ability Type="AreaBlast" Value="3" />
+        <Trigger Type="OnThisCardDeath" Side="Friendly">
+            <Target Zone="Hand" Side="Enemy" Amount="1" Random="True">
+                <Effect Type="MoveCardTo" Destination="Graveyard"/>
+            </Target>
+        </Trigger>
+        <Description>If Chaos Lacerator dies during your turn, opponent discards a card at random.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Inf_043" DisplayName="Hellfire Maniac" Faction="Inferno" SubType="Melee" Cost="5" MightLevel="5" Attack="3" Retaliate="0" HP="5" ID="354">
+        <Target Zone="BattlegroundColumn" CardType="Unit" Amount="Self" Side="Enemy" >
+            <Effect Type="Modifier">
+                <Ability Type="Berserk" />
+            </Effect>
+        </Target>
+        <Trigger Type="OnThisPostAttacked">
+            <Target Zone="Battleground" CardType="Unit" Amount="FromTrigger">
+                <Effect Type="Damage" Value="4" />
+            </Target>
+        </Trigger>
+        <Description>Enemy creatures in the same row as Hellfire Maniac gain Berserk. (At the beginning of the action phase, creatures with Berserk automatically attack the first valid enemy target in front of them.)
+            After Hellfire Maniac is attacked, deal 4 damage to the attacking creature.
+        </Description>        
+    </Card>
+    <Card Rarity="Epic" Type="Unit" Name="Cre_Inf_044" DisplayName="Chaos Seer" Faction="Inferno" SubType="Shooter" Cost="3" MightLevel="2" DestinyLevel="2" Attack="2" Retaliate="0" HP="3" ID="355">
+        <Ability Type="ImmuneToRetaliate" />
+        <Trigger Type="OnTurnBegin" Side="Friendly">
+            <Target Zone="Hand" Amount="Variable" Side="Friendly" Cancelable="False">
+                <Variable Type="CardInHandCount" ValueModifier="-6" Side="Friendly"/>
+                <Effect Type="MoveCardTo" Destination="Graveyard"/>
+            </Target>
+        </Trigger>
+        <Trigger Type="OnTurnBegin" Side="Enemy">
+            <Target Zone="Hand" Amount="Variable" Side="Enemy" Cancelable="False">
+                <Variable Type="CardInHandCount" ValueModifier="-6" Side="Enemy"/>
+                <Effect Type="MoveCardTo" Destination="Graveyard"/>
+            </Target>
+        </Trigger>
+        <Trigger Type="OnThisCardLeavePlay" Side="Enemy">
+            <Target Zone="Hand" Amount="1" Side="Enemy" Cancelable="False">
+                <Effect Type="MoveCardTo" Destination="Graveyard"/>
+            </Target>
+        </Trigger>
+        <Description>At the beginning of each player's turn, if that player have more than 6 cards in hand, they discard until he have 6 cards left.
+        If Chaos Seer leaves the battlefield during your opponent's turn, they discard a card.</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Unit" Name="Cre_Inf_045" DisplayName="Void Arbiter" Faction="Inferno" SubType="Magic|Shooter" Cost="4" MightLevel="3" MagicLevel="2" Attack="2" Retaliate="1" HP="4" ID="356">
+        <Ability Type="ImmuneToRetaliate" />
+        <Target Zone="Hero" Amount="All" Side="Any" >
+            <Effect Type="GlobalEffect" GlobalEffectType="CantDrawAdditional" />
+        </Target>
+        <Ability Type="MagicChannel" Value="2" />
+        <Description>Players cannot draw cards outside of their supply phase.</Description>
+    </Card>
+    <!--...............................................................................-->
+    <!-- Creatures - Necropolis -->
+    <!--...............................................................................-->
+    <Card Rarity="Common" Type="Unit" Name="Cre_Nec_040" DisplayName="Hangman Tree" Faction="Necropolis" SubType="Melee" Cost="2" MightLevel="1" Attack="0" Retaliate="1" HP="5" ID="357">
+        <Ability Type="CannotAttack" />
+        <Ability Type="Regenerate" Value="1" />
+    </Card>
+    <Card Rarity="Common" Type="Unit" Name="Cre_Nec_041" DisplayName="Skeleton Archer" Faction="Necropolis" SubType="Shooter" Cost="3" MightLevel="3" Attack="2" Retaliate="2" HP="5" ID="358">
+        <Ability Type="ImmuneToRetaliate" />
+    </Card>
+    <Card Rarity="Common" Type="Unit" Name="Cre_Nec_042" DisplayName="Untamed Wraith" Faction="Necropolis" SubType="Magic|Flyer" Cost="3" MightLevel="3" MagicLevel="1" Attack="2" Retaliate="2" HP="4" ID="360">
+        <Ability Type="Incorporeal" />
+    </Card>
+    <Card Rarity="Rare" Type="Unit" Name="Cre_Nec_043" DisplayName="Living Nightmare" Faction="Necropolis" SubType="Melee" Cost="5" MightLevel="5" Attack="3" Retaliate="3" HP="6" ID="359">
+        <Ability Type="Fear" Value="3" />
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Nec_044" DisplayName="Soul-Consuming Lich" Faction="Necropolis" SubType="Melee" Cost="4" MightLevel="4" Attack="2" Retaliate="1" HP="7" ID="361">
+        <Trigger Type="OnUnitDeath" Side="Any" >
+            <Target Zone="Battleground" CardType="Unit" Amount="Self" Shape="Self">
+                <Effect Type="Heal" Value="2" />
+            </Target>
+        </Trigger>
+        <Description>Each time a creature dies, heal 2 damage to Soul-Consuming Lich.</Description>
+    </Card>
+    <Card Rarity="Epic" Type="Unit" Name="Cre_Nec_045" DisplayName="Namtaru Channeler" Faction="Necropolis" SubType="Magic|Melee" Cost="3" MightLevel="2" MagicLevel="3" Attack="1" Retaliate="0" HP="5" ID="362">
+        <Ability Type="Infect" Value="1" />
+        <Target Zone="Battleground" CardType="Unit" Amount="Self" >
+            <Variable Type="TargetCount" >
+                <Target Zone="Battleground" CardType="Spell" Amount="All" Side="Any" />
+            </Variable>
+            <Effect Type="ModifyAttack" Value="Variable" />
+            <Effect Type="ModifyRetaliate" Value="Variable" />
+        </Target>
+        <Description>Namtary Channeler gets +[1:ATK] and +[1:RET] for each ongoing spell in play.</Description>
+    </Card>
+    <!--...............................................................................-->
+    <!-- Creatures - Sanctuary -->
+    <!--...............................................................................-->
+    <Card Rarity="Common" Type="Unit" Name="Cre_San_040" DisplayName="Waterfall Guardians" Faction="Sanctuary" SubType="Melee" Cost="2" MightLevel="1" Attack="0" Retaliate="1" HP="5" ID="363">
+        <Ability Type="CannotAttack" />
+        <Ability Type="Hypnotize" />
+        <Ability Type="Anchored" />
+    </Card>
+    <Card Rarity="Common" Type="Unit" Name="Cre_San_041" DisplayName="Naga Yokujin" Faction="Sanctuary" SubType="Shooter" Cost="3" MightLevel="3" Attack="2" Retaliate="2" HP="5" ID="364">
+        <Ability Type="ImmuneToRetaliate" />
+    </Card>
+    <Card Rarity="Common" Type="Unit" Name="Cre_San_042" DisplayName="Okane no Okane" Faction="Sanctuary" SubType="Shooter" Cost="3" MightLevel="3" DestinyLevel="1" Attack="2" Retaliate="1" HP="4" ID="365">
+        <Ability Type="ImmuneToRetaliate" />
+        <Target Zone="Hero" Amount="All" Side="Any" >
+            <Effect Type="GlobalEffect" GlobalEffectType="CantGainResources" />
+        </Target>
+        <Description>Prevent resource gain from cards and abilities.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_San_043" DisplayName="Kabuki Tei" Faction="Sanctuary" SubType="Melee" Cost="4" MightLevel="3" DestinyLevel="2" Attack="2" Retaliate="2" HP="5" ID="366">
+        <Ability Type="Honor" Value="1" />
+        <Ability Type="Switch" />
+        <Description>Kabuki Tei can be deployed on another friendly creature.  If you do, return that creature to its owner's hand.</Description>
+    </Card>
+    <Card Rarity="Epic" Type="Unit" Name="Cre_San_044" DisplayName="Shinje Warrior" Faction="Sanctuary" SubType="Magic|Melee" Cost="3" MightLevel="3" MagicLevel="1" Attack="2" Retaliate="0" HP="4" ID="367">
+        <Trigger Type="OnThisPostAttacked">
+            <Target Zone="Battleground" CardType="Unit" Amount="FromTrigger">
+                <Effect Type="Kill" />
+            </Target>
+        </Trigger>
+        <Description>After Shinje Warrior is attacked, destroy the creature that attacked it.</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Unit" Name="Cre_San_045" DisplayName="Unmei-Kami" Faction="Sanctuary" SubType="Magic|Melee" Cost="4" MightLevel="2" MagicLevel="2" DestinyLevel="2" Attack="2" Retaliate="1" HP="5" ID="368">
+        <Ability Type="FortuneWard" />
+        <Trigger Type="OnThisDamageHero" Side="Enemy">
+            <Target Zone="Hand" Amount="1" Side="Enemy" Cancelable="True">
+                <CardFilter IncludeCardType="Fortune|Spell" />
+                <Effect Type="Play" CancelDestination="Hand"/>
+            </Target>
+        </Trigger>
+        <Description>When Unmei-Kami deals damage to an enemy hero, look at opponent's hand. You may play a fortune or spell card from it. (You must fullfill all requirements and pay the cost to play that card.)</Description>
+    </Card>
+    <!--...............................................................................-->
+    <!-- Creatures - Stronghold -->
+    <!--...............................................................................-->
+    <Card Rarity="Common" Type="Unit" Name="Cre_Str_040" DisplayName="Bramble Beast" Faction="Stronghold" SubType="Melee" Cost="2" MightLevel="1" Attack="0" Retaliate="2" HP="5" ID="369">
+        <Ability Type="CannotAttack" />
+        <Ability Type="MagicResist" />
+        <Ability Type="Anchored" />
+    </Card>
+    <Card Rarity="Common" Type="Unit" Name="Cre_Str_041" DisplayName="War Oliphant" Faction="Stronghold" SubType="Melee" Cost="3" MightLevel="3" Attack="2" Retaliate="2" HP="7" ID="370">
+    </Card>
+    <Card Rarity="Common" Type="Unit" Name="Cre_Str_042" DisplayName="Blackskull Centaur" Faction="Stronghold" SubType="Shooter" Cost="3" MightLevel="3" Attack="2" Retaliate="1" HP="3" ID="371">
+        <Ability Type="ImmuneToRetaliate" />
+        <Ability Type="Swift" />
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Str_043" DisplayName="Blackskull Shredder" Faction="Stronghold" SubType="Melee" Cost="4" MightLevel="4" Attack="2" Retaliate="0" HP="4" ID="372">
+        <Ability Type="QuickAttack" />
+        <Ability Type="Swift" />
+    </Card>
+    <Card Rarity="Rare" Type="Unit" Name="Cre_Str_044" DisplayName="Bloodfrenzied Wyvern" Faction="Stronghold" SubType="Flyer" Cost="5" MightLevel="5" Attack="3" Retaliate="3" HP="8" ID="373">
+        <Ability Type="BloodThirst" Value="1" />
+    </Card>
+    <Card Rarity="Epic" Type="Unit" Name="Cre_Str_045" DisplayName="Blackskull Cyclops" Faction="Stronghold" SubType="Melee" Cost="6" MightLevel="6" Attack="3" Retaliate="0" HP="6" ID="374">
+        <Ability Type="DoubleAttack" />
+        <Ability Type="Fear" Value="4" />
+    </Card>
+    <Card Rarity="Common" Type="Unit" Name="Cre_Str_046" DisplayName="Kitten Warrior" Faction="Stronghold" SubType="Melee" Cost="1"  MightLevel="0" Attack="0" Retaliate="0" HP="1" ID="408">
+        <Ability Type="QuickAttack" />
+    </Card>
+    <!--...............................................................................-->
+    <!-- Creatures - Neutral -->
+    <!--...............................................................................-->
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Neu_040" DisplayName="Dark Wood Treant" Faction="Neutral" SubType="Melee" Cost="3" MightLevel="1" Attack="0" Retaliate="0" HP="7" ID="375">
+        <Ability Type="CannotAttack" />
+        <Ability Type="Towering" />
+    </Card>
+    <Card Rarity="Common" Type="Unit" Name="Cre_Neu_041" DisplayName="Serpentfly" Faction="Neutral" SubType="Flyer" Cost="1" MightLevel="1" Attack="1" Retaliate="0" HP="2" ID="376">
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Neu_042" DisplayName="Magic Peddler" Faction="Neutral" SubType="Melee" Cost="2" MightLevel="2" DestinyLevel="1" Attack="1" Retaliate="0" HP="1" ID="377">
+        <Trigger Type="OnThisCardDeploy">
+            <Target Zone="Library" Side="Friendly" Amount="1" RevealToOther="True" >
+                <CardFilter IncludeCardType="Spell" IncludeUnique="True"/>
+                <Effect Type="MoveCardTo" Destination="Hand" />
+            </Target>
+            <Target Side="Friendly">
+                <Effect Type="Shuffle" CardHolder="Library" />
+            </Target>
+        </Trigger>
+        <Description>When Magic Peddler enters the battleground, search your library for a unique spell and put that spell in your hand.</Description>
+    </Card>
+    <Card Rarity="Common" Type="Unit" Name="Cre_Neu_043" DisplayName="Lesser Water Elemental" Faction="Neutral" SubType="Magic|Shooter" Cost="3" MightLevel="3" MagicLevel="1" Attack="2" Retaliate="1" HP="4" ID="378">
+        <Ability Type="ImmuneToRetaliate" />
+    </Card>
+    <Card Rarity="Rare" Type="Unit" Name="Cre_Neu_044" DisplayName="Greater Earth Elemental" Faction="Neutral" SubType="Magic|Melee" Cost="7" MightLevel="5" MagicLevel="2" Attack="3" Retaliate="4" HP="9" ID="379">
+        <Ability Type="EarthHeal" />
+        <Ability Type="Towering" />
+    </Card>
+    <Card Rarity="Rare" Type="Unit" Name="Cre_Neu_045" DisplayName="Void Keeper" Faction="Neutral" SubType="Magic|Shooter" Cost="4" MightLevel="4" MagicLevel="1" DestinyLevel="1" Attack="2" Retaliate="1" HP="5" ID="380">
+        <Ability Type="ImmuneToRetaliate" />
+        <Trigger Type="OnUnitDeath" Side="Any" >
+            <Target Zone="Graveyard" Amount="FromTrigger" CantTargetSelf="True">
+                <Effect Type="Banish" />
+            </Target>
+        </Trigger>
+        <Description>Whenever another creature dies, banish it.</Description>
+    </Card>
+    <!--...............................................................................-->
+    <!-- Creatures - Other -->
+    <!--...............................................................................-->
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Hav_046" DisplayName="Angel of Mercy" Faction="Haven" SubType="Flyer" Cost="4" MightLevel="3" DestinyLevel="2" Attack="2" Retaliate="2" HP="6" ID="381">
+        <Trigger Type="OnThisCardDeploy">
+            <Target Zone="Graveyard" Side="Friendly" CardType="Unit" Amount="1" InputOnExec="True" Random="True" Cancelable="False" >
+                <Effect Type="MoveCardTo" Destination="Hand" />
+            </Target>
+        </Trigger>
+        <Description>When Luminous Herald enters the battleground, choose a creature at random from your graveyard and put it in your hand.</Description>
+    </Card>
+    <Card Rarity="Common" Type="Unit" Name="Cre_Hav_047" DisplayName="Chosen of Elrath" Faction="Haven" SubType="Magic|Shooter" Cost="4" MightLevel="4" MagicLevel="1" Attack="2" Retaliate="2" HP="6" ID="382">
+        <Ability Type="ImmuneToRetaliate" />
+        <Ability Type="Mending" />
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Inf_046" DisplayName="Lurker in the Dark" Faction="Inferno" SubType="Melee" Cost="2" MightLevel="4" Attack="2" Retaliate="0" HP="4" ID="383">
+        <Ability Type="Fear" Value="3" />
+    </Card>
+    <Card Rarity="Common" Type="Unit" Name="Cre_Inf_047" DisplayName="Ur-Khrag Enforcer" Faction="Inferno" SubType="Melee" Cost="5" MightLevel="5" Attack="4" Retaliate="5" HP="6" ID="384">
+        <Ability Type="SweepAttack" />
+        <Ability Type="Berserk" />
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Nec_046" DisplayName="Dark Wood Hermit" Faction="Necropolis" SubType="Magic|Shooter" Cost="4" MightLevel="4" MagicLevel="1" Attack="2" Retaliate="1" HP="5" ID="385">
+        <Ability Type="ImmuneToRetaliate" />
+        <Target Zone="Battleground" CardType="Unit" Amount="All" >
+            <CardFilter IncludeAbility="Infect" />
+            <Effect Type="ModifyAbilityValue" Ability="Infect" Value="1" />
+        </Target>
+        <Description>All creatures with Infect gain +1 on their Infect value.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Nec_047" DisplayName="Decay Spitter" Faction="Necropolis" SubType="Shooter" Cost="4" MightLevel="4" Attack="2" Retaliate="0" HP="5" ID="386">
+        <Ability Type="Infect" Value="1" />
+        <Trigger Type="OnThisCardDeploy">
+            <Target Zone="Battleground" Side="Any" CardType="Unit" Amount="1" Cancelable="False" CantTargetSelf="True">
+                <Effect Type="AddCounter" CounterType="Poison" Value="2" />
+            </Target>
+        </Trigger>
+        <Description>When Decay spitter enters the battleground, another target creature gets 2 poison counters.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_San_046" DisplayName="Stream Singer" Faction="Sanctuary" SubType="Magic|Shooter" Cost="2" MightLevel="2" MagicLevel="1" DestinyLevel="1" Attack="1" Retaliate="0" HP="3" ID="387">
+        <Ability Type="ImmuneToRetaliate" />
+        <Trigger Type="OnThisCardDeploy">
+            <Target Zone="Battleground" Side="Any" Amount="1" Cancelable="False">
+                <CardFilter IncludeCardType="Fortune|Spell" />
+                <Effect Type="MoveCardTo" Destination="Hand" />
+            </Target>
+        </Trigger>
+        <Description>When Stream Singer enters the battleground, return target ongoing spell or fortune to its owner's hand.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_San_047" DisplayName="Venerable Kappa" Faction="Sanctuary" SubType="Melee" Cost="4" MightLevel="4" DestinyLevel="1" Attack="3" Retaliate="3" HP="6" ID="388">
+        <Ability Type="FortuneWard" />
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Str_047" DisplayName="Blackskull Spellsmasher" Faction="Stronghold" SubType="Melee" Cost="4" MightLevel="4" Attack="2" Retaliate="2" HP="6" ID="389">
+        <Trigger Type="OnThisAttack">
+            <Target Zone="Battleground" CardType="Spell" Side="Any" Amount="1" Cancelable="False">
+                <Effect Type="Kill" />
+            </Target>
+        </Trigger>
+        <Description>When Blackskull Spellsmasher attacks, destroy target ongoing spell.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Str_048" DisplayName="Blackskull Crusher" Faction="Stronghold" SubType="Melee" Cost="5" MightLevel="5" Attack="3" Retaliate="2" HP="7" ID="390">
+        <Ability Type="EnemySpellWard" />
+    </Card>
+</Cards>

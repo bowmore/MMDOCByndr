@@ -1,0 +1,656 @@
+<!-- Define all cards of the third serie in this document. XML is case sensitive. -->
+<Cards>
+    <!--....................................................................-->
+    <!-- //	#####    ###    ####    #####   ##  #   #   #   #####   #####
+         //	##      ##  #   #   #    ##     ##  #   ##  #   ##      ##
+         //	####    ##  #   ####     ##     ##  #   # # #   ####    #####
+         //	##      ##  #   ## #     ##     ##  #   #  ##   ##         ##
+         //	##       ###    ##  #    ##     #####   #   #   #####   ##### -->
+	<!--....................................................................-->
+    <!-- Fortune - Academy -->
+    <!--....................................................................-->
+    <Card Rarity="Common" Type="Fortune" Name="For_Aca_001" DisplayName="Shifting Sand" Faction="Academy" Cost="2" MagicLevel="1" DestinyLevel="3" ID="528">
+        <Ongoing Duration="Permanent" />
+        <Trigger Type="OnPreAttack" Side="Friendly" >
+            <CardFilter IncludeUnitType="Magic" /> 
+            <Target Zone="Library" Amount="1" Side="Enemy" AutoTakeFirstInputs="True">
+                <Effect Type="MoveCardTo" Destination="Graveyard" />
+            </Target>
+        </Trigger>
+        <Trigger Type="OnTurnBegin" Side="Friendly" >
+            <Target Zone="Battleground" Amount="Self">
+                <Effect Type="MoveCardTo" Destination="Hand" />
+            </Target>
+        </Trigger>
+        <Description>Permanent:
+Whenever a magic friendly creature attacks, your opponent puts the top 1 cards of their library into their graveyard. At the beginning of your turn, return [THIS] to your hand.</Description>
+    </Card>
+    <Card Rarity="Common" Type="Fortune" Name="For_Aca_002" DisplayName="Unraveled Fate" Faction="Academy" Cost="1" DestinyLevel="1" ID="529">
+        <Variable Type="TargetCount" ValueModifier="3" >
+            <Target Zone="Graveyard" Side="Friendly" Amount="All">
+                <CardFilter IncludeCardID="For_Aca_002" />
+            </Target>
+        </Variable>
+        <Target Zone="Library" Side="Enemy" Amount="1" AmountVisible="Variable">
+            <Effect Type="MoveCardTo" Destination="Graveyard" />
+        </Target>
+        <Description>Look at the top X cards of opponent's library and choose one to put into their graveyard, where X is 3 plus the number of cards named [THIS] in your graveyard.</Description>
+    </Card>
+    <Card Rarity="Common" Type="Fortune" Name="For_Aca_003" DisplayName="Arcane Research" Faction="Academy" Cost="3" DestinyLevel="2" ID="530">
+        <Target Zone="None" Side="Friendly">
+            <Effect Type="IncreaseLevel" Value="2" LevelType="Magic" />
+        </Target>
+        <Description>Increase your [MAGIC] level by 2.</Description>
+    </Card>
+    <Card Rarity="Common" Type="Fortune" Name="For_Aca_004" DisplayName="Favorite Spell" Faction="Academy" Cost="3" DestinyLevel="2" ID="531">
+        <Target Zone="Library" Side="Friendly" Amount="1">
+            <CardFilter IncludeCardType="Spell" />
+            <Effect Type="MoveCardTo" Destination="Hand" />
+        </Target>
+        <Target Zone="None" Amount="Same" ForceExecute="True" Persistent="True">
+            <Effect Type="ModifyCost" Value="-1" Duration="UntilEndOfTurn" />
+        </Target>
+        <Target Side="Friendly">
+            <Effect Type="Shuffle" CardHolder="Library" />
+        </Target>
+        <Description>Search your library for spell card and put it into your hand. Until end of turn, that spell costs [1:RESOURCES] less to play. Shuffle your library.</Description>
+    </Card>
+    <Card Rarity="Common" Type="Fortune" Name="For_Aca_005" DisplayName="Lost in the Void" Faction="Academy" Cost="2" DestinyLevel="2" ID="532">
+        <Target Zone="None" Side="Friendly">
+            <Effect Type="ChoiceOption" />
+            <Subgroup>
+                <Target Zone="Graveyard" Side="Friendly" Amount="3" >
+                    <Option Value="0" DisplayText="Friendly Graveyard" />
+                    <Effect Type="Banish" />
+                </Target>
+                <Target Zone="Graveyard" Side="Enemy" Amount="3">
+                    <Option Value="1" DisplayText="Enemy Graveyard" />
+                    <Effect Type="Banish" />
+                </Target>
+            </Subgroup>
+        </Target>
+        <Description>Banish 3 target cards from a graveyard of your choice.</Description>
+    </Card>
+    <Card Rarity="Common" Type="Fortune" Name="For_Aca_006" DisplayName="Severed Fate" Faction="Academy" Cost="3" DestinyLevel="3" ID="533">
+        <Variable Type="TargetCount">
+            <Target Zone="Battleground" CardType="Unit" Amount="All" Side="Friendly"/>
+        </Variable>
+        <Target Zone="Library" Side="Enemy" Amount="Variable" AutoTakeFirstInputs="True">
+            <Effect Type="MoveCardTo" Destination="Graveyard" />
+        </Target>
+        <Description>Put the top X cards of opponent's library into his graveyard, where X is the number of creatures you control.</Description>
+    </Card>
+    <Card Rarity="Common" Type="Fortune" Name="For_Aca_007" DisplayName="Conversion to the Void" Faction="Academy" Cost="1" DestinyLevel="1" ID="534">
+        <Target Zone="Hand" Side="Friendly" Amount="1">
+            <Effect Type="MoveCardTo" Destination="Library" />
+        </Target>
+        <Target Zone="Library" Side="Enemy" Amount="2" AmountVisible="4" >
+            <Effect Type="MoveCardTo" Destination="Graveyard" />
+        </Target>
+        <Description>Take a card from your hand on top of your library. Then look at the top 4 cards of your opponent's library and choose 2 to put into his graveyard.</Description>
+    </Card>
+    <Card Rarity="Common" Type="Fortune" Name="For_Aca_008" DisplayName="Rivalry" Faction="Academy" Cost="2" DestinyLevel="2" ID="535">
+        <Target Zone="None" Side="Friendly">
+            <Effect Type="ChoiceOption" />
+            <Subgroup>
+                <Target Zone="None" Side="Friendly" >
+                    <Option Value="0" DisplayText="Draw a card." />
+                    <Effect Type="Draw" Value="1" />
+                </Target>
+                <Target Zone="None" Side="Friendly" >
+                    <Option Value="1" DisplayText="Increase your [MAGIC] level." />
+                    <Variable Type="Level" LevelType="Magic" Side="Friendly" />
+                    <Variable2 Type="Level" LevelType="Magic" Side="Enemy" />
+                    <Condition Operator="LesserThan" ValueA="Variable" ValueB="Variable2" />
+                    <Effect Type="IncreaseLevel" Value="2" LevelType="Magic" />
+                </Target>
+            </Subgroup>
+        </Target>
+        <Description>Draw a card. OR If your [MAGIC] level is lower than your opponent, increase your [MAGIC] level by 2.</Description>
+    </Card>
+    <Card Rarity="Common" Type="Fortune" Name="For_Aca_009" DisplayName="Scrying Orb" Faction="Academy" Cost="3" DestinyLevel="3" ID="536">
+        <Variable Type="TargetCount" ValueModifier="5mi" >
+            <Target Zone="Library" Side="Enemy" Amount="All" />
+        </Variable>
+        <Target Zone="Library" Side="Enemy" Amount="Variable" AmountVisible="5">
+            <Effect Type="Reorder" />
+        </Target>
+        <Description>Look at the top 5 cards of opponent's library. Put them back in any order.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Fortune" Name="For_Aca_010" DisplayName="Void Tainted Ritual" Faction="Academy" Cost="2" MightLevel="2" DestinyLevel="3" ID="537">
+        <Ongoing Duration="UntilEndOfTurn" />
+        <Target Zone="None" Side="Friendly" ForceExecute="True" >
+            <Effect Type="Draw" Value="1" />
+        </Target>
+        <Trigger Type="OnCardPlay" Side="Friendly">
+            <CardFilter IncludeCardType="Unit" IncludeUnitType="Magic" />
+            <Target Zone="Library" Side="Enemy" Amount="3" AutoTakeFirstInputs="True">
+                <Effect Type="MoveCardTo" Destination="Graveyard" />
+            </Target>
+        </Trigger>
+        <Description>Until end of turn:
+When you play a magic creature, put the top 3 cards of opponent's library into their graveyard.
+When Void Tainted Ritual enters the battleground, draw a card.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Fortune" Name="For_Aca_011" DisplayName="Stolen Research" Faction="Academy" Cost="3" DestinyLevel="3" ID="538">
+        <Target Zone="None" Side="Friendly">
+            <Effect Type="IncreaseLevel" Value="1" LevelType="Magic" />
+        </Target>
+        <Target Zone="None" Side="Enemy">
+            <Effect Type="IncreaseLevel" Value="-1" LevelType="Magic" />
+        </Target>
+        <Description>Increase your [MAGIC] level by 1. Decrease your opponent's [MAGIC] level by 1.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Fortune" Name="For_Aca_012" DisplayName="Rift's Echo" Faction="Academy" Cost="2" DestinyLevel="2" ID="539">
+        <Ongoing Duration="UntilYourNextTurn" />
+        <Target Zone="Hero" Side="Friendly" Amount="All" />
+        <Trigger Type="OnPreAttackUnit" Side="Enemy">
+            <Target Zone="Library" Side="Enemy" Amount="3" AutoTakeFirstInputs="True">
+                <Effect Type="MoveCardTo" Destination="Graveyard" />
+            </Target>
+        </Trigger>
+        <Description>Until your next turn: Whenever a creature attack a friendly unit, put the top 3 cards of opponent's library into their graveyard.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Fortune" Name="For_Aca_013" DisplayName="Thread of Fate" Faction="Academy" Cost="1" DestinyLevel="1" ID="540">
+        <Ongoing Duration="UntilYourNextTurn" />
+        <Target Zone="None" Side="Enemy">
+            <Effect Type="ChoiceOption" />
+            <Subgroup>
+                <Target Zone="None" Side="Enemy">
+                    <Option Value="0" DisplayText="Creature" />
+                    <Trigger Type="OnCardPlay" Side="Enemy">
+                        <CardFilter IncludeCardType="Unit" />
+                        <Target Zone="None" Side="Friendly" >
+                            <Effect Type="Draw" Value="1" />
+                        </Target>
+                    </Trigger>
+                </Target>
+                <Target Zone="None" Side="Enemy">
+                    <Option Value="1" DisplayText="Spell" />
+                    <Trigger Type="OnCardPlay" Side="Enemy">
+                        <CardFilter IncludeCardType="Spell" />
+                        <Target Zone="None" Side="Friendly" >
+                            <Effect Type="Draw" Value="1" />
+                        </Target>
+                    </Trigger>
+                </Target>
+                <Target Zone="None" Side="Enemy">
+                    <Option Value="2" DisplayText="Fortune" />
+                    <Trigger Type="OnCardPlay" Side="Enemy">
+                        <CardFilter IncludeCardType="Fortune" />
+                        <Target Zone="None" Side="Friendly" >
+                            <Effect Type="Draw" Value="1" />
+                        </Target>
+                    </Trigger>
+                </Target>
+            </Subgroup>
+        </Target>
+        <Description>Until your next turn: Choose [0]creature[/0], [1]spell[/1] or [2]fortune[/2]. Whenever your opponent plays a card of the chosen type, draw a card.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Fortune" Name="For_Aca_014" DisplayName="Forgotten Spell" Faction="Academy" Cost="3" MagicLevel="3" DestinyLevel="3" ID="541">
+        <Target Zone="Graveyard" Side="Enemy" CardType="Spell" Amount="1">
+            <CardFilter IncludeOngoingType="Immediate" />
+            <Variable Type="CardCost" />
+            <Effect Type="DetachLocation" Destination="Banish" />
+            <Effect Type="Play" CancelDestination="Graveyard" ForcePlay="True" PlayFakeAdditionalCost="Variable" />
+        </Target>
+        <Description>Choose an Instant spell card from opponent's graveyard, play that card and banish it.</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Fortune" Name="For_Aca_015" DisplayName="Dangerous Research" Faction="Academy" Cost="1" DestinyLevel="3" ID="542">
+        <Variable Type="Level" LevelType="Magic" Side="Friendly" />
+        <Target Zone="None" Side="Friendly">            
+            <Effect Type="GainResources" Value="Variable" />
+        </Target>
+        <Target Zone="Hero" Amount="All" Side="Friendly">
+            <Effect Type="Damage" Value="Variable" />
+        </Target>
+        <Description>Increase your [RESOURCES] by an amount equal to your [MAGIC] level. Deal damage to your hero equal to your [MAGIC] level.</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Fortune" Name="For_Aca_016" DisplayName="Chain Casting" Faction="Academy" Cost="0" DestinyLevel="1" ID="543">
+        <Ongoing Duration="UntilEndOfTurn" />
+        <Variable Type="CardPlayedCount" Side="Friendly" ValueModifier="-1.0x" >
+            <CardFilter IncludeCardType="Spell" />
+        </Variable>
+        <Target Zone="Hero" Amount="All" Side="Friendly" >            
+            <Effect Type="GlobalEffect" GlobalEffectType="ModifyCost" Value="Variable" >
+                <CardFilter IncludeCardType="Spell" />
+            </Effect>
+        </Target>
+        <Description>Until end of turn:
+Spells you play cost [1:RESOURCES] less for every other spell you played this turn.</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Fortune" Name="For_Aca_017" DisplayName="Offering to the Void" Faction="Academy" Cost="6" DestinyLevel="3" ID="544">
+        <Target Zone="None" Side="Friendly">
+            <Variable Type="TargetCount" ValueModifier="0.5xd">
+                <Target Zone="Graveyard" Amount="All" Side="Enemy" />
+            </Variable>
+            <Effect Type="GainResources" Value="Variable" />
+        </Target>
+        <Target Zone="Graveyard" Side="Enemy" Amount="All">
+            <Effect Type="Banish"/>
+        </Target>
+        <Description>Gain [RESOURCES] equal to half the number of cards in opponent's graveyard, rounded down, then banish all cards in opponent's graveyard.</Description>
+    </Card>
+    <Card Rarity="Epic" Unique="True" Type="Fortune" Name="For_Aca_018" DisplayName="Arcane Intuition" Faction="Academy" Cost="6" MightLevel="2" MagicLevel="4" DestinyLevel="3" ID="545">
+        <Target Zone="None" Side="Friendly" >
+            <Subgroup>
+                <Target Side="Enemy">
+                    <Effect Type="Shuffle" CardHolder="Library" />
+                </Target>
+            </Subgroup>
+        </Target>
+        <Target Zone="None" Side="Friendly" >
+            <Subgroup>
+                <Target Zone="Library" Side="Enemy" Amount="1" >
+                    <CardFilter IncludeCardType="Spell|Unit" IncludeUnitType="Magic" />
+                    <Effect Type="PlayFree" CancelDestination="Library" />
+                </Target>
+            </Subgroup>
+        </Target>
+        <Description>Look at opponent's library. You may choose a spell or magic creature from it and play it for free.</Description>
+    </Card>
+	
+    <!--....................................................................-->
+    <!-- Fortune - Haven -->
+    <!--....................................................................-->
+    <Card Rarity="Common" Type="Fortune" Name="For_Hav_050" DisplayName="Fleeting Oasis" Faction="Haven" Cost="2" DestinyLevel="2" ID="546">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" CardType="Unit" Amount="All" Side="Friendly" >
+            <Effect Type="Modifier">
+                <Ability Type="Mending" />
+            </Effect>
+        </Target>
+        <Trigger Type="OnTurnBegin" Side="Friendly" >
+            <Target Zone="Battleground" Amount="Self" >
+                <Effect Type="MoveCardTo" Destination="Hand" />
+            </Target>
+        </Trigger>  
+        <Description>Permanent:
+Creatures you control have Mending. At the beginning of your turn, return [THIS] to your hand.</Description>
+    </Card>
+    <Card Rarity="Common" Type="Fortune" Name="For_Hav_051" DisplayName="Inexhaustible Mine" Faction="Haven" Cost="2" DestinyLevel="2" ID="547">
+        <Target Zone="None" Side="Friendly">
+            <Effect Type="GainResources" Value="2" />
+        </Target>
+        <Target Zone="None" Side="Friendly">
+            <Variable Type="TargetCount" ValueModifier="2.0x" >
+                <Target Zone="Graveyard" Side="Friendly" Amount="All" >
+                    <CardFilter IncludeCardID="For_Hav_051" />
+                </Target>
+            </Variable>
+            <Effect Type="GainResources" Value="Variable" />
+        </Target>
+        <Description>Gain [2:RESOURCES], plus [2:RESOURCES]for each card named THIS in your graveyard.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Fortune" Name="For_Hav_052" DisplayName="Toll Gate" Faction="Haven" Cost="2" DestinyLevel="3" ID="548">
+        <Ongoing Duration="Permanent" />
+        <Trigger Type="OnSupplyPhaseEnd" Side="Friendly" >
+            <Target Zone="None" Side="Friendly">
+                <Variable Type="CardPlayedCount" Side="Enemy" ValueModifier="2.0x" />
+                <Effect Type="GainResources" Value="Variable" />
+            </Target>
+            <Target Zone="Battleground" Amount="Self">
+                <Effect Type="Kill" />
+            </Target>
+        </Trigger>
+        <Description>Permanent: At the end of your supply phase, gain [2:RESOURCES] for each card your opponent played during his last turn and destroy [THIS].</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Fortune" Name="For_Hav_053" DisplayName="Stockpile" Faction="Haven" Cost="2" DestinyLevel="4" ID="549">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Hero" Side="Friendly" Amount="All">
+            <Effect Type="GlobalEffect" GlobalEffectType="KeepResources" />
+        </Target>
+        <Trigger Type="OnSupplyPhaseEnd" Side="Friendly" >
+            <Target Zone="Battleground" Amount="Self">
+                <Effect Type="Kill" />
+            </Target>
+        </Trigger>
+        <Description>Until your next turn: You don't empty your resources during your supply phase.</Description>
+    </Card>
+	
+    <!--....................................................................-->
+    <!-- Fortune - Inferno -->
+    <!--....................................................................-->
+    <Card Rarity="Common" Type="Fortune" Name="For_Inf_050" DisplayName="Garden of Extasy" Faction="Inferno" Cost="5" DestinyLevel="3" ID="550">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Hero" Amount="All" Side="Any">
+            <Effect Type="GlobalEffect" GlobalEffectType="CantDrawAdditional" />
+        </Target>
+        <Trigger Type="OnTurnBegin" Side="Friendly" >
+            <Target Zone="Battleground" Amount="Self" >
+                <Effect Type="MoveCardTo" Destination="Hand" />
+            </Target>
+        </Trigger>
+        <Description>Permanent:
+Players cannot draw cards outside of their supply phase.
+At the beginning of your turn, return THIS to its owner's hand.
+        </Description>
+    </Card>
+    <Card Rarity="Common" Type="Fortune" Name="For_Inf_051" DisplayName="Escalating Madness" Faction="Inferno" Cost="3" DestinyLevel="3" ID="551">
+        <Variable Type="TargetCount" ValueModifier="1" >
+            <Target Zone="Graveyard" Side="Friendly" Amount="All" >
+                <CardFilter IncludeCardID="For_Inf_051" />
+            </Target>
+        </Variable>
+        <Target Zone="Hand" Side="Enemy" Amount="Variable" MinAmount="0" Random="True" >
+            <Effect Type="MoveCardTo" Destination="Graveyard" />
+        </Target>
+        <Description>Opponent discards X cards at random where X is 1 plus the number of cards named [THIS] in your graveyard.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Fortune" Name="For_Inf_052" DisplayName="Dunes of Madness" Faction="Inferno" Cost="1" DestinyLevel="2" ID="552">
+        <Target Zone="Hand" Side="Friendly" Amount="2" MinAmount="0" Random="True">
+            <Effect Type="MoveCardTo" Destination="Graveyard"/>
+        </Target>
+        <Target Zone="Hand" Side="Enemy" Amount="2" MinAmount="0" Random="True">
+            <Effect Type="MoveCardTo" Destination="Graveyard"/>
+        </Target>
+        <Description>Both players discard 2 cards at random.</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Fortune" Name="For_Inf_053" DisplayName="Gate to Sheogh" Faction="Inferno" Cost="3" MightLevel="3" DestinyLevel="3" ID="553">
+        <Target Side="Friendly" >
+            <Effect Type="Shuffle" CardHolder="Library" />
+            <Subgroup>
+                <Target Zone="Library" Side="Friendly" CardType="Unit" Amount="1" AmountVisible="5" >
+                    <Effect Type="Deploy" Side="Friendly" />
+                </Target>
+                <Target Zone="Library" Side="Friendly" Amount="5" AutoTakeFirstInputs="True" CantTargetPrevious="True" >
+                    <Effect Type="MoveCardTo" Destination="Graveyard" />
+                </Target>
+            </Subgroup>
+        </Target>
+        <Description>Shuffle your library, then look at the top 5 cards. Choose a creature card and deploy it for free. Put the rest in your graveyard.</Description>
+    </Card>
+	
+    <!--....................................................................-->
+    <!-- Fortune - Necropolis -->
+    <!--....................................................................-->
+    <Card Rarity="Common" Type="Fortune" Name="For_Nec_050" DisplayName="Eternal Battlefield" Faction="Necropolis" Cost="2" DestinyLevel="2" ID="554">
+        <Ongoing Duration="Permanent" />
+        <Trigger Type="OnTurnBegin" Side="Friendly" >
+            <Target Zone="Battleground" Amount="Self" >
+                <Effect Type="MoveCardTo" Destination="Hand" />
+            </Target>
+        </Trigger>
+        <Trigger Type="OnUnitDeath" >
+            <Target Zone="Graveyard" Amount="FromTrigger" >
+                <Effect Type="ShuffleCardToLibrary" />
+            </Target>
+        </Trigger>
+        <Description>Permanent:
+Whenever a creature dies, shuffle it into its owner's library.
+At the beginning of your turn, return [THIS] to your hand.
+        </Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Fortune" Name="For_Nec_051" DisplayName="Harvesting the Dead" Faction="Necropolis" Cost="5" DestinyLevel="3" ID="555">
+        <Variable Type="TargetCount" ValueModifier="1" >
+            <Target Zone="Graveyard" Side="Friendly" Amount="All" >
+                <CardFilter IncludeCardID="For_Nec_051" />
+            </Target>
+        </Variable>
+        <Variable2 Type="TargetCount" >
+            <Target Zone="Graveyard" Side="Friendly" Amount="All" >
+                <CardFilter IncludeCardType="Unit" ExcludeUnique="True" IncludeFaction="Necropolis" />
+            </Target>
+        </Variable2>
+        <PlayabilityCondition Operator="LesserOrEqual" ValueA="Variable" ValueB="Variable2" />
+        <Target Zone="Graveyard" Side="Friendly" Amount="Variable" >            
+            <CardFilter IncludeCardType="Unit" ExcludeUnique="True" IncludeFaction="Necropolis" />
+            <Effect Type="MoveCardTo" Destination="Hand" />
+        </Target>
+        <Description>Put X non-unique Necropolis creature cards from your graveyard into your hand where X is 1 plus the number of cards named [THIS] in your graveyard.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Fortune" Name="For_Nec_052" DisplayName="Death is Not the End" Faction="Necropolis" Cost="3" DestinyLevel="3" ID="556">
+        <Target Zone="Graveyard" Side="Friendly" Amount="1" >
+            <CardFilter ExcludeUnique="True" />
+            <Effect Type="MoveCardTo" Destination="Library" />
+        </Target>
+        <Target Zone="Graveyard" Side="Enemy" Amount="1" >
+            <CardFilter ExcludeUnique="True" />
+            <Effect Type="MoveCardTo" Destination="Library" />
+        </Target>
+        <Description>Choose a non-unique card from each player's graveyard and put it on top of their library.</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Fortune" Name="For_Nec_053" DisplayName="A Life For a Life" Faction="Necropolis" Cost="4" DestinyLevel="4" ID="557">
+        <Target Zone="Battleground" CardType="Unit" Amount="1" Side="Friendly" >
+            <Effect Type="Kill" />
+        </Target>
+        <Target Zone="Battleground" CardType="Unit" Amount="1" Side="Enemy" >
+            <Variable Type="BaseCardCost" UseCurrentTarget="True" />
+            <Variable2 Type="BaseCardCost" UseLastTarget="True" />            
+            <Condition Operator="LesserOrEqual" ValueA="Variable" ValueB="Variable2" />
+            <Effect Type="Kill" />
+        </Target>
+        <Description>Destroy target friendly creature. Destroy target enemy creature of equal or lower cost.</Description>
+    </Card>
+	
+    <!--....................................................................-->
+    <!-- Fortune - Sanctuary -->
+    <!--....................................................................-->
+    <Card Rarity="Common" Type="Fortune" Name="For_San_050" DisplayName="Zen Garden" Faction="Sanctuary" Cost="4" DestinyLevel="3" ID="558">
+        <Ongoing Duration="Permanent" />
+        <Trigger Type="OnTurnBegin" Side="Friendly" >
+            <Target Zone="Battleground" Amount="Self" >
+                <Effect Type="MoveCardTo" Destination="Hand" />
+            </Target>
+        </Trigger>
+        <Target Zone="Battleground" CardType="Unit" Amount="1" >
+            <Effect Type="Modifier">
+                <Ability Type="CannotAttack" />
+            </Effect>
+        </Target>      
+        <Description>Permanent:
+Target creature cannot attack.
+At the beginning of your turn, return [THIS] to your hand.
+        </Description>
+    </Card>
+    <Card Rarity="Common" Type="Fortune" Name="For_San_051" DisplayName="Road to Enlightenment" Faction="Sanctuary" Cost="2" DestinyLevel="2" ID="559">
+        <Target Zone="None" Side="Friendly">
+            <Variable Type="TargetCount" ValueModifier="1" >
+                <Target Zone="Graveyard" Side="Friendly" Amount="All" >
+                    <CardFilter IncludeCardID="For_San_051" />
+                </Target>
+            </Variable>
+            <Effect Type="Draw" Value="Variable" />
+        </Target>
+        <Description>Draw a card, plus one additional card for each copy of [THIS] in your graveyard.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Fortune" Name="For_San_052" DisplayName="Sinkhole" Faction="Sanctuary" Cost="1" DestinyLevel="1" ID="560">
+        <Target Zone="Battleground" CardType="Unit" Amount="1" Side="Friendly">
+            <CardFilter IncludeFaction="Sanctuary" />
+            <Effect Type="MoveCardTo" Destination="Hand" />
+        </Target>
+        <Target Zone="None" Side="Friendly">
+            <Effect Type="Draw" Value="1" />
+        </Target>
+        <Description>Return target friendly Sanctuary creature to your hand. Draw a card.</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Fortune" Name="For_San_053" DisplayName="Honor Binds Us" Faction="Sanctuary" Cost="4" DestinyLevel="3" ID="561">
+        <Ongoing Duration="UntilEndOfTurn" />
+        <Target Zone="Battleground" CardType="Unit" Amount="All">
+            <CardFilter IncludeFaction="Sanctuary" />
+            <Effect Type="Modifier">
+                <Ability Type="Honor" Value="1" />
+            </Effect>
+        </Target>
+        <Description>Until end of turn:
+All Sanctuary creatures gain Honor 1.</Description>
+    </Card>
+	
+    <!--....................................................................-->
+    <!-- Fortune - Stronghold -->
+    <!--....................................................................-->
+    <Card Rarity="Common" Type="Fortune" Name="For_Str_050" DisplayName="Outraging Vision" Faction="Stronghold" Cost="5" DestinyLevel="3" ID="562">
+        <Ongoing Duration="Permanent" />
+        <Trigger Type="OnTurnBegin" Side="Friendly" >
+            <Target Zone="Battleground" Amount="Self" >
+                <Effect Type="MoveCardTo" Destination="Hand" />
+            </Target>
+        </Trigger>
+        <Target Zone="Battleground" CardType="Unit" Amount="All" >
+            <CardFilter IncludeAbility="Enrage" />
+            <Effect Type="ModifyAbilityValue" Ability="Enrage" Value="1" />
+        </Target>
+        <Target Zone="Battleground" CardType="Unit" Amount="All" >
+            <CardFilter IncludeAbility="Bloodthirst" />
+            <Effect Type="ModifyAbilityValue" Ability="Bloodthirst" Value="1" />
+        </Target>
+        <Description>Permanent:
+All creatures with Enrage gain Enrage 1. All creatures with Bloodthirst gain Bloodthirst 1.
+At the beginning of your turn, return [THIS] to its owner's hand.</Description>
+    </Card>
+    <Card Rarity="Common" Type="Fortune" Name="For_Str_051" DisplayName="Ancestral Guidance" Faction="Stronghold" Cost="2" DestinyLevel="2" ID="563">
+        <Ongoing Duration="UntilEndOfTurn" />
+        <Target Zone="Battleground" CardType="Unit" Amount="1" >
+            <Variable Type="TargetCount" ValueModifier="1" >
+                <Target Zone="Graveyard" Side="Friendly" Amount="All" >
+                    <CardFilter IncludeCardID="For_Str_051" />
+                </Target>
+            </Variable>
+            <Effect Type="ModifyAttack" Value="Variable" />
+        </Target>
+        <Description>Until end of turn:
+Target creature gains +[X:ATK] where X is equal to 1 plus the number of cards named [THIS] in your graveyard.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Fortune" Name="For_Str_052" DisplayName="Desperate Assault" Faction="Stronghold" Cost="2" DestinyLevel="4" ID="564">
+        <Ongoing Duration="UntilEndOfTurn" />
+        <Target Zone="Battleground" CardType="Unit" Amount="1" />
+        <Target Zone="Battleground" CardType="Unit" Amount="Same" >
+            <Variable Type="HeroHP" Side="Friendly" />
+            <Condition Operator="GreaterThan" ValueA="Variable" ValueB="5" />
+            <Effect Type="ModifyAttack" Value="1" />
+        </Target>
+        <Target Zone="Battleground" CardType="Unit" Amount="Same" >
+            <Variable Type="HeroHP" Side="Friendly" />
+            <Condition Operator="LesserThan" ValueA="Variable" ValueB="6" />
+            <Effect Type="ModifyAttack" Value="4" />
+        </Target>
+        <Description>Until end of turn:
+Target creature gains +[1:ATK]. If you got 5 life or less, target creature gains +[4:ATK] instead.</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Fortune" Name="For_Str_053" DisplayName="Rushing Assault" Faction="Stronghold" Cost="4" DestinyLevel="4" ID="565">
+        <Ongoing Duration="UntilEndOfTurn" />
+        <Trigger Type="OnDeploy" >
+            <Target Zone="BattlegroundColumn" CardType="Unit" Amount="FromTrigger" >
+                <CardFilter Side="Enemy" />
+                <Variable Type="CardAttack" FromTrigger="True" />
+                <Effect Type="Damage" Value="Variable" DamageFromTrigger="True" />
+            </Target>    
+        </Trigger>
+        <Description>Until end of turn:
+When you deploy a creature, that creature deals damage equal ot its [ATK] to all enemy creatures in the same row.</Description>
+    </Card>
+	
+    <!--....................................................................-->
+    <!--  Fortune - Neutral -->
+    <!--....................................................................-->
+    <Card Rarity="Common" Type="Fortune" Name="For_Neu_050" DisplayName="Fortune Telling" Faction="Neutral" Cost="4" DestinyLevel="2" ID="566">
+        <Target Zone="None" Side="Friendly" Cancelable="False" SkipSubTargetValidation="True" >
+            <Effect Type="Draw" Value="3" />
+            <Subgroup>
+                <Target Zone="Hand" Amount="2" Side="Friendly" Cancelable="False">
+                    <Effect Type="MoveCardTo" Destination="Graveyard" />
+                </Target>
+            </Subgroup>
+        </Target>
+        <Description>Draw 3 cards then discard 2 cards.</Description>
+    </Card>
+    <Card Rarity="Common" Type="Fortune" Name="For_Neu_051" DisplayName="Full Moon" Faction="Neutral" Cost="2" DestinyLevel="3" ID="567">
+        <Target Zone="Graveyard" Amount="All" CardType="Unit" Side="Friendly">
+            <Effect Type="MoveCardTo" Destination="Library" />
+        </Target>
+        <Target Side="Friendly" >
+            <Effect Type="Shuffle" CardHolder="Library" />
+        </Target>
+        <Target Zone="Graveyard" Amount="All" CardType="Unit" Side="Enemy">
+            <Effect Type="MoveCardTo" Destination="Library" />
+        </Target>
+        <Target Side="Enemy" >
+            <Effect Type="Shuffle" CardHolder="Library" />
+        </Target>
+        <Description>Take all creatures in all graveyards and shuffle them into their owner's libraries.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Fortune" Name="For_Neu_052" DisplayName="Second Chance" Faction="Neutral" Cost="3" DestinyLevel="3" ID="568">
+        <Target Zone="None" Side="Friendly">
+            <Effect Type="ChoiceOption" />
+            <Subgroup>
+                <Target Zone="Graveyard" Amount="1" Side="Friendly"  >
+                    <Option Value="0" DisplayText="Friendly Graveyard" />
+                    <CardFilter IncludeCardType="Unit" ExcludeUnique="True" IncludeStatus="InHolderThisTurn" />
+                    <Effect Type="MoveCardTo" Destination="Library" />
+                </Target>
+                <Target Zone="Graveyard" Amount="1" Side="Enemy"  >
+                    <Option Value="1" DisplayText="Enemy Graveyard" />
+                    <CardFilter IncludeCardType="Unit" ExcludeUnique="True" IncludeStatus="InHolderThisTurn" />
+                    <Effect Type="MoveCardTo" Destination="Library" />
+                </Target> 
+            </Subgroup>
+        </Target>      
+        <Description>Put target non-unique creature that died this turn on top of its owner's library.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Fortune" Name="For_Neu_053" DisplayName="Cosmic Singularity" Faction="Neutral" Cost="2" DestinyLevel="2" ID="569">
+        <Target Zone="None" Side="Friendly">
+            <Effect Type="Draw" Value="1" />
+        </Target>
+        <Trigger Type="OnThisCardDiscarded" Location="Graveyard" >
+            <Target Zone="None" Amount="Self" >
+                <Effect Type="Banish" />
+            </Target>
+            <Target Zone="Graveyard" Amount="All" Side="Friendly" >
+                <Effect Type="MoveCardTo" Destination="Library" />
+            </Target>
+            <Target Side="Friendly" >
+                <Effect Type="Shuffle" CardHolder="Library" />
+            </Target>
+            <Target Zone="Graveyard" Amount="All" Side="Enemy" >
+                <Effect Type="MoveCardTo" Destination="Library" />
+            </Target>
+            <Target Side="Enemy" >
+                <Effect Type="Shuffle" CardHolder="Library" />
+            </Target>
+        </Trigger>
+        <Description>Draw a card.
+If [THIS] is discarded, banish [THIS] and shuffle both graveyards into their owner's libraries.
+        </Description>
+    </Card>
+    <Card Rarity="Rare" Type="Fortune" Name="For_Neu_054" DisplayName="Volunteers" Faction="Neutral" Cost="3" DestinyLevel="3" ID="570">
+        <Ongoing Duration="UntilYourNextTurn" />
+        <Trigger Type="OnActionPhaseEnd" Side="Friendly" >
+            <Target Zone="Hand" Side="Friendly" Amount="1" CardType="Unit" Cancelable="True" RevealToOther="True" >
+                <CardFilter ExcludeUnique="True" />
+                <Effect Type="Deploy" Side="Friendly" RequireLevel="True" /> 
+            </Target>
+        </Trigger>
+        <Trigger Type="OnActionPhaseEnd" Side="Enemy" >
+            <Target Zone="Hand" Side="Enemy" Amount="1" CardType="Unit" Cancelable="True" RevealToOther="True" >
+                <CardFilter ExcludeUnique="True" />
+                <Effect Type="Deploy" Side="Enemy" RequireLevel="True" />
+            </Target>
+        </Trigger>
+        <Description>Until your next turn:
+At the end of each player's turn, that player may put a non-unique creature into play for free. They must meet its requirements.</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Fortune" Name="For_Neu_055" DisplayName="Black Fang Extorsion" Faction="Neutral" Cost="1" DestinyLevel="2" ID="571">
+        <Variable Type="CardPlayedCount" Side="Friendly" />
+        <PlayabilityCondition Operator="LesserThan" ValueA="Variable" ValueB="1" />
+        <Ongoing Duration="UntilYourNextTurn" />
+        <Target Zone="Hero" Amount="All" Side="Any" >
+            <Variable Type="CardCost" UseCurrentTarget="True" />
+            <Condition Operator="LesserThan" ValueA="Variable" ValueB="3" />
+            <Effect Type="GlobalEffect" GlobalEffectType="ModifyCost" Value="3ma" >
+                <CardFilter IncludeCardType="Unit|Spell|Fortune" />
+            </Effect>
+        </Target>
+        <Description>Until your next turn:
+Cards that cost less than [3:RESOURCES] to play cost [3:RESOURCES] instead. Play only if you haven't played any cards this turn.</Description>
+    </Card>
+    <Card Rarity="Epic" Type="Fortune" Name="For_Neu_056" DisplayName="Time Of Need" Faction="Neutral" Unique="True" Cost="7" MightLevel="2" MagicLevel="2" DestinyLevel="2" ID="572">
+        <Target Zone="Library" Side="Friendly" Amount="1" RevealToOther="True" >
+            <CardFilter IncludeUnique="True" />
+            <Effect Type="PlayFree" ForcePlay="True" />
+        </Target>
+        <Target Side="Friendly">
+            <Effect Type="Shuffle" CardHolder="Library" />
+        </Target>
+        <Description>Search your library for a Unique card and play it for free. Then shuffle your library.</Description>
+    </Card>
+</Cards>

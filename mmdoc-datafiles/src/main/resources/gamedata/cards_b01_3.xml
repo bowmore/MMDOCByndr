@@ -1,0 +1,742 @@
+<Cards>
+    <!--...............................................................................-->
+    <!-- //	#####   ####    #####   ##      ##      #####
+         //	##      ##  #   ##      ##      ##      ##
+         //	#####   ####    ####    ##      ##      #####
+         //	   ##   ##      ##      ##      ##         ##
+         //	#####   ##      #####   #####   #####   ##### -->
+    <!--...............................................................................-->
+    <!-- Spells - Fire -->
+    <!--...............................................................................-->
+    <Card Rarity="Common" Type="Spell" Name="Spe_Fir_005" DisplayName="Fire Bolt" School="Fire" Cost="1" MagicLevel="1" ID="180">
+        <Target Zone="Battleground" CardType="Unit" Amount="1">
+            <Effect Type="Damage" Value="2" />
+        </Target>
+        <Description>Deal 2 damage to target unit.</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Spell" Name="Spe_Fir_011" DisplayName="Meteor Shower" School="Fire" Cost="5" MagicLevel="5" ID="181">
+        <Target Zone="BattlegroundLine" Amount="1" >
+            <Effect Type="Damage" Value="4" />
+        </Target>
+        <Description>Deal 4 damage to all units of target line.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Spell" Name="Spe_Fir_003" DisplayName="Fireball" School="Fire" Cost="4" MagicLevel="4" ID="182">
+        <Target Zone="Battleground" CardType="Unit" Amount="1" Shape="SelfAndAdjacent">
+            <Effect Type="Damage" Value="4" />
+        </Target>
+        <Description>Deal 4 damage to target unit and all adjacent units.</Description>
+        <ExtraDescription>(Also damage friendly units.)</ExtraDescription>
+    </Card>
+    <Card Rarity="Rare" Type="Spell" Name="Spe_Fir_001" DisplayName="Armageddon" School="Fire" Cost="6" MagicLevel="6" ID="183">
+        <Target Zone="Battleground" CardType="Unit" Amount="All">
+            <Effect Type="Damage" Value="10" />
+        </Target>
+        <Description>Deal 10 damage to all units.</Description>
+        <ExtraDescription>(Also damage friendly units.)</ExtraDescription>
+    </Card>
+    <Card Rarity="Common" Type="Spell" Name="Spe_Fir_004" DisplayName="Fire Trap" School="Fire" Cost="1" MagicLevel="1" ID="184">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="BattlegroundColumn" Amount="1" />
+        <Trigger Type="OnPostAttackThisRow" >
+            <CardFilter IncludeUnitType="Melee|Flyer" />
+            <Target Zone="Battleground" Amount="FromTrigger" >
+                <Effect Type="Damage" Value="3" />
+            </Target>
+            <Target Zone="Battleground" Amount="Self" >
+                <Effect Type="Kill" />
+            </Target>
+        </Trigger>
+        <Description>Enchant row. Permanent:
+            After a melee or flyer creature from the enchanted row attacks, deal 3 damage to it, then destroy Fire Trap.
+        </Description>
+    </Card>
+    <Card Rarity="Rare" Type="Spell" Name="Spe_Fir_002" DisplayName="Immolation" School="Fire" Cost="4" MagicLevel="4" ID="185">
+        <Variable Type="TargetCount">
+            <Target Zone="Battleground" CardType="Unit" Amount="All" />
+        </Variable>
+        <Ongoing Duration="FromCondition" >
+            <Condition Operator="GreaterThan" ValueA="Variable" ValueB="0" />
+        </Ongoing>
+        <Target Zone="Battleground" CardType="Unit" Amount="All" />
+        <Trigger Type="OnTurnBegin">
+            <Target Zone="Battleground" CardType="Unit" Amount="All">
+                <Effect Type="Damage" Value="1" />
+            </Target>
+        </Trigger>
+        <Description>Permanent: At the beginning of each player turn, [THIS] deals 1 damage to every unit. When there is no unit left in play, remove [THIS].</Description>
+        <ExtraDescription>(Also damage friendly units.)</ExtraDescription>
+    </Card>
+    <Card Rarity="Common" Type="Spell" Name="Spe_Fir_006" DisplayName="Fire Shield" School="Fire" Cost="2" MagicLevel="2" ID="186">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" CardType="Unit" Amount="1" />
+        <Trigger Type="OnEnchantedDamaged" DamageIncludeFlags="Attack">
+            <Target Zone="Battleground" CardType="Unit" Amount="FromTrigger">
+                <Effect Type="Damage" Value="FromTrigger" />
+            </Target>
+        </Trigger>
+        <Description>Enchant unit. Permanent: Each time enchanted unit is dealt attack damage, [THIS] deal the same amount of damage to the attacking unit.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Spell" Name="Spe_Fir_007" DisplayName="Frenzy" School="Fire" Cost="3" MagicLevel="3" ID="187">
+        <Target Zone="Battleground" CardType="Unit" Amount="1" Side="Enemy" />
+        <Target Zone="Battleground" CardType="Unit" Amount="1" Side="Any" CantTargetPrevious="True">
+            <Variable Type="CardAttack" UseLastTarget="True" />
+            <Effect Type="Damage" Value="Variable" />
+        </Target>
+        <Description>Choose target enemy unit. Do damage to a target unit equal to the chosen unit[SPACE][ATK].</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Spell" Name="Spe_Fir_009" DisplayName="Inner Fire" School="Fire" Cost="2" MagicLevel="2" ID="188">
+        <Ongoing Duration="UntilYourNextTurn" />
+        <Target Zone="Battleground" CardType="Unit" Amount="1">
+            <Effect Type="ModifyAttack" Value="2" />
+            <Effect Type="ModifyRetaliate" Value="2" />
+        </Target>
+        <Description>Enchant unit. Until your next turn: Enchanted unit gain +2[ATK] and +2[RET]</Description>
+    </Card>
+    <!--...............................................................................-->
+    <!-- Spells - Air -->
+    <!--...............................................................................-->
+    <Card Rarity="Uncommon" Type="Spell" Name="Spe_Air_001" DisplayName="Chain Lightning" School="Air" Cost="4" MagicLevel="4" ID="189">
+        <Target Zone="BattlegroundPosition" Amount="1" BattlegroundPositionState="NoUnit" Shape="AdjacentOnly">
+            <Effect Type="Damage" Value="3" />
+        </Target>
+        <Description>Target an empty battleground position. Deal 3 damage to every adjacent units.</Description>
+    </Card>
+    <Card Rarity="Common" Type="Spell" Name="Spe_Air_007" DisplayName="Lightning Bolt" School="Air" Cost="4" MagicLevel="4" ID="190">
+        <Target Zone="Battleground" CardType="Unit" Amount="1">
+            <Effect Type="Damage" Value="6" />
+        </Target>
+        <Description>Deal 6 damage to target unit.</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Spell" Name="Spe_Air_002" DisplayName="Lightning Speed" School="Air" Cost="3" MagicLevel="3" ID="191">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" CardType="Unit" Amount="1">
+            <Effect Type="Modifier">
+                <Ability Type="Swift" />
+            </Effect>
+        </Target>
+        <Description>Enchant unit. Permanent:Enchanted unit can move AND attack each turn.</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Spell" Name="Spe_Air_004" DisplayName="Father Sky&apos;s Wrath" School="Air" Cost="5" MagicLevel="5" ID="192">
+        <Target Zone="Battleground" CardType="Unit" Amount="1" Side="Enemy">
+            <Effect Type="MoveCardTo" Destination="Hand" />
+            <Subgroup>
+                <Target Zone="Battleground" CardType="Unit" Amount="All" Side="Enemy">
+                    <CardFilter IncludeUnitType="Flyer" />
+                    <Effect Type="Damage" Value="6" />
+                </Target>   
+            </Subgroup>                
+        </Target>
+        <Description>Return target enemy unit to his owner hand, then deal 6 damage to all flying enemy units.</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Spell" Name="Spe_Air_005" DisplayName="Fog Veil" School="Air" Cost="3" MagicLevel="3" ID="193">
+        <Ongoing Duration="UntilYourNextTurn" />
+        <Target Zone="Battleground" CardType="Unit" Amount="All" Side="Enemy" >
+            <CardFilter IncludeUnitType="Shooter|Flyer" />
+            <Effect Type="Modifier">
+                <Ability Type="CannotAttack" />
+            </Effect>
+        </Target>
+        <Description>Until your next turn: Enemy shooter and flyer units can&apos;t attack</Description>
+    </Card>
+    <Card Rarity="Common" Type="Spell" Name="Spe_Air_009" DisplayName="Cyclone" School="Air" Cost="4" MagicLevel="4" ID="194">
+        <Ongoing Duration="UntilYourNextTurn" />
+        <Target Zone="BattlegroundLine" Amount="1" >
+            <Effect Type="Modifier">
+                <Ability Type="CannotAttack" />
+            </Effect>
+        </Target>
+        <Target Zone="BattlegroundLine" Amount="Same">
+            <Effect Type="Damage" Value="1" Duration="Immediate" />
+        </Target>
+        <Description>Enchant line. Until your next turn: Units of the enchanted line can&apos;t attack. When [THIS] come into play, deal 1 damage to all units of enchanted line.</Description>
+    </Card>
+    <Card Rarity="Common" Type="Spell" Name="Spe_Air_011" DisplayName="Wind Shield" School="Air" Cost="1" MagicLevel="1" ID="195">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" CardType="Unit" Amount="1">
+            <Effect Type="ModifyDamage" Value="0.5xd" DamageIncludeFlags="Shooter" />
+        </Target>
+        <Description>Enchant unit. Permanent: All shooter attack damage dealt to echanted unit is reduced by half, round down.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Spell" Name="Spe_Air_006" DisplayName="Grounded" School="Air" Cost="2" MagicLevel="2" ID="196">
+        <Target Zone="Battleground" CardType="Unit" Amount="All">
+            <CardFilter IncludeUnitType="Flyer" />
+            <Effect Type="MoveCardTo" Destination="Hand" />
+        </Target>
+        <Description>Return all flyer units to their owner hand.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Spell" Name="Spe_Air_008" DisplayName="Storm Wind" School="Air" Cost="2" MagicLevel="3" ID="197">
+        <Target Zone="Battleground" CardType="Unit" Amount="1" Side="Enemy">
+            <Effect Type="Relocate" Side="Enemy" />
+        </Target>
+        <Description>Move target enemy unit to another valid position.</Description>
+    </Card>
+    <!--...............................................................................-->
+    <!-- Spells - Water -->
+    <!--...............................................................................-->
+    <Card Rarity="Uncommon" Type="Spell" Name="Spe_Wat_002" DisplayName="Circle of Winter" School="Water" Cost="3" MagicLevel="3" ID="198">
+        <Target Zone="BattlegroundLine" Amount="1" >
+            <Effect Type="Damage" Value="2" />
+        </Target>
+        <Description>Deal 2 damage to all units of target line.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Spell" Name="Spe_Wat_009" DisplayName="Frozen Ground" School="Water" Cost="2" MagicLevel="2" ID="199">
+        <Ongoing Duration="UntilYourNextTurn" />
+        <Target Zone="BattlegroundColumn" CardType="Unit" Amount="1" >
+            <Effect Type="Modifier">
+                <Ability Type="CannotMove" />
+            </Effect>
+            <Effect Type="Modifier">
+                <Ability Type="CannotAttack" />
+            </Effect>
+        </Target>
+        <Description>Enchant column. Until your next turn: Units of target column cannot attack or move.</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Spell" Name="Spe_Wat_001" DisplayName="Blizzard" School="Water" Cost="3" MagicLevel="3" ID="200">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" CardType="Unit" Amount="1" />
+        <Trigger Type="OnTurnBegin">
+            <Target Zone="Battleground" CardType="Unit" Amount="Parent">
+                <Effect Type="Damage" Value="3" />
+            </Target>
+            <Target Zone="Battleground" Amount="Self" >
+                <Effect Type="AdjacentMovement" />
+            </Target>
+        </Trigger>
+        <Description>Enchant unit. Permanent: At the beginning of each turn, deal 3 damage to enchanted unit, then, if possible, [THIS] enchants an adjacent unit, chosen at random.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Spell" Name="Spe_Wat_003" DisplayName="Eternal Winter" School="Water" Cost="1" MagicLevel="2" ID="201">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" CardType="Unit" Amount="1">
+            <Effect Type="Modifier">
+                <Ability Type="CannotMove" />
+            </Effect>
+        </Target>
+        <Trigger Type="OnEnchantedTurnBegin" Duration="Permanent">
+            <Target Zone="Battleground" CardType="Unit" Amount="Parent">
+                <Effect Type="Damage" Value="1" />
+            </Target>
+        </Trigger>
+        <Description>Enchant unit. Permanent: Enchanted unit cannot move. At the beginning of enchanted unit&apos;s controller turn, enchanted unit takes 1 damage.</Description>
+    </Card>
+    <Card Rarity="Common" Type="Spell" Name="Spe_Wat_007" DisplayName="Ice Wall" School="Water" Cost="1" MagicLevel="1" ID="202">
+        <Ongoing Duration="UntilYourNextTurn" />
+        <Target Zone="BattlegroundColumn" Amount="1" >
+            <CardFilter IncludeUnitType="Melee|Shooter" />
+            <Effect Type="Modifier">
+                <Ability Type="CannotAttack" />
+            </Effect>
+        </Target>
+        <Description>Enchant column. Until your next turn: Melee unit and shooter unit from enchanted column cannot attack.</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Spell" Name="Spe_Wat_011" DisplayName="Tsunami" School="Water" Cost="6" MagicLevel="6" ID="203">
+        <Target Zone="Battleground" CardType="Unit" Amount="All" Side="Any">
+            <CardFilter ExcludeUnitType="Flyer" />
+            <Effect Type="Damage" Value="8" />
+        </Target>
+        <Description>Deal 8 damage to all non-flyer units.</Description>
+    </Card>
+    <Card Rarity="Common" Type="Spell" Name="Spe_Wat_010" DisplayName="Refreshing Spring" School="Water" Cost="1" MagicLevel="1" ID="204">
+        <Ongoing Duration="UntilEndOfTurn" />
+        <Target Zone="Battleground" CardType="Unit" Amount="1">
+            <Effect Type="ModifyAttack" Value="1" />
+        </Target>
+        <Description>Enchant Unit. Until end of turn: Enchanted Unit gains +1 [ATK].</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Spell" Name="Spe_Wat_005" DisplayName="Geyser" School="Water" Cost="3" MagicLevel="3" ID="205">
+        <Target Zone="Battleground" CardType="Unit" Amount="1" Shape="SelfAndAdjacent">
+            <Effect Type="Damage" Value="3" />
+        </Target>
+        <Description>Deal 3 damage to target unit and all adjacent units.</Description>
+        <ExtraDescription>(Also damage friendly units.)</ExtraDescription>
+    </Card>
+    <Card Rarity="Common" Type="Spell" Name="Spe_Wat_008" DisplayName="Icy Weapon" School="Water" Cost="4" MagicLevel="4" ID="206">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" CardType="Unit" Amount="1">
+            <Effect Type="ModifyAttack" Value="3" />
+        </Target>
+        <Description>Permanent: Target unit gains +3[ATK]</Description>
+    </Card>
+    <!--...............................................................................-->
+    <!-- Spells - Earth -->
+    <!--...............................................................................-->
+    <Card Rarity="Uncommon" Type="Spell" Name="Spe_Ear_003" DisplayName="Earthquake" School="Earth" Cost="2" MagicLevel="2" ID="207">
+        <Target Zone="Battleground" CardType="Unit" Amount="All">
+            <CardFilter ExcludeUnitType="Flyer" />
+            <Effect Type="Damage" Value="2" />
+        </Target>
+        <Description>Does 2 dmg to all non-flyer units.</Description>
+        <ExtraDescription>(Also damage friendly units.)</ExtraDescription>
+    </Card>
+    <Card Rarity="Common" Type="Spell" Name="Spe_Ear_011" DisplayName="Rock Wall" School="Earth" Cost="1" MagicLevel="1" ID="208">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="BattlegroundColumn" Amount="1"  />
+        <Trigger Type="OnPreAttackThisRow" >
+            <CardFilter IncludeUnitType="Melee" />
+            <Target Zone="Battleground" Amount="FromTrigger" >
+                <Effect Type="CancelAttack" />
+            </Target>
+            <Target Zone="Battleground" Amount="Self" >
+                <Effect Type="Kill" />
+            </Target>
+        </Trigger>
+        <Description>Enchant column. Permanent: When a melee unit from enchanted column attacks, instead of resolving the attack, remove [THIS].</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Spell" Name="Spe_Ear_002" DisplayName="Contagion" School="Earth" Cost="3" MagicLevel="3" ID="209">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" CardType="Unit" Amount="1" />
+        <Trigger Type="OnTurnBegin" Duration="Permanent">
+            <Target Zone="Battleground" CardType="Unit" Amount="Parent">
+                <Effect Type="AddCounter" CounterType="Poison" Value="1" />
+            </Target>
+            <Target Zone="Battleground" Amount="Self">
+                <Effect Type="AdjacentMovement" />
+            </Target>
+        </Trigger>
+        <Description>Enchant unit. Permanent: At the beginning of each turn, put 1 poison counter on enchanted unit, then, if possible, [THIS] enchants an adjacent unit chosen at random.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Spell" Name="Spe_Ear_007" DisplayName="Regeneration" School="Earth" Cost="2" MagicLevel="2" ID="210">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" CardType="Unit" Amount="1">
+            <Effect Type="Modifier">
+                <Ability Type="Regenerate" Value="2" />
+            </Effect>
+        </Target>
+        <Description>Enchant unit. Permanent: Enchanted unit gains Regeneration[SPACE]2</Description>
+        <ExtraDescription>(Unit with Regeneration[SPACE]2, at the beginning of your turn, gains 2[SPACE]HP. Cannot go above starting HP.)</ExtraDescription>
+    </Card>
+    <Card Rarity="Rare" Type="Spell" Name="Spe_Ear_004" DisplayName="Mass Regeneration" School="Earth" Cost="3" MagicLevel="3" ID="211">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" CardType="Unit" Amount="All" Side="Friendly" >
+            <Effect Type="Modifier">
+                <Ability Type="Regenerate" Value="1" />
+            </Effect>
+        </Target>
+        <Description>Permanent: All friendly unit in play have Regeneration 1.</Description>
+        <ExtraDescription>(Unit with Regeneration 1, at the beginning of your turn, gains 1 HP. Cannot go above starting HP.)</ExtraDescription>
+    </Card>
+    <Card Rarity="Rare" Type="Spell" Name="Spe_Ear_009" DisplayName="Stone Skin" School="Earth" Cost="3" MagicLevel="3" ID="212">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" CardType="Unit" Amount="1">
+            <Effect Type="ModifyDamage" Value="0.5xd" DamageIncludeFlags="Combat" />
+        </Target>
+        <Description>Enchant creature. Permanent:
+            Enchanted creature receives half damage from combat, rounded down.
+        </Description>
+    </Card>
+    <Card Rarity="Common" Type="Spell" Name="Spe_Ear_008" DisplayName="Stone Shield" School="Earth" Cost="3" MagicLevel="4" ID="213">
+        <Ongoing Duration="UntilDamagedAbsorbedAtEndOfTurn" />
+        <Target Zone="Hero" Amount="All" Side="Friendly">
+            <Effect Type="ModifyDamage" Value="0.0x" DamageIncludeFlags="All" />
+        </Target>
+        <Description>Permanent: Prevent all damage done to your hero. At end of turn, if damage was prevented this way this turn, remove [THIS].</Description>
+    </Card>
+    <Card Rarity="Common" Type="Spell" Name="Spe_Ear_010" DisplayName="Venomous Touch" School="Earth" Cost="2" MagicLevel="2" ID="214">
+        <Ongoing Duration="Permanent" />        
+        <Target Zone="Battleground" CardType="Unit" Amount="1" >
+            <Effect Type="Modifier">
+                <Ability Type="Infect" Value="1" />
+            </Effect>            
+        </Target>
+        <Description>Enchant unit. Permanent: Enchanted unit gains Infect 1</Description>
+        <ExtraDescription>(When a unit with Infect 1 deals attack damage to a unit, that unit gets 1 poison counter. Units with poison counter lose 1 HP at the beginning of their controller’s turn for each poison counter.)</ExtraDescription>
+    </Card>
+    <Card Rarity="Uncommon" Type="Spell" Name="Spe_Ear_001" DisplayName="Breath of Vermin" School="Earth" Cost="3" MagicLevel="3" ID="215">
+        <Target Zone="Battleground" CardType="Unit" Amount="All">
+            <Effect Type="Damage" Value="3" />
+        </Target>
+        <Description>Deal 3 damage to every units.</Description>
+    </Card>
+    <!--...............................................................................-->
+    <!-- Spells - Dark -->
+    <!--...............................................................................-->
+    <Card Rarity="Rare" Type="Spell" Name="Spe_Dar_006" DisplayName="Puppet Master" School="Dark" Cost="6" MagicLevel="6" ID="216">
+        <Target Zone="Battleground" CardType="Unit" Amount="1" Side="Enemy">
+            <Effect Type="Relocate" Side="Friendly" />
+        </Target>
+        <Target Zone="Battleground" CardType="Unit" Amount="Same" >
+            <Effect Type="RestoreAttack" />
+            <Effect Type="RestoreMove" />
+        </Target>
+        <Description>Take control of target enemy unit. You can&apos;t use this spell if you have no valid position for that unit.</Description>
+    </Card>
+    <Card Rarity="Common" Type="Spell" Name="Spe_Dar_003" DisplayName="Agony" School="Dark" Cost="2" MagicLevel="2" ID="217">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" CardType="Unit" Amount="1" />
+        <Trigger Type="OnThisPostAttack">
+            <Target Zone="Battleground" CardType="Unit" Amount="Parent">
+                <Effect Type="Damage" Value="2" />
+            </Target>
+        </Trigger>
+        <Trigger Type="OnThisPostMove">
+            <Target Zone="Battleground" CardType="Unit" Amount="Parent">
+                <Effect Type="Damage" Value="2" />
+            </Target>
+        </Trigger>
+        <Description>Enchant unit. Permanent: Every time enchanted unit moves or attacks, [THIS] deals 2 damage to it.</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Spell" Name="Spe_Dar_002" DisplayName="Curse of the Netherworld" School="Dark" Cost="6" MagicLevel="6" ID="218">
+        <Target Zone="Battleground" CardType="Unit" Amount="All" />
+        <Target Zone="Battleground" CardType="Unit" Amount="All" Side="Enemy">
+            <Effect Type="Damage" Value="3" />
+        </Target>
+        <Target Zone="Battleground" CardType="Unit" Amount="All" Side="Friendly">
+            <Effect Type="Heal" Value="3" />
+        </Target>
+        <Description>Deal 3 damage to every enemy units. All friendly units gain 3 HP. Cannot go above starting HP.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Spell" Name="Spe_Dar_010" DisplayName="Vampiric Embrace" School="Dark" Cost="2" MagicLevel="2" ID="219">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" CardType="Unit" Amount="1">
+            <Effect Type="Modifier">
+                <Ability Type="LifeDrain" Value="2" />
+            </Effect>
+        </Target>
+        <Description>Enchant unit. Permanent: Enchanted unit gains Life Drain 2.</Description>
+        <ExtraDescription>(When unit with Life Drain 2 deals attack damage, it gains 2 HP. Cannot go above starting HP.)</ExtraDescription>
+    </Card>
+    <Card Rarity="Uncommon" Type="Spell" Name="Spe_Dar_008" DisplayName="Spirit Devourer" School="Dark" Cost="4" MagicLevel="4" ID="220">
+        <Target Zone="Battleground" CardType="Unit" Amount="1">
+            <Effect Type="Kill" />
+        </Target>
+        <Description>Kill target unit.</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Spell" Name="Spe_Dar_004" DisplayName="Shadow Image" School="Dark" Cost="4" MagicLevel="4" ID="221">
+        <Target Zone="Battleground" CardType="Unit" Amount="1" Side="Enemy">
+            <Effect Type="Clone" />
+        </Target>
+        <Target Zone="Battleground" CardType="Unit" Amount="FromEffect" IgnoreWard="True" >
+            <Effect Type="Modifier" >
+                <Ability Type="QuickAttack" />
+                <Ability Type="DieOnDamage" />
+            </Effect>
+        </Target>
+        <Description>Permanent: Deploy a copy of target enemy unit. When the copy received any damage, kill it.</Description>
+        <ExtraDescription>You put the copy on your side of the battleground, on a valid deploy position.</ExtraDescription>
+    </Card>
+    <Card Rarity="Common" Type="Spell" Name="Spe_Dar_005" DisplayName="Mark of Doom" School="Dark" Cost="3" MagicLevel="3" ID="222">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" CardType="Unit" Amount="1">
+            <Effect Type="Modifier">
+                <Ability Type="DieOnCombatDamage" />
+            </Effect>
+        </Target>
+        <Description>Enchant unit. Permanent: The next time enchanted unit receive any attack damage, kill it.</Description>
+    </Card>
+    <Card Rarity="Common" Type="Spell" Name="Spe_Dar_007" DisplayName="Purge" School="Dark" Cost="1" MagicLevel="1" ID="223">
+        <Target Zone="Battleground" CardType="Unit" Amount="1" Side="Enemy">
+            <Effect Type="Cleanse" />
+        </Target>
+        <Description>Remove all Ongoing spell on target enemy unit.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Spell" Name="Spe_Dar_011" DisplayName="Weakness" School="Dark" Cost="2" MagicLevel="2" ID="224">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" CardType="Unit" Amount="1">
+            <Effect Type="ModifyAttack" Value="-2" />
+            <Effect Type="ModifyRetaliate" Value="-2" />
+        </Target>
+        <Description>Enchant unit. Permanent: Enchanted unit loses 2[ATK] and 2[RET].</Description>
+    </Card>
+    <!--...............................................................................-->
+    <!-- Spells - Light -->
+    <!--...............................................................................-->
+    <Card Rarity="Common" Type="Spell" Name="Spe_Lig_007" DisplayName="Heal" School="Light" Cost="1" MagicLevel="1" ID="225">
+        <Target Zone="Battleground" CardType="Unit" Amount="1">
+            <Effect Type="Heal" Value="3" />
+        </Target>
+        <Description>Target unit gain up to 3 HP. Can&apos;t go over max HP.</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Spell" Name="Spe_Lig_010" DisplayName="Resurrection" School="Light" Cost="5" MagicLevel="3" MightLevel="3" ID="226">
+        <Target Zone="Graveyard" CardType="Unit" Side="Friendly" Amount="1">
+            <Effect Type="Deploy" Side="Friendly" />
+        </Target>
+        <Description>Take a unit card in your graveyard and deploy it for free.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Spell" Name="Spe_Lig_004" DisplayName="Cleansing" School="Light" Cost="3" MagicLevel="2" ID="227">
+        <Target Zone="Battleground" CardType="Spell" Amount="All">
+            <Effect Type="Kill" />
+        </Target>
+        <Description>Remove all Ongoing spell in play.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Spell" Name="Spe_Lig_011" DisplayName="Word of Light" School="Light" Cost="4" MagicLevel="4" ID="228">
+        <Target Zone="Battleground" CardType="Unit" Amount="All" Side="Enemy">
+            <Effect Type="Damage" Value="2" />
+        </Target>
+        <Description>Deal 2 damage to every enemy units</Description>
+    </Card>
+    <Card Rarity="Common" Type="Spell" Name="Spe_Lig_001" DisplayName="Bless" School="Light" Cost="3" MagicLevel="3" ID="229">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" CardType="Unit" Amount="1">
+            <Effect Type="ModifyAttack" Value="2" />
+        </Target>
+        <Description>Enchant unit. Permanent: Enchanted unit gains +2[ATK].</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Spell" Name="Spe_Lig_003" DisplayName="Celestial Armor" School="Light" Cost="5" MagicLevel="5" ID="230">
+        <Ongoing Duration="UntilDamagedAbsorbedAtEndOfTurn" />
+        <Target Zone="Hero" Amount="All" Side="Friendly">
+            <Effect Type="ModifyDamage" Value="0.0x" DamageIncludeFlags="All" />
+        </Target>
+        <Target Zone="Battleground" CardType="Unit" Amount="All" Side="Friendly">
+            <Effect Type="ModifyDamage" Value="0.0x" DamageIncludeFlags="All" />
+        </Target>
+        <Description>Permanent: Prevent all damage done to your hero and your units. At end of turn, if damage was prevented this way this turn, remove [THIS].</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Spell" Name="Spe_Lig_005" DisplayName="Divine Intervention" School="Light" Cost="5" MagicLevel="4" ID="231">
+        <Target Zone="Battleground" CardType="Spell" Amount="All" Side="Enemy">
+            <Effect Type="Kill" />
+        </Target>
+        <Target Zone="Battleground" CardType="Unit" Amount="All" Side="Friendly">
+            <Effect Type="Heal" Value="infinite" />
+        </Target>
+        <Description>Remove all Ongoing spell you don&apos;t control in play. Heal all friendly unit to their maximum HP.</Description>
+    </Card>
+    <Card Rarity="Common" Type="Spell" Name="Spe_Lig_008" DisplayName="Sunburst" School="Light" Cost="2" MagicLevel="2" ID="232">
+        <Target Zone="BattlegroundColumn" Amount="1" >
+            <Effect Type="Damage" Value="3" />
+        </Target>
+        <Description>Deal 3 damage to all units of target column.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Spell" Name="Spe_Lig_006" DisplayName="Martyr" School="Light" Cost="3" MagicLevel="3" ID="233">
+        <Ongoing Duration="UntilDamagedAbsorbedAtEndOfTurn" SuicideParent="True" />
+        <Target Zone="Battleground" CardType="Unit" Amount="1" Side="Friendly" />
+        <Target Zone="Battleground" CardType="Unit" Amount="All" Side="Friendly"  >
+            <Effect Type="ModifyDamage" Value="0.0x" Side="Enemy" DamageIncludeFlags="All" />
+        </Target>
+        <Description>Enchant friendly creature. Permanent:
+            [br]Prevent all damage dealt to your creatures from a source you don't control.
+            [br]Destroy enchanted creature at the end of the turn during which damage is prevented in this way.
+        </Description>
+    </Card>
+    <!--...............................................................................-->
+    <!-- Spells - Prime -->
+    <!--...............................................................................-->
+    <Card Rarity="Rare" Type="Spell" Name="Spe_Pri_007" DisplayName="Spell Twister" School="Prime" Cost="4" MagicLevel="4" ID="234">
+        <Target Zone="Hand" Amount="1" Side="Enemy" >
+            <CardFilter IncludeCardType="Spell" ExcludeUnique="True" />
+            <Effect Type="PlayFree" CancelDestination="Graveyard" />
+        </Target>
+        <Description>Look at opponent's hand and choose a non-unique spell card from it. You can play this spell for free. If you don't, put that card in opponent's graveyard.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Spell" Name="Spe_Pri_006" DisplayName="Soul Syphon" School="Prime" Cost="2" MagicLevel="2" ID="235">
+        <Target Zone="Hand" CardType="Spell" Amount="1" Side="Friendly" CantTargetSelf="True">
+            <CardFilter MaxCost="True" Value="Variable" >
+                <Variable Type="TargetCount">
+                    <Target Zone="Battleground" CardType="Unit" Amount="All" Side="Enemy" />
+                </Variable>
+            </CardFilter>
+            <Effect Type="PlayFree" CancelDestination="Hand" />
+        </Target>
+        <Description>Choose a spell from your hand with a cost equal or less than the number of enemy units on the battlefield. Play this spell for free.</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Spell" Name="Spe_Pri_009" DisplayName="Time Jump" School="Prime" Cost="6" MagicLevel="6" ID="236">
+        <Target Zone="None" Side="Friendly">
+            <Effect Type="ExtraTurn" />
+        </Target>
+        <Description>At the end of your turn, you gain one extra turn. You don't gain any resources during the supply phase of that turn.</Description>
+    </Card>
+    <Card Rarity="Common" Type="Spell" Name="Spe_Pri_002" DisplayName="Dispel Magic" School="Prime" Cost="1" MagicLevel="1" ID="237">
+        <Target Zone="Battleground" CardType="Spell" Amount="1">
+            <Effect Type="Kill" />
+        </Target>
+        <Description>Remove target Ongoing spell.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Spell" Name="Spe_Pri_011" DisplayName="Town Portal" School="Prime" Cost="3" MagicLevel="3" ID="238">
+        <Target Zone="Battleground" CardType="Unit" Amount="1">
+            <Effect Type="MoveCardTo" Destination="Hand" />
+        </Target>
+        <Description>Return target unit to its owner hand.</Description>
+    </Card>
+    <Card Rarity="Common" Type="Spell" Name="Spe_Pri_008" DisplayName="Teleport" School="Prime" Cost="2" MagicLevel="2" ID="239">
+        <Target Zone="Battleground" CardType="Unit" Amount="1" Side="Friendly">
+            <Effect Type="Relocate"  Side="Friendly" />
+        </Target>
+        <Description>Move target friendly unit to another valid position.</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Spell" Name="Spe_Pri_003" DisplayName="For Whom the Bell Tolls" School="Prime" Cost="5" MagicLevel="5" ID="240">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" CardType="Unit" Amount="All" />
+        <Trigger Type="OnTurnBegin" Side="Friendly">
+            <Target Zone="Battleground" CardType="Unit" Amount="All">
+                <Effect Type="Kill" />
+            </Target>
+            <Target Zone="Battleground" Amount="Self">
+                <Effect Type="Kill" />
+            </Target>
+        </Trigger>
+        <Description>Permanent: At the beginning of your next turn, kill all units on the battleground, then remove [THIS].</Description>
+    </Card>
+    <Card Rarity="Common" Type="Spell" Name="Spe_Pri_005" DisplayName="Slow" School="Prime" Cost="1" MagicLevel="2" ID="241">
+        <Ongoing Duration="UntilYourNextTurn" />
+        <Target Zone="Battleground" CardType="Unit" Amount="1">
+            <Effect Type="Modifier">
+                <Ability Type="CannotAttack" />
+            </Effect>
+            <Effect Type="Modifier">
+                <Ability Type="CannotMove" />
+            </Effect>
+        </Target>
+        <Description>Enchant unit. Until your next turn: Enchanted unit cannot attack or move.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Spell" Name="Spe_Pri_001" DisplayName="Arcane Ward" School="Prime" Cost="4" MagicLevel="4" ID="242">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" CardType="Unit" Amount="1">
+            <Effect Type="Modifier" >
+                <Ability Type="MagicShield" />
+            </Effect>
+        </Target>
+        <Description>Enchant unit. Permanent: Enchanted unit gain Immune to Magic.</Description>
+        <ExtraDescription>(No magic damage is dealt to a unit with Immune to Magic.)</ExtraDescription>
+    </Card>
+    <!--...............................................................................-->
+    <!-- //	#####   ##  #   #####   #   #   #####   #####
+         //	##      ##  #   ##      ##  #    ##     ##
+         //	####    ##  #   ####    # # #    ##     #####
+         //	##      ##  #   ##      #  ##    ##        ##
+         //	#####     ##    #####   #   #    ##     ##### -->
+    <!--...............................................................................-->
+    <Card Rarity="Rare" Type="Event" Name="Eve_Neu_002" DisplayName="Market of Wonders" Faction="Neutral" Cost="5" ID="243">
+        <Target Zone="Library" Side="Friendly" Amount="1" AmountVisible="3">
+            <Effect Type="MoveCardTo" Destination="Hand" />
+        </Target>
+        <Target Zone="Library" Side="Friendly" Amount="2" AutoTakeFirstInputs="True" InputOnExec="True">
+            <Effect Type="MoveCardTo" Destination="Graveyard" />
+        </Target>
+        <Description>5 [RESOURCES] : Look at the top three cards of your library. Choose one of them to put into your hand and discard the others.</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Event" Name="Eve_Neu_011" DisplayName="Week of the Mercenaries" Faction="Neutral" Cost="3" ID="244">
+        <Ongoing Duration="UntilEndOfTurn" />
+        <Target Zone="Hero" Amount="All" Side="Friendly" NeedActivation="True" Persistent="True" > 
+            <Effect Type="GlobalEffect" GlobalEffectType="RevealLibraryTop" />
+        </Target>
+        <Target Zone="Battleground" Side="Friendly" Amount="All" NeedActivation="True" Persistent="True" >
+            <Variable Type="LibraryTopCard" Side="Friendly" >
+                <CardFilter IncludeCardType="Unit" />
+            </Variable>
+            <Condition Operator="GreaterThan" ValueA="Variable" ValueB="0" />
+            <Effect Type="ModifyAttack" Value="1" />
+        </Target>
+        <Target Zone="Battleground" Side="Enemy" Amount="All" NeedActivation="True" Persistent="True" >
+            <Variable Type="LibraryTopCard" Side="Friendly" >
+                <CardFilter IncludeCardType="Unit" />
+            </Variable>
+            <Condition Operator="LesserThan" ValueA="Variable" ValueB="1" />
+            <Effect Type="ModifyRetaliate" Value="1" />
+        </Target>
+        <Description>3 [RESOURCES]: Until the end of the turn, play with the top card your library revealed. As long as the top card of your library is a unit card, all friendly units gains +1 [ATK]. Otherwise, all enemy units get +1 [RET].</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Event" Name="Eve_Neu_003" DisplayName="Tax Week" Faction="Neutral" ID="245">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" Amount="All" />        <!-- Hack to add a permanent feedback -->
+        <Trigger Type="OnCardPlay" Side="Friendly">
+            <CardFilter IncludeCardType="Fortune" />
+            <Target Zone="Hero" Amount="All" Side="Friendly" InputOnExec="True" >
+                <Variable Type="Resources" Side="Friendly" />
+                <Condition Operator="LesserThan" ValueA="Variable" ValueB="1" />
+                <Effect Type="Damage" Value="1" />
+            </Target>
+            <Target Zone="None" Side="Friendly" InputOnExec="True" >
+                <Variable Type="Resources" Side="Friendly" />
+                <Condition Operator="GreaterThan" ValueA="Variable" ValueB="0" />
+                <Effect Type="GainResources" Value="-1" />
+            </Target>
+        </Trigger>
+        <Description>Ongoing: When you play a fortune, pay [1:RESOURCES]. If you can't pay, deal 1 damage to your hero.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Event" Name="Eve_Neu_007" DisplayName="Mana Storm" Faction="Neutral" ID="246">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" Amount="All" />        <!-- Hack to add a permanent feedback -->
+        <Trigger Type="OnCardPlay" Side="Friendly">
+            <CardFilter IncludeCardType="Spell" />
+            <Target Zone="Hero" Amount="All" Side="Friendly" InputOnExec="True" >
+                <Variable Type="Resources" Side="Friendly" />
+                <Condition Operator="LesserThan" ValueA="Variable" ValueB="1" />
+                <Effect Type="Damage" Value="1" />
+            </Target>
+            <Target Zone="None" Side="Friendly" InputOnExec="True" >
+                <Variable Type="Resources" Side="Friendly" />
+                <Condition Operator="GreaterThan" ValueA="Variable" ValueB="0" />
+                <Effect Type="GainResources" Value="-1" />
+            </Target>
+        </Trigger>
+        <Description>Ongoing: When you play a spell, pay [1:RESOURCES]. If you can't pay, deal 1 damage to your hero.</Description>
+    </Card>
+    <Card Rarity="Common" Type="Event" Name="Eve_Neu_013" DisplayName="Celebrations" Faction="Neutral" Cost="2" ID="247">
+        <Target Zone="None" Side="Any">
+            <Effect Type="Draw" Value="1" />
+        </Target>
+        <Description>1[RESOURCES]: Each player draw a card.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Event" Name="Eve_Neu_014" DisplayName="Week of Sylanna's Blessing" Faction="Neutral" Cost="3" ID="248">
+        <Ongoing Duration="UntilDeployThisTurn" />
+        <Target Zone="None" Side="Friendly" NeedActivation="True">
+            <Trigger Type="OnDeploy">
+                <Target Zone="None" Amount="FromTrigger" Persistent="True" ForceExecute="True">
+                    <Effect Type="MaxHp" Value="2" Duration="Permanent" />
+                </Target>
+            </Trigger>
+        </Target>
+        <Description>[3:RESOURCES] : Increase the maximum [HEALTH] of the next unit you'll deploy this turn by 2.</Description>
+    </Card>
+    <Card Rarity="Common" Type="Event" Name="Eve_Neu_006" DisplayName="Day of Fortune" Faction="Neutral" Cost="3" ID="249">
+        <Target Zone="Hand" Side="Friendly" Amount="1">
+            <Effect Type="MoveCardTo" Destination="Graveyard"/>
+        </Target>
+        <Target Zone="None" Side="Friendly" >
+            <Effect Type="Draw" Value="1" />
+        </Target>
+        <Description>[3:RESOURCES]: Discard a card, then draw a card.</Description>
+    </Card>
+    <Card Rarity="Common" Type="Event" Name="Eve_Neu_001" DisplayName="Week of Arkath's Fury" Faction="Neutral" Cost="5" ID="250">
+        <Ongoing Duration="UntilEndOfTurn" />
+        <Target Zone="Battleground" Side="Any" Amount="All" NeedActivation="True" Persistent="True" >
+            <Effect Type="ModifyAttack" Value="1" />
+        </Target>
+        <Target Zone="Battleground" Side="Any" Amount="All" NeedActivation="True" Persistent="True" >
+            <Effect Type="ModifyRetaliate" Value="1" />
+        </Target>
+        <Description>5 [RESOURCES] : Until the end of the turn, all units gain +1 [ATK] and +1 [RET].</Description>
+        <ExtraDescription>(Friendly and enemy units.)</ExtraDescription>
+    </Card>
+    <Card Rarity="Uncommon" Type="Event" Name="Eve_Neu_010" DisplayName="Week of the Dead" Faction="Neutral" Cost="1" ID="251">
+        <Target Zone="Battleground" CardType="Unit" Side="Friendly" Amount="1">
+            <Effect Type="Kill" />
+        </Target>
+        <Target Zone="None" Side="Friendly">
+            <Variable Type="BaseCardCost" UseLastTarget="True" ValueModifier="0.5xd"/>
+            <Effect Type="GainResources" Value="Variable" />
+        </Target>
+        <Description>0 [RESOURCES]: Kill target friendly unit. You gain [RESOURCES] equal to half its cost, round up.</Description>
+    </Card>
+    <Card Rarity="Common" Type="Event" Name="Eve_Neu_009" DisplayName="Week of Knowledge" Faction="Neutral" ID="252">
+        <Variable Type="CardPlayedCount" Side="Friendly" />
+        <PlayabilityCondition Operator="LesserThan" ValueA="Variable" ValueB="1" />
+        <Ongoing Duration="UntilEndOfTurn" />
+        <Target Zone="Hero" Amount="All" Side="Friendly" NeedActivation="True" Persistent="True" >
+            <Effect Type="GlobalEffect" GlobalEffectType="CantPlay">
+                <CardFilter IncludeCardType="Fortune|Spell|Unit|Building" />
+            </Effect>
+        </Target>
+        <Target Zone="None" Side="Friendly">
+            <Effect Type="Draw" Value="1" Duration="Immediate" />
+        </Target>
+        <Description>0 [RESOURCES]: If you haven&apos;t played a card this turn, you may draw a card. If you do, you cannot play a card this turn.</Description>
+        <ExtraDescription>(Playing a card include casting a Spell card, using a Fortune card or deploying a Unit card.)</ExtraDescription>
+    </Card>
+    <Card Rarity="Uncommon" Type="Event" Name="Eve_Neu_008" DisplayName="Market of Shadows" Faction="Neutral" Cost="2" ID="253">
+        <Target Zone="Hero" Amount="All" Side="Friendly" NeedActivation="True" >
+            <Effect Type="Damage" Value="1" />
+            <Effect Type="Draw" Value="1" />
+        </Target>
+        <Description>2 [RESOURCES], deals 1 damage to your hero: Draw a card.</Description>
+    </Card>
+    <Card Rarity="Common" Type="Event" Name="Eve_Neu_012" DisplayName="Week of the Blacksmith" Faction="Neutral" Cost="3" ID="254">
+        <Ongoing Duration="UntilDeployThisTurn" />
+        <Target Zone="None" Side="Friendly" NeedActivation="True">
+            <Trigger Type="OnDeploy">
+                <Target Zone="None" Amount="FromTrigger" Persistent="True" ForceExecute="True">
+                    <Effect Type="ModifyAttack" Value="1" Duration="Permanent" />
+                </Target>
+            </Trigger>
+        </Target>
+        <Description>3 [RESOURCES]: Increase by 1 the [ATK] of the next unit you&apos;ll deploy this turn.</Description>
+    </Card>
+</Cards>

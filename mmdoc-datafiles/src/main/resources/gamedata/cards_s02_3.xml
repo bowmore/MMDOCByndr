@@ -1,0 +1,296 @@
+<!-- Define all cards of the second serie in this document. XML is case sensitive. -->
+<Cards>
+    <!--....................................................................-->
+    <!-- //	#####   ####    #####   ##      ##      #####
+         //	##      ##  #   ##      ##      ##      ##
+         //	#####   ####    ####    ##      ##      #####
+         //	   ##   ##      ##      ##      ##         ##
+         //	#####   ##      #####   #####   #####   ##### -->
+    <!--....................................................................-->
+    <!-- Spells - Air -->
+    <!--....................................................................-->
+    <Card Rarity="Common" Type="Spell" Name="Spe_Air_040" DisplayName="Lightning Strike" School="Air" Cost="3" MagicLevel="2" ID="418">
+        <Target Zone="Battleground" CardType="Unit" Amount="1">
+            <Effect Type="Damage" Value="4" />
+        </Target>
+        <Description>Deal 4 damage to target creature.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Spell" Name="Spe_Air_041" DisplayName="Wind Gust" School="Air" Cost="3" MagicLevel="3" ID="419">
+        <Target Zone="Battleground" CardType="Unit" Amount="1" Side="Enemy">
+            <Effect Type="Relocate" Side="Enemy" />
+        </Target>
+        <Target Zone="None" Amount="Same" Shape="SelfAndAdjacent">
+            <Effect Type="Damage" Value="1" />
+        </Target>
+        <Description>Relocate target enemy creature, then deal 1 damage to it and to every adjacent creature.</Description>
+    </Card>
+    <Card Rarity="Epic" Unique="True" Type="Spell" Name="Spe_Air_042" DisplayName="The Song of the Lost" School="Air" Cost="4" MagicLevel="4" ID="420">
+        <Ongoing Duration="Repeatable" />
+        <Target Zone="Battleground" CardType="Unit" Amount="1" Side="Enemy" AllowDuplicate="True">
+            <Effect Type="Relocate" Side="Enemy" />
+        </Target>      
+        <Description>Relocate target enemy creature. You can repeat this as many times as you want. You can choose a new target each time.</Description>
+    </Card>
+    <!--....................................................................-->
+    <!-- Spells - Dark -->
+    <!--....................................................................-->
+    <Card Rarity="Uncommon" Type="Spell" Name="Spe_Dar_040" DisplayName="Cursed Chains" School="Dark" Cost="3" MagicLevel="3" ID="421">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" CardType="Unit" Amount="1" />
+        <Trigger Type="OnEnchantedTurnBegin">
+            <Target Zone="Hero" Amount="ParentHero">
+                <Effect Type="Damage" Value="1" />
+            </Target>
+        </Trigger>
+        <Description>Enchant creature. Permanent:
+            At the beginning of enchanted creature's controller's turn, deal 1 damage to their Hero.
+        </Description>
+    </Card>
+    <Card Rarity="Common" Type="Spell" Name="Spe_Dar_041" DisplayName="Intimidation" School="Dark" Cost="2" MagicLevel="2" ID="422">
+        <Ongoing Duration="UntilYourNextTurn" />
+        <Target Zone="Battleground" CardType="Unit" Side="Any" Amount="All" >
+            <CardFilter IncludeStatus="NoFriendlyAdjacent" />
+            <Effect Type="Modifier">
+                <Ability Type="CannotAttack" />
+            </Effect>
+        </Target>
+        <Description>Until your next turn:
+        Creatures with no adjacent friendly creature cannot attack.</Description>
+    </Card>
+    <Card Rarity="Epic" Unique="True" Type="Spell" Name="Spe_Dar_042" DisplayName="The Silent Death" School="Dark" Cost="4" MagicLevel="4" ID="423">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" CardType="Unit" Amount="1" />
+        <Trigger Type="OnTurnBegin" Side="Friendly">
+            <Target Zone="Battleground" CardType="Unit" Amount="Parent">
+                <Effect Type="Kill" />
+            </Target>
+            <Target Zone="Graveyard" Amount="Self" InputOnExec="True">
+                <Effect Type="MoveCardTo" Destination="Hand" />
+            </Target>
+        </Trigger>
+        <Description>Enchant Creature. Permanent:
+            At the beginning of your turn, destroy enchanted creture and return The Silent Death to your hand.
+        </Description>
+    </Card>
+    <!--....................................................................-->
+    <!-- Spells - Earth -->
+    <!--....................................................................-->
+    <Card Rarity="Common" Type="Spell" Name="Spe_Ear_040" DisplayName="Earth's Grasp" School="Earth" Cost="1" MagicLevel="1" ID="424">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" CardType="Unit" Amount="1" Side="Any">
+            <Effect Type="Modifier">
+                <Ability Type="Anchored" />                
+            </Effect>            
+        </Target>
+        <Description>Enchant creature. Permanent:
+            Enchanted creature gains Anchored. (Creatures with Anchored cannot move, change controller, be relocated or returned to hand.)
+        </Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Spell" Name="Spe_Ear_041" DisplayName="Sylvanna's Embrace" School="Earth" Cost="2" MagicLevel="3" ID="425">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" CardType="Unit" Amount="1" Side="Any">
+            <Effect Type="MaxHp" Value="2" />
+            <Effect Type="Modifier">
+                <Ability Type="Regenerate" Value="1" />
+            </Effect>            
+        </Target>
+        <Description>Enchant creature. Permanent:
+            Enchanted creature gains Regenerate 1 and has its health increased by 2.
+        </Description>
+    </Card>
+    <Card Rarity="Epic" Unique="True" Type="Spell" Name="Spe_Ear_042" DisplayName="The Nature's Might" School="Earth" Cost="4" MagicLevel="4" ID="426">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" Side="Friendly" CardType="Unit" Amount="All" >
+            <CardFilter IncludeUnitType="Melee" IncludeFrontLine="True" />
+            <Effect Type="ModifyDamage" Value="0.5xd" />
+        </Target>       
+        <Description>
+            Permanent: Damage dealt to friendly melee creatures in the front line is halved, rounded down.
+        </Description>
+    </Card>
+    <!--....................................................................-->
+    <!-- Spells - Fire -->
+    <!--....................................................................-->
+    <Card Rarity="Common" Type="Spell" Name="Spe_Fir_040" DisplayName="Heat Wave" School="Fire" Cost="1" MagicLevel="1" ID="427">
+        <Target Zone="Battleground" CardType="Unit" Side="Any" Amount="All">
+            <Effect Type="Damage" Value="1" />
+        </Target>
+        <Description>Deal 1 damage to every creature.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Spell" Name="Spe_Fir_041" DisplayName="Fiery Rage" School="Fire" Cost="2" MagicLevel="2" ID="428">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" Side="Any" Amount="1" CardType="Unit">
+            <Effect Type="ModifyAttack" Value="1" />
+            <Effect Type="Modifier">
+                <Ability Type="Berserk" />
+            </Effect>
+        </Target>
+        <Description>Enchant creature. Permanent:
+        Enchanted creature gains +[1:ATK] and Berserk. (At the beginning of the action phase, creatures with Berserk automatically attacks the first valid enemy target in front of them.)</Description>
+    </Card>
+    <Card Rarity="Epic" Unique="True" Type="Spell" Name="Spe_Fir_042" DisplayName="The Forbidden Flame" School="Fire" Cost="4" MagicLevel="3" ID="429">
+        <Target Zone="Battleground" Side="Any" Amount="All" CardType="Unit" >
+            <Variable Type="Level" LevelType="Magic" ValueModifier="2.0x" Side="Friendly"/>
+            <Effect Type="Damage" Value="Variable" />
+        </Target>
+        <Description>Deal damage to every creature equal to double your [MAGIC] level.</Description>
+    </Card>
+    <!--....................................................................-->
+    <!-- Spells - Light -->
+    <!--....................................................................-->
+    <Card Rarity="Common" Type="Spell" Name="Spe_Lig_040" DisplayName="Lightspeed" School="Light" Cost="2" MagicLevel="1" ID="430">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" CardType="Unit" Amount="1">
+            <Effect Type="Modifier">
+                <Ability Type="PreemptiveStrike" />
+            </Effect>
+        </Target>
+        <Description>Enchant creature. Permanent:
+            Enchanted creature gains Preemptive Strike.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Spell" Name="Spe_Lig_041" DisplayName="Resolute Stand" School="Light" Cost="2" MagicLevel="2" ID="431">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" Side="Friendly" Amount="All" CardType="Unit" >
+            <Effect Type="ModifyRetaliate" Value="1" />
+        </Target>
+        <Description>Permanent:
+        All friendly creatures gain +[1:RET].</Description>
+    </Card>
+    <Card Rarity="Epic" Unique="True" Type="Spell" Name="Spe_Lig_042" DisplayName="The Light of Tomorrow" School="Light" Cost="4" MagicLevel="4" ID="432">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="None" Side="Friendly" />
+        <Trigger Type="OnTurnBegin" Side="Friendly" >        
+            <Target Zone="Graveyard" CardType="Unit" Side="Friendly" Amount="1" ExcludeUnique="True" Random="True">
+                <Effect Type="MoveCardTo" Destination="Hand" />
+            </Target>
+        </Trigger>
+        <Description>Permanent:
+            At the beginning of your turn, choose at random a non-unique creature card from your graveyard and put it into your hand.
+        </Description>
+    </Card>
+    <!--....................................................................-->
+    <!-- Spells - Prime -->
+    <!--....................................................................-->
+    <Card Rarity="Common" Type="Spell" Name="Spe_Pri_040" DisplayName="Minor Recall" School="Prime" Cost="3" MagicLevel="3" ID="433">
+        <Target Zone="Battleground" Amount="1">
+            <CardFilter IncludeCardType="Fortune|Spell" />
+            <Effect Type="MoveCardTo" Destination="Hand" />
+        </Target>
+        <Description>Return target ongoing spell or fortune to its owner's hand.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Spell" Name="Spe_Pri_041" DisplayName="Fate Twister" School="Prime" Cost="4" MagicLevel="3" DestinyLevel="2" ID="434">
+        <Target Zone="Hand" Amount="1" Side="Enemy" >
+            <CardFilter IncludeCardType="Fortune" ExcludeUnique="True" />
+            <Effect Type="PlayFree" CancelDestination="Graveyard" />
+        </Target>
+        <Description>Look at opponent's hand and choose a non-unique fortune card from it. You can play this fortune for free. If you don't, put that card into opponent's graveyard.</Description>
+    </Card>
+    <Card Rarity="Epic" Unique="True" Type="Spell" Name="Spe_Pri_042" DisplayName="The Gate to Nowhere" School="Prime" Cost="3" MagicLevel="3" ID="435">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="BattlegroundColumn" Amount="1" />
+        <Trigger Type="OnPostAttackThisRow" Side="Enemy">
+            <Target Zone="None" Amount="FromTrigger" >
+                <Effect Type="Banish" />
+            </Target>
+        </Trigger>
+        <Description>Enchant Row. Permanent:
+            After an enemy creature from enchanted row attacks, banish it.
+        </Description>
+    </Card>
+    <!--....................................................................-->
+    <!-- Spells - Water -->
+    <!--....................................................................-->
+    <Card Rarity="Common" Type="Spell" Name="Spe_Wat_040" DisplayName="Ice Shell" School="Water" Cost="1" MagicLevel="2" ID="436">
+        <Ongoing Duration="UntilDamagedAbsorbed" />
+        <Target Zone="Battleground" CardType="Unit" Amount="1">
+            <Effect Type="Modifier">
+                <Ability Type="Anchored" />
+            </Effect>
+            <Effect Type="ModifyDamage" Value="0.0x" DamageIncludeFlags="All" />
+        </Target>
+        <Description>Enchant creature. Permanent:
+        Enchanted creature gains Anchored. Prevent all damage dealt to enchanted creature. When damage is prevented in this way, remove Ice Armor.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Spell" Name="Spe_Wat_041" DisplayName="Ice Splinters" School="Water" Cost="3" MagicLevel="3" ID="437">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="BattlegroundColumn" Amount="1" />
+        <Trigger Type="OnDeployThisRow">
+            <Target Zone="Battleground" Amount="FromTrigger" Side="Any" CardType="Unit">
+                <Effect Type="Damage" Value="2" />
+            </Target>
+        </Trigger>
+        <Trigger Type="OnRelocateThisRow">
+            <Target Zone="Battleground" Amount="FromTrigger" Side="Any" CardType="Unit">
+                <Effect Type="Damage" Value="2" />
+            </Target>
+        </Trigger>
+        <Trigger Type="OnMoveThisRow">
+            <Target Zone="Battleground" Amount="FromTrigger" Side="Any" CardType="Unit">
+                <Effect Type="Damage" Value="2" />
+            </Target>
+        </Trigger>
+        <Description>Enchant row. Permanent:
+        Whenever a creature is deployed, moves into or is relocated to enchanted row, deal 2 damage to it.</Description>
+    </Card>
+    <Card Rarity="Epic" Unique="True" Type="Spell" Name="Spe_Wat_042" DisplayName="The Strength of the Sea" School="Water" Cost="4" MagicLevel="4" ID="438">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" Side="Friendly" Amount="All" CardType="Unit" >
+            <Effect Type="ModifyAttack" Value="1" />
+            <Effect Type="Modifier">
+                <Ability Type="FortuneWard" />
+            </Effect>
+        </Target>
+        <Description>Permanent:
+        All friendly creatures gain +[1:ATK] and Fortune Ward.</Description>
+    </Card>
+    <!--....................................................................-->
+    <!-- //	#####   ##  #   #####   #   #   #####   #####
+         //	##      ##  #   ##      ##  #    ##     ##
+         //	####    ##  #   ####    # # #    ##     #####
+         //	##      ##  #   ##      #  ##    ##        ##
+         //	#####     ##    #####   #   #    ##     ##### -->
+    <!--....................................................................-->
+    <Card Rarity="Uncommon" Type="Event" Name="Eve_Neu_040" DisplayName="Day of the Sanctuary" Cost="1" Faction="Neutral" ID="439">
+        <Target Zone="Battleground" CardType="Unit" Amount="1" ForceExecute="True" Persistent="True">
+            <Effect Type="PlayEffect" PlayEffectType="CannotTarget" Duration="UntilYourNextTurn" />
+        </Target>
+        <Description>[1:RESOURCES]: Until your next turn, target creature cannot be targeted.</Description>
+    </Card>
+    <Card Rarity="Common" Type="Event" Name="Eve_Neu_041" DisplayName="Hail Storm" Cost="4" Faction="Neutral" ID="440">
+        <Target Zone="Battleground" CardType="Unit" Amount="All" NeedActivation="True" >
+            <Effect Type="Damage" Value="1" />
+        </Target>
+        <Description>[4:RESOURCES]: Deal 1 damage to every creature.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Event" Name="Eve_Neu_042" DisplayName="Conscription Day" Cost="3" Faction="Neutral" ID="441">
+        <Target Zone="None" Side="Any">
+            <Effect Type="IncreaseLevel" Value="1" LevelType="Might" />
+        </Target>
+        <Description>[3:RESOURCES]: Increase both players' [MIGHT] level by 1.</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Event" Name="Eve_Neu_043" DisplayName="Blind Arbiters" Faction="Neutral" ID="442">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Hero" Amount="All" Side="Any" >
+            <Variable Type="CardPlayedCount" Side="Friendly" />
+            <Condition Operator="GreaterThan" ValueA="Variable" ValueB="2" />
+            <Effect Type="GlobalEffect" GlobalEffectType="CantPlay">
+                <CardFilter IncludeCardType="Fortune|Spell|Unit|Building" />
+            </Effect>
+        </Target>
+        <Description>Ongoing: Players cannot play more than 3 cards per turn.</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Event" Name="Eve_Neu_044" DisplayName="Cosmic Balance" Cost="4" Faction="Neutral" ID="443">
+        <Target Zone="Hero" Amount="All" Side="Friendly" NeedActivation="True" >
+            <Effect Type="Damage" Value="3" />
+        </Target>
+        <Target Zone="Hand" Amount="Variable" Side="Friendly" Random="True">
+            <Variable Type="CardInHandCount" ValueModifier="-6" Side="Friendly"/>
+            <Effect Type="MoveCardTo" Destination="Graveyard"/>
+        </Target>
+        <Target Zone="Hand" Amount="Variable" Side="Enemy" Random="True">
+            <Variable Type="CardInHandCount" ValueModifier="-6" Side="Enemy"/>
+            <Effect Type="MoveCardTo" Destination="Graveyard"/>
+        </Target>
+        <Description>[4:RESOURCES], deal 3 damage to your hero: Both players must discard cards at random until they have a maximum of 6 in hand.</Description>
+    </Card>
+</Cards>

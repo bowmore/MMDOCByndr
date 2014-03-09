@@ -1,0 +1,152 @@
+<!-- Define all cards of the second serie in this document. XML is case sensitive. -->
+<Cards>
+    <!--...............................................................................-->
+    <!-- //	##  #   #####   ####     ###    #####   #####   
+         //	##  #   ##      #   #   ##  #   ##      ##      
+         //	#####   ####    ####    ##  #   ####    #####   
+         //	##  #   ##      ## #    ##  #   ##         ##   
+         //	##  #   #####   ##  #    ###    #####   #####    -->
+    <!--...............................................................................-->
+    <!-- Heroes Haven -->
+    <!--...............................................................................-->
+    <Card Rarity="Heroic" Type="Hero" Name="Her_Hav_006" DisplayName="Alia, Caller of Faith" Faction="Haven" MightLevel="1" MagicLevel="1" DestinyLevel="1" HP="20" ID="340">
+        <School Name="Fire" />
+        <School Name="Light" />
+        <Description>0[RESOURCES]: Increase your [MIGHT], [MAGIC] or [DESTINY] level. [BR]1[RESOURCES]: Draw a card.
+        [BR][6:RESOURCES]: Heal your creatures of all damage.</Description>
+        <Target Zone="None" Side="Friendly">
+            <Effect Type="ChoiceOption" />
+            <Subgroup>
+                <TemplateEffect Name="HeroAbilities" />
+                <!-- HeroAbilities template contains 4 options, so the value of the next one must be 4 -->
+                <Target Zone="None" Side="Friendly">
+                    <Variable Type="Resources" Side="Friendly" />
+                    <Condition Operator="GreaterThan" ValueA="Variable" ValueB="5" />
+                    <Option Value="4" DisplayText="[6:RESOURCES]: Heal all friendly creature." />
+                    <Effect Type="GainResources" Value="-6" Duration="Immediate" />
+                </Target>
+                <Target Zone="Battleground" CardType="Unit" Amount="All" Side="Friendly">
+                    <Option Value="4" />
+                    <Effect Type="Heal" Value="infinite" Duration="Immediate" />
+                </Target>
+            </Subgroup>
+        </Target>
+    </Card>
+    <!--...............................................................................-->
+    <!-- Heroes Inferno -->
+    <!--...............................................................................-->
+    <Card Rarity="Heroic" Type="Hero" Name="Her_Inf_006" DisplayName="Dhamiria, Caller of Madness" Faction="Inferno" MightLevel="1" MagicLevel="1" DestinyLevel="1" HP="20" ID="341">
+        <School Name="Earth" />
+        <School Name="Fire" />
+        <Description>
+            0[RESOURCES]: Increase your [MIGHT], [MAGIC] or [DESTINY] level. [BR]1[RESOURCES]: Draw a card.
+            [BR][6:RESOURCES]: Look at opponent's hand and choose a spell or fortune card from it. Put that card and every card with the same name from your opponent's hand into their graveyard.
+        </Description>
+        <Target Zone="None" Side="Friendly">
+            <Effect Type="ChoiceOption" />
+            <Subgroup>
+                <TemplateEffect Name="HeroAbilities" />
+                <!-- HeroAbilities template contains 4 options, so the value of the next one must be 4 -->
+                <Target Zone="Hand" Side="Enemy" Amount="1">
+                    <Option Value="4" />
+                    <CardFilter IncludeCardType="Fortune|Spell" />
+                    <Effect Type="MoveCardTo" Destination="Graveyard" Duration="Immediate" />
+                </Target>
+                <Target Zone="Hand" Side="Enemy" Amount="All">
+                    <Option Value="4" />
+                    <CardFilter SameGPID="True"/>
+                    <Effect Type="MoveCardTo" Destination="Graveyard" Duration="Immediate" />
+                </Target>
+                <Target Zone="None" Side="Friendly">
+                    <Variable Type="Resources" Side="Friendly" />
+                    <Condition Operator="GreaterThan" ValueA="Variable" ValueB="5" />
+                    <Option Value="4" DisplayText="[6:RESOURCES]: Discard opponent card." />
+                    <Effect Type="GainResources" Value="-6" Duration="Immediate" />
+                </Target>
+            </Subgroup>
+        </Target>
+    </Card>
+    <!--...............................................................................-->
+    <!-- Heroes Necropolis -->
+    <!--...............................................................................-->
+    <Card Rarity="Heroic" Type="Hero" Name="Her_Nec_006" DisplayName="Adar-Malik, Caller of Doom" Faction="Necropolis" MightLevel="1" MagicLevel="1" DestinyLevel="1" HP="20" ID="342">
+        <School Name="Dark" />
+        <School Name="Fire" />
+        <Description>0[RESOURCES]: Increase your [MIGHT], [MAGIC] or [DESTINY] level. [BR]1[RESOURCES]: Draw a card.
+        [BR][6:RESOURCES]: Return to your hand a target creature card put into your graveyard since the end of your last turn.</Description>
+        <Target Zone="None" Side="Friendly">
+            <Effect Type="ChoiceOption" />
+            <Subgroup>
+                <TemplateEffect Name="HeroAbilities" />
+                <!-- HeroAbilities template contains 4 options, so the value of the next one must be 4 -->
+                <Target Zone="Graveyard" Side="Friendly" Amount="1">
+                  <Option Value="4" />
+                  <CardType Include="Unit" />
+                  <CardFilter IncludeStatus="InHolderSinceYourLastTurn"/>
+                  <Effect Type="MoveCardTo" Destination="Hand" Duration="Immediate" />
+                </Target>
+                <Target Zone="None" Side="Friendly">
+                    <Variable Type="Resources" Side="Friendly" />
+                    <Condition Operator="GreaterThan" ValueA="Variable" ValueB="5" />
+                    <Option Value="4" DisplayText="[6:RESOURCES]: Take creature from graveyard." />
+                    <Effect Type="GainResources" Value="-6" Duration="Immediate" />
+                </Target>
+
+            </Subgroup>
+        </Target>
+    </Card>
+    <!--...............................................................................-->
+    <!-- Heroes Sanctuary -->
+    <!--...............................................................................-->
+    <Card Rarity="Heroic" Type="Hero" Name="Her_San_006" DisplayName="Noboru, Caller of Twilight" Faction="Sanctuary" MightLevel="1" MagicLevel="1" DestinyLevel="1" HP="20" ID="343">
+        <School Name="Dark" />
+        <School Name="Light" />
+        <Description>0[RESOURCES]: Increase your [MIGHT], [MAGIC] or [DESTINY] level. [BR]1[RESOURCES]: Draw a card.[BR]
+        [6:RESOURCES]: Relocate target enemy creature to another valid battleground position.</Description>
+        <Target Zone="None" Side="Friendly">
+            <Effect Type="ChoiceOption" />
+            <Subgroup>
+                <TemplateEffect Name="HeroAbilities" />
+                <!-- HeroAbilities template contains 4 options, so the value of the next one must be 4 -->
+                <Target Zone="None" Side="Friendly">
+                    <Variable Type="Resources" Side="Friendly" />
+                    <Condition Operator="GreaterThan" ValueA="Variable" ValueB="5" />
+                    <Option Value="4" DisplayText="[6:RESOURCES]: Relocate enemy creature." />
+                    <Effect Type="GainResources" Value="-6" Duration="Immediate" />
+                </Target>
+                <Target Zone="Battleground" CardType="Unit" Amount="1" Side="Enemy">
+                    <Option Value="4" />
+                    <Effect Type="Relocate" Side="Enemy" Duration="Immediate" />
+                </Target>
+            </Subgroup>
+        </Target>
+    </Card>
+    <!--...............................................................................-->
+    <!-- Heroes Stronghold -->
+    <!--...............................................................................-->
+    <Card Rarity="Heroic" Type="Hero" Name="Her_Str_006" DisplayName="Zardoc, Caller of Valor" Faction="Stronghold" MightLevel="1" MagicLevel="1" DestinyLevel="1" HP="20" ID="344">
+        <School Name="Earth" />
+        <School Name="Light" />
+        <Description>0[RESOURCES]: Increase your [MIGHT], [MAGIC] or [DESTINY] level. [BR]1[RESOURCES]: Draw a card.[BR][6:RESOURCES]: Target creature gains Swift and Charge until end of turn.</Description>
+        <Target Zone="None" Side="Friendly">
+            <Effect Type="ChoiceOption" />
+            <Subgroup>
+                <TemplateEffect Name="HeroAbilities" />
+                <!-- HeroAbilities template contains 4 options, so the value of the next one must be 4 -->
+                <Target Zone="None" Side="Friendly">
+                    <Variable Type="Resources" Side="Friendly" />
+                    <Condition Operator="GreaterThan" ValueA="Variable" ValueB="5" />
+                    <Option Value="4" DisplayText="[6:RESOURCES]: Target creature gains Charge and Swift." />
+                    <Effect Type="GainResources" Value="-6" Duration="Immediate" />
+                </Target>
+                <Target Zone="Battleground" CardType="Unit" Amount="1" ForceExecute="True" >
+                    <Option Value="4" />
+                    <Effect Type="Modifier" Duration="UntilEndOfTurn">
+                        <Ability Type="Charge" />
+                        <Ability Type="Swift" />
+                    </Effect>
+                </Target>
+            </Subgroup>
+        </Target>
+    </Card>
+</Cards>

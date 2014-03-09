@@ -1,0 +1,275 @@
+<Cards>
+    <!--....................................................................-->
+    <!-- //	#####   ####    #####   ##      ##      #####
+         //	##      ##  #   ##      ##      ##      ##
+         //	#####   ####    ####    ##      ##      #####
+         //	   ##   ##      ##      ##      ##         ##
+         //	#####   ##      #####   #####   #####   ##### -->
+    <!--....................................................................-->
+    <!-- Spells - Air -->
+    <!--....................................................................-->
+    <Card Rarity="Rare" Type="Spell" Name="Spe_Air_060" DisplayName="Thunder Weapon" School="Air" Cost="2" MagicLevel="3" ID="635">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" CardType="Unit" Amount="1" >
+            <Effect Type="Modifier">
+                <Ability Type="Shockwave" Value="2" />
+            </Effect>
+        </Target>
+        <Description>Enchant Creature. Permanent:
+Enchanted creature gains Shockwave 2.
+        </Description>
+    </Card>
+    <Card Rarity="Common" Type="Spell" Name="Spe_Air_061" DisplayName="Ylath's Breath" School="Air" Cost="2" MagicLevel="2" ID="636">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" Side="Friendly" CardType="Unit" Amount="1" />
+        <Target Zone="BattlegroundColumn" CardType="Unit" Amount="Self" CantTargetParent="True" >
+            <Effect Type="Modifier">
+                <Ability Type="CannotAttack" />
+            </Effect>
+        </Target>
+        <Trigger Type="OnThisPostAttack">
+            <Target Zone="None" Amount="Self" >
+                <Effect Type="Kill" />
+            </Target>
+        </Trigger>
+        <Trigger Type="OnThisPostMove">
+            <Target Zone="None" Amount="Self" >
+                <Effect Type="Kill" />
+            </Target>            
+        </Trigger>
+        <Description>
+            Enchant friendly creature. Permanent:
+            Other creatures in the same row as enchanted creature cannot attack. When enchanted creature attacks or moves, destroy [THIS].
+        </Description>
+    </Card>
+    <!--....................................................................-->
+    <!-- Spells - Dark -->
+    <!--....................................................................-->
+    <Card Rarity="Common" Type="Spell" Name="Spe_Dar_060" DisplayName="Wither" School="Dark" Cost="3" MagicLevel="3" ID="637">
+        <Ongoing Duration="Permanent" />
+        <Variable Type="Level" Side="Friendly" LevelType="Magic" ValueModifier="-1.0x"/>
+        <Target Zone="Battleground" CardType="Unit" Amount="1" >
+            <Effect Type="ModifyAttack" Value="Variable" />
+            <Effect Type="ModifyRetaliate" Value="Variable" />
+        </Target>
+        <Description>
+            Enchant Creature. Permanent:
+            Enchanted creature gets -X ATK and -X RET where X is your [MAGIC] level.
+        </Description>
+    </Card>
+    <Card Rarity="Rare" Type="Spell" Name="Spe_Dar_061" DisplayName="Moonsilk Strand" School="Dark" Cost="3" MagicLevel="2" ID="638">
+        <Target Zone="BattlegroundColumn" CardType="Unit" Side="Enemy" Amount="1" >
+            <Effect Type="AddCounter" CounterType="Crippling" Value="2" />
+        </Target>
+        <Description>Enemy creatures of target row gain 2 crippling counters.</Description>
+    </Card>
+    <!--....................................................................-->
+    <!-- Spells - Earth -->
+    <!--....................................................................-->
+    <Card Rarity="Rare" Type="Spell" Name="Spe_Ear_060" DisplayName="Symbiotic Barkskin" School="Earth" Cost="3" MagicLevel="3" ID="639">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" CardType="Unit" Side="Friendly" Amount="1" >
+            <Effect Type="MaxHp" Value="3" />
+        </Target>
+        <Trigger Type="OnEnchantedCardDeath" >
+            <Target Zone="None" Amount="Self" >
+                <Effect Type="AdjacentMovement" Side="Friendly" MoveFromLastKnownParent="True" />
+            </Target>
+        </Trigger>
+        <Description>
+            Enchant Friendly Creature. Permanent:
+            Enchanted creature gains +3HP. When enchanted creature dies, move [THIS] on an adjacent friendly creature at random if possible.
+        </Description>
+    </Card>
+    <Card Rarity="Common" Type="Spell" Name="Spe_Ear_061" DisplayName="Landslide" School="Earth" Cost="3" MagicLevel="3" ID="640">
+        <Target Zone="BattlegroundPosition" CardType="Building" Amount="1" Shape="Self" >
+            <Effect Type="Kill" />
+        </Target>
+        <Target Zone="BattlegroundPosition" CardType="Unit" Amount="Same" Shape="Self" >
+            <Effect Type="Damage" Value="2" />
+        </Target>
+        <Description>Target any battleground position. Destroy any building presents and do 2 damage to any creature present.</Description>
+    </Card>
+    <!--....................................................................-->
+    <!-- Spells - Fire -->
+    <!--....................................................................-->
+    <Card Rarity="Rare" Type="Spell" Name="Spe_Fir_060" DisplayName="Lava Stream" School="Fire" Cost="1" MagicLevel="2" ID="641">
+        <Variable Type="TargetCount">
+            <Target Zone="BattlegroundColumn" CardType="Unit" Amount="Self" BattlegroundPositionState="DontCare" />
+        </Variable>
+        <Ongoing Duration="FromCondition" >
+            <Condition Operator="GreaterThan" ValueA="Variable" ValueB="0" />
+        </Ongoing>
+        <Target Zone="BattlegroundColumn" Amount="1" />
+        <Trigger Type="OnTurnBegin" Side="Any" >
+            <Target Zone="BattlegroundColumn" CardType="Unit" Amount="Self" >
+                <Effect Type="Damage" Value="1" />
+            </Target>
+        </Trigger>
+        <Description>
+            Enchant row. Permanent:
+            At the beginning of each players's turn, deal 1 damage to all creature of enchanted row. Destroy [THIS] when there is no creature in enchanted row.
+        </Description>
+    </Card>
+    <Card Rarity="Common" Type="Spell" Name="Spe_Fir_061" DisplayName="Soulfire" School="Fire" Cost="3" MagicLevel="3" ID="642">
+        <Variable Type="CardAttack" UseParent="True" />
+        <Variable2 Type="AbilityValue" Ability="FireWard" UseParent="True" />
+        <Ongoing Duration="FromCondition" SuicideParent="True">
+            <Condition Operator="Or" ValueA="Condition" ValueB="Condition" >
+                <Condition Operator="LesserThan" ValueA="Variable" ValueB="6" />
+                <Condition Operator="GreaterThan" ValueA="Variable2" ValueB="0" />
+            </Condition>
+        </Ongoing>
+        <Target Zone="Battleground" CardType="Unit" Amount="1" />
+        <Trigger Type="OnThisAttack" Side="Enemy" DamageIncludeFlags="Attack">
+            <Target Zone="Battleground" CardType="Unit" Amount="Parent">
+                <Effect Type="AddCounter" CounterType="Fierce" Value="1" />
+            </Target>
+        </Trigger>
+        <Description>Enchant creature. Permanent:
+When enchanted creature attack, put a +[1:ATK] counter on it. If enchanted creature [ATK] is greater than 5, destroy enchanted creature.
+        </Description>
+    </Card>
+    <!--....................................................................-->
+    <!-- Spells - Light -->
+    <!--....................................................................-->
+    <Card Rarity="Rare" Type="Spell" Name="Spe_Lig_060" DisplayName="Elrath's Protection" School="Light" Cost="4" MagicLevel="4" ID="643">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" CardType="Unit" Amount="1" >
+            <Effect Type="PlayEffect" PlayEffectType="CannotTarget" />
+            <Effect Type="Modifier" >
+                <Ability Type="SpellShield" />
+            </Effect>
+        </Target>
+        <Description>Enchant creature. Permanent:
+Enchanted creature cannot be targeted and gains Spell Shield.
+        </Description>
+    </Card>
+    <Card Rarity="Common" Type="Spell" Name="Spe_Lig_061" DisplayName="Chain Heal" School="Light" Cost="2" MagicLevel="2" ID="644">
+        <Target Zone="Battleground" CardType="Unit" Amount="2" >
+            <Effect Type="Heal" Value="3" />
+        </Target>
+        <Description>Heal 3 damage to 2 target creature.</Description>
+    </Card>
+    <!--....................................................................-->
+    <!-- Spells - Prime -->
+    <!--....................................................................-->
+    <Card Rarity="Common" Type="Spell" Name="Spe_Pri_060" DisplayName="Rewind" School="Prime" Cost="3" MagicLevel="4" ID="645">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" CardType="Unit" Amount="1" />
+        <Trigger Type="OnTurnBegin" Side="Friendly" >
+            <Target Zone="Battleground" CardType="Unit" Amount="Parent">
+                <Effect Type="MoveCardTo" Destination="Hand" />
+            </Target>
+            <Target Zone="Battleground" Amount="Self">
+                <Effect Type="MoveCardTo" Destination="Hand" />
+            </Target>
+        </Trigger>
+        <Description>Enchant creature. Permanent:
+At the beginning of your turn, return [THIS] and enchanted creature to their owner hand.
+        </Description>
+    </Card>
+    <Card Rarity="Rare" Type="Spell" Name="Spe_Pri_061" DisplayName="Nether Curse" School="Prime" Cost="2" MagicLevel="2" ID="646">
+        <Ongoing Duration="Permanent" />
+        <Variable Type="TargetCount" MustBeTargetable="True" >
+            <Target Zone="Graveyard" Side="Friendly" Amount="All" />
+        </Variable>
+        <Trigger Type="OnTurnBegin" Side="Friendly" >
+            <Target Zone="Graveyard" Amount="1" Side="Friendly" Cancelable="False" >
+                <Effect Type="Banish" />
+            </Target>
+        </Trigger>
+        <Trigger Type="OnTurnBegin" Side="Friendly" >
+            <Target Zone="Hero" Amount="All" Side="Friendly">
+                <Condition Operator="LesserThan" ValueA="Variable" ValueB="1" />
+                <Effect Type="Damage" Value="1" />
+            </Target>
+        </Trigger>
+        <Trigger Type="OnTurnEnd" Side="Friendly" >
+            <Target Zone="None" Amount="Self" >
+                <Effect Type="GiveControl" />
+            </Target>
+        </Trigger>
+        <Description>Permanent:
+At the beginning of your turn, banish target card from your graveyard. If you can't, take 1 damage.
+At the end of your turn, give [THIS] to your opponent.
+        </Description>
+    </Card>
+    <!--....................................................................-->
+    <!-- Spells - Water -->
+    <!--....................................................................-->
+    <Card Rarity="Rare" Type="Spell" Name="Spe_Wat_060" DisplayName="Shalassa's Blade" School="Water" Cost="4" MagicLevel="5" ID="647">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" CardType="Unit" Amount="1" >
+            <Variable Type="TargetCount" >
+                <Target Zone="Battleground" CardType="Spell" Amount="All" Side="Any" >
+                    <CardFilter IncludeSchool="Water" />
+                </Target>
+            </Variable>
+            <Effect Type="ModifyAttack" Value="Variable" />
+        </Target>
+        <Description>Enchant creature. Permanent:
+Enchanted creature gains +[1:ATK] for each water ongoing spell in play.
+        </Description>
+    </Card>
+    <Card Rarity="Common" Type="Spell" Name="Spe_Wat_061" DisplayName="Ice Armour" School="Water" Cost="3" MagicLevel="4" ID="648">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" CardType="Unit" Amount="1" >
+            <Effect Type="PlayEffect" PlayEffectType="CannotTarget" />
+            <Effect Type="ModifyAttack" Value="1" />
+            <Effect Type="ModifyRetaliate" Value="1" />
+        </Target>
+        <Description>Enchant creature. Permanent:
+Enchanted creature cannot be targeted and gains +[1:ATK] and +[1:RET].
+        </Description>
+    </Card>
+    <!--....................................................................-->
+    <!-- //	#####   ##  #   #####   #   #   #####   #####
+         //	##      ##  #   ##      ##  #    ##     ##
+         //	####    ##  #   ####    # # #    ##     #####
+         //	##      ##  #   ##      #  ##    ##        ##
+         //	#####     ##    #####   #   #    ##     ##### -->
+    <!--....................................................................-->
+    <Card Rarity="Uncommon" Type="Event" Name="Eve_Neu_060" DisplayName="Time Of War" Cost="0" Faction="Neutral" ID="649">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" Amount="All" /> <!-- Hack to add a permanent feedback -->
+        <Trigger Type="OnTurnEnd" Side="Friendly" >
+            <Target Zone="None" Side="Friendly" >
+                <Variable Type="CardPlayedCount" Side="Friendly" >
+                    <CardFilter IncludeCardType="Unit" />
+                </Variable>
+                <Condition Operator="GreaterThan" ValueA="Variable" ValueB="2" />
+                <Effect Type="Draw" Value="1" />
+            </Target>
+        </Trigger>
+        <Description>At end of turn, if you played 3 creatures or more, draw a card.</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Event" Name="Eve_Neu_061" DisplayName="Night of the Rising Moon" Cost="2" Faction="Neutral" ID="656">
+        <Target Zone="Hand" CardType="Unit" Side="Friendly" Amount="1">
+            <Effect Type="MoveCardTo" Destination="Graveyard"/>
+        </Target>
+        <Target Zone="Hand" CardType="Fortune" Side="Friendly" Amount="1">
+            <Effect Type="MoveCardTo" Destination="Graveyard"/>
+        </Target>
+        <Target Zone="Hand" CardType="Spell" Side="Friendly" Amount="1">
+            <Effect Type="MoveCardTo" Destination="Graveyard"/>
+        </Target>
+        <Target Zone="None" Side="Friendly" >
+            <Effect Type="Draw" Value="4" />
+        </Target>
+        <Description>[2:RESOURCES] Discard a Creature, a Spell and a Fortune: Draw 4 cards.</Description>
+    </Card>
+    <Card Rarity="Common" Type="Event" Name="Eve_Neu_062" DisplayName="The Great Hunt" Cost="0" Faction="Neutral" ID="657">
+        <Ongoing Duration="Permanent" />
+        <Target Zone="Battleground" Amount="All" />
+        <!-- Hack to add a permanent feedback -->
+        <Trigger Type="OnTurnEnd" Side="Friendly" >
+            <Target Zone="None" Side="Friendly" >
+                <Variable Type="CardInHandCount" Side="Friendly"/>
+                <Condition Operator="LesserThan" ValueA="Variable" ValueB="2" />
+                <Effect Type="Draw" Value="1" />
+            </Target>
+        </Trigger>
+        <Description>At end of turn, if you have 1 card or less in hand, draw a card.</Description>
+    </Card>
+</Cards>

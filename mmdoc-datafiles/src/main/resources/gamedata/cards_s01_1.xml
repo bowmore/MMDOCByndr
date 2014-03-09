@@ -1,0 +1,354 @@
+<!-- Define all cards of the second serie in this document. XML is case sensitive. -->
+<Cards>
+    <!--...............................................................................-->
+    <!-- //	 ####   ####    #####    ###    #####   ##  #   ####    #####   #####
+         //	##      #   #   ##      ##  #    ##     ##  #   #   #   ##      ##
+         //	##      ####    ####    #####    ##     ##  #   ####    ####    #####
+         //	##      ## #    ##      ##  #    ##     ##  #   ## #    ##         ##
+         //	 ####   ##  #   #####   ##  #    ##     #####   ##  #   #####   ##### -->
+    <!--...............................................................................-->
+    <!-- Abilities Template -->
+    <!--...............................................................................-->
+    <TemplateEffect Name="Hypnotize">
+        <Target Zone="BattlegroundColumn" CardType="Unit" Amount="Self" Side="Enemy" >
+            <Effect Type="Modifier" OwnerAbility="Hypnotize">
+                <Ability Type="CannotMove" />
+            </Effect>
+        </Target>
+    </TemplateEffect>
+    <TemplateEffect Name="Honor">
+        <Target Zone="Battleground" CardType="Unit" Amount="Self" Side="Friendly" Shape="AdjacentOnly">
+            <Variable Type="AbilityValue" Ability="Honor" />
+            <Effect Type="ModifyAttack" Value="Variable" OwnerAbility="Honor"/>
+            <Effect Type="ModifyRetaliate" Value="Variable" OwnerAbility="Honor"/>
+        </Target>
+    </TemplateEffect>
+    <TemplateEffect Name="FireBurst">
+        <Trigger Type="OnThisCardDeath">
+            <Target Zone="BattlegroundColumn" CardType="Unit" Amount="FromTrigger" >
+                <Variable Type="AbilityValue" Ability="FireBurst" />
+                <Effect Type="Damage" Value="Variable" OwnerAbility="FireBurst"/>
+            </Target>
+        </Trigger>
+    </TemplateEffect>
+    <TemplateEffect Name="Lucky">
+        <Target Zone="Hero" Amount="All" Side="Friendly" >
+            <Variable Type="AbilityValue" Ability="Lucky" />
+            <Effect Type="IncreaseLevel" Value="Variable" LevelType="Destiny" OwnerAbility="Lucky"/>
+        </Target>
+    </TemplateEffect>
+    <TemplateEffect Name="FrozenTouch">
+        <Trigger Type="OnThisDamageUnit" Side="Enemy" DamageIncludeFlags="Attack">
+            <Target Zone="Battleground" CardType="Unit" Amount="FromTrigger" ForceExecute="True" Persistent="True">
+                <Effect Type="Modifier" Duration="UntilYourNextTurn" OwnerAbility="FrozenTouch">
+                    <Ability Type="CannotAttack" />
+                    <Ability Type="CannotMove" />
+                </Effect>
+            </Target>
+        </Trigger>
+    </TemplateEffect>
+    <TemplateEffect Name="FireHeal">
+        <Target Zone="Battleground" CardType="Unit" Amount="Self" Side="Friendly" >
+            <Effect Type="ModifyDamage" Value="1.0x" DamageIncludeFlags="Fire" Reverse="True" OwnerAbility="FireHeal"/>
+        </Target>
+    </TemplateEffect>
+    <TemplateEffect Name="Crippling">
+        <Trigger Type="OnThisDamageUnit" Side="Enemy" DamageIncludeFlags="Attack">
+            <Target Zone="Battleground" CardType="Unit" Amount="FromTrigger">
+                <Variable Type="AbilityValue" Ability="Crippling" />
+                <Effect Type="AddCounter" CounterType="Crippling" Value="Variable" OwnerAbility="Crippling"/>
+            </Target>
+        </Trigger>
+    </TemplateEffect>
+    <TemplateEffect Name="FireWard">
+        <Target Zone="Battleground" CardType="Unit" Amount="Self" Side="Friendly" >
+            <Effect Type="PlayEffect" PlayEffectType="Ward" OwnerAbility="FireWard">
+                <CardFilter IncludeSchool="Fire" />
+            </Effect>
+        </Target>
+    </TemplateEffect>
+    <TemplateEffect Name="AirWard">
+        <Target Zone="Battleground" CardType="Unit" Amount="Self" Side="Friendly" >
+            <Effect Type="PlayEffect" PlayEffectType="Ward" OwnerAbility="AirWard">
+                <CardFilter IncludeSchool="Air" />
+            </Effect>
+        </Target>
+    </TemplateEffect>
+    <TemplateEffect Name="WaterWard">
+        <Target Zone="Battleground" CardType="Unit" Amount="Self" Side="Friendly" >
+            <Effect Type="PlayEffect" PlayEffectType="Ward" OwnerAbility="WaterWard">
+                <CardFilter IncludeSchool="Water" />
+            </Effect>
+        </Target>
+    </TemplateEffect>
+    <TemplateEffect Name="EarthWard">
+        <Target Zone="Battleground" CardType="Unit" Amount="Self" Side="Friendly" >
+            <Effect Type="PlayEffect" PlayEffectType="Ward" OwnerAbility="EarthWard">
+                <CardFilter IncludeSchool="Earth" />
+            </Effect>
+        </Target>
+    </TemplateEffect>
+    <TemplateEffect Name="DarkWard">
+        <Target Zone="Battleground" CardType="Unit" Amount="Self" Side="Friendly" >
+            <Effect Type="PlayEffect" PlayEffectType="Ward" OwnerAbility="DarkWard">
+                <CardFilter IncludeSchool="Dark" />
+            </Effect>
+        </Target>
+    </TemplateEffect>
+    <TemplateEffect Name="LightWard">
+        <Target Zone="Battleground" CardType="Unit" Amount="Self" Side="Friendly" >
+            <Effect Type="PlayEffect" PlayEffectType="Ward" OwnerAbility="LightWard">
+                <CardFilter IncludeSchool="Light" />
+            </Effect>
+        </Target>
+    </TemplateEffect>
+    <TemplateEffect Name="PrimeWard">
+        <Target Zone="Battleground" CardType="Unit" Amount="Self" Side="Friendly" >
+            <Effect Type="PlayEffect" PlayEffectType="Ward" OwnerAbility="PrimeWard">
+                <CardFilter IncludeSchool="Prime" />
+            </Effect>
+        </Target>
+    </TemplateEffect>
+
+    <!--...............................................................................-->
+    <!-- Creatures - Haven -->
+    <!--...............................................................................-->
+    <Card Rarity="Common" Type="Unit" Name="Cre_Hav_020" DisplayName="Wolf Marskman" Faction="Haven" SubType="Shooter" Cost="3" MightLevel="3" Attack="2" Retaliate="2" HP="4" ID="260">
+        <Ability Type="ImmuneToRetaliate" />
+        <Ability Type="Retribution"/>
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Hav_021" DisplayName="Wolf Praetorian" Faction="Haven" SubType="Melee" Cost="4" MightLevel="4" Attack="2" Retaliate="4" HP="6" ID="261">
+        <Ability Type="Retribution"/>
+    </Card>
+    <Card Rarity="Rare" Type="Unit" Name="Cre_Hav_022" DisplayName="Wolf Justicar" Faction="Haven" SubType="Magic|Shooter" Cost="5" MightLevel="5" MagicLevel="1" Attack="2" Retaliate="3" HP="6" ID="262">
+        <Ability Type="ImmuneToRetaliate" />
+        <Target Zone="Battleground" CardType="Unit" Amount="AllOther" Side="Friendly" >
+            <Effect Type="ModifyRetaliate" Value="2" />
+        </Target>
+        <Description>+2[RET] to all other friendly creatures.</Description>
+    </Card>
+    <Card Rarity="Epic" Type="Unit" Name="Cre_Hav_023" DisplayName="Wolf Captain" Faction="Haven" SubType="Melee" Cost="2" MightLevel="3" Attack="1" Retaliate="0" HP="5" ID="263">
+        <Ability Type="Retribution"/>
+        <Target Zone="Battleground" CardType="Unit" Amount="Self" >
+            <Variable Type="TargetCount">
+                <Target Zone="Battleground" CardType="Unit" Amount="Self" Side="Friendly" Shape="AdjacentOnly"/>
+            </Variable>
+            <Effect Type="ModifyAttack" Value="Variable" />
+            <Effect Type="ModifyRetaliate" Value="Variable" />
+        </Target>
+        <Description>Gains +1 ATK +1 RET by adjacent friendly creatures.</Description>
+    </Card>
+    <!--...............................................................................-->
+    <!-- Creatures - Inferno -->
+    <!--...............................................................................-->
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Inf_020" DisplayName="Hellfire Imp" Faction="Inferno" SubType="Magic|Flyer" Cost="2" MightLevel="2" MagicLevel="2" Attack="3" Retaliate="0" HP="2" ID="264">
+        <Ability Type="FireBurst" Value="1"/>
+    </Card>
+    <Card Rarity="Common" Type="Unit" Name="Cre_Inf_021" DisplayName="Hellfire Cerberus" Faction="Inferno" SubType="Shooter" Cost="3" MightLevel="3" Attack="2" Retaliate="0" HP="3" ID="265">
+        <Ability Type="ImmuneToRetaliate" />
+        <Ability Type="AttackAnywhere"/>
+    </Card>
+    <Card Rarity="Rare" Type="Unit" Name="Cre_Inf_022" DisplayName="Hellfire Juggernaut" Faction="Inferno" SubType="Magic|Melee" Cost="5" MightLevel="5" MagicLevel="1" Attack="7" Retaliate="3" HP="3" ID="266">
+        <Ability Type="FireBurst" Value="2"/>
+    </Card>
+    <Card Rarity="Epic" Type="Unit" Name="Cre_Inf_023" DisplayName="Caller of the Void" Faction="Inferno" SubType="Magic|Shooter" Cost="3" MightLevel="3" MagicLevel="1" Attack="2" Retaliate="0" HP="4" ID="267">
+        <Ability Type="ImmuneToRetaliate" />
+        <Trigger Type="OnSupplyPhaseBegin" Side="Friendly">
+            <Target Zone="Hero" Amount="All" Side="Enemy">
+                <Effect Type="Damage" Value="1" />
+            </Target>
+        </Trigger>
+        <Description>During your supply phase, [THIS] deals 1 damage to enemy hero.</Description>
+    </Card>
+    <!--...............................................................................-->
+    <!-- Creatures - Necropolis -->
+    <!--...............................................................................-->
+    <Card Rarity="Common" Type="Unit" Name="Cre_Nec_020" DisplayName="Moonsilk Skeleton" Faction="Necropolis" SubType="Melee" Cost="2" MightLevel="2" Attack="2" Retaliate="1" HP="3" ID="268">
+        <Ability Type="Crippling" Value="1"/>
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Nec_021" DisplayName="Moonsilk Spinner" Faction="Necropolis" SubType="Shooter" Cost="4" MightLevel="4" Attack="2" Retaliate="2" HP="5" ID="269">
+        <Ability Type="Crippling" Value="2"/>
+    </Card>
+    <Card Rarity="Epic" Type="Unit" Name="Cre_Nec_023" DisplayName="Vampire Assassin" Faction="Necropolis" SubType="Melee" Cost="4" MightLevel="4" Attack="1" Retaliate="2" HP="4" ID="270">
+        <Trigger Type="OnThisDamageUnit" Side="Enemy" DamageIncludeFlags="Combat">
+            <Target Zone="Battleground" CardType="Unit" Amount="FromTrigger">
+                <Effect Type="Kill" />
+            </Target>
+        </Trigger>
+        <Description>When Vampire Assassin deal combat damage to a creature, kill that creature.</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Unit" Name="Cre_Nec_022" DisplayName="Fate Sealer" Faction="Necropolis" SubType="Magic|Flyer" Cost="6" MightLevel="3" MagicLevel="1" DestinyLevel="3" Attack="2" Retaliate="2" HP="4" ID="271">
+        <Ability Type="Incorporeal" />
+        <Ability Type="LifeDrain" Value="2" />
+        <Trigger Type="OnUnitDeath" Side="Friendly" >
+            <Target Zone="None" Side="Friendly">
+                <Effect Type="Draw" Value="1" />
+            </Target>
+        </Trigger>      
+        <Description>When Fate Sealer or another friendly creature dies, draw a card.</Description>
+    </Card>
+    <!--...............................................................................-->
+    <!-- Creatures - Sanctuary -->
+    <!--...............................................................................-->
+    <Card Rarity="Common" Type="Unit" Name="Cre_San_018" DisplayName="Coral Priestess" Faction="Sanctuary" SubType="Magic|Shooter" Cost="3" MightLevel="3" MagicLevel="1" Attack="2" Retaliate="1" HP="3" ID="95">
+        <Ability Type="ImmuneToRetaliate" />
+        <Ability Type="Outmaneuver" />
+    </Card>
+    <Card Rarity="Common" Type="Unit" Name="Cre_San_005" DisplayName="Kappa" Faction="Sanctuary" SubType="Melee" Cost="3" MightLevel="3" Attack="2" Retaliate="3" HP="6" ID="96" />
+    <Card Rarity="Common" Type="Unit" Name="Cre_San_014" DisplayName="Snow Maiden" Faction="Sanctuary" SubType="Shooter" Cost="3" MightLevel="3" Attack="2" Retaliate="1" HP="4" ID="98">
+        <Ability Type="ImmuneToRetaliate" />
+        <Ability Type="Hypnotize" />
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_San_003" DisplayName="Kenshi" Faction="Sanctuary" SubType="Melee" Cost="5" MightLevel="5" Attack="2" Retaliate="1" HP="4" ID="99">
+        <Ability Type="Honor" Value="2" />
+    </Card>
+    <Card Rarity="Common" Type="Unit" Name="Cre_San_006" DisplayName="Kirin" Faction="Sanctuary" SubType="Magic|Melee" Cost="4" MightLevel="4" MagicLevel="1" Attack="2" Retaliate="2" HP="5" ID="100">
+        <Ability Type="FocusedBlast" Value="2" />
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_San_011" DisplayName="Pearl Priestess" Faction="Sanctuary" SubType="Magic|Shooter" Cost="5" MightLevel="5" MagicLevel="1" Attack="3" Retaliate="2" HP="5" ID="102">
+        <Ability Type="ImmuneToRetaliate" />
+        <Ability Type="Hypnotize" />
+        <Ability Type="Outmaneuver" />
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_San_017" DisplayName="Kappa Shoya" Faction="Sanctuary" SubType="Magic|Melee" Cost="5" MightLevel="5" MagicLevel="1" Attack="3" Retaliate="3" HP="6" ID="103">
+        <Ability Type="FocusedBlast" Value="2" />
+    </Card>
+    <Card Rarity="Rare" Type="Unit" Name="Cre_San_013" DisplayName="Mizu-Kami" Faction="Sanctuary" SubType="Magic|Melee" Cost="5" MightLevel="3" MagicLevel="2" Attack="3" Retaliate="1" HP="5" ID="104">
+        <Ability Type="MagicShield" />
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_San_009" DisplayName="Yuki-Onna" Faction="Sanctuary" SubType="Shooter" Cost="5" MightLevel="5" Attack="3" Retaliate="2" HP="8" ID="105">
+        <Ability Type="ImmuneToRetaliate" />
+        <Ability Type="Hypnotize" />
+    </Card>
+    <Card Rarity="Rare" Type="Unit" Name="Cre_San_008" DisplayName="Kensei" Faction="Sanctuary" SubType="Melee" Cost="7" MightLevel="6" Attack="2" Retaliate="1" HP="4" ID="106">
+        <Ability Type="ImmuneToRetaliate" />
+        <Ability Type="Honor" Value="3" />
+    </Card>
+    <Card Rarity="Rare" Type="Unit" Name="Cre_San_007" DisplayName="Sacred Kirin" Faction="Sanctuary" SubType="Magic|Melee" Cost="8" MightLevel="6" MagicLevel="1" Attack="4" Retaliate="3" HP="9" ID="107">
+        <Ability Type="FocusedBlast" Value="4" />
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_San_010" DisplayName="Naga Warrior" Faction="Sanctuary" SubType="Melee" Cost="6" MightLevel="6" Attack="2" Retaliate="1" HP="7" ID="108">
+        <Ability Type="Honor" Value="2" />
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_San_004" DisplayName="Naga Tide Master" Faction="Sanctuary" SubType="Magic|Shooter" Cost="5" MightLevel="5" MagicLevel="1" Attack="4" Retaliate="2" HP="6" ID="109">
+        <Ability Type="ImmuneToRetaliate" />
+        <Ability Type="Outmaneuver" />
+    </Card>
+    <Card Rarity="Epic" Type="Unit" Name="Cre_San_001" DisplayName="Naga Tactician" Faction="Sanctuary" SubType="Shooter" Cost="2" MightLevel="2" Attack="1" Retaliate="0" HP="2" ID="110">
+        <Description>When [THIS] deals attack damage to an enemy Hero, increase your[SPACE][RESOURCES] production by 1.</Description>
+        <Trigger Type="OnThisDamageHero" Side="Enemy">
+            <Target Zone="None" Side="Friendly">
+                <Effect Type="GainResourcesProd" Value="1" />
+            </Target>
+        </Trigger>
+    </Card>
+    <Card Rarity="Epic" Type="Unit" Name="Cre_San_002" DisplayName="Nyorai Sairensa" Faction="Sanctuary" SubType="Magic|Melee" Unique="True" Cost="4" MightLevel="4" MagicLevel="1" Attack="3" Retaliate="3" HP="5" ID="111">
+        <Ability Type="Outmaneuver" />
+        <Ability Type="BlockDeploy" />
+        <Description>No more enemy unit can be deployed in the same column as [THIS].</Description>
+    </Card>
+    <Card Rarity="Common" Type="Unit" Name="Cre_San_016" DisplayName="Wanizane" Faction="Sanctuary" SubType="Melee" Cost="4" MightLevel="4" Attack="3" Retaliate="1" HP="5" ID="101">
+        <Ability Type="Honor" Value="1" />
+    </Card>
+    <Card Rarity="Common" Type="Unit" Name="Cre_San_012" DisplayName="Shark Guard" Faction="Sanctuary" SubType="Melee" Cost="1" MightLevel="1" Attack="2" Retaliate="1" HP="2" ID="94" />
+    <Card Rarity="Common" Type="Unit" Name="Cre_San_015" DisplayName="Spring Spirit" Faction="Sanctuary" SubType="Magic|Melee" Cost="2" MightLevel="2" MagicLevel="1" Attack="2" Retaliate="2" HP="4" ID="97" />
+    <Card Rarity="Common" Type="Unit" Name="Cre_San_020" DisplayName="White Fox" Faction="Sanctuary" SubType="Melee" Cost="2" MightLevel="2" Attack="2" Retaliate="1" HP="3" ID="272">
+        <Ability Type="Lucky" Value="1"/>
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_San_021" DisplayName="Shanriya Guard" Faction="Sanctuary" SubType="Magic|Melee" Cost="3" MightLevel="3" MagicLevel="1" Attack="2" Retaliate="0" HP="4" ID="273">
+        <Ability Type="ImmuneToRetaliate" />
+        <Ability Type="FrozenTouch"/>
+    </Card>
+    <Card Rarity="Rare" Type="Unit" Name="Cre_San_022" DisplayName="Shanriya Priestess" Faction="Sanctuary" SubType="Magic|Shooter" Cost="4" MightLevel="4" MagicLevel="1" Attack="2" Retaliate="0" HP="4" ID="274">
+        <Ability Type="ImmuneToRetaliate" />
+        <Ability Type="FrozenTouch"/>
+        <Ability Type="Hypnotize"/>
+    </Card>
+    <Card Rarity="Epic" Type="Unit" Name="Cre_San_023" DisplayName="Deep Mountain Yeti" Faction="Sanctuary" SubType="Melee" Cost="5" MightLevel="5" Attack="2" Retaliate="0" HP="6" ID="275">
+        <Target Zone="Battleground" CardType="Unit" Amount="Self" >
+            <Variable Type="TargetCount" >
+                <Target Zone="Battleground" CardType="Unit" Amount="All" Side="Enemy" />
+            </Variable>
+            <Effect Type="ModifyAttack" Value="Variable" />
+            <Effect Type="ModifyRetaliate" Value="Variable" />
+        </Target>
+        <Description>Deep Mountain Yeti gets +[1:ATK] and +[1:RET] for every enemy creatures.</Description>
+    </Card>
+    <!--...............................................................................-->
+    <!-- Creatures - Stronghold -->
+    <!--...............................................................................-->
+    <Card Rarity="Common" Type="Unit" Name="Cre_Str_020" DisplayName="Blackskull Warchanter" Faction="Stronghold" SubType="Melee" Cost="1" MightLevel="2" Attack="0" Retaliate="0" HP="3" ID="276">
+        <Trigger Type="OnTurnEnd" Side="Friendly">
+            <Target Zone="Battleground" CardType="Unit" Amount="All" Side="Friendly">
+                <CardFilter IncludeAbility="Enrage" />
+                <Effect Type="AddCounter" CounterType="Enrage" Value="1" />
+            </Target>
+        </Trigger>
+        <Description>At the end of your turn, add 1 Enrage counter to every creatures with Enrage.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Str_021" DisplayName="Blackskull Goblin" Faction="Stronghold" SubType="Shooter" Cost="2" MightLevel="2" Attack="3" Retaliate="3" HP="4" ID="277">
+        <Ability Type="ImmuneToRetaliate" />
+        <Variable Type="TargetCount">
+            <Target Zone="Battleground" CardType="Unit" Amount="Self" Shape="AdjacentOnly"/>
+        </Variable>
+        <Ongoing Duration="FromCondition" >
+            <Condition Operator="GreaterThan" ValueA="Variable" ValueB="0" />
+        </Ongoing>
+        <Description>When there is no adjacent friendly creatures, kill Blackskull Goblin.</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Unit" Name="Cre_Str_022" DisplayName="Blackskull Vulture Rider" Faction="Stronghold" SubType="Flyer" Cost="4" MightLevel="4" Attack="3" Retaliate="3" HP="6" ID="278">
+        <Target Zone="Hand" CardType="Unit" Amount="Self" >
+            <Variable Type="CardInGraveyardThisTurnCount" Side="Any" ValueModifier="-1.0x" >
+                <CardFilter IncludeCardType="Unit" />
+            </Variable>
+            <Effect Type="ModifyCost" Value="Variable" Duration="UntilEndOfTurn" />
+        </Target>
+        <Description>Blackskull Vulture Rider costs [1:RESOURCES] less to play for each creature that was put into a graveyard this turn.</Description>
+    </Card>
+    <Card Rarity="Epic" Type="Unit" Name="Cre_Str_023" DisplayName="Blackskull Clan Warlord" Faction="Stronghold" SubType="Melee" Cost="5" MightLevel="3" Attack="0" Retaliate="0" HP="7" ID="279">
+        <Target Zone="Battleground" CardType="Unit" Amount="Self" >
+            <Variable Type="Level" Side="Friendly" LevelType="Might" />
+            <Effect Type="ModifyAttack" Value="Variable" />
+            <Effect Type="ModifyRetaliate" Value="Variable" />
+        </Target>
+        <Description>[ATK] and [RET] equal Might Level.</Description>
+    </Card>
+    <!--...............................................................................-->
+    <!-- Creatures - Neutral -->
+    <!--...............................................................................-->
+    <Card Rarity="Common" Type="Unit" Name="Cre_Neu_020" DisplayName="Dire Wolf" Faction="Neutral" SubType="Melee" Cost="2" MightLevel="2" Attack="1" Retaliate="2" HP="2" ID="280">
+        <Ability Type="Retribution" />
+    </Card>
+    <Card Rarity="Common" Type="Unit" Name="Cre_Neu_021" DisplayName="Black Vulture" Faction="Neutral" SubType="Flyer" Cost="2" MightLevel="2" Attack="2" Retaliate="1" HP="2" ID="281">
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Neu_022" DisplayName="Blind Brother" Faction="Neutral" SubType="Shooter" Cost="4" MightLevel="3" Attack="0" DestinyLevel="2" Retaliate="0" HP="4" ID="282">
+        <Trigger Type="OnSupplyPhaseBegin" Side="Friendly">
+            <Target Zone="None" Side="Friendly">
+                <Effect Type="Draw" Value="1" />
+            </Target>
+        </Trigger>
+        <Description>At the beginning of your supply phase, draw an additional card.</Description>
+    </Card>
+    <Card Rarity="Rare" Type="Unit" Name="Cre_Neu_023" DisplayName="Greater Fire Elemental" Faction="Neutral" SubType="Magic|Shooter" Cost="6" MightLevel="4" MagicLevel="3" Attack="3" Retaliate="2" HP="5" ID="283">
+        <Ability Type="ImmuneToRetaliate" />
+        <Ability Type="FireHeal"/>
+        <Ability Type="FireBurst" Value="2"/>
+    </Card>
+    <Card Rarity="Epic" Type="Unit" Name="Cre_Neu_024" DisplayName="Shi-No-Shi" Faction="Neutral" SubType="Magic|Flyer" Unique="True" Cost="8" MightLevel="6" MagicLevel="2" Attack="6" Retaliate="6" HP="6" ID="284">
+        <Ability Type="Charge" />
+        <Ability Type="DarkWard" />
+        <Ability Type="ShuffleOnEnterGraveyard" />
+        <Description>Dark Ward.[BR]When this is put into your graveyard, shuffle it in your library.</Description>
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Neu_025" DisplayName="Deep Mountain Turtle" Faction="Neutral" SubType="Melee" Cost="4" MightLevel="4" Attack="0" Retaliate="3" HP="5" ID="333">
+        <Ability Type="PreemptiveStrike" />
+    </Card>
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Neu_026" DisplayName="Void Wraith" Faction="Neutral" SubType="Magic|Melee" Cost="3" MightLevel="3" MagicLevel="1" Attack="1" Retaliate="0" HP="1" ID="334">
+        <Trigger Type="OnThisCardDeath" Side="Enemy">
+            <Target Zone="Hero" Amount="All" Side="Enemy">
+                <Effect Type="Damage" Value="3" Duration="Immediate" />
+            </Target>
+        </Trigger>
+        <Description>If Void Wraith is killed during your opponent's turn, Void Wraith deal 3 damage to enemy hero.</Description>
+    </Card>
+</Cards>

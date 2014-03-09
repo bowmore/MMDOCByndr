@@ -1,0 +1,147 @@
+<!-- Define all cards of the third serie in this document. XML is case sensitive. -->
+<Cards>
+    <!--...............................................................................-->
+    <!-- //	##  #   #####   ####     ###    #####   #####   
+         //	##  #   ##      #   #   ##  #   ##      ##      
+         //	#####   ####    ####    ##  #   ####    #####   
+         //	##  #   ##      ## #    ##  #   ##         ##   
+         //	##  #   #####   ##  #    ###    #####   #####    -->		 
+	<!--...............................................................................-->
+    <!-- Heroes Academy -->
+    <!--...............................................................................-->	
+	 <Card Rarity="Heroic" Type="Hero" Name="Her_Aca_001" DisplayName="Gazal, Lady of Secrets" Faction="Academy" MightLevel="1" MagicLevel="1" DestinyLevel="1" HP="20" ID="444">
+         <School Name="Prime" />
+         <School Name="Light" />
+         <Description>0[RESOURCES]: Increase your [MIGHT], [MAGIC] or [DESTINY] level.[BR]1[RESOURCES]: Draw a card.[BR]3[RESOURCES]: Until the end of the turn, whenever an effect causes cards to go from your opponent's library to their graveyard, draw a card.</Description>
+         <Ongoing Duration="UntilEndOfTurn" />
+         <Target Zone="None" Side="Friendly">
+            <Effect Type="ChoiceOption" />
+            <Subgroup>
+                <TemplateEffect Name="HeroAbilities" />
+                <!-- HeroAbilities template contains 4 options, so the value of the next one must be 4 -->
+                 <Target Zone="None" Side="Friendly"> 
+                     <Variable Type="Resources" Side="Friendly" /> 
+                     <Condition Operator="GreaterThan" ValueA="Variable" ValueB="2" /> 
+                     <Option Value="4" DisplayText="[3:RESOURCES]: Draw a card." /> 
+                     <Effect Type="GainResources" Value="-3" Duration="Immediate" /> 
+                 </Target>
+                <Target Zone="None" Side="Friendly">
+                    <Option Value="4" />
+                    <Trigger Type="OnCardMill" Side="Enemy" ExecuteOncePerTransaction="True" >                        
+                        <Target Zone="None" Side="Friendly">
+                            <Effect Type="Draw" Value="1" />
+                        </Target>                    
+                    </Trigger>
+                </Target>
+            </Subgroup>
+        </Target>
+    </Card>
+	 <Card Rarity="Heroic" Type="Hero" Name="Her_Aca_002" DisplayName="Hakeem, Seeker of Mysteries" Faction="Academy" MightLevel="1" MagicLevel="1" DestinyLevel="2" HP="20" ID="445">
+        <School Name="Dark" />
+        <School Name="Earth" />
+        <Description>0[RESOURCES]: Increase your [MIGHT], [MAGIC] or [DESTINY] level.[BR]1[RESOURCES]: Draw a card.
+        </Description>
+        <Target Zone="None" Side="Friendly">
+            <Effect Type="ChoiceOption" />
+            <Subgroup>
+                <TemplateEffect Name="HeroAbilities" />
+                <!-- HeroAbilities template contains 4 options, so the value of the next one must be 4 -->
+            </Subgroup>
+        </Target>
+    </Card>
+	 <Card Rarity="Heroic" Type="Hero" Name="Her_Aca_003" DisplayName="Asalah, Invoker of Castigation" Faction="Academy" MightLevel="0" MagicLevel="2" DestinyLevel="1" HP="18" ID="446">
+        <School Name="Fire" />
+        <School Name="Water" />
+        <School Name="Light" />
+        <Description>0[RESOURCES]: Increase your [MIGHT], [MAGIC] or [DESTINY] level.[BR]1[RESOURCES]: Draw a card.[BR]2[RESOURCES]: Discard a card: Creatures you control gain +[1:ATK] for each ongoing spell attached to them.</Description>
+        <Target Zone="None" Side="Friendly">
+            <Effect Type="ChoiceOption" />
+            <Subgroup>
+                <TemplateEffect Name="HeroAbilities" />
+                <!-- HeroAbilities template contains 4 options, so the value of the next one must be 4 -->
+                <Target Zone="None" Side="Friendly">
+                    <Variable Type="Resources" Side="Friendly" />
+                    <Condition Operator="GreaterThan" ValueA="Variable" ValueB="1" />
+                    <Option Value="4" DisplayText="[2:RESOURCES]: Discard a card: Creatures you control gains +[1:ATK] for each ongoing spell attached to them." />
+                    <Effect Type="GainResources" Value="-2" Duration="Immediate" />
+                </Target>
+                <Target Zone="Hand" Amount="1" Side="Friendly">
+                    <Option Value="4" />
+                    <Effect Type="MoveCardTo" Destination="Graveyard" Duration="Immediate" />
+                </Target>
+                <Target Zone="Battleground" Amount="All" Side="Friendly" NeedActivation="True" >
+                    <Option Value="4" />
+                    <Variable Type="CardChildrenCount" UseCurrentTarget="True" />
+                    <Effect Type="ModifyAttack" Value="Variable" Duration="UntilEndOfTurn" />
+                </Target>
+            </Subgroup>
+        </Target>
+    </Card>
+	 <Card Rarity="Heroic" Type="Hero" Name="Her_Aca_004" DisplayName="Myranda, Blademage Champion" Faction="Academy" MightLevel="2" MagicLevel="1" DestinyLevel="0" HP="20" ID="447">
+        <School Name="Air" />
+        <School Name="Prime" />
+        <Description>0[RESOURCES]: Increase your [MIGHT], [MAGIC] or [DESTINY] level.[BR]1[RESOURCES]: Draw a card.[BR]4[RESOURCES]: Relocate target friendly magic creature.</Description>
+        <Target Zone="None" Side="Friendly">
+            <Effect Type="ChoiceOption" />
+            <Subgroup>
+                <TemplateEffect Name="HeroAbilities" />
+                <!-- HeroAbilities template contains 4 options, so the value of the next one must be 4 -->
+                <Target Zone="None" Side="Friendly">
+                    <Variable Type="Resources" Side="Friendly" />
+                    <Condition Operator="GreaterThan" ValueA="Variable" ValueB="3" />
+                    <Option Value="4" DisplayText="[4:RESOURCES]: Relocate target friendly magic creature." />
+                    <Effect Type="GainResources" Value="-4" Duration="Immediate" />
+                </Target>
+                <Target Zone="Battleground" CardType="Unit" Amount="1" Side="Friendly">
+                    <Option Value="4" />
+                    <CardFilter IncludeUnitType="Magic" />
+                    <Effect Type="Relocate" Side="Friendly" Duration="Immediate" />
+                </Target>
+            </Subgroup>
+        </Target>
+    </Card>
+	 <Card Rarity="Heroic" Type="Hero" Name="Her_Aca_006" DisplayName="Akane, Caller of Memories" Faction="Academy" MightLevel="1" MagicLevel="1" DestinyLevel="1" HP="20" ID="449">
+        <School Name="Air" />
+        <School Name="Water" />
+        <Description>0[RESOURCES]: Increase your [MIGHT], [MAGIC] or [DESTINY] level.[BR]1[RESOURCES]: Draw a card.[BR]6[RESOURCES]: Return target non-unique spell from your graveyard to your hand.</Description>
+        <Target Zone="None" Side="Friendly">
+            <Effect Type="ChoiceOption" />
+            <Subgroup>
+                <TemplateEffect Name="HeroAbilities" />
+                <!-- HeroAbilities template contains 4 options, so the value of the next one must be 4 -->
+                <Target Zone="None" Side="Friendly">
+                    <Variable Type="Resources" Side="Friendly" />
+                    <Condition Operator="GreaterThan" ValueA="Variable" ValueB="5" />
+                    <Option Value="4" DisplayText="[6:RESOURCES]: Return target non-unique spell from your graveyard to your hand." />
+                    <Effect Type="GainResources" Value="-6" Duration="Immediate" />
+                </Target>
+                <Target Zone="Graveyard" Amount="1" Side="Friendly" >                    
+                    <Option Value="4" />
+                    <CardFilter IncludeCardType="Spell" ExcludeUnique="True" />
+                    <Effect Type="MoveCardTo" Destination="Hand" Duration="Immediate" />
+                </Target>
+            </Subgroup>
+        </Target>
+    </Card>	
+	
+    <!--...............................................................................-->
+    <!-- Heroes Haven -->
+    <!--...............................................................................-->
+
+    <!--...............................................................................-->
+    <!-- Heroes Inferno -->
+    <!--...............................................................................-->
+
+    <!--...............................................................................-->
+    <!-- Heroes Necropolis -->
+    <!--...............................................................................-->
+
+    <!--...............................................................................-->
+    <!-- Heroes Sanctuary -->
+    <!--...............................................................................-->
+
+    <!--...............................................................................-->
+    <!-- Heroes Stronghold -->
+    <!--...............................................................................-->
+
+</Cards>

@@ -1,0 +1,83 @@
+<!-- Define all cards of the second serie in this document. XML is case sensitive. -->
+<Cards>
+    <!--...............................................................................-->
+    <!-- //	##  #   #####   ####     ###    #####   #####   
+         //	##  #   ##      #   #   ##  #   ##      ##      
+         //	#####   ####    ####    ##  #   ####    #####   
+         //	##  #   ##      ## #    ##  #   ##         ##   
+         //	##  #   #####   ##  #    ###    #####   #####    -->
+    <!--...............................................................................-->
+    <!-- Heroes Sanctuary -->
+    <!--...............................................................................-->
+    <Card Rarity="Heroic" Type="Hero" Name="Her_San_004" DisplayName=" General Takana Osore" Faction="Sanctuary" MightLevel="2" MagicLevel="0" DestinyLevel="1" HP="20" ID="13">
+        <School Name="Water" />
+        <Description>0[RESOURCES]: Increase your [MIGHT], [MAGIC] or [DESTINY] level. [BR]1[RESOURCES]: Draw a card. [BR]0[RESOURCES]: Every friendly unit with Honor gain +1[ATK] until end of turn.</Description>
+        <Target Zone="Battleground" CardType="Unit" Amount="All" Side="Friendly" EvaluateLast="True" >
+            <CardFilter IncludeAbility="Honor" />
+            <Effect Type="ModifyAttack" Value="1" />
+        </Target>
+        <Target Zone="None" Side="Friendly">
+            <Effect Type="ChoiceOption" />
+            <Subgroup>
+                <TemplateEffect Name="HeroAbilities" />
+                <!-- HeroAbilities template contains 4 options, so the value of the next one must be 4 -->
+            </Subgroup>
+        </Target>
+    </Card>
+    <Card Rarity="Heroic" Type="Hero" Name="Her_San_002" DisplayName="Kashiko, Seeker of Honor" Faction="Sanctuary" MightLevel="1" MagicLevel="1" DestinyLevel="2" HP="20" ID="14">
+        <School Name="Air" />
+        <School Name="Water" />
+        <Description>0[RESOURCES]: Increase your [MIGHT], [MAGIC] or [DESTINY] level. [BR]1[RESOURCES]: Draw a card.</Description>
+        <Target Zone="None" Side="Friendly">
+            <Effect Type="ChoiceOption" />
+            <Subgroup>
+                <TemplateEffect Name="HeroAbilities" />
+                <!-- HeroAbilities template contains 4 options, so the value of the next one must be 4 -->
+            </Subgroup>
+        </Target>
+    </Card>
+    <Card Rarity="Heroic" Type="Hero" Name="Her_San_001" DisplayName="Ishuma, Lord of Dragons" Faction="Sanctuary" MightLevel="1" MagicLevel="1" DestinyLevel="1" HP="20" ID="15">
+        <School Name="Light" />
+        <School Name="Water" />
+        <Description>0[RESOURCES]: Increase your [MIGHT], [MAGIC] or [DESTINY] level. [BR]1[RESOURCES]: Draw a card. [BR]0[RESOURCES]: Deal 2 damages to target immobilized enemy unit.</Description>
+        <Target Zone="None" Side="Friendly">
+            <Effect Type="ChoiceOption" />
+            <Subgroup>
+                <TemplateEffect Name="HeroAbilities" />
+                <!-- HeroAbilities template contains 4 options, so the value of the next one must be 4 -->
+                <Target Zone="Battleground" CardType="Unit" Amount="1" Side="Enemy">
+                    <Option Value="4" DisplayText="2 damage to immobilized unit." />
+                    <CardFilter IncludeAbility="CannotMove" />
+                    <Effect Type="Damage" Value="2" Duration="Immediate" />
+                </Target>
+            </Subgroup>
+        </Target>
+    </Card>
+    <Card Rarity="Heroic" Type="Hero" Name="Her_San_003" DisplayName="Nagana, Invoker of the deep" Faction="Sanctuary" MightLevel="0" MagicLevel="2" DestinyLevel="1" HP="18" ID="16">
+        <School Name="Air" />
+        <School Name="Light" />
+        <School Name="Water" />
+        <Description>0[RESOURCES]: Increase your [MIGHT], [MAGIC] or [DESTINY] level. [BR]1[RESOURCES]: Draw a card. [BR]1[RESOURCES], discard a card: Return target friendly unit to its owner hand.</Description>
+        <Target Zone="None" Side="Friendly">
+            <Effect Type="ChoiceOption" />
+            <Subgroup>
+                <TemplateEffect Name="HeroAbilities" />
+                <!-- HeroAbilities template contains 4 options, so the value of the next one must be 4 -->
+                <Target Zone="None" Side="Friendly">
+                    <Variable Type="Resources" Side="Friendly" />
+                    <Condition Operator="GreaterThan" ValueA="Variable" ValueB="0" />
+                    <Option Value="4" DisplayText="Discard: Return unit to hand." />
+                    <Effect Type="GainResources" Value="-1" Duration="Immediate" />
+                </Target>
+                <Target Zone="Hand" Amount="1" Side="Friendly">
+                    <Option Value="4" />
+                    <Effect Type="MoveCardTo" Destination="Graveyard" Duration="Immediate" />
+                </Target>
+                <Target Zone="Battleground" CardType="Unit" Amount="1" Side="Friendly">
+                    <Option Value="4" />
+                    <Effect Type="MoveCardTo" Destination="Hand" Duration="Immediate" />
+                </Target>
+            </Subgroup>
+        </Target>
+    </Card>
+</Cards>

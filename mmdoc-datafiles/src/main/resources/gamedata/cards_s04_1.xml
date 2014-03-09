@@ -1,0 +1,315 @@
+<Cards>
+    <!--...............................................................................-->
+    <!-- //	 ####   ####    #####    ###    #####   ##  #   ####    #####   #####
+         //	##      #   #   ##      ##  #    ##     ##  #   #   #   ##      ##
+         //	##      ####    ####    #####    ##     ##  #   ####    ####    #####
+         //	##      ## #    ##      ##  #    ##     ##  #   ## #    ##         ##
+         //	 ####   ##  #   #####   ##  #    ##     #####   ##  #   #####   ##### -->
+    <!--...............................................................................-->
+    <!-- Abilities Template -->
+    <!--...............................................................................-->
+    <TemplateEffect Name="SpellShield">
+        <Target Zone="Battleground" CardType="Unit" Amount="Self" Side="Friendly" >
+            <Effect Type="ModifyDamage" Value="0.0x" DamageIncludeFlags="Spell" OwnerAbility="SpellShield"/>
+        </Target>
+    </TemplateEffect>
+    <TemplateEffect Name="WaterHeal">
+        <Target Zone="Battleground" CardType="Unit" Amount="Self" Side="Friendly" >
+            <Effect Type="ModifyDamage" Value="1.0x" DamageIncludeFlags="Water" Reverse="True" OwnerAbility="WaterHeal"/>
+        </Target>
+    </TemplateEffect>
+	
+	<!--...............................................................................-->
+    <!-- Creatures - Academy -->
+    <!--...............................................................................-->
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Aca_060" DisplayName="Spirit Traveller" Faction="Academy" SubType="Magic|Shooter" Cost="4" MightLevel="2" MagicLevel="1" DestinyLevel="2" Attack="2" Retaliate="0" HP="5" ID="600">
+        <Ability Type="ImmuneToRetaliate" />
+        <Ability Type="Ambush" />
+        <Trigger Type="OnAmbush" Side="Enemy">
+            <Target Zone="Library" Amount="2" Side="Enemy" AutoTakeFirstInputs="True">
+                <Effect Type="MoveCardTo" Destination="Graveyard" />
+            </Target>
+        </Trigger>
+        <Description>Ambush: Put the top 2 cards of opponent's library into their graveyard.</Description>
+    </Card>
+
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Aca_061" DisplayName="Insatiable Djinn" Faction="Academy" SubType="Magic|Flyer" Cost="5" MightLevel="5" MagicLevel="4" Attack="5" Retaliate="4" HP="9" ID="601">
+        <Trigger Type="OnTurnBegin" Side="Friendly">
+            <Target Zone="Graveyard" CardType="Spell" Amount="1" Side="Friendly" Random="True" >
+                <Effect Type="Banish" />
+            </Target>
+        </Trigger>
+        <Trigger Type="OnTurnBegin" Side="Friendly">
+            <Target Zone="Battleground" Amount="Self">
+                <Variable Type="TargetCount" >
+                    <Target Zone="Graveyard" CardType="Spell" Amount="All" Side="Friendly"/>
+                </Variable>
+                <Condition Operator="LesserThan" ValueA="Variable" ValueB="1" />
+                <Effect Type="Kill" />
+            </Target>
+        </Trigger>
+        <Description>At the beginning of your turn, banish a random spell card from your graveyard. If you can't, destroy [THIS].</Description>
+    </Card>
+
+    <Card Rarity="Rare" Type="Unit" Name="Cre_Aca_063" DisplayName="Sentinel of the Ages" Faction="Academy" SubType="Magic|Shooter" Cost="8" MightLevel="6" MagicLevel="4" Attack="6" Retaliate="6" HP="10" ID="667">
+        <Ability Type="ImmuneToRetaliate" />
+        <Ability Type="Anchored" />
+        <Ability Type="Shockwave" Value="4" />
+    </Card>
+
+    <Card Rarity="Common" Type="Unit" Name="Cre_Aca_064" DisplayName="Rakshasa Skirmisher" Faction="Academy" SubType="Melee" Cost="1" MightLevel="1" Attack="1" Retaliate="0" HP="3" ID="668">
+        <Ability Type="Evade" />
+    </Card>
+
+    <!--...............................................................................-->
+    <!-- Creatures - Haven -->
+    <Card Rarity="Rare" Type="Unit" Name="Cre_Hav_060" DisplayName="Crusader Sergeant" Faction="Haven" SubType="Melee" Cost="5" MightLevel="5" Attack="1" Retaliate="3" HP="7" ID="602">
+        <Target Zone="Battleground" CardType="Unit" Side="Friendly" Amount="All" >
+            <CardFilter IncludeFaction="Haven" />
+            <Variable Type="CardDamage" UseCurrentTarget="True" />
+            <Condition Operator="LesserThan" ValueA="Variable" ValueB="1" />
+            <Effect Type="ModifyAttack" Value="1" />
+        </Target>
+        <Description>Friendly Haven creatures with no damage on them gains +[1:ATK].</Description>
+    </Card>
+
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Hav_061" DisplayName="Vindicator" Faction="Haven" SubType="Melee" Cost="2" MightLevel="2" Attack="2" Retaliate="0" HP="4" ID="603">
+        <Trigger Type="OnThisDamageUnit" Side="Enemy" DamageIncludeFlags="Combat">
+            <Target Zone="Battleground" CardType="Unit" Amount="FromTrigger">
+                <Variable Type="CardAttack" UseCurrentTarget="True" />
+                <Condition Operator="GreaterThan" ValueA="Variable" ValueB="4" />
+                <Effect Type="Kill" />
+            </Target>
+        </Trigger>
+        <Description>If [THIS] deal combat damage to a creature with 5 or more [ATK], destroy that creature.</Description>
+    </Card>
+
+    <Card Rarity="Common" Type="Unit" Name="Cre_Hav_062" DisplayName="Crusader Vanguard" Faction="Haven" SubType="Melee" Cost="3" MightLevel="3" Attack="2" Retaliate="1" HP="6" ID="669">
+        <Target Zone="Battleground" Amount="Self" >
+            <Variable Type="CardDamage" />
+            <Condition Operator="LesserThan" ValueA="Variable" ValueB="1" />
+            <Effect Type="ModifyAttack" Value="1" />
+        </Target>
+        <Target Zone="Battleground" Amount="Self" >
+            <Variable Type="CardDamage" />
+            <Condition Operator="LesserThan" ValueA="Variable" ValueB="1" />
+            <Effect Type="ModifyRetaliate" Value="1" />
+        </Target>
+        <Description>If [THIS] has no damage, it gains +1 [ATK] and +1 [RET].</Description>
+    </Card>
+
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Hav_064" DisplayName="Angel of Mourning" Faction="Haven" SubType="Magic|Flyer" Cost="4" MightLevel="4" MagicLevel="2" Attack="2" Retaliate="3" HP="6" ID="671">
+        <Variable Type="TargetCount" ValueModifier="0.2xd">
+            <Target Zone="Graveyard" Amount="All" Side="Friendly"/>
+        </Variable>
+        <Target Zone="Battleground" Amount="Self" >
+            <Condition Operator="GreaterThan" ValueA="Variable" ValueB="0" />
+            <Effect Type="Modifier">
+                <Ability Type="Heal" Value="Variable" />
+            </Effect>
+        </Target>
+        <Description>For every 5 cards in your graveyard, Angel of Mourning gains Heal 1.</Description>
+    </Card>
+
+    <!--...............................................................................-->
+    <!-- Creatures - Inferno -->
+    <!--...............................................................................-->
+    <Card Rarity="Rare" Type="Unit" Name="Cre_Inf_060" DisplayName="Fate Bender" Faction="Inferno" SubType="Magic|Shooter" Cost="3" MightLevel="3" MagicLevel="1" DestinyLevel="1" Attack="2" Retaliate="2" HP="5" ID="604">
+        <Ability Type="ImmuneToRetaliate" />
+        <Trigger Type="OnCardDiscard" Side="Enemy" ExecuteOncePerTurn="True" >
+            <Target Zone="Battleground" Amount="Self" ForceExecute="True" >
+                <Effect Type="ModifyAttack" Value="2" Duration="UntilEndOfTurn" />
+            </Target>
+        </Trigger>
+        <Description>[THIS] gets +[2:ATK] if your opponent discarded a card this turn.</Description>
+    </Card>
+
+    <Card Rarity="Common" Type="Unit" Name="Cre_Inf_061" DisplayName="Gated Demon" Faction="Inferno" SubType="Melee" Cost="2" MightLevel="2" DestinyLevel="2" Attack="2" Retaliate="0" HP="3" ID="605">
+        <Ability Type="Ambush" />
+        <Trigger Type="OnAmbush" Side="Enemy">
+            <Target Zone="Hand" Amount="1" Side="Enemy" Random="True">
+                <Effect Type="MoveCardTo" Destination="Graveyard"/>
+            </Target>
+        </Trigger>
+        <Description>Ambush: Ambushed creature's controller discard one card at random.</Description>
+    </Card>
+
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Inf_062" DisplayName="Reborn Incubus" Faction="Inferno" SubType="Flyer" Cost="3" MightLevel="2" DestinyLevel="2" Attack="2" Retaliate="3" HP="4" ID="672">
+        <Trigger Type="OnThisCardMill" Location="Graveyard" >
+            <Target Zone="None" Amount="Self">
+                <Effect Type="MoveCardTo" Destination="Hand"/>
+            </Target>
+        </Trigger>
+        <Description>If [THIS] goes from your library to your graveyard, put it into your hand.</Description>
+    </Card>
+
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Inf_063" DisplayName="Soul-Consuming Efreet" Faction="Inferno" SubType="Magic|Flyer" Cost="4" MightLevel="2" MagicLevel="2" Attack="2" Retaliate="2" HP="5" ID="673">
+        <Variable2 Type="TargetCount" ValueModifier="0.2xd">
+            <Target Zone="Graveyard" Amount="All" Side="Friendly"/>
+        </Variable2>
+        <Target Zone="None" Amount="Self" >
+            <Condition Operator="GreaterThan" ValueA="Variable2" ValueB="0" />
+            <Effect Type="Modifier" >
+                <Ability Type="FireBurst" Value="Variable2" />
+            </Effect>
+        </Target>
+        <Description>For each 5 cards in your graveyard, [THIS] gains Fire Burst 1.</Description>
+    </Card>
+
+    <!--...............................................................................-->
+    <!-- Creatures - Necropolis -->
+    <!--...............................................................................-->
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Nec_060" DisplayName="Trapper Spider" Faction="Necropolis" SubType="Melee|Shooter" Cost="2" MightLevel="2" Attack="2" Retaliate="0" HP="3" ID="606">
+        <Ability Type="Ambush" />        
+        <Trigger Type="OnAmbush" Side="Enemy">
+            <Target Zone="Battleground" Amount="FromTrigger" CardType="Unit">
+                <Effect Type="AddCounter" CounterType="Crippling" Value="1" />
+            </Target>
+        </Trigger>
+        <Description>Ambush: Put 1 Crippling counter on ambushed creature.</Description>
+    </Card>
+
+    <Card Rarity="Rare" Type="Unit" Name="Cre_Nec_061" DisplayName="Plague Bearer" Faction="Necropolis" SubType="Melee" Cost="6" MightLevel="4" Attack="4" Retaliate="2" HP="7" ID="607">
+        <Ability Type="Infect" Value="1" />
+        <Variable Type="InPlayCounterCount" CounterType="Poison" ValueModifier="-1.0x"/>
+        <Target Zone="None" Amount="Self" >
+            <Effect Type="ModifyCost" Value="Variable" />
+        </Target>
+        <Description>Plague Bearer costs [1:RESOURCES] less to play for each poison counters on the battleground.</Description>
+    </Card>
+
+    <Card Rarity="Common" Type="Unit" Name="Cre_Nec_062" DisplayName="Undead Minotaur" Faction="Necropolis" SubType="Melee" Cost="3" MightLevel="3" Attack="2" Retaliate="3" HP="6" ID="675" />
+
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Nec_063" DisplayName="Scavenger Ratkin" Faction="Necropolis" SubType="Melee|Shooter" Cost="3" MightLevel="2" Attack="2" Retaliate="0" HP="5" ID="676">
+        <Ability Type="ImmuneToRetaliate" />
+        <Variable Type="TargetCount" ValueModifier="0.2xd">
+            <Target Zone="Graveyard" Amount="All" Side="Friendly"/>
+        </Variable>
+        <Target Zone="Battleground" Amount="Self" >
+            <Condition Operator="GreaterThan" ValueA="Variable" ValueB="0" />
+            <Effect Type="Modifier" >
+                <Ability Type="Infect" Value="Variable" />
+            </Effect>
+        </Target>
+        <Description>For every 5 cards in your graveyard, [THIS] gains Infect 1.</Description>
+    </Card>
+
+    <!--...............................................................................-->
+    <!-- Creatures - Sanctuary -->
+    <!--...............................................................................-->
+    <Card Rarity="Rare" Type="Unit" Name="Cre_San_060" DisplayName="Sayama Predator" Faction="Sanctuary" SubType="Melee" Cost="5" MightLevel="4" Attack="3" Retaliate="0" HP="5" ID="608">
+        <Target Zone="Hero" Amount="All" Side="Enemy" >
+            <Effect Type="GlobalEffect" GlobalEffectType="AmbushOnRelocate" />
+        </Target>
+        <Description>Ambush abilities on friendly creatures triggers on relocation.</Description>
+    </Card>
+
+    <Card Rarity="Common" Type="Unit" Name="Cre_San_061" DisplayName="Silver Bowl Spirit" Faction="Sanctuary" SubType="Magic|Melee|Shooter" Cost="1" MightLevel="1" Attack="0" Retaliate="1" HP="4" ID="609">
+        <Ability Type="Replaceable" />
+        <Description>You can deploy another creature of higher [MIGHT] onto [THIS]. If you do, return [THIS] to your hand.</Description>
+    </Card>
+
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_San_062" DisplayName="Honor Bound Kami" Faction="Sanctuary" SubType="Melee|Shooter" Cost="3" MightLevel="2" Attack="1" Retaliate="0" HP="4" ID="678">
+        <Target Zone="Battleground" Amount="Self" >
+            <Variable Type="TargetCount" >
+                <Target Zone="Graveyard" Amount="All" Side="Friendly"/>
+            </Variable>
+            <Condition Operator="GreaterThan" ValueA="Variable" ValueB="4" />
+            <Effect Type="Modifier" >
+                <Ability Type="Honor" Value="1" />
+            </Effect>
+        </Target>
+        <Description>If you have 5 or more cards in your graveyard, [THIS] gains Honor 1.</Description>
+    </Card>
+
+    <Card Rarity="Common" Type="Unit" Name="Cre_San_064" DisplayName="Sand Kame" Faction="Sanctuary" SubType="Melee" Cost="5" MightLevel="5" Attack="4" Retaliate="4" HP="8" ID="680" />
+
+    <!--...............................................................................-->
+    <!-- Creatures - Stronghold -->
+    <!--...............................................................................-->
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Str_060" DisplayName="Guerilla Master" Faction="Stronghold" SubType="Shooter" Cost="4" MightLevel="3" Attack="2" Retaliate="2" HP="7" ID="610">
+        <Ability Type="ImmuneToRetaliate" />
+        <Target Zone="Battleground" CardType="Unit" Side="Friendly" Amount="All" >
+            <CardFilter IncludeAbility="Ambush" />
+            <Effect Type="ModifyAttack" Value="1" />
+        </Target>
+        <Description>All friendly creatures with ambush gains +[1:ATK].</Description>
+    </Card>
+
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Str_061" DisplayName="Suicide Goblin" Faction="Stronghold" SubType="Melee" Cost="2" MightLevel="3" Attack="2" Retaliate="0" HP="3" ID="611">
+        <Ability Type="Ambush" />
+        <Trigger Type="OnAmbush" Side="Enemy">
+            <Target Zone="Battleground" Amount="FromTrigger" CardType="Unit">
+                <Effect Type="Kill" />
+            </Target>
+            <Target Zone="Battleground" Amount="Self" CardType="Unit">
+                <Effect Type="Kill" />
+            </Target>
+        </Trigger>
+        <Description>Ambush: Destroy ambushed creature and destroy [THIS].</Description>
+    </Card>
+
+    <Card Rarity="Rare" Type="Unit" Name="Cre_Str_062" DisplayName="Sahaar Orc" Faction="Stronghold" SubType="Melee" Cost="5" MightLevel="5" Attack="2" Retaliate="2" HP="6" ID="681">
+        <Ability Type="Bloodthirst" Value="1" />
+        <Ability Type="Enrage" Value="1" />
+    </Card>
+
+    <Card Rarity="Common" Type="Unit" Name="Cre_Str_063" DisplayName="Erg Hunter" Faction="Stronghold" SubType="Shooter" Cost="3" MightLevel="3" Attack="2" Retaliate="2" HP="5" ID="682" >
+        <Ability Type="ImmuneToRetaliate" />
+    </Card>
+
+    <!--...............................................................................-->
+    <!-- Creatures - Neutral -->
+    <!--...............................................................................-->
+    <Card Rarity="Uncommon" Type="Unit" Name="Cre_Neu_060" DisplayName="Raider" Faction="Neutral" SubType="Melee" Cost="2" MightLevel="2" DestinyLevel="1" Attack="1" Retaliate="0" HP="1" ID="612">
+        <Trigger Type="OnThisCardDeploy">
+            <Target Zone="Library" Side="Friendly" Amount="1" RevealToOther="True" >
+                <CardFilter IncludeCardType="Building" IncludeUnique="True" />
+                <Effect Type="MoveCardTo" Destination="Hand" />
+            </Target>
+            <Target Side="Friendly">
+                <Effect Type="Shuffle" CardHolder="Library" />
+            </Target>
+        </Trigger>
+        <Description>When [THIS] enters the battleground, search your library for a unique building and put that building in your hand.</Description>
+    </Card>
+    
+    <Card Rarity="Common" Type="Unit" Name="Cre_Neu_061" DisplayName="Sand Shark" Faction="Neutral" SubType="Melee" Cost="3" MightLevel="2" Attack="2" Retaliate="0" HP="3" ID="613">
+        <Ability Type="Ambush" />
+        <Trigger Type="OnAmbush" Side="Enemy">
+            <Target Zone="Battleground" Amount="FromTrigger" CardType="Unit">
+                <Effect Type="Damage" Value="1" />
+            </Target>
+        </Trigger>
+        <Description>Ambush: Deals 1 damage to ambushed creature.</Description>
+    </Card>
+
+    <Card Rarity="Rare" Type="Unit" Name="Cre_Neu_062" DisplayName="Soul Consuming Wraith" Faction="Neutral" SubType="Magic|Melee" Cost="4" MightLevel="3" MagicLevel="1" DestinyLevel="2" Attack="3" Retaliate="0" HP="5" ID="614">
+        <Ability Type="ImmuneToRetaliate" />
+        <Trigger Type="OnTurnBegin" Side="Friendly">
+            <Target Zone="Graveyard" Amount="1" Side="Enemy" Cancelable="False">
+                <Effect Type="Banish" />
+            </Target>
+        </Trigger>
+        <Trigger Type="OnTurnBegin" Side="Friendly">
+            <Target Zone="Battleground" Amount="Self">
+                <Variable Type="TargetCount" MustBeTargetable="True">
+                    <Target Zone="Graveyard" Amount="All" Side="Enemy"/>
+                </Variable>
+                <Condition Operator="LesserThan" ValueA="Variable" ValueB="1" />
+                <Effect Type="Damage" Value="1" />
+            </Target>
+        </Trigger>
+        <Description>At the begining of your turn, banish target card from opponent's graveyard. If you can't, deal one damage to [THIS].</Description>
+    </Card>
+
+    <Card Rarity="Rare" Type="Unit" Name="Cre_Neu_063" DisplayName="Greater Water Elemental" Faction="Neutral" SubType="Magic|Shooter" Cost="5" MightLevel="3" MagicLevel="3" Attack="3" Retaliate="3" HP="5" ID="684">
+        <Ability Type="WaterHeal" />
+        <Ability Type="Hypnotize" />
+    </Card>
+
+    <Card Rarity="Common" Type="Unit" Name="Cre_Neu_064" DisplayName="Lesser Light Elemental" Faction="Neutral" SubType="Magic|Flyer" Cost="3" MightLevel="1" MagicLevel="3" Attack="1" Retaliate="3" HP="4" ID="685">
+        <Ability Type="PreemptiveStrike" />
+    </Card>
+
+</Cards>

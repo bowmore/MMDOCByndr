@@ -1,0 +1,316 @@
+<Cards>
+    <!--...............................................................................-->
+    <!-- //	##  #   #####   ####     ###    #####   #####   
+         //	##  #   ##      #   #   ##  #   ##      ##      
+         //	#####   ####    ####    ##  #   ####    #####   
+         //	##  #   ##      ## #    ##  #   ##         ##   
+         //	##  #   #####   ##  #    ###    #####   #####    -->
+    <!--...............................................................................-->
+    <!-- Heros - Haven-->
+    <!--...............................................................................-->
+    <Card Rarity="Heroic" Type="Hero" Name="Her_Hav_004" DisplayName="Siegfried, Champion of Faith" Faction="Haven" MightLevel="2" MagicLevel="0" DestinyLevel="1" HP="20" ID="1">
+        <School Name="Light" />
+        <Description>0[RESOURCES]: Increase your [MIGHT], [MAGIC] or [DESTINY] level. [BR][1:RESOURCES]: Draw a card.[BR][0:RESOURCES]: Until end of turn, melee creature that you deploy get +[1:HEALTH].</Description>
+        <Ongoing Duration="UntilEndOfTurn" />
+        <Target Zone="None" Side="Friendly">
+            <Effect Type="ChoiceOption" />
+            <Subgroup>
+                <TemplateEffect Name="HeroAbilities" />
+                <!-- HeroAbilities template contains 4 options, so the value of the next one must be 4 -->                
+                <Target Zone="None" Side="Friendly">
+                    <Option Value="4" DisplayText="Deployed melee get +[1:HP]." />
+                    <Trigger Type="OnDeploy">
+                        <CardFilter IncludeUnitType="Melee" Side="Friendly" />
+                        <Target Zone="Battleground" CardType="Unit" Amount="FromTrigger" Side="Friendly" >
+                            <Effect Type="MaxHp" Value="1" Duration="Immediate" />
+                        </Target>
+                    </Trigger>
+                </Target>
+            </Subgroup>
+        </Target>
+    </Card>
+    <Card Rarity="Heroic" Type="Hero" Name="Her_Hav_002" DisplayName="Cassandra, Seeker of Light" Faction="Haven" MightLevel="1" MagicLevel="1" DestinyLevel="2" HP="20" ID="2">
+        <School Name="Light" />
+        <School Name="Air" />
+        <Description>0[RESOURCES]: Increase your [MIGHT], [MAGIC] or [DESTINY] level. [BR]0[RESOURCES]: Draw a card.</Description>
+        <Target Zone="None" Side="Friendly">
+            <Effect Type="ChoiceOption" />
+            <Subgroup>
+                <TemplateEffect Name="HeroAbilities" />
+                <!-- HeroAbilities template contains 4 options, so the value of the next one must be 4 -->
+            </Subgroup>
+        </Target>
+    </Card>
+    <Card Rarity="Heroic" Type="Hero" Name="Her_Hav_001" DisplayName="Sandalphon, Lord of Power" Faction="Haven" MightLevel="1" MagicLevel="1" DestinyLevel="1" HP="20" ID="3">
+        <School Name="Air" />
+        <School Name="Water" />
+        <Description>0[RESOURCES]: Increase your [MIGHT], [MAGIC] or [DESTINY] level. [BR]0[RESOURCES]: Draw a card. [BR]Discard a card: +2[RESOURCES].</Description>
+        <Target Zone="None" Side="Friendly">
+            <Effect Type="ChoiceOption" />
+            <Subgroup>
+                <TemplateEffect Name="HeroAbilities" />
+                <!-- HeroAbilities template contains 4 options, so the value of the next one must be 4 -->
+                <Target Zone="Hand" Amount="1" Side="Friendly">
+                    <Option Value="4" DisplayText="Gain 2 [RESOURCES]." />
+                    <Effect Type="MoveCardTo" Destination="Graveyard" Duration="Immediate" />
+                </Target>
+                <Target Zone="None" Side="Friendly">
+                    <Option Value="4" />
+                    <Effect Type="GainResources" Value="2" Duration="Immediate" />
+                </Target>
+            </Subgroup>
+        </Target>
+    </Card>
+    <Card Rarity="Heroic" Type="Hero" Name="Her_Hav_003" DisplayName="Jezziel, Invoker of Hope" Faction="Haven" MightLevel="0" MagicLevel="2" DestinyLevel="1" HP="18" ID="4">
+        <School Name="Light" />
+        <School Name="Air" />
+        <School Name="Prime" />
+        <Description>0[RESOURCES]: Increase your [MIGHT], [MAGIC] or [DESTINY] level. [BR]0[RESOURCES]: Draw a card. [BR]Discard a card: Target unit gains 3 HP. (Cannot go over maximum HP)</Description>
+        <Target Zone="None" Side="Friendly">
+            <Effect Type="ChoiceOption" />
+            <Subgroup>
+                <TemplateEffect Name="HeroAbilities" />
+                <!-- HeroAbilities template contains 4 options, so the value of the next one must be 4 -->
+                <Target Zone="Hand" Amount="1" Side="Friendly">
+                    <Option Value="4" DisplayText="Discard: Heal a unit." />
+                    <Effect Type="MoveCardTo" Destination="Graveyard" Duration="Immediate" />
+                </Target>
+                <Target Zone="Battleground" CardType="Unit" Side="Any" Amount="1">
+                    <Option Value="4" />
+                    <Effect Type="Heal" Value="3" Duration="Immediate" />
+                </Target>
+            </Subgroup>
+        </Target>
+    </Card>
+    <!--...............................................................................-->
+    <!-- Heros - Inferno-->
+    <!--...............................................................................-->
+    <Card Rarity="Heroic" Type="Hero" Name="Her_Inf_004" DisplayName="General Xorm Hellbringer" Faction="Inferno" MightLevel="2" MagicLevel="0" DestinyLevel="1" HP="20" ID="5">
+        <School Name="Fire" />
+        <Description>0[RESOURCES]: Increase your [MIGHT], [MAGIC] or [DESTINY] level. [BR]0[RESOURCES]: Draw a card. [BR]2[RESOURCES] : All your melee units gain +1[ATK] until end of turn.</Description>
+        <Target Zone="None" Side="Friendly">
+            <Effect Type="ChoiceOption" />
+            <Subgroup>
+                <TemplateEffect Name="HeroAbilities" />
+                <!-- HeroAbilities template contains 4 options, so the value of the next one must be 4 -->
+                <Target Zone="None" Side="Friendly">
+                    <Variable Type="Resources" Side="Friendly" />
+                    <Condition Operator="GreaterThan" ValueA="Variable" ValueB="1" />
+                    <Option Value="4" DisplayText="+1[ATK] to all units." />
+                    <Effect Type="GainResources" Value="-2" Duration="Immediate" />
+                </Target>
+                <Target Zone="Battleground" Side="Friendly" Amount="All" NeedActivation="True" >
+                    <Option Value="4" />
+                    <CardType Include="Unit" />
+                    <CardFilter IncludeUnitType="Melee" />
+                    <Effect Type="ModifyAttack" Value="1" Duration="UntilEndOfTurn" />
+                </Target>
+            </Subgroup>
+        </Target>
+    </Card>
+    <Card Rarity="Heroic" Type="Hero" Name="Her_Inf_002" DisplayName="Garant, Seeker of Discord" Faction="Inferno" MightLevel="1" MagicLevel="1" DestinyLevel="2" HP="20" ID="6">
+        <School Name="Fire" />
+        <School Name="Prime" />
+        <Description>0[RESOURCES]: Increase your [MIGHT], [MAGIC] or [DESTINY] level. [BR]0[RESOURCES]: Draw a card.</Description>
+        <Target Zone="None" Side="Friendly">
+            <Effect Type="ChoiceOption" />
+            <Subgroup>
+                <TemplateEffect Name="HeroAbilities" />
+                <!-- HeroAbilities template contains 4 options, so the value of the next one must be 4 -->
+            </Subgroup>
+        </Target>
+    </Card>
+    <Card Rarity="Heroic" Type="Hero" Name="Her_Inf_001" DisplayName="Syron, Lord of the Hounds" Faction="Inferno" MightLevel="1" MagicLevel="1" DestinyLevel="1" HP="20" ID="7">
+        <School Name="Dark" />
+        <School Name="Prime" />
+        <Description>0[RESOURCES]: Increase your [MIGHT], [MAGIC] or [DESTINY] level. [BR]0[RESOURCES]: Draw a card. [BR]Discard a card: Your opponent loses 1[HEALTH].</Description>
+        <Target Zone="None" Side="Friendly">
+            <Effect Type="ChoiceOption" />
+            <Subgroup>
+                <TemplateEffect Name="HeroAbilities" />
+                <!-- HeroAbilities template contains 4 options, so the value of the next one must be 4 -->
+                <Target Zone="Hand" Amount="1" Side="Friendly">
+                    <Option Value="4" DisplayText="Discard: Opponent lose 1 life." />
+                    <Effect Type="MoveCardTo" Destination="Graveyard" Duration="Immediate" />
+                </Target>
+                <Target Zone="Hero" Amount="All" Side="Enemy">
+                    <Option Value="4" />
+                    <Effect Type="Damage" Value="1" Duration="Immediate" />
+                </Target>
+            </Subgroup>
+        </Target>
+    </Card>
+    <Card Rarity="Heroic" Type="Hero" Name="Her_Inf_003" DisplayName="Scresh, Invoker of Havock" Faction="Inferno" MightLevel="0" MagicLevel="2" DestinyLevel="1" HP="18" ID="8">
+        <School Name="Fire" />
+        <School Name="Dark" />
+        <School Name="Prime" />
+        <Description>0[RESOURCES]: Increase your [MIGHT], [MAGIC] or [DESTINY] level. [BR]0[RESOURCES]: Draw a card. [BR]Discard a card: Do 2 damages to target unit.</Description>
+        <Target Zone="None" Side="Friendly">
+            <Effect Type="ChoiceOption" />
+            <Subgroup>
+                <TemplateEffect Name="HeroAbilities" />
+                <!-- HeroAbilities template contains 4 options, so the value of the next one must be 4 -->
+                <Target Zone="Hand" Amount="1" Side="Friendly">
+                    <Option Value="4" DisplayText="Discard: Deal 2 damages." />
+                    <Effect Type="MoveCardTo" Destination="Graveyard" Duration="Immediate" />
+                </Target>
+                <Target Zone="Battleground" CardType="Unit" Side="Any" Amount="1">
+                    <Option Value="4" />
+                    <Effect Type="Damage" Value="2" Duration="Immediate" />
+                </Target>
+            </Subgroup>
+        </Target>
+    </Card>
+    <!--...............................................................................-->
+    <!-- Heros - Necropolis-->
+    <!--...............................................................................-->
+    <Card Rarity="Heroic" Type="Hero" Name="Her_Nec_004" DisplayName="General Fleshbane" Faction="Necropolis" MightLevel="2" MagicLevel="0" DestinyLevel="1" HP="20" ID="9">
+        <School Name="Dark" />
+        <Description>0[RESOURCES]: Increase your [MIGHT], [MAGIC] or [DESTINY] level. [BR]0[RESOURCES]: Draw a card. [BR][BR]Ongoing: All your Incorporal units maximum[SPACE][HEALTH] is increase by 1.</Description>
+        <Target Zone="None" Side="Friendly">
+            <Effect Type="ChoiceOption" />
+            <Subgroup>
+                <TemplateEffect Name="HeroAbilities" />
+                <!-- HeroAbilities template contains 4 options, so the value of the next one must be 4 -->
+            </Subgroup>
+        </Target>
+        <Target Zone="Battleground" CardType="Unit" Amount="All" Side="Friendly" >
+            <CardFilter IncludeAbility="Incorporeal" />
+            <Effect Type="MaxHp" Value="1" Duration="Permanent" />
+        </Target>
+    </Card>
+    <Card Rarity="Heroic" Type="Hero" Name="Her_Nec_002" DisplayName="Seria, Seeker of the Damned" Faction="Necropolis" MightLevel="1" MagicLevel="1" DestinyLevel="2" HP="20" ID="10">
+        <School Name="Dark" />
+        <School Name="Water" />
+        <Description>0[RESOURCES]: Increase your [MIGHT], [MAGIC] or [DESTINY] level. [BR]0[RESOURCES]: Draw a card.</Description>
+        <Target Zone="None" Side="Friendly">
+            <Effect Type="ChoiceOption" />
+            <Subgroup>
+                <TemplateEffect Name="HeroAbilities" />
+                <!-- HeroAbilities template contains 4 options, so the value of the next one must be 4 -->
+            </Subgroup>
+        </Target>
+    </Card>
+    <Card Rarity="Heroic" Type="Hero" Name="Her_Nec_001" DisplayName="Nergal, Lord of Pestilence" Faction="Necropolis" MightLevel="1" MagicLevel="1" DestinyLevel="1" HP="20" ID="11">
+        <School Name="Earth" />
+        <School Name="Prime" />
+        <Description>0[RESOURCES]: Increase your [MIGHT], [MAGIC] or [DESTINY] level. [BR]0[RESOURCES]: Draw a card. [BR]0[RESOURCES]: Add one poison counter to target creature.</Description>
+        <Target Zone="None" Side="Friendly">
+            <Effect Type="ChoiceOption" />
+            <Subgroup>
+                <TemplateEffect Name="HeroAbilities" />
+                <!-- HeroAbilities template contains 4 options, so the value of the next one must be 4 -->
+                <Target Zone="None" Side="Friendly" >
+                    <Variable Type="Resources" Side="Friendly" />
+                    <Condition Operator="GreaterThan" ValueA="Variable" ValueB="0" />
+                    <Option Value="4" DisplayText="Draw a card." />
+                    <Effect Type="GainResources" Value="-1" Duration="Immediate" />
+                </Target>
+                <Target Zone="Battleground" CardType="Unit" Side="Any" Amount="1">
+                    <Option Value="4" DisplayText="1 poison counter." />
+                    <Effect Type="AddCounter" CounterType="Poison" Value="1" Duration="Immediate" />
+                </Target>
+            </Subgroup>
+        </Target>
+    </Card>
+    <Card Rarity="Heroic" Type="Hero" Name="Her_Nec_003" DisplayName="Asherath, Invoker of Death" Faction="Necropolis" MightLevel="0" MagicLevel="2" DestinyLevel="1" HP="18" ID="12">
+        <School Name="Dark" />
+        <School Name="Water" />
+        <School Name="Prime" />
+        <Description>0[RESOURCES]: Increase your [MIGHT], [MAGIC] or [DESTINY] level. [BR]0[RESOURCES]: Draw a card. [BR]Discard a card: Kill target enemy unit with a cost of 2 or less.</Description>
+        <Target Zone="None" Side="Friendly">
+            <Effect Type="ChoiceOption" />
+            <Subgroup>
+                <TemplateEffect Name="HeroAbilities" />
+                <!-- HeroAbilities template contains 4 options, so the value of the next one must be 4 -->
+                <Target Zone="Hand" Amount="1" Side="Friendly">
+                    <Option Value="4" DisplayText="Discard: Kill unit." />
+                    <Effect Type="MoveCardTo" Destination="Graveyard" Duration="Immediate" />
+                </Target>
+                <Target Zone="Battleground" CardType="Unit" Side="Enemy" Amount="1">
+                    <Option Value="4" />
+                    <Variable Type="BaseCardCost" UseCurrentTarget="True" />
+                    <Condition Operator="LesserThan" ValueA="Variable" ValueB="3" />
+                    <Effect Type="Kill" Duration="Immediate" />
+                </Target>
+            </Subgroup>
+        </Target>
+    </Card>
+    <!--...............................................................................-->
+    <!-- Heroes Stronghold -->
+    <!--...............................................................................-->
+    <Card Rarity="Heroic" Type="Hero" Name="Her_Str_004" DisplayName="General Grum Raginghorn" Faction="Stronghold" MightLevel="2" MagicLevel="0" DestinyLevel="1" HP="20" ID="17">
+        <School Name="Earth" />
+        <Description>0[RESOURCES]: Increase your [MIGHT], [MAGIC] or [DESTINY] level. [BR]0[RESOURCES]: Draw a card. [BR]0[RESOURCES]: Every friendly unit with Enrage lose 1[HEALTH]. They gain +1[ATK] until end of turn.</Description>
+        <Target Zone="None" Side="Friendly">
+            <Effect Type="ChoiceOption" />
+            <Subgroup>
+                <TemplateEffect Name="HeroAbilities" />
+                <!-- HeroAbilities template contains 4 options, so the value of the next one must be 4 -->
+                <Target Zone="Battleground" CardType="Unit" Amount="All" Side="Friendly">
+                    <Option Value="4" DisplayText="Enrage ability." />
+                    <CardFilter IncludeAbility="Enrage" />
+                    <Effect Type="Damage" Value="1" Duration="Immediate" />
+                </Target>
+                <Target Zone="None" Amount="Same" ForceExecute="True">
+                    <Option Value="4" />
+                    <Effect Type="ModifyAttack" Value="1" Duration="UntilEndOfTurn"/>
+                </Target>
+            </Subgroup>
+        </Target>
+    </Card>
+    <Card Rarity="Heroic" Type="Hero" Name="Her_Str_002" DisplayName="Kat, Seeker of Freedom" Faction="Stronghold" MightLevel="1" MagicLevel="1" DestinyLevel="2" HP="20" ID="18">
+        <School Name="Air" />
+        <School Name="Earth" />
+        <Description>0[RESOURCES]: Increase your [MIGHT], [MAGIC] or [DESTINY] level. [BR]0[RESOURCES]: Draw a card.</Description>
+        <Target Zone="None" Side="Friendly">
+            <Effect Type="ChoiceOption" />
+            <Subgroup>
+                <TemplateEffect Name="HeroAbilities" />
+                <!-- HeroAbilities template contains 4 options, so the value of the next one must be 4 -->
+            </Subgroup>
+        </Target>
+    </Card>
+    <Card Rarity="Heroic" Type="Hero" Name="Her_Str_001" DisplayName="Kelthor, Lord of Fury" Faction="Stronghold" MightLevel="1" MagicLevel="1" DestinyLevel="1" HP="20" ID="19">
+        <School Name="Air" />
+        <School Name="Fire" />
+        <Description>0[RESOURCES]: Increase your [MIGHT], [MAGIC] or [DESTINY] level. [BR]0[RESOURCES]: Draw a card. [BR]0[RESOURCES]: Choose target friendly unit. Do damage to another target unit equal to the chosen unit number of enrage counter.</Description>
+        <Target Zone="None" Side="Friendly">
+            <Effect Type="ChoiceOption" />
+            <Subgroup>
+                <TemplateEffect Name="HeroAbilities" />
+                <!-- HeroAbilities template contains 4 options, so the value of the next one must be 4 -->
+                <Target Zone="Battleground" CardType="Unit" Amount="1" Side="Friendly">                    
+                    <Option Value="4" DisplayText="Enrage damage." Duration="Immediate" />
+                </Target>
+                <Target Zone="Battleground" CardType="Unit" Amount="1" CantTargetPrevious="True" Side="Any">
+                    <Option Value="4" />
+                    <Variable Type="CounterCount" CounterType="Enrage" UseLastTarget="True" />
+                    <Effect Type="Damage" Value="Variable" Duration="Immediate" />
+                </Target>
+            </Subgroup>
+        </Target>
+    </Card>
+    <Card Rarity="Heroic" Type="Hero" Name="Her_Str_003" DisplayName="Shaar, Invoker of the Skies" Faction="Stronghold" MightLevel="0" MagicLevel="2" DestinyLevel="1" HP="18" ID="20">
+        <School Name="Air" />
+        <School Name="Earth" />
+        <School Name="Fire" />
+        <Description>0[RESOURCES]: Increase your [MIGHT], [MAGIC] or [DESTINY] level. [BR]0[RESOURCES]: Draw a card. [BR]Discard a card: Up to two friendly units gains +1[ATK] until end of turn.</Description>
+        <Target Zone="None" Side="Friendly">
+            <Effect Type="ChoiceOption" />
+            <Subgroup>
+                <TemplateEffect Name="HeroAbilities" />
+                <!-- HeroAbilities template contains 4 options, so the value of the next one must be 4 -->
+                <Target Zone="Hand" Amount="1" Side="Friendly">
+                    <Option Value="4" DisplayText="Discard: 2 units gain +1[ATK]." />
+                    <Effect Type="MoveCardTo" Destination="Graveyard" Duration="Immediate" />
+                </Target>
+                <Target Zone="Battleground" Side="Friendly" Amount="2" ForceExecute="True" >
+                    <Option Value="4" />
+                    <CardType Include="Unit" />
+                    <Effect Type="ModifyAttack" Value="1" Duration="UntilEndOfTurn" />
+                </Target>
+            </Subgroup>
+        </Target>
+    </Card>
+</Cards>
