@@ -16,11 +16,19 @@
                 <version>0.8.3</version>
                 <executions>
                     <execution>
+                        <configuration>
+                            <schemaDirectory>src/main/resources/xsd</schemaDirectory>
+                            <generatePackage>be.degreyt</generatePackage>
+                            <bindingIncludes>
+                                <include>src/main/resources/xsd/bindings.xjb</include>
+                            </bindingIncludes>
+                        </configuration>
                         <goals>
                             <goal>generate</goal>
                         </goals>
                     </execution>
                 </executions>
+
             </plugin>
         </plugins>
     </build>

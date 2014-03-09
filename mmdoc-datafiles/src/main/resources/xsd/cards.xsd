@@ -183,13 +183,7 @@
 			<xs:attribute name="Cost" type="xs:int"/>
 			<xs:attribute name="Name" use="required" type="xs:string"/>
 			<xs:attribute name="Type" use="required" type="CardType"/>
-			<xs:attribute name="Zone">
-				<xs:simpleType>
-					<xs:restriction base="xs:string">
-						<xs:enumeration value="Battleground"/>
-					</xs:restriction>
-				</xs:simpleType>
-			</xs:attribute>
+			<xs:attribute name="Zone" type="Zone"/>
 			<xs:attribute name="Attack" type="xs:int"/>
 			<xs:attribute name="Rarity" use="required" type="Rarity"/>
 			<xs:attribute name="School" type="MagicSchool"/>
@@ -223,18 +217,7 @@
 			<xs:attribute name="Value" type="xs:string"/>
 			<xs:attribute name="Ability" type="CreatureAbility"/>
 			<xs:attribute name="Reverse" type="xs:boolean"/>
-			<xs:attribute name="Duration">
-				<xs:simpleType>
-					<xs:restriction base="xs:string">
-						<xs:enumeration value="Immediate"/>
-						<xs:enumeration value="Permanent"/>
-						<xs:enumeration value="Static"/>
-						<xs:enumeration value="UntilEndOfTurn"/>
-						<xs:enumeration value="UntilYourEndOfTurn"/>
-						<xs:enumeration value="UntilYourNextTurn"/>
-					</xs:restriction>
-				</xs:simpleType>
-			</xs:attribute>
+			<xs:attribute name="Duration" type="xs:string"/>
 			<xs:attribute name="ForcePlay" type="xs:boolean"/>
 			<xs:attribute name="LevelType" type="LevelType"/>
 			<xs:attribute name="CardHolder">
@@ -248,16 +231,7 @@
 			<xs:attribute name="EpicEnrage" type="xs:boolean"/>
 			<xs:attribute name="Persistent" type="xs:boolean"/>
 			<xs:attribute name="CounterType" type="CounterType"/>
-			<xs:attribute name="Destination">
-				<xs:simpleType>
-					<xs:restriction base="xs:string">
-						<xs:enumeration value="Banish"/>
-						<xs:enumeration value="Graveyard"/>
-						<xs:enumeration value="Hand"/>
-						<xs:enumeration value="Library"/>
-					</xs:restriction>
-				</xs:simpleType>
-			</xs:attribute>
+			<xs:attribute name="Destination" type="Zone"/>
 			<xs:attribute name="EvaluateLast" type="xs:boolean"/>
 			<xs:attribute name="OwnerAbility">
 				<xs:simpleType>
@@ -268,15 +242,7 @@
 			<xs:attribute name="RevealToOther" type="xs:boolean"/>
 			<xs:attribute name="PlayEffectType" type="xs:string"/>
 			<xs:attribute name="GlobalEffectType" type="xs:string"/>
-			<xs:attribute name="CancelDestination">
-				<xs:simpleType>
-					<xs:restriction base="xs:string">
-						<xs:enumeration value="Graveyard"/>
-						<xs:enumeration value="Hand"/>
-						<xs:enumeration value="Library"/>
-					</xs:restriction>
-				</xs:simpleType>
-			</xs:attribute>
+			<xs:attribute name="CancelDestination" type="Zone"/>
 			<xs:attribute name="DamageFromTrigger" type="xs:boolean"/>
 			<xs:attribute name="DamageExcludeFlags" type="xs:string"/>
 			<xs:attribute name="DamageIncludeFlags" type="xs:string"/>
@@ -393,21 +359,7 @@
 				<xs:element ref="Trigger"/>
 			</xs:choice>
 			<xs:attribute name="Side" type="Side"/>
-			<xs:attribute name="Zone">
-				<xs:simpleType>
-					<xs:restriction base="xs:string">
-						<xs:enumeration value="Battleground"/>
-						<xs:enumeration value="BattlegroundColumn"/>
-						<xs:enumeration value="BattlegroundLine"/>
-						<xs:enumeration value="BattlegroundPosition"/>
-						<xs:enumeration value="Graveyard"/>
-						<xs:enumeration value="Hand"/>
-						<xs:enumeration value="Hero"/>
-						<xs:enumeration value="Library"/>
-						<xs:enumeration value="None"/>
-					</xs:restriction>
-				</xs:simpleType>
-			</xs:attribute>
+			<xs:attribute name="Zone" type="Zone"/>
 			<xs:attribute name="Shape" type="xs:string"/>
 			<xs:attribute name="Amount" type="xs:string"/>
 			<xs:attribute name="Option" type="xs:int"/>
@@ -459,28 +411,9 @@
 			</xs:sequence>
 			<xs:attribute name="Side" type="Side"/>
 			<xs:attribute name="Type" use="required" type="xs:string"/>
-			<xs:attribute name="Duration">
-				<xs:simpleType>
-					<xs:restriction base="xs:string">
-						<xs:enumeration value="Permanent"/>
-					</xs:restriction>
-				</xs:simpleType>
-			</xs:attribute>
-			<xs:attribute name="Location">
-				<xs:simpleType>
-					<xs:restriction base="xs:string">
-						<xs:enumeration value="Graveyard"/>
-					</xs:restriction>
-				</xs:simpleType>
-			</xs:attribute>
-			<xs:attribute name="DamageIncludeFlags">
-				<xs:simpleType>
-					<xs:restriction base="xs:string">
-						<xs:enumeration value="Attack"/>
-						<xs:enumeration value="Combat"/>
-					</xs:restriction>
-				</xs:simpleType>
-			</xs:attribute>
+			<xs:attribute name="Duration" type="xs:string"/>
+			<xs:attribute name="Location" type="Zone"/>
+			<xs:attribute name="DamageIncludeFlags" type="xs:string"/>
 			<xs:attribute name="ExecuteOncePerTurn" type="xs:boolean"/>
 			<xs:attribute name="ExecuteOncePerTransaction" type="xs:boolean"/>
 		</xs:complexType>
@@ -509,42 +442,9 @@
 				<xs:element ref="Target"/>
 			</xs:choice>
 			<xs:attribute name="Side" type="Side"/>
-			<xs:attribute name="Type" use="required">
-				<xs:simpleType>
-					<xs:restriction base="xs:string">
-						<xs:enumeration value="AbilityValue"/>
-						<xs:enumeration value="AttackerCount"/>
-						<xs:enumeration value="AttackerCountPerLine"/>
-						<xs:enumeration value="BaseCardCost"/>
-						<xs:enumeration value="CardAttack"/>
-						<xs:enumeration value="CardChildrenCount"/>
-						<xs:enumeration value="CardCost"/>
-						<xs:enumeration value="CardDamage"/>
-						<xs:enumeration value="CardHealth"/>
-						<xs:enumeration value="CardInGraveyardThisTurnCount"/>
-						<xs:enumeration value="CardInHandCount"/>
-						<xs:enumeration value="CardPlayedCount"/>
-						<xs:enumeration value="CardUnmodifiedAttack"/>
-						<xs:enumeration value="CounterCount"/>
-						<xs:enumeration value="HeroHP"/>
-						<xs:enumeration value="InPlayCounterCount"/>
-						<xs:enumeration value="Level"/>
-						<xs:enumeration value="LibraryTopCard"/>
-						<xs:enumeration value="OccupantCount"/>
-						<xs:enumeration value="Resources"/>
-						<xs:enumeration value="TargetCount"/>
-						<xs:enumeration value="UnitAttackCount"/>
-					</xs:restriction>
-				</xs:simpleType>
-			</xs:attribute>
+			<xs:attribute name="Type" use="required" type="xs:string"/>
 			<xs:attribute name="Ability" type="CreatureAbility"/>
-			<xs:attribute name="UnitType">
-				<xs:simpleType>
-					<xs:restriction base="xs:string">
-						<xs:enumeration value="Melee"/>
-					</xs:restriction>
-				</xs:simpleType>
-			</xs:attribute>
+			<xs:attribute name="UnitType" type="CreatureType"/>
 			<xs:attribute name="LevelType" type="LevelType"/>
 			<xs:attribute name="UseParent" type="xs:boolean"/>
 			<xs:attribute name="CounterType" type="CounterType"/>
@@ -869,6 +769,21 @@
             <xs:enumeration value="Context"/>
             <xs:enumeration value="Enemy"/>
             <xs:enumeration value="Friendly"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="Zone">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Graveyard"/>
+            <xs:enumeration value="Hand"/>
+            <xs:enumeration value="Library"/>
+            <xs:enumeration value="Banish"/>
+            <xs:enumeration value="Battleground"/>
+            <xs:enumeration value="BattlegroundColumn"/>
+            <xs:enumeration value="BattlegroundLine"/>
+            <xs:enumeration value="BattlegroundPosition"/>
+            <xs:enumeration value="Graveyard"/>
+            <xs:enumeration value="Hero"/>
+            <xs:enumeration value="None"/>
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
