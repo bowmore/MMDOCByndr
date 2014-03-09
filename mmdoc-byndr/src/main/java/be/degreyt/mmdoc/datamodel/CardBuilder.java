@@ -4,24 +4,24 @@ public interface CardBuilder {
 
     CardBuilder description(String description);
 
-    CardBuilder setName(String name);
+    CardBuilder name(String name);
 
-    CardBuilder setFaction(Faction faction);
+    CardBuilder faction(Faction faction);
 
-    CardBuilder setCost(int cost);
+    CardBuilder cost(int cost);
 
-    CardBuilder setMight(int might);
+    CardBuilder might(int might);
 
-    CardBuilder setMagic(int magic);
+    CardBuilder magic(int magic);
 
-    CardBuilder setDestiny(int destiny);
+    CardBuilder destiny(int destiny);
 
     CardBuilder unique();
 
-    CreatureBuilder setAttack(int attack);
+    CreatureBuilder attack(int attack);
 
-    CreatureBuilder setHealth(int health);
+    CreatureBuilder health(int health);
 
-    CreatureBuilder setRetaliation(int retaliation);
+    CreatureBuilder retaliation(int retaliation);
 
 }

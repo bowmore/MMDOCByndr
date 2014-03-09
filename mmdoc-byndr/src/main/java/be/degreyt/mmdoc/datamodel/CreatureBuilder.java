@@ -4,25 +4,31 @@ public interface CreatureBuilder extends CardBuilder {
 
     CreatureBuilder description(String description);
 
-    CreatureBuilder setName(String name);
+    CreatureBuilder name(String name);
 
-    CreatureBuilder setFaction(Faction faction);
+    CreatureBuilder faction(Faction faction);
 
-    CreatureBuilder setCost(int cost);
+    CreatureBuilder cost(int cost);
 
-    CreatureBuilder setMight(int might);
+    CreatureBuilder might(int might);
 
-    CreatureBuilder setMagic(int magic);
+    CreatureBuilder magic(int magic);
 
-    CreatureBuilder setDestiny(int destiny);
+    CreatureBuilder destiny(int destiny);
 
     CreatureBuilder unique();
 
-    CreatureBuilder setAttack(int attack);
+    CreatureBuilder attack(int attack);
 
-    CreatureBuilder setHealth(int health);
+    CreatureBuilder health(int health);
 
-    CreatureBuilder setRetaliation(int retaliation);
+    CreatureBuilder retaliation(int retaliation);
 
     Creature build();
+
+    CreatureBuilder position(PositionType positionType);
+
+    CreatureBuilder creatureType(CreatureType creatureType);
+
+    CreatureBuilder ability(Ability ability);
 }

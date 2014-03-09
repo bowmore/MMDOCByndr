@@ -1,10 +1,15 @@
 package be.degreyt.mmdoc.cardprovider;
 
+import be.degreyt.mmdoc.byndr.services.impl.ByndrServicesModule;
 import be.degreyt.mmdoc.datamodel.*;
 import be.degreyt.mmdoc.datamodel.impl.*;
 import be.degreyt.mmdoc.interfaces.importers.CardsXmlParser;
 import be.degreyt.mmdoc.interfaces.importers.data.XCard;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import com.google.inject.Provider;
 
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -14,16 +19,25 @@ import java.util.Set;
  * Created by WDH on 09/03/14.
  */
 public class CardLoader {
-    public static CardProvider loadCards() {
+
+    private final Provider<CardBuilder> cardBuilderProvider;
+
+    @Inject
+    public CardLoader(Provider<CardBuilder> cardBuilderProvider) {
+        this.cardBuilderProvider = cardBuilderProvider;
+    }
+
+    public CardProvider loadCards() {
         return doLoadCards(new CardsXmlParser());
     }
 
-    public static CardProvider loadCards(String parentDirectoryPath) {
+    public CardProvider loadCards(String parentDirectoryPath) {
         return doLoadCards(new CardsXmlParser(parentDirectoryPath));
     }
 
     public static void main(String[] args) {
-        CardProvider cardProvider = loadCards();
+        Injector injector = Guice.createInjector(new DataModelModule());
+        CardProvider cardProvider = injector.getInstance(CardLoader.class).loadCards();
         System.out.println(cardProvider.getHeroes().size());
         System.out.println(cardProvider.getEvents().size());
         System.out.println(cardProvider.getCreatures().size());
@@ -32,7 +46,7 @@ public class CardLoader {
         System.out.println(cardProvider.getBuildings().size());
     }
 
-    private static CardProvider doLoadCards(CardsXmlParser parser) {
+    private CardProvider doLoadCards(CardsXmlParser parser) {
         List<Hero> heroes = new ArrayList<Hero>();
         List<Event> events = new ArrayList<Event>();
         List<Creature> creatures = new ArrayList<Creature>();
@@ -59,46 +73,67 @@ public class CardLoader {
                 case "Building":
                     buildings.add(parseBuilding(card));
                     break;
-                default: break;
+                default:
+                    break;
             }
         }
         return new CardProvider(heroes, events, creatures, spells, fortunes, buildings);
     }
 
-    private static Hero parseHero(XCard card) {
+    private Hero parseHero(XCard card) {
         return new HeroImpl(parseFaction(card.getFaction()), card.getDisplayName(), card.getDescription());
     }
 
-    private static Event parseEvent(XCard card) {
+    private Event parseEvent(XCard card) {
         return new EventImpl(parseFaction(card.getFaction()), card.getDisplayName(), card.getDescription());
     }
 
-    private static Creature parseCreature(XCard card) {
-        return new CreatureImpl(parseFaction(card.getFaction()), card.getDisplayName(), card.getDescription(),
-                parseLevel(card.getCost()), parseLevel(card.getMightLevel()), parseLevel(card.getMagicLevel()), parseLevel(card.getDestinyLevel()),
-                parseUnique(card), parsePositionTypes(card.getSubType()), parseCreatureTypes(card.getSubType()), parseAbilities(card),
-                parseLevel(card.getAttack()), parseLevel(card.getRetaliate()), parseLevel(card.getHP()));
+    private Creature parseCreature(XCard card) {
+        CreatureBuilder creatureBuilder = cardBuilderProvider.get()
+                .faction(parseFaction(card.getFaction()))
+                .name(card.getDisplayName())
+                .description(card.getDescription())
+                .cost(parseLevel(card.getCost()))
+                .might(parseLevel(card.getMightLevel()))
+                .magic(parseLevel(card.getMagicLevel()))
+                .destiny(parseLevel(card.getDestinyLevel()))
+                .attack(parseLevel(card.getAttack()))
+                .retaliation(parseLevel(card.getRetaliate()))
+                .health(parseLevel(card.getHP()));
+        if (parseUnique(card)) {
+            creatureBuilder.unique();
+        }
+        for (PositionType positionType : parsePositionTypes(card.getSubType())) {
+            creatureBuilder.position(positionType);
+        }
+        for (CreatureType creatureType : parseCreatureTypes(card.getSubType())) {
+            creatureBuilder.creatureType(creatureType);
+        }
+        for (Ability ability : parseAbilities(card)) {
+            creatureBuilder.ability(ability);
+        }
+        return creatureBuilder.build();
     }
 
-    private static Spell parseSpell(XCard card) {
+    private Spell parseSpell(XCard card) {
         return new SpellImpl(parseFaction(card.getFaction()), card.getDisplayName(), card.getDescription(),
                 parseLevel(card.getCost()), parseLevel(card.getMightLevel()), parseLevel(card.getMagicLevel()), parseLevel(card.getDestinyLevel()),
                 parseUnique(card));
     }
 
-    private static Fortune parseFortune(XCard card) {
+    private Fortune parseFortune(XCard card) {
         return new FortuneImpl(parseFaction(card.getFaction()), card.getDisplayName(), card.getDescription(),
                 parseLevel(card.getCost()), parseLevel(card.getMightLevel()), parseLevel(card.getMagicLevel()), parseLevel(card.getDestinyLevel()),
                 parseUnique(card));
     }
 
-    private static Building parseBuilding(XCard card) {
+    private Building parseBuilding(XCard card) {
         return new BuildingImpl(parseFaction(card.getFaction()), card.getDisplayName(), card.getDescription(),
                 parseLevel(card.getCost()), parseLevel(card.getMightLevel()), parseLevel(card.getMagicLevel()), parseLevel(card.getDestinyLevel()),
                 parseUnique(card));
     }
 
-    private static int parseLevel(String levelString) {
+    private int parseLevel(String levelString) {
         if (levelString == null || levelString.trim().isEmpty()) {
             return 0;
         } else {
@@ -108,23 +143,23 @@ public class CardLoader {
 
 //todo implement
 
-    private static Faction parseFaction(String faction) {
+    private Faction parseFaction(String faction) {
         return null;
     }
 
-    private static boolean parseUnique(XCard card) {
+    private boolean parseUnique(XCard card) {
         return false;
     }
 
-    private static Set<CreatureType> parseCreatureTypes(String subtype) {
+    private Set<CreatureType> parseCreatureTypes(String subtype) {
         return Collections.emptySet();
     }
 
-    private static Set<PositionType> parsePositionTypes(String subtype) {
+    private Set<PositionType> parsePositionTypes(String subtype) {
         return Collections.emptySet();
     }
 
-    private static Set<Ability> parseAbilities(XCard card) {
+    private Set<Ability> parseAbilities(XCard card) {
         return Collections.emptySet();
     }
 }

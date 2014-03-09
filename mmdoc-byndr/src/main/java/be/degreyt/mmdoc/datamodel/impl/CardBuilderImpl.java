@@ -33,37 +33,37 @@ class CardBuilderImpl implements CardBuilder {
     }
 
     @Override
-    public CardBuilder setName(String name) {
+    public CardBuilder name(String name) {
         this.name = name;
         return this;
     }
 
     @Override
-    public CardBuilder setFaction(Faction faction) {
+    public CardBuilder faction(Faction faction) {
         this.faction = faction;
         return this;
     }
 
     @Override
-    public CardBuilder setCost(int cost) {
+    public CardBuilder cost(int cost) {
         this.cost = cost;
         return this;
     }
 
     @Override
-    public CardBuilder setMight(int might) {
+    public CardBuilder might(int might) {
         this.might = might;
         return this;
     }
 
     @Override
-    public CardBuilder setMagic(int magic) {
+    public CardBuilder magic(int magic) {
         this.magic = magic;
         return this;
     }
 
     @Override
-    public CardBuilder setDestiny(int destiny) {
+    public CardBuilder destiny(int destiny) {
         this.destiny = destiny;
         return this;
     }
@@ -75,19 +75,19 @@ class CardBuilderImpl implements CardBuilder {
     }
 
     @Override
-    public CreatureBuilder setAttack(int attack) {
+    public CreatureBuilder attack(int attack) {
         this.attack = attack;
         return new InternalCreatureBuilder();
     }
 
     @Override
-    public CreatureBuilder setHealth(int health) {
+    public CreatureBuilder health(int health) {
         this.health = health;
         return new InternalCreatureBuilder();
     }
 
     @Override
-    public CreatureBuilder setRetaliation(int retaliation) {
+    public CreatureBuilder retaliation(int retaliation) {
         this.retaliation = retaliation;
         return new InternalCreatureBuilder();
     }
@@ -100,38 +100,38 @@ class CardBuilderImpl implements CardBuilder {
         }
 
         @Override
-        public CreatureBuilder setName(String name) {
-            CardBuilderImpl.this.setName(name);
+        public CreatureBuilder name(String name) {
+            CardBuilderImpl.this.name(name);
             return this;
         }
 
         @Override
-        public CreatureBuilder setFaction(Faction faction) {
-            CardBuilderImpl.this.setFaction(faction);
+        public CreatureBuilder faction(Faction faction) {
+            CardBuilderImpl.this.faction(faction);
             return this;
         }
 
         @Override
-        public CreatureBuilder setCost(int cost) {
-            CardBuilderImpl.this.setCost(cost);
+        public CreatureBuilder cost(int cost) {
+            CardBuilderImpl.this.cost(cost);
             return this;
         }
 
         @Override
-        public CreatureBuilder setMight(int might) {
-            CardBuilderImpl.this.setMight(might);
+        public CreatureBuilder might(int might) {
+            CardBuilderImpl.this.might(might);
             return this;
         }
 
         @Override
-        public CreatureBuilder setMagic(int magic) {
-            CardBuilderImpl.this.setMagic(magic);
+        public CreatureBuilder magic(int magic) {
+            CardBuilderImpl.this.magic(magic);
             return this;
         }
 
         @Override
-        public CreatureBuilder setDestiny(int destiny) {
-            CardBuilderImpl.this.setDestiny(destiny);
+        public CreatureBuilder destiny(int destiny) {
+            CardBuilderImpl.this.destiny(destiny);
             return this;
         }
 
@@ -142,20 +142,38 @@ class CardBuilderImpl implements CardBuilder {
         }
 
         @Override
-        public CreatureBuilder setAttack(int attack) {
+        public CreatureBuilder attack(int attack) {
             CardBuilderImpl.this.attack = attack;
             return this;
         }
 
         @Override
-        public CreatureBuilder setHealth(int health) {
+        public CreatureBuilder health(int health) {
             CardBuilderImpl.this.health = health;
             return this;
         }
 
         @Override
-        public CreatureBuilder setRetaliation(int retaliation) {
+        public CreatureBuilder retaliation(int retaliation) {
             CardBuilderImpl.this.retaliation = retaliation;
+            return this;
+        }
+
+        @Override
+        public CreatureBuilder position(PositionType positionType) {
+            positionTypes.add(positionType);
+            return this;
+        }
+
+        @Override
+        public CreatureBuilder creatureType(CreatureType creatureType) {
+            creatureTypes.add(creatureType);
+            return this;
+        }
+
+        @Override
+        public CreatureBuilder ability(Ability ability) {
+            abilities.add(ability);
             return this;
         }
 
