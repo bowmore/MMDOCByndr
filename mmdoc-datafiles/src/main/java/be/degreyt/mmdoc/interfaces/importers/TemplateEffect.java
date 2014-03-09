@@ -4,4 +4,6 @@ public class TemplateEffect {
     private String Name;
 
     private Trigger Trigger;
+
+    private Target Target;
 }
