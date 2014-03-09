@@ -61,8 +61,8 @@ public class CardsXmlParser {
     private void initXStream() {
         xStream = new XStream(new StaxDriver());
         xStream.alias("Cards", Cards.class);
-        xStream.addImplicitCollection(Cards.class, "cards");
-        xStream.addImplicitCollection(Cards.class, "templateEffects");
+        xStream.addImplicitCollection(Cards.class, "cards", XCard.class);
+        xStream.addImplicitCollection(Cards.class, "templateEffects", TemplateEffect.class);
         xStream.addImplicitCollection(XCard.class, "schools");
         xStream.addImplicitCollection(XCard.class, "variables");
         xStream.addImplicitCollection(Subgroup.class, "targets");
