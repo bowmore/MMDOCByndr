@@ -13,5 +13,4 @@ public interface CardCollection {
 
     int totalWildcardCost(Rarity rarity);
 
-    CardCollection subSet(Expansion expansion);
 }
