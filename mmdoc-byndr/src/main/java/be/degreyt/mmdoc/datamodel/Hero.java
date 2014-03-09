@@ -10,5 +10,6 @@ public interface Hero extends Card {
     int getStartingMagic();
     int getStartingDestiny();
     Set<HeroAbility> getHeroAbilities();
+    Set<MagicSchool> getMagicSchools();
 
 }

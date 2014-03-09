@@ -13,9 +13,11 @@ public class HeroImpl extends AbstractCard implements Hero {
     private int magic;
     private int destiny;
     private Set<HeroAbility> heroAbilities;
+    private Set<MagicSchool> magicSchools;
 
-    public HeroImpl(Faction faction, String name, String description) {
+    public HeroImpl(Faction faction, String name, String description, Set<MagicSchool> magicSchools) {
         super(faction, name, description);
+        this.magicSchools = magicSchools;
     }
 
     @Override
@@ -36,5 +38,10 @@ public class HeroImpl extends AbstractCard implements Hero {
     @Override
     public Set<HeroAbility> getHeroAbilities() {
         return heroAbilities;
+    }
+
+    @Override
+    public Set<MagicSchool> getMagicSchools() {
+        return magicSchools;
     }
 }

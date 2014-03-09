@@ -11,8 +11,9 @@ public class FortuneImpl extends AbstractHandCard implements Fortune {
 
     private PlayType playType;
 
-    public FortuneImpl(Faction faction, String name, String description, int cost, int might, int magic, int destiny, boolean unique) {
+    public FortuneImpl(Faction faction, String name, String description, int cost, int might, int magic, int destiny, boolean unique, PlayType playType) {
         super(faction, name, description, cost, might, magic, destiny, unique);
+        this.playType = playType;
     }
 
     @Override

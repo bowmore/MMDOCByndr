@@ -81,7 +81,7 @@ public class CardLoader {
     }
 
     private Hero parseHero(XCard card) {
-        return new HeroImpl(parseFaction(card.getFaction()), card.getDisplayName(), card.getDescription());
+        return new HeroImpl(parseFaction(card.getFaction()), card.getDisplayName(), card.getDescription(), parseMagicSchools(card.getSubType()));
     }
 
     private Event parseEvent(XCard card) {
@@ -118,13 +118,13 @@ public class CardLoader {
     private Spell parseSpell(XCard card) {
         return new SpellImpl(parseFaction(card.getFaction()), card.getDisplayName(), card.getDescription(),
                 parseLevel(card.getCost()), parseLevel(card.getMightLevel()), parseLevel(card.getMagicLevel()), parseLevel(card.getDestinyLevel()),
-                parseUnique(card));
+                parseUnique(card), parseMagicSchool(card.getSubType()), parsePlayType(card.getSubType()));
     }
 
     private Fortune parseFortune(XCard card) {
         return new FortuneImpl(parseFaction(card.getFaction()), card.getDisplayName(), card.getDescription(),
                 parseLevel(card.getCost()), parseLevel(card.getMightLevel()), parseLevel(card.getMagicLevel()), parseLevel(card.getDestinyLevel()),
-                parseUnique(card));
+                parseUnique(card), parsePlayType(card.getSubType()));
     }
 
     private Building parseBuilding(XCard card) {
@@ -161,5 +161,17 @@ public class CardLoader {
 
     private Set<Ability> parseAbilities(XCard card) {
         return Collections.emptySet();
+    }
+
+    private Set<MagicSchool> parseMagicSchools(String subType) {
+        return Collections.emptySet();
+    }
+
+    private MagicSchool parseMagicSchool(String subType) {
+        return null;
+    }
+
+    private PlayType parsePlayType(String subType) {
+        return null;
     }
 }
