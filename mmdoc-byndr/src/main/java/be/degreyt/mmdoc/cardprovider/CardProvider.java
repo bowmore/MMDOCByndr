@@ -15,6 +15,15 @@ public class CardProvider {
     private List<Fortune> fortunes;
     private List<Building> buildings;
 
+    public CardProvider(List<Hero> heroes, List<Event> events, List<Creature> creatures, List<Spell> spells, List<Fortune> fortunes, List<Building> buildings) {
+        this.heroes = heroes;
+        this.events = events;
+        this.creatures = creatures;
+        this.spells = spells;
+        this.fortunes = fortunes;
+        this.buildings = buildings;
+    }
+
     public List<Hero> getHeroes() {
         return heroes;
     }
