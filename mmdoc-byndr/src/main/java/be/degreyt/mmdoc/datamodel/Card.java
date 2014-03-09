@@ -1,5 +1,8 @@
 package be.degreyt.mmdoc.datamodel;
 
+import com.google.common.base.Optional;
+
+import java.net.URL;
 import java.util.Set;
 
 public interface Card {
@@ -10,4 +13,7 @@ public interface Card {
     Set<Format> getAllowedFormats();
 
     String getDescription();
+
+    Optional<URL> smallImageUrl();
+    Optional<URL> largeImageUrl();
 }

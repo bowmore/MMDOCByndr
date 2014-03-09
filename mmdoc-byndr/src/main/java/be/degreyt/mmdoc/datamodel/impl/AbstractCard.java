@@ -4,13 +4,18 @@ import be.degreyt.mmdoc.datamodel.Card;
 import be.degreyt.mmdoc.datamodel.ExpansionInfo;
 import be.degreyt.mmdoc.datamodel.Faction;
 import be.degreyt.mmdoc.datamodel.Format;
+import com.google.common.base.Optional;
 
+import java.net.URL;
 import java.util.Set;
 
 abstract class AbstractCard implements Card {
     private final String description;
     private final String name;
     private final Faction faction;
+    private URL smallImageUrl; // TODO
+    private URL largeImageUrl; // TODO
+
 
     AbstractCard(Faction faction, String name, String description) {
         this.faction = faction;
@@ -41,5 +46,15 @@ abstract class AbstractCard implements Card {
     @Override
     public final String getDescription() {
         return description;
+    }
+
+    @Override
+    public Optional<URL> smallImageUrl() {
+        return Optional.fromNullable(smallImageUrl);
+    }
+
+    @Override
+    public Optional<URL> largeImageUrl() {
+        return Optional.fromNullable(largeImageUrl);
     }
 }
