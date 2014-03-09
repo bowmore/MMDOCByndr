@@ -6,7 +6,9 @@ import com.thoughtworks.xstream.io.xml.StaxDriver;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 public class CardsXmlParser {
@@ -52,8 +54,12 @@ public class CardsXmlParser {
     public static void main(String[] args) {
         List<XCard> cards = new CardsXmlParser().parse();
         System.out.println(cards.size());
+        Set<String> types = new HashSet<String>();
         for (XCard xCard : cards) {
-            System.out.println(xCard.getName());
+            types.add(xCard.getType());
+        }
+        for (String type : types) {
+            System.out.println(type);
         }
     }
 
