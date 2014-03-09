@@ -6,7 +6,7 @@ import com.google.common.collect.ImmutableSet;
 import java.util.EnumSet;
 import java.util.Set;
 
-public final class CreatureImpl extends AbstractHandCard implements Creature {
+final class CreatureImpl extends AbstractHandCard implements Creature {
 
     private final Set<PositionType> positionTypes;
     private final Set<CreatureType> creatureTypes;
