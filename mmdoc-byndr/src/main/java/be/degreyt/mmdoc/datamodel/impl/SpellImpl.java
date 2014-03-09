@@ -13,7 +13,7 @@ public class SpellImpl extends AbstractHandCard implements Spell {
     private MagicSchool school;
     private PlayType playType;
 
-    SpellImpl(Faction faction, String name, String description, int cost, int might, int magic, int destiny, boolean unique) {
+    public SpellImpl(Faction faction, String name, String description, int cost, int might, int magic, int destiny, boolean unique) {
         super(faction, name, description, cost, might, magic, destiny, unique);
     }
 

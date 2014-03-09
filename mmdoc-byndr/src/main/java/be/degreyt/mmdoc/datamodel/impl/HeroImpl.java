@@ -14,7 +14,7 @@ public class HeroImpl extends AbstractCard implements Hero {
     private int destiny;
     private Set<HeroAbility> heroAbilities;
 
-    HeroImpl(Faction faction, String name, String description) {
+    public HeroImpl(Faction faction, String name, String description) {
         super(faction, name, description);
     }
 

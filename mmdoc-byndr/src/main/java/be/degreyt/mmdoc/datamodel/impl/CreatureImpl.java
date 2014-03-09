@@ -6,7 +6,7 @@ import com.google.common.collect.ImmutableSet;
 import java.util.EnumSet;
 import java.util.Set;
 
-final class CreatureImpl extends AbstractHandCard implements Creature {
+public final class CreatureImpl extends AbstractHandCard implements Creature {
 
     private final Set<PositionType> positionTypes;
     private final Set<CreatureType> creatureTypes;
@@ -15,7 +15,10 @@ final class CreatureImpl extends AbstractHandCard implements Creature {
     private final int retaliation;
     private final int health;
 
-    public CreatureImpl(Faction faction, String name, String description, int cost, int might, int magic, int destiny, boolean unique, Set<PositionType> positionTypes, Set<CreatureType> creatureTypes, Set<Ability> abilities, int attack, int retaliation, int health) {
+    public CreatureImpl(Faction faction, String name, String description,
+                        int cost, int might, int magic, int destiny,
+                        boolean unique, Set<PositionType> positionTypes, Set<CreatureType> creatureTypes, Set<Ability> abilities,
+                        int attack, int retaliation, int health) {
         super(faction, name, description, cost, might, magic, destiny, unique);
         this.positionTypes = positionTypes;
         this.creatureTypes = creatureTypes;
