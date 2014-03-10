@@ -17,6 +17,7 @@ public class XCard {
     private String Attack;
     private String Retaliate;
     private String HP;
+    private String Unique;
 
     private List<School> schools;
     private String ExtraDescription;
@@ -147,5 +148,13 @@ public class XCard {
 
     public void setDescription(String description) {
         Description = description;
+    }
+
+    public String getUnique() {
+        return Unique;
+    }
+
+    public void setUnique(String unique) {
+        Unique = unique;
     }
 }

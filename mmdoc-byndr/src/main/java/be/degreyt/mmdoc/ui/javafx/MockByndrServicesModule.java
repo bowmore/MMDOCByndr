@@ -1,4 +1,4 @@
-package be.degreyt.mmdoc.ui;
+package be.degreyt.mmdoc.ui.javafx;
 
 import be.degreyt.mmdoc.byndr.services.ByndrService;
 import be.degreyt.mmdoc.byndr.services.CardCollection;
@@ -8,8 +8,6 @@ import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableSet;
 import com.google.inject.AbstractModule;
 
-import javax.swing.text.html.Option;
-import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -23,7 +21,7 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class MockByndrServicesModule extends AbstractModule {
+class MockByndrServicesModule extends AbstractModule {
 
     private static final Logger LOG = Logger.getLogger(MockByndrServicesModule.class.getName());
 

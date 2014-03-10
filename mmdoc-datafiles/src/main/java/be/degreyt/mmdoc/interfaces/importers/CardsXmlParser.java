@@ -18,7 +18,7 @@ public class CardsXmlParser {
     private Pattern fileNamePattern = Pattern.compile(".*\\.xml");
 
     public CardsXmlParser() {
-        this(".\\mmdoc-datafiles\\src\\main\\resources\\gamedata");
+        this(".\\mmdoc-datafiles\\src\\main\\resources\\gamedata"); // TODO separate parser logic from knowledge where to find files
     }
 
     public CardsXmlParser(String rootPath) {
@@ -27,9 +27,9 @@ public class CardsXmlParser {
 
     public List<XCard> parse() {
         XStream xStream = new CardsXmlParser().getXStream();
-        File rootDirectory = new File(rootPath);
+        File rootDirectory = new File(rootPath); // TODO read through URL loaded through classloader
         if (!rootDirectory.isDirectory()) {
-            throw new RuntimeException("Invalid path");
+            throw new RuntimeException("Invalid path " + rootDirectory.getAbsolutePath());
         }
         FilenameFilter filenameFilter = new FilenameFilter() {
             @Override
@@ -111,5 +111,6 @@ public class CardsXmlParser {
         xStream.useAttributeFor(XCard.class, "Attack");
         xStream.useAttributeFor(XCard.class, "Retaliate");
         xStream.useAttributeFor(XCard.class, "HP");
+        xStream.useAttributeFor(XCard.class, "Unique");
     }
 }

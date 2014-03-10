@@ -4,47 +4,18 @@ import be.degreyt.mmdoc.datamodel.*;
 
 import java.util.List;
 
-/**
- * Created by WDH on 09/03/14.
- */
-public class CardProvider {
-    private List<Hero> heroes;
-    private List<Event> events;
-    private List<Creature> creatures;
-    private List<Spell> spells;
-    private List<Fortune> fortunes;
-    private List<Building> buildings;
+public interface CardProvider {
+    List<Card> getCards();
 
-    public CardProvider(List<Hero> heroes, List<Event> events, List<Creature> creatures, List<Spell> spells, List<Fortune> fortunes, List<Building> buildings) {
-        this.heroes = heroes;
-        this.events = events;
-        this.creatures = creatures;
-        this.spells = spells;
-        this.fortunes = fortunes;
-        this.buildings = buildings;
-    }
+    List<Hero> getHeroes();
 
-    public List<Hero> getHeroes() {
-        return heroes;
-    }
+    List<Event> getEvents();
 
-    public List<Event> getEvents() {
-        return events;
-    }
+    List<Creature> getCreatures();
 
-    public List<Creature> getCreatures() {
-        return creatures;
-    }
+    List<Spell> getSpells();
 
-    public List<Spell> getSpells() {
-        return spells;
-    }
+    List<Fortune> getFortunes();
 
-    public List<Fortune> getFortunes() {
-        return fortunes;
-    }
-
-    public List<Building> getBuildings() {
-        return buildings;
-    }
+    List<Building> getBuildings();
 }

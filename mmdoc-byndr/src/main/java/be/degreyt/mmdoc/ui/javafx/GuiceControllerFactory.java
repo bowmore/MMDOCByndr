@@ -1,4 +1,4 @@
-package be.degreyt.mmdoc.ui;
+package be.degreyt.mmdoc.ui.javafx;
 
 import com.google.inject.Injector;
 import javafx.util.Callback;

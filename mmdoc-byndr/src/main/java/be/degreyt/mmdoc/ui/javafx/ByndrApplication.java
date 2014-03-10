@@ -1,6 +1,7 @@
-package be.degreyt.mmdoc.ui;
+package be.degreyt.mmdoc.ui.javafx;
 
 import be.degreyt.mmdoc.byndr.services.impl.ByndrServicesModule;
+import be.degreyt.mmdoc.cardprovider.impl.CardProviderModule;
 import be.degreyt.mmdoc.datamodel.impl.DataModelModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -10,19 +11,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.net.URL;
-
 public class ByndrApplication extends Application {
-
-    public static void main(String[] args) {
-        launch(args);
-    }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        Injector injector = Guice.createInjector(new ByndrServicesModule(),
+                new CardProviderModule(),
+                new DataModelModule());
         try {
             FXMLLoader myLoader = new FXMLLoader(getClass().getResource("/be/degreyt/mmdoc/ui/MMDOCByndr.fxml"));
-            Injector injector = Guice.createInjector(new DataModelModule(), new MockByndrServicesModule());
             myLoader.setControllerFactory(new GuiceControllerFactory(injector));
             Parent page = (Parent) myLoader.load();
             MainController mainController = myLoader.getController();
@@ -33,8 +30,11 @@ public class ByndrApplication extends Application {
             primaryStage.show();
             mainController.initScreen();
         } catch (Exception ex) {
-            ex.printStackTrace();
-            System.exit(-1);
+            ex.printStackTrace(); // TODO proper handling
         }
+    }
+
+    public static void main(String[] args) {
+        launch(args);
     }
 }

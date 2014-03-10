@@ -1,23 +1,14 @@
-package be.degreyt.mmdoc.ui;
+package be.degreyt.mmdoc.ui.javafx;
 
 import be.degreyt.mmdoc.byndr.services.ByndrService;
 import be.degreyt.mmdoc.byndr.services.CardCollection;
 import be.degreyt.mmdoc.byndr.services.CardOwnership;
 import be.degreyt.mmdoc.exceptions.UnderlyingIOException;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
-import javafx.beans.property.DoubleProperty;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.StackPane;
-import javafx.util.Duration;
 
 import javax.inject.Inject;
 import java.io.IOException;
