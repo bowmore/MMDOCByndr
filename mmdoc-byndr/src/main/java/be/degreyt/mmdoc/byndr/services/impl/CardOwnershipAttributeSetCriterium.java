@@ -9,7 +9,7 @@ import java.util.Set;
 /**
  * Created by WDH on 11/03/14.
  */
-public abstract class CardOwnershipAttributeSetCriterium<T> implements CardOwnershipCriterium {
+abstract class CardOwnershipAttributeSetCriterium<T> implements CardOwnershipCriterium {
     private CardOwnershipAttributeSet<T> cardOwnershipAttributeSet;
     private Set<T> validValues;
 
