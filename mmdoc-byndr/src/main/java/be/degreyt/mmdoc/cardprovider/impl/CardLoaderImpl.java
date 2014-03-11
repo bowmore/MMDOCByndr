@@ -105,15 +105,9 @@ class CardLoaderImpl implements CardLoader {
         if (parseUnique(card)) {
             creatureBuilder.unique();
         }
-        for (PositionType positionType : parsePositionTypes(card.getSubType())) {
-            creatureBuilder.position(positionType);
-        }
-        for (CreatureType creatureType : parseCreatureTypes(card.getSubType())) {
-            creatureBuilder.creatureType(creatureType);
-        }
-        for (Ability ability : parseAbilities(card)) {
-            creatureBuilder.ability(ability);
-        }
+        parsePositionTypes(card.getSubType()).stream().forEach(creatureBuilder::position);
+        parseCreatureTypes(card.getSubType()).stream().forEach(creatureBuilder::creatureType);
+        parseAbilities(card).stream().forEach(creatureBuilder::ability);
         return creatureBuilder.build();
     }
 
