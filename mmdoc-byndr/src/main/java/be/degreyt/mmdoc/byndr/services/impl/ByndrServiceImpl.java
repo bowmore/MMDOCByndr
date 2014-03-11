@@ -23,11 +23,8 @@ class ByndrServiceImpl implements ByndrService{
     @Override
     public CardCollection load() {
         CardProvider cardProvider = cardLoader.loadCards();
-        ImmutableSet<Card> cards = ImmutableSet.<Card>builder().addAll(cardProvider.getCards()).build();
-        ImmutableSet.Builder<CardOwnership> builder = ImmutableSet.<CardOwnership>builder();
-        for (Card card : cards) {
-            builder.add(new CardOwnershipImpl(card, 0, 0));
-        }
+        ImmutableSet.Builder<CardOwnership> builder = ImmutableSet.builder();
+        cardProvider.getCards().stream().map((card) -> new CardOwnershipImpl(card, 0, 0)).forEach(builder::add);
         return new CardCollectionImpl(builder.build());
     }
 

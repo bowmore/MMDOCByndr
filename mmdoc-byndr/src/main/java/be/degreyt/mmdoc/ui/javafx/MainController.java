@@ -30,18 +30,18 @@ public class MainController {
     }
 
     public void initScreen() {
-        CardCollection cardCollection = byndrService.load();
-        Set<CardOwnership> ownerships = cardCollection.ownerships();
-        for (CardOwnership ownership : ownerships) {
-            try {
-                FXMLLoader myLoader = new FXMLLoader(getClass().getResource("/be/degreyt/mmdoc/ui/CardGlyph.fxml"));
-                Parent loadScreen = (Parent) myLoader.load();
-                resultPane.getChildren().add(loadScreen);
-                GlyphController contentController = ((GlyphController) myLoader.getController());
-                contentController.set(ownership);
-            } catch (IOException e) {
-                throw new UnderlyingIOException(e);
-            }
+        byndrService.load().ownerships().forEach(this::addGlyph);
+    }
+
+    private void addGlyph(CardOwnership ownership) {
+        try {
+            FXMLLoader myLoader = new FXMLLoader(getClass().getResource("/be/degreyt/mmdoc/ui/CardGlyph.fxml"));
+            Parent loadScreen = (Parent) myLoader.load();
+            resultPane.getChildren().add(loadScreen);
+            GlyphController contentController = ((GlyphController) myLoader.getController());
+            contentController.set(ownership);
+        } catch (IOException e) {
+            throw new UnderlyingIOException(e);
         }
     }
 
