@@ -10,6 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class CardsXmlParser {
 
@@ -44,6 +45,7 @@ public class CardsXmlParser {
             List<XCard> cardsInFile = parsedFile.getCards();
 
             if (cardsInFile != null) {
+                cardsInFile.forEach((c) -> c.setFileName(file.getName()));
                 cards.addAll(cardsInFile);
             }
         }
@@ -54,13 +56,7 @@ public class CardsXmlParser {
     public static void main(String[] args) {
         List<XCard> cards = new CardsXmlParser().parse();
         System.out.println(cards.size());
-        Set<String> types = new HashSet<String>();
-        for (XCard xCard : cards) {
-            types.add(xCard.getType());
-        }
-        for (String type : types) {
-            System.out.println(type);
-        }
+        cards.stream().map(XCard::getType).forEach(System.out::println);
     }
 
     private XStream getXStream() {

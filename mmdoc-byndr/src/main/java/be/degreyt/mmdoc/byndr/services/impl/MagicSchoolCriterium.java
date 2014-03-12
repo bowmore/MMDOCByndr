@@ -11,6 +11,6 @@ import java.util.Set;
  */
 public class MagicSchoolCriterium extends CardOwnershipAttributeCriterium<MagicSchool> {
     protected MagicSchoolCriterium(Set<MagicSchool> validValues) {
-        super(co -> co.getCard() instanceof Spell ? ((Spell)co.getCard()).getMagicSchool() : null, validValues);
+        super(co -> co.getCard() instanceof Spell ? ((Spell)co.getCard()).getMagicSchool() : null, validValues); // TODO fix possible NPE
     }
 }

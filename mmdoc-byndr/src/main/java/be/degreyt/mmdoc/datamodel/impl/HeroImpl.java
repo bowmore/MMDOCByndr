@@ -2,6 +2,7 @@ package be.degreyt.mmdoc.datamodel.impl;
 
 import be.degreyt.mmdoc.datamodel.*;
 
+import java.net.URL;
 import java.util.Set;
 
 /**
@@ -15,8 +16,8 @@ public class HeroImpl extends AbstractCard implements Hero {
     private Set<HeroAbility> heroAbilities;
     private Set<MagicSchool> magicSchools;
 
-    public HeroImpl(Faction faction, String name, String description, Set<MagicSchool> magicSchools) {
-        super(faction, name, description);
+    public HeroImpl(Faction faction, String name, String description, Set<MagicSchool> magicSchools, URL smallImageUrl, URL largeImageUrl, Set<ExpansionInfo> expansionInfos) {
+        super(faction, name, description, smallImageUrl, largeImageUrl, expansionInfos);
         this.magicSchools = magicSchools;
     }
 

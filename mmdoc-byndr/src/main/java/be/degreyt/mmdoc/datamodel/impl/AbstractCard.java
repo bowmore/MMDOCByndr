@@ -13,14 +13,18 @@ abstract class AbstractCard implements Card {
     private final String description;
     private final String name;
     private final Faction faction;
-    private URL smallImageUrl; // TODO
-    private URL largeImageUrl; // TODO
+    private final URL smallImageUrl;
+    private final URL largeImageUrl;
+    private final Set<ExpansionInfo> expansionInfos;
 
 
-    AbstractCard(Faction faction, String name, String description) {
+    AbstractCard(Faction faction, String name, String description, URL smallImageUrl, URL largeImageUrl, Set<ExpansionInfo> expansionInfos) {
         this.faction = faction;
         this.name = name;
         this.description = description;
+        this.smallImageUrl = smallImageUrl;
+        this.largeImageUrl = largeImageUrl;
+        this.expansionInfos = expansionInfos;
     }
 
     public final String getName() {

@@ -3,11 +3,19 @@ package be.degreyt.mmdoc.datamodel.impl;
 import be.degreyt.mmdoc.datamodel.*;
 import com.google.common.collect.ImmutableSet;
 
+import java.net.URL;
+import java.util.Set;
+
 class CardBuilderImpl implements CardBuilder {
 
     private String description = "";
     private String name = null;
     private Faction faction = null;
+
+    private URL smallImageUrl;
+    private URL largeImageUrl;
+    private final ImmutableSet.Builder<ExpansionInfo> expansionInfos = ImmutableSet.builder();
+
 
     // HandCard
     private int cost;
@@ -17,9 +25,9 @@ class CardBuilderImpl implements CardBuilder {
     private boolean unique;
 
     // Creature
-    private ImmutableSet.Builder<PositionType> positionTypes = new ImmutableSet.Builder<>();
-    private ImmutableSet.Builder<CreatureType> creatureTypes = new ImmutableSet.Builder<>();
-    private ImmutableSet.Builder<Ability> abilities = new ImmutableSet.Builder<>();
+    private final ImmutableSet.Builder<PositionType> positionTypes = ImmutableSet.builder();
+    private final ImmutableSet.Builder<CreatureType> creatureTypes = ImmutableSet.builder();
+    private final ImmutableSet.Builder<Ability> abilities = ImmutableSet.builder();
     private int attack;
     private int retaliation;
     private int health;
@@ -90,6 +98,21 @@ class CardBuilderImpl implements CardBuilder {
     public CreatureBuilder retaliation(int retaliation) {
         this.retaliation = retaliation;
         return new InternalCreatureBuilder();
+    }
+
+    public CardBuilder setSmallImageUrl(URL smallImageUrl) {
+        this.smallImageUrl = smallImageUrl;
+        return this;
+    }
+
+    public CardBuilder setLargeImageUrl(URL largeImageUrl) {
+        this.largeImageUrl = largeImageUrl;
+        return this;
+    }
+
+    public CardBuilder expansionInfo(ExpansionInfo expansionInfo) {
+        expansionInfos.add(expansionInfo);
+        return this;
     }
 
     private class InternalCreatureBuilder implements CreatureBuilder {
@@ -179,7 +202,26 @@ class CardBuilderImpl implements CardBuilder {
 
         @Override
         public Creature build() {
-            return new CreatureImpl(faction, name, description, cost, might, magic, destiny, unique, positionTypes.build(), creatureTypes.build(), abilities.build(), attack, retaliation, health);
+            return new CreatureImpl(faction, name, description, cost, might, magic, destiny, unique, positionTypes.build(), creatureTypes.build(), abilities.build(), attack, retaliation, health, smallImageUrl, largeImageUrl, expansionInfos.build());
         }
+
+        @Override
+        public CreatureBuilder setSmallImageUrl(URL smallImageUrl) {
+            CardBuilderImpl.this.smallImageUrl = smallImageUrl;
+            return this;
+        }
+
+        @Override
+        public CreatureBuilder setLargeImageUrl(URL largeImageUrl) {
+            CardBuilderImpl.this.largeImageUrl = largeImageUrl;
+            return this;
+        }
+
+        @Override
+        public CreatureBuilder expansionInfo(ExpansionInfo expansionInfo) {
+            CardBuilderImpl.this.expansionInfos.add(expansionInfo);
+            return this;
+        }
+
     }
 }

@@ -1,5 +1,7 @@
 package be.degreyt.mmdoc.datamodel;
 
+import java.net.URL;
+
 public interface CreatureBuilder extends CardBuilder {
 
     CreatureBuilder description(String description);
@@ -31,4 +33,10 @@ public interface CreatureBuilder extends CardBuilder {
     CreatureBuilder creatureType(CreatureType creatureType);
 
     CreatureBuilder ability(Ability ability);
+
+    CreatureBuilder setSmallImageUrl(URL smallImageUrl);
+
+    CreatureBuilder setLargeImageUrl(URL largeImageUrl);
+
+    CreatureBuilder expansionInfo(ExpansionInfo expansionInfo);
 }

@@ -30,6 +30,8 @@ public class XCard {
     private AttackCondition AttackCondition;
     private AdditionalCost AdditionalCost;
 
+    private String fileName;
+
     public String getRarity() {
         return Rarity;
     }
@@ -157,4 +159,17 @@ public class XCard {
     public void setUnique(String unique) {
         Unique = unique;
     }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public List<School> getSchools() {
+        return schools;
+    }
+
 }

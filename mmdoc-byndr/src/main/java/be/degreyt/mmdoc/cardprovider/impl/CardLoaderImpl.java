@@ -4,6 +4,8 @@ import be.degreyt.mmdoc.cardprovider.CardLoader;
 import be.degreyt.mmdoc.cardprovider.CardProvider;
 import be.degreyt.mmdoc.datamodel.*;
 import be.degreyt.mmdoc.datamodel.impl.*;
+import be.degreyt.mmdoc.exceptions.MissingExpansionCode;
+import be.degreyt.mmdoc.exceptions.UnderlyingUrlException;
 import be.degreyt.mmdoc.interfaces.importers.CardsXmlParser;
 import be.degreyt.mmdoc.interfaces.importers.data.XCard;
 import com.google.inject.Guice;
@@ -11,17 +13,20 @@ import com.google.inject.Injector;
 import com.google.inject.Provider;
 
 import javax.inject.Inject;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by WDH on 09/03/14.
  */
 class CardLoaderImpl implements CardLoader {
 
+    public static final String BASE_RESOURCE_PATH = "file:./mmdoc-byndr/src/main/resources/images/";
     private final Provider<CardBuilder> cardBuilderProvider;
+    private final Pattern FILE_NAME_PATTERN = Pattern.compile("cards_(\\w{3})(_\\w)?\\.xml");
 
     @Inject
     public CardLoaderImpl(Provider<CardBuilder> cardBuilderProvider) {
@@ -83,11 +88,55 @@ class CardLoaderImpl implements CardLoader {
     }
 
     private Hero parseHero(XCard card) {
-        return new HeroImpl(parseFaction(card.getFaction()), card.getDisplayName(), card.getDescription(), parseMagicSchools(card.getSubType()));
+        return new HeroImpl(parseFaction(card.getFaction()), card.getDisplayName(), card.getDescription(), parseMagicSchools(card.getSubType()), parseSmallUrl(card), parseLargeUrl(card), parseExpansionInfos(card));
+    }
+
+    private Set<ExpansionInfo> parseExpansionInfos(XCard card) {
+        Optional<Expansion> expansion = Expansion.forCode(getExpansionCode(card).orElseThrow(MissingExpansionCode::new));
+        if (expansion.isPresent()) {
+            ExpansionInfo expansionInfo = new ExpansionInfoImpl(expansion.get(), Rarity.valueOf(card.getRarity().toUpperCase()));
+            return Collections.singleton(expansionInfo);
+        }
+        return Collections.emptySet();
+    }
+
+    private URL parseSmallUrl(XCard card) {
+        return getUrl(card, "small/");
+    }
+
+    private URL parseLargeUrl(XCard card) {
+        return getUrl(card, "large/");
+    }
+
+    private URL getUrl(XCard card, String sizeFolder) {
+        String resourceName = buildResourceName(card);
+        if (resourceName == null) {
+            return null;
+        }
+        String urlString = BASE_RESOURCE_PATH + sizeFolder + resourceName;
+        try {
+            return new URL(urlString);
+        } catch (MalformedURLException e) {
+            throw new UnderlyingUrlException(e);
+        }
+    }
+
+    private String buildResourceName(XCard card) {
+        StringBuilder fileName = new StringBuilder();
+        fileName.append(getExpansionCode(card).orElseThrow(MissingExpansionCode::new))
+                .append('_')
+                .append(card.getName())
+                .append(".jpg");
+        return fileName.toString();
+    }
+
+    private Optional<String> getExpansionCode(XCard card) {
+        Matcher matcher = FILE_NAME_PATTERN.matcher(card.getFileName());
+        return matcher.matches() ? Optional.of(matcher.group(1)) : Optional.<String>empty();
     }
 
     private Event parseEvent(XCard card) {
-        return new EventImpl(parseFaction(card.getFaction()), card.getDisplayName(), card.getDescription());
+        return new EventImpl(parseFaction(card.getFaction()), card.getDisplayName(), card.getDescription(), parseSmallUrl(card), parseLargeUrl(card), parseExpansionInfos(card));
     }
 
     private Creature parseCreature(XCard card) {
@@ -101,7 +150,10 @@ class CardLoaderImpl implements CardLoader {
                 .destiny(parseLevel(card.getDestinyLevel()))
                 .attack(parseLevel(card.getAttack()))
                 .retaliation(parseLevel(card.getRetaliate()))
-                .health(parseLevel(card.getHP()));
+                .health(parseLevel(card.getHP()))
+                .setSmallImageUrl(parseSmallUrl(card))
+                .setLargeImageUrl(parseLargeUrl(card));
+        parseExpansionInfos(card).forEach(creatureBuilder::expansionInfo);
         if (parseUnique(card)) {
             creatureBuilder.unique();
         }
@@ -114,19 +166,19 @@ class CardLoaderImpl implements CardLoader {
     private Spell parseSpell(XCard card) {
         return new SpellImpl(parseFaction(card.getFaction()), card.getDisplayName(), card.getDescription(),
                 parseLevel(card.getCost()), parseLevel(card.getMightLevel()), parseLevel(card.getMagicLevel()), parseLevel(card.getDestinyLevel()),
-                parseUnique(card), parseMagicSchool(card.getSubType()), parsePlayType(card.getSubType()));
+                parseUnique(card), parseMagicSchool(card.getSubType()), parsePlayType(card.getSubType()), parseSmallUrl(card), parseLargeUrl(card), parseExpansionInfos(card));
     }
 
     private Fortune parseFortune(XCard card) {
         return new FortuneImpl(parseFaction(card.getFaction()), card.getDisplayName(), card.getDescription(),
                 parseLevel(card.getCost()), parseLevel(card.getMightLevel()), parseLevel(card.getMagicLevel()), parseLevel(card.getDestinyLevel()),
-                parseUnique(card), parsePlayType(card.getSubType()));
+                parseUnique(card), parsePlayType(card.getSubType()), parseSmallUrl(card), parseLargeUrl(card), parseExpansionInfos(card));
     }
 
     private Building parseBuilding(XCard card) {
         return new BuildingImpl(parseFaction(card.getFaction()), card.getDisplayName(), card.getDescription(),
                 parseLevel(card.getCost()), parseLevel(card.getMightLevel()), parseLevel(card.getMagicLevel()), parseLevel(card.getDestinyLevel()),
-                parseUnique(card));
+                parseUnique(card), parseSmallUrl(card), parseLargeUrl(card), parseExpansionInfos(card));
     }
 
     private int parseLevel(String levelString) {
