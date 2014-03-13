@@ -5,4 +5,6 @@ import be.degreyt.mmdoc.datamodel.CardBuilder;
 public interface ByndrService {
 
     CardCollection load();
+
+    FilterProvider getFilterProvider();
 }

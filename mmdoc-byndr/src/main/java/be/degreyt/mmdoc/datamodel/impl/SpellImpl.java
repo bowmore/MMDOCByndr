@@ -3,6 +3,7 @@ package be.degreyt.mmdoc.datamodel.impl;
 import be.degreyt.mmdoc.datamodel.*;
 
 import java.net.URL;
+import java.util.Collections;
 import java.util.Set;
 
 /**
@@ -27,5 +28,10 @@ public class SpellImpl extends AbstractHandCard implements Spell {
     @Override
     public PlayType getPlayType() {
         return playType;
+    }
+
+    @Override
+    public Set<MagicSchool> getMagicSchools() {
+        return Collections.singleton(getMagicSchool());
     }
 }

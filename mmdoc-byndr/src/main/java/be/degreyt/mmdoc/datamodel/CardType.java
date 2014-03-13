@@ -1,5 +1,8 @@
 package be.degreyt.mmdoc.datamodel;
 
+import java.util.Arrays;
+import java.util.Optional;
+
 /**
  * Created by WDH on 10/03/14.
  */
@@ -14,13 +17,8 @@ public enum CardType {
         return clazz;
     }
 
-    public static CardType forClass(Class<? extends Card> clazz) {
-        for (CardType cardType : values()) {
-            if (cardType.getClazz().equals(clazz)) {
-                return cardType;
-            }
-        }
-        return null;
+    public static Optional<CardType> forClass(Class<? extends Card> clazz) {
+        return Arrays.stream(values()).filter((type -> type.getClazz().isAssignableFrom(clazz))).findAny();
     }
 
     private final Class<? extends Card> clazz;

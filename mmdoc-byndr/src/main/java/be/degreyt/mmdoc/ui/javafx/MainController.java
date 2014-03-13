@@ -3,11 +3,14 @@ package be.degreyt.mmdoc.ui.javafx;
 import be.degreyt.mmdoc.byndr.services.ByndrService;
 import be.degreyt.mmdoc.byndr.services.CardCollection;
 import be.degreyt.mmdoc.byndr.services.CardOwnership;
+import be.degreyt.mmdoc.datamodel.CardType;
 import be.degreyt.mmdoc.exceptions.UnderlyingIOException;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.CheckBox;
 import javafx.scene.layout.FlowPane;
 
 import javax.inject.Inject;
@@ -45,4 +48,12 @@ public class MainController {
         }
     }
 
+    public void heroCardTypeSelectionChanged(ActionEvent actionEvent) {
+        resultPane.getChildren().clear();
+        if (((CheckBox) actionEvent.getSource()).isSelected()) {
+            byndrService.load().ownerships(byndrService.getFilterProvider().hasType(CardType.HERO)).forEach(this::addGlyph);
+        } else {
+            byndrService.load().ownerships().forEach(this::addGlyph);
+        }
+    }
 }

@@ -5,7 +5,7 @@ import java.util.Set;
 /**
  * Created by WDH on 26/02/14.
  */
-public interface Hero extends Card {
+public interface Hero extends Card, HasMagicSchools {
     int getStartingMight();
     int getStartingMagic();
     int getStartingDestiny();

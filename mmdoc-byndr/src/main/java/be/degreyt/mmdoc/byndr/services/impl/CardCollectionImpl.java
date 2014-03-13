@@ -7,6 +7,8 @@ import com.google.common.collect.ImmutableSet;
 
 import java.util.Collections;
 import java.util.Set;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 class CardCollectionImpl implements CardCollection {
 
@@ -19,6 +21,11 @@ class CardCollectionImpl implements CardCollection {
     @Override
     public Set<CardOwnership> ownerships() {
         return ownerships;
+    }
+
+    @Override
+    public Set<CardOwnership> ownerships(Predicate<CardOwnership> filter) {
+        return ownerships().stream().filter(filter).collect(Collectors.toSet());
     }
 
     @Override
