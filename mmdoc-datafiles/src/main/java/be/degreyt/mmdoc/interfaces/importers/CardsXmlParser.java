@@ -5,10 +5,8 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.StaxDriver;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.concurrent.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -27,31 +25,61 @@ public class CardsXmlParser {
     }
 
     public List<XCard> parse() {
-        XStream xStream = new CardsXmlParser().getXStream();
-        File rootDirectory = new File(rootPath); // TODO read through URL loaded through classloader
-        if (!rootDirectory.isDirectory()) {
-            throw new RuntimeException("Invalid path " + rootDirectory.getAbsolutePath());
-        }
-        FilenameFilter filenameFilter = new FilenameFilter() {
-            @Override
-            public boolean accept(File dir, String name) {
-                return name != null && fileNamePattern.matcher(name).matches();
+        try {
+            XStream xStream = new CardsXmlParser().getXStream();
+            File rootDirectory = new File(rootPath); // TODO read through URL loaded through classloader
+            if (!rootDirectory.isDirectory()) {
+                throw new RuntimeException("Invalid path " + rootDirectory.getAbsolutePath());
             }
-        };
-        File[] files = rootDirectory.listFiles(filenameFilter);
-        List<XCard> cards = new ArrayList<XCard>();
-        for (File file : files) {
-            Cards parsedFile = (Cards) xStream.fromXML(file);
+            FilenameFilter filenameFilter = new FilenameFilter() {
+                @Override
+                public boolean accept(File dir, String name) {
+                    return name != null && fileNamePattern.matcher(name).matches();
+                }
+            };
+            File[] files = rootDirectory.listFiles(filenameFilter);
+            List<XCard> cards = new ArrayList<XCard>();
+            ExecutorService executorService = Executors.newCachedThreadPool();
+
+            List<Future<List<XCard>>> futures = new ArrayList<>(files.length);
+            for (File file : files) {
+                Future<List<XCard>> future = executorService.submit(new FileLoader(file));
+                futures.add(future);
+            }
+
+            for (Future<List<XCard>> future : futures) {
+                cards.addAll(future.get());
+            }
+            return cards;
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            return Collections.emptyList();
+        } catch (ExecutionException e) {
+            throw (RuntimeException) e.getCause();
+        }
+    }
+
+    private class FileLoader implements Callable<List<XCard>> {
+
+        private final File file;
+
+        private FileLoader(File file) {
+            this.file = file;
+        }
+
+        @Override
+        public List<XCard> call() throws Exception {
+            Cards parsedFile = (Cards) getXStream().fromXML(file);
             List<XCard> cardsInFile = parsedFile.getCards();
 
             if (cardsInFile != null) {
                 cardsInFile.forEach((c) -> c.setFileName(file.getName()));
-                cards.addAll(cardsInFile);
+                return cardsInFile;
             }
+            return Collections.emptyList();
         }
-        return cards;
-    }
 
+    }
 
     public static void main(String[] args) {
         List<XCard> cards = new CardsXmlParser().parse();
