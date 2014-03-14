@@ -25,7 +25,8 @@ public class MainController {
 
     @FXML private FlowPane resultPane;
 
-    private final Map<String, Node> screens = new HashMap<>();
+    private final Map<CardOwnership, Node> screens = new HashMap<>();
+    private CardCollection cardCollection;
 
     @Inject
     public MainController(ByndrService byndrService) {
@@ -33,16 +34,22 @@ public class MainController {
     }
 
     public void initScreen() {
-        byndrService.load().ownerships().forEach(this::addGlyph);
+        cardCollection = byndrService.load();
+        cardCollection.ownerships().forEach(this::addGlyph);
     }
 
     private void addGlyph(CardOwnership ownership) {
         try {
+            if (screens.containsKey(ownership)) {
+                resultPane.getChildren().add(screens.get(ownership));
+                return;
+            }
             FXMLLoader myLoader = new FXMLLoader(getClass().getResource("/be/degreyt/mmdoc/ui/CardGlyph.fxml"));
             Parent loadScreen = (Parent) myLoader.load();
             resultPane.getChildren().add(loadScreen);
             GlyphController contentController = ((GlyphController) myLoader.getController());
             contentController.set(ownership);
+            screens.put(ownership, loadScreen);
         } catch (IOException e) {
             throw new UnderlyingIOException(e);
         }
@@ -51,9 +58,9 @@ public class MainController {
     public void heroCardTypeSelectionChanged(ActionEvent actionEvent) {
         resultPane.getChildren().clear();
         if (((CheckBox) actionEvent.getSource()).isSelected()) {
-            byndrService.load().ownerships(byndrService.getFilterProvider().hasType(CardType.HERO)).forEach(this::addGlyph);
+            cardCollection.ownerships(byndrService.getFilterProvider().hasType(CardType.HERO)).forEach(this::addGlyph);
         } else {
-            byndrService.load().ownerships().forEach(this::addGlyph);
+            cardCollection.ownerships().forEach(this::addGlyph);
         }
     }
 }
