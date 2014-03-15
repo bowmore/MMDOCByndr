@@ -16,11 +16,11 @@ final class CreatureImpl extends AbstractHandCard implements Creature {
     private final int retaliation;
     private final int health;
 
-    CreatureImpl(Faction faction, String name, String description,
+    CreatureImpl(String identification, Faction faction, String name, String description,
                         int cost, int might, int magic, int destiny,
                         boolean unique, Set<PositionType> positionTypes, Set<CreatureType> creatureTypes, Set<Ability> abilities,
                         int attack, int retaliation, int health, URL smallImageUrl, URL largeImageUrl, Set<ExpansionInfo> expansionInfos) {
-        super(faction, name, description, cost, might, magic, destiny, unique, smallImageUrl, largeImageUrl, expansionInfos);
+        super(identification, faction, name, description, cost, might, magic, destiny, unique, smallImageUrl, largeImageUrl, expansionInfos);
         this.positionTypes = positionTypes;
         this.creatureTypes = creatureTypes;
         this.abilities = abilities;
@@ -57,6 +57,12 @@ final class CreatureImpl extends AbstractHandCard implements Creature {
     @Override
     public int getHealth() {
         return health;
+    }
+
+
+    @Override
+    public CardType getCardType() {
+        return CardType.CREATURE;
     }
 
 }

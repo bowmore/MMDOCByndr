@@ -2,6 +2,8 @@ package be.degreyt.mmdoc.datamodel;
 
 public interface CardBuilder {
 
+    CardBuilder identification(String identification);
+
     CardBuilder description(String description);
 
     CardBuilder name(String name);

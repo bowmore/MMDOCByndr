@@ -8,6 +8,7 @@ import java.util.Set;
 
 class CardBuilderImpl implements CardBuilder {
 
+    private String identification = "";
     private String description = "";
     private String name = null;
     private Faction faction = null;
@@ -32,7 +33,11 @@ class CardBuilderImpl implements CardBuilder {
     private int retaliation;
     private int health;
 
-
+    @Override
+    public CardBuilder identification(String identification) {
+        this.identification = identification;
+        return this;
+    }
 
     @Override
     public CardBuilder description(String description) {
@@ -116,6 +121,12 @@ class CardBuilderImpl implements CardBuilder {
     }
 
     private class InternalCreatureBuilder implements CreatureBuilder {
+        @Override
+        public CreatureBuilder identification(String identification) {
+            CardBuilderImpl.this.identification(identification);
+            return this;
+        }
+
         @Override
         public CreatureBuilder description(String description) {
             CardBuilderImpl.this.description(description);
@@ -202,7 +213,7 @@ class CardBuilderImpl implements CardBuilder {
 
         @Override
         public Creature build() {
-            return new CreatureImpl(faction, name, description, cost, might, magic, destiny, unique, positionTypes.build(), creatureTypes.build(), abilities.build(), attack, retaliation, health, smallImageUrl, largeImageUrl, expansionInfos.build());
+            return new CreatureImpl(identification, faction, name, description, cost, might, magic, destiny, unique, positionTypes.build(), creatureTypes.build(), abilities.build(), attack, retaliation, health, smallImageUrl, largeImageUrl, expansionInfos.build());
         }
 
         @Override

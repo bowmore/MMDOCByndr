@@ -88,7 +88,7 @@ class CardLoaderImpl implements CardLoader {
     }
 
     private Hero parseHero(XCard card) {
-        return new HeroImpl(parseFaction(card.getFaction()), card.getDisplayName(), card.getDescription(), parseMagicSchools(card.getSubType()), parseSmallUrl(card), parseLargeUrl(card), parseExpansionInfos(card));
+        return new HeroImpl(card.getName(), parseFaction(card.getFaction()), card.getDisplayName(), card.getDescription(), parseMagicSchools(card.getSubType()), parseSmallUrl(card), parseLargeUrl(card), parseExpansionInfos(card));
     }
 
     private Set<ExpansionInfo> parseExpansionInfos(XCard card) {
@@ -136,7 +136,7 @@ class CardLoaderImpl implements CardLoader {
     }
 
     private Event parseEvent(XCard card) {
-        return new EventImpl(parseFaction(card.getFaction()), card.getDisplayName(), card.getDescription(), parseSmallUrl(card), parseLargeUrl(card), parseExpansionInfos(card));
+        return new EventImpl(card.getName(), parseFaction(card.getFaction()), card.getDisplayName(), card.getDescription(), parseSmallUrl(card), parseLargeUrl(card), parseExpansionInfos(card));
     }
 
     private Creature parseCreature(XCard card) {
@@ -164,19 +164,19 @@ class CardLoaderImpl implements CardLoader {
     }
 
     private Spell parseSpell(XCard card) {
-        return new SpellImpl(parseFaction(card.getFaction()), card.getDisplayName(), card.getDescription(),
+        return new SpellImpl(card.getName(), parseFaction(card.getFaction()), card.getDisplayName(), card.getDescription(),
                 parseLevel(card.getCost()), parseLevel(card.getMightLevel()), parseLevel(card.getMagicLevel()), parseLevel(card.getDestinyLevel()),
                 parseUnique(card), parseMagicSchool(card.getSubType()), parsePlayType(card.getSubType()), parseSmallUrl(card), parseLargeUrl(card), parseExpansionInfos(card));
     }
 
     private Fortune parseFortune(XCard card) {
-        return new FortuneImpl(parseFaction(card.getFaction()), card.getDisplayName(), card.getDescription(),
+        return new FortuneImpl(card.getName(), parseFaction(card.getFaction()), card.getDisplayName(), card.getDescription(),
                 parseLevel(card.getCost()), parseLevel(card.getMightLevel()), parseLevel(card.getMagicLevel()), parseLevel(card.getDestinyLevel()),
                 parseUnique(card), parsePlayType(card.getSubType()), parseSmallUrl(card), parseLargeUrl(card), parseExpansionInfos(card));
     }
 
     private Building parseBuilding(XCard card) {
-        return new BuildingImpl(parseFaction(card.getFaction()), card.getDisplayName(), card.getDescription(),
+        return new BuildingImpl(card.getName(), parseFaction(card.getFaction()), card.getDisplayName(), card.getDescription(),
                 parseLevel(card.getCost()), parseLevel(card.getMightLevel()), parseLevel(card.getMagicLevel()), parseLevel(card.getDestinyLevel()),
                 parseUnique(card), parseSmallUrl(card), parseLargeUrl(card), parseExpansionInfos(card));
     }
@@ -192,7 +192,10 @@ class CardLoaderImpl implements CardLoader {
 //todo implement
 
     private Faction parseFaction(String faction) {
-        return null;
+        if (faction == null) {
+            return null;
+        }
+        return Faction.valueOf(faction.toUpperCase());
     }
 
     private boolean parseUnique(XCard card) {

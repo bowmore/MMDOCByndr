@@ -7,7 +7,7 @@ import java.util.Optional;
  * Created by WDH on 10/03/14.
  */
 public enum CardType {
-    HERO(Hero.class), EVENT(Event.class), CREATURE(Creature.class), SPELL(Spell.class), FORTUNE(Fortune.class), BUILDING(Building.class);
+    HERO(Hero.class), CREATURE(Creature.class), SPELL(Spell.class), FORTUNE(Fortune.class), EVENT(Event.class), BUILDING(Building.class);
 
     CardType(Class<? extends Card> clazz) {
         this.clazz = clazz;

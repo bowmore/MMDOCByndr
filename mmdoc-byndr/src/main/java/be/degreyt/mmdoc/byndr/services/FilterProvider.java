@@ -21,4 +21,6 @@ public interface FilterProvider {
     Predicate<CardOwnership> or(Predicate<CardOwnership> first, Predicate<CardOwnership> second);
 
     Predicate<CardOwnership> xor(Predicate<CardOwnership> first, Predicate<CardOwnership> second);
+
+    Predicate<CardOwnership> nameMatches(String text);
 }

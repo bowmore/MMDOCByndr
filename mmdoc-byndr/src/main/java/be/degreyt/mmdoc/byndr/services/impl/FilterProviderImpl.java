@@ -2,6 +2,7 @@ package be.degreyt.mmdoc.byndr.services.impl;
 
 import be.degreyt.mmdoc.byndr.services.CardOwnership;
 import be.degreyt.mmdoc.byndr.services.FilterProvider;
+import be.degreyt.mmdoc.byndr.services.NameMatcher;
 import be.degreyt.mmdoc.datamodel.*;
 
 import java.util.function.Predicate;
@@ -45,5 +46,10 @@ public class FilterProviderImpl implements FilterProvider {
     @Override
     public Predicate<CardOwnership> xor(Predicate<CardOwnership> first, Predicate<CardOwnership> second) {
         return ownership -> first.test(ownership) ^ second.test(ownership);
+    }
+
+    @Override
+    public NameMatcher nameMatches(String text) {
+        return new NameMatcher(text);
     }
 }

@@ -1,8 +1,10 @@
 package be.degreyt.mmdoc.datamodel.impl;
 
+import be.degreyt.mmdoc.datamodel.Card;
 import be.degreyt.mmdoc.datamodel.ExpansionInfo;
 import be.degreyt.mmdoc.datamodel.Faction;
 import be.degreyt.mmdoc.datamodel.HandCard;
+import be.degreyt.mmdoc.utils.ComparisonBuilder;
 
 import java.net.URL;
 import java.util.Set;
@@ -14,8 +16,8 @@ abstract class AbstractHandCard extends AbstractCard implements HandCard {
     private final int destiny;
     private final boolean unique;
 
-    AbstractHandCard(Faction faction, String name, String description, int cost, int might, int magic, int destiny, boolean unique, URL smallImageUrl, URL largeImageUrl, Set<ExpansionInfo> expansionInfos) {
-        super(faction, name, description, smallImageUrl, largeImageUrl, expansionInfos);
+    AbstractHandCard(String identification, Faction faction, String name, String description, int cost, int might, int magic, int destiny, boolean unique, URL smallImageUrl, URL largeImageUrl, Set<ExpansionInfo> expansionInfos) {
+        super(identification, faction, name, description, smallImageUrl, largeImageUrl, expansionInfos);
         this.cost = cost;
         this.might = might;
         this.magic = magic;
@@ -43,4 +45,16 @@ abstract class AbstractHandCard extends AbstractCard implements HandCard {
         return unique;
     }
 
+    @Override
+    public int compareTo(Card other) {
+        ComparisonBuilder builder = new ComparisonBuilder()
+                .add(getCardType(), other.getCardType());
+        if (other instanceof HandCard) {
+            builder.add(getCost(), ((HandCard) other).getCost());
+        }
+        return builder
+                .add(getFaction(), other.getFaction())
+                .add(getIdentification(), other.getIdentification())
+                .compare();
+    }
 }

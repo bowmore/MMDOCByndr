@@ -10,6 +10,7 @@ import java.net.URL;
 import java.util.Set;
 
 abstract class AbstractCard implements Card {
+    private final String identification;
     private final String description;
     private final String name;
     private final Faction faction;
@@ -18,7 +19,8 @@ abstract class AbstractCard implements Card {
     private final Set<ExpansionInfo> expansionInfos;
 
 
-    AbstractCard(Faction faction, String name, String description, URL smallImageUrl, URL largeImageUrl, Set<ExpansionInfo> expansionInfos) {
+    AbstractCard(String identification, Faction faction, String name, String description, URL smallImageUrl, URL largeImageUrl, Set<ExpansionInfo> expansionInfos) {
+        this.identification = identification;
         this.faction = faction;
         this.name = name;
         this.description = description;
@@ -60,5 +62,10 @@ abstract class AbstractCard implements Card {
     @Override
     public Optional<URL> largeImageUrl() {
         return Optional.fromNullable(largeImageUrl);
+    }
+
+    @Override
+    public String getIdentification() {
+        return identification;
     }
 }

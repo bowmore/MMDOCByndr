@@ -1,6 +1,7 @@
 package be.degreyt.mmdoc.datamodel.impl;
 
 import be.degreyt.mmdoc.datamodel.*;
+import be.degreyt.mmdoc.utils.ComparisonBuilder;
 
 import java.net.URL;
 import java.util.Collections;
@@ -14,8 +15,8 @@ public class SpellImpl extends AbstractHandCard implements Spell {
     private MagicSchool school;
     private PlayType playType;
 
-    public SpellImpl(Faction faction, String name, String description, int cost, int might, int magic, int destiny, boolean unique, MagicSchool school, PlayType playType, URL smallImageUrl, URL largeImageUrl, Set<ExpansionInfo> expansionInfos) {
-        super(faction, name, description, cost, might, magic, destiny, unique, smallImageUrl, largeImageUrl, expansionInfos);
+    public SpellImpl(String identification, Faction faction, String name, String description, int cost, int might, int magic, int destiny, boolean unique, MagicSchool school, PlayType playType, URL smallImageUrl, URL largeImageUrl, Set<ExpansionInfo> expansionInfos) {
+        super(identification, faction, name, description, cost, might, magic, destiny, unique, smallImageUrl, largeImageUrl, expansionInfos);
         this.school = school;
         this.playType = playType;
     }
@@ -34,4 +35,25 @@ public class SpellImpl extends AbstractHandCard implements Spell {
     public Set<MagicSchool> getMagicSchools() {
         return Collections.singleton(getMagicSchool());
     }
+
+    @Override
+    public CardType getCardType() {
+        return CardType.SPELL;
+    }
+
+    @Override
+    public int compareTo(Card other) {
+        ComparisonBuilder builder = new ComparisonBuilder()
+                .add(getCardType(), other.getCardType());
+        if (other instanceof Spell) {
+            Spell otherSpell = (Spell) other;
+            builder.add(getCost(), otherSpell.getCost())
+                    .add(getMagicSchool(), otherSpell.getMagicSchool());
+        }
+        return builder
+                .add(getFaction(), other.getFaction())
+                .add(getIdentification(), other.getIdentification())
+                .compare();
+    }
+
 }

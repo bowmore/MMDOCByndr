@@ -16,8 +16,8 @@ public class HeroImpl extends AbstractCard implements Hero {
     private Set<HeroAbility> heroAbilities;
     private Set<MagicSchool> magicSchools;
 
-    public HeroImpl(Faction faction, String name, String description, Set<MagicSchool> magicSchools, URL smallImageUrl, URL largeImageUrl, Set<ExpansionInfo> expansionInfos) {
-        super(faction, name, description, smallImageUrl, largeImageUrl, expansionInfos);
+    public HeroImpl(String identification, Faction faction, String name, String description, Set<MagicSchool> magicSchools, URL smallImageUrl, URL largeImageUrl, Set<ExpansionInfo> expansionInfos) {
+        super(identification, faction, name, description, smallImageUrl, largeImageUrl, expansionInfos);
         this.magicSchools = magicSchools;
     }
 
@@ -44,5 +44,10 @@ public class HeroImpl extends AbstractCard implements Hero {
     @Override
     public Set<MagicSchool> getMagicSchools() {
         return magicSchools;
+    }
+
+    @Override
+    public CardType getCardType() {
+        return CardType.HERO;
     }
 }

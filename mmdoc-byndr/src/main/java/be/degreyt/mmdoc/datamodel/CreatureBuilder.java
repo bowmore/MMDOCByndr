@@ -3,6 +3,7 @@ package be.degreyt.mmdoc.datamodel;
 import java.net.URL;
 
 public interface CreatureBuilder extends CardBuilder {
+    CreatureBuilder identification(String identification);
 
     CreatureBuilder description(String description);
 
