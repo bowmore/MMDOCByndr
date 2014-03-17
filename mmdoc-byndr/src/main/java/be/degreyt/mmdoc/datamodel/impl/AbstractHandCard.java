@@ -1,9 +1,6 @@
 package be.degreyt.mmdoc.datamodel.impl;
 
-import be.degreyt.mmdoc.datamodel.Card;
-import be.degreyt.mmdoc.datamodel.ExpansionInfo;
-import be.degreyt.mmdoc.datamodel.Faction;
-import be.degreyt.mmdoc.datamodel.HandCard;
+import be.degreyt.mmdoc.datamodel.*;
 import be.degreyt.mmdoc.utils.ComparisonBuilder;
 
 import java.net.URL;
@@ -16,8 +13,8 @@ abstract class AbstractHandCard extends AbstractCard implements HandCard {
     private final int destiny;
     private final boolean unique;
 
-    AbstractHandCard(String identification, Faction faction, String name, String description, int cost, int might, int magic, int destiny, boolean unique, URL smallImageUrl, URL largeImageUrl, Set<ExpansionInfo> expansionInfos) {
-        super(identification, faction, name, description, smallImageUrl, largeImageUrl, expansionInfos);
+    AbstractHandCard(String identification, Faction faction, String name, Rarity rarity, String description, int cost, int might, int magic, int destiny, boolean unique, URL smallImageUrl, URL largeImageUrl, Set<ExpansionInfo> expansionInfos) {
+        super(identification, faction, name, rarity, description, smallImageUrl, largeImageUrl, expansionInfos);
         this.cost = cost;
         this.might = might;
         this.magic = magic;

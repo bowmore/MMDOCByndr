@@ -4,7 +4,6 @@ import be.degreyt.mmdoc.datamodel.*;
 import com.google.common.collect.ImmutableSet;
 
 import java.net.URL;
-import java.util.Set;
 
 class CardBuilderImpl implements CardBuilder {
 
@@ -32,6 +31,10 @@ class CardBuilderImpl implements CardBuilder {
     private int attack;
     private int retaliation;
     private int health;
+    private CardType cardType;
+    private Rarity rarity;
+
+    private final ImmutableSet.Builder<MagicSchool> schools = ImmutableSet.builder();
 
     @Override
     public CardBuilder identification(String identification) {
@@ -105,6 +108,12 @@ class CardBuilderImpl implements CardBuilder {
         return new InternalCreatureBuilder();
     }
 
+    @Override
+    public CardBuilder rarity(Rarity rarity) {
+        this.rarity = rarity;
+        return this;
+    }
+
     public CardBuilder setSmallImageUrl(URL smallImageUrl) {
         this.smallImageUrl = smallImageUrl;
         return this;
@@ -118,6 +127,21 @@ class CardBuilderImpl implements CardBuilder {
     public CardBuilder expansionInfo(ExpansionInfo expansionInfo) {
         expansionInfos.add(expansionInfo);
         return this;
+    }
+
+    @Override
+    public CardBuilder type(CardType cardType) {
+        this.cardType = cardType;
+        return this;
+    }
+
+    @Override
+    public Card build() {
+        switch (cardType) {
+            case HERO:
+                return new HeroImpl(identification, faction, name, rarity, description, schools.build(), smallImageUrl, largeImageUrl, expansionInfos.build(), might, magic, destiny);
+        }
+        return null;
     }
 
     private class InternalCreatureBuilder implements CreatureBuilder {
@@ -213,7 +237,13 @@ class CardBuilderImpl implements CardBuilder {
 
         @Override
         public Creature build() {
-            return new CreatureImpl(identification, faction, name, description, cost, might, magic, destiny, unique, positionTypes.build(), creatureTypes.build(), abilities.build(), attack, retaliation, health, smallImageUrl, largeImageUrl, expansionInfos.build());
+            return new CreatureImpl(identification, faction, name, rarity, description, cost, might, magic, destiny, unique, positionTypes.build(), creatureTypes.build(), abilities.build(), attack, retaliation, health, smallImageUrl, expansionInfos.build(), largeImageUrl);
+        }
+
+        @Override
+        public CreatureBuilder rarity(Rarity rarity) {
+            CardBuilderImpl.this.rarity = rarity;
+            return this;
         }
 
         @Override
@@ -231,6 +261,12 @@ class CardBuilderImpl implements CardBuilder {
         @Override
         public CreatureBuilder expansionInfo(ExpansionInfo expansionInfo) {
             CardBuilderImpl.this.expansionInfos.add(expansionInfo);
+            return this;
+        }
+
+        @Override
+        public CardBuilder type(CardType cardType) {
+            CardBuilderImpl.this.cardType = cardType;
             return this;
         }
 

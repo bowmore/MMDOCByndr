@@ -1,9 +1,6 @@
 package be.degreyt.mmdoc.datamodel.impl;
 
-import be.degreyt.mmdoc.datamodel.Card;
-import be.degreyt.mmdoc.datamodel.ExpansionInfo;
-import be.degreyt.mmdoc.datamodel.Faction;
-import be.degreyt.mmdoc.datamodel.Format;
+import be.degreyt.mmdoc.datamodel.*;
 import com.google.common.base.Optional;
 
 import java.net.URL;
@@ -17,12 +14,14 @@ abstract class AbstractCard implements Card {
     private final URL smallImageUrl;
     private final URL largeImageUrl;
     private final Set<ExpansionInfo> expansionInfos;
+    private final Rarity rarity;
 
 
-    AbstractCard(String identification, Faction faction, String name, String description, URL smallImageUrl, URL largeImageUrl, Set<ExpansionInfo> expansionInfos) {
+    AbstractCard(String identification, Faction faction, String name, Rarity rarity, String description, URL smallImageUrl, URL largeImageUrl, Set<ExpansionInfo> expansionInfos) {
         this.identification = identification;
         this.faction = faction;
         this.name = name;
+        this.rarity = rarity;
         this.description = description;
         this.smallImageUrl = smallImageUrl;
         this.largeImageUrl = largeImageUrl;
@@ -47,6 +46,11 @@ abstract class AbstractCard implements Card {
 
     public final Set<Format> getAllowedFormats() {
         return null;
+    }
+
+    @Override
+    public Rarity getRarity() {
+        return rarity;
     }
 
     @Override

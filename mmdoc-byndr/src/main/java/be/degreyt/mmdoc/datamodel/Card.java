@@ -17,6 +17,8 @@ public interface Card extends Comparable<Card> {
 
     String getDescription();
 
+    Rarity getRarity();
+
     Optional<URL> smallImageUrl();
     Optional<URL> largeImageUrl();
 

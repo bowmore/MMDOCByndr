@@ -10,15 +10,18 @@ import java.util.Set;
  */
 public class HeroImpl extends AbstractCard implements Hero {
 
-    private int might;
-    private int magic;
-    private int destiny;
+    private final int might;
+    private final int magic;
+    private final int destiny;
     private Set<HeroAbility> heroAbilities;
     private Set<MagicSchool> magicSchools;
 
-    public HeroImpl(String identification, Faction faction, String name, String description, Set<MagicSchool> magicSchools, URL smallImageUrl, URL largeImageUrl, Set<ExpansionInfo> expansionInfos) {
-        super(identification, faction, name, description, smallImageUrl, largeImageUrl, expansionInfos);
+    public HeroImpl(String identification, Faction faction, String name, Rarity rarity, String description, Set<MagicSchool> magicSchools, URL smallImageUrl, URL largeImageUrl, Set<ExpansionInfo> expansionInfos, int might, int magic, int destiny) {
+        super(identification, faction, name, rarity, description, smallImageUrl, largeImageUrl, expansionInfos);
         this.magicSchools = magicSchools;
+        this.might = might;
+        this.magic = magic;
+        this.destiny = destiny;
     }
 
     @Override

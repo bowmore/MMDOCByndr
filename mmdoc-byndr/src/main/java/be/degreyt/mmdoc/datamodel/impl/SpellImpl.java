@@ -15,8 +15,8 @@ public class SpellImpl extends AbstractHandCard implements Spell {
     private MagicSchool school;
     private PlayType playType;
 
-    public SpellImpl(String identification, Faction faction, String name, String description, int cost, int might, int magic, int destiny, boolean unique, MagicSchool school, PlayType playType, URL smallImageUrl, URL largeImageUrl, Set<ExpansionInfo> expansionInfos) {
-        super(identification, faction, name, description, cost, might, magic, destiny, unique, smallImageUrl, largeImageUrl, expansionInfos);
+    public SpellImpl(String identification, Faction faction, String name, Rarity rarity, String description, int cost, int might, int magic, int destiny, boolean unique, MagicSchool school, PlayType playType, URL smallImageUrl, URL largeImageUrl, Set<ExpansionInfo> expansionInfos) {
+        super(identification, faction, name, rarity, description, cost, might, magic, destiny, unique, smallImageUrl, largeImageUrl, expansionInfos);
         this.school = school;
         this.playType = playType;
     }

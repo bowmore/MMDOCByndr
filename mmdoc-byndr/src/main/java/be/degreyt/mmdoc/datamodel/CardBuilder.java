@@ -26,4 +26,9 @@ public interface CardBuilder {
 
     CreatureBuilder retaliation(int retaliation);
 
+    CardBuilder type(CardType cardType);
+
+    Card build();
+
+    CardBuilder rarity(Rarity rarity);
 }
