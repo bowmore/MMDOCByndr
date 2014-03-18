@@ -1,30 +1,29 @@
 package be.degreyt.mmdoc.datamodel.impl;
 
 import be.degreyt.mmdoc.datamodel.*;
-import com.google.common.base.Optional;
+import be.degreyt.mmdoc.exceptions.UnderlyingUrlException;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Set;
 
 abstract class AbstractCard implements Card {
+    private static final String BASE_RESOURCE_PATH = "file:./mmdoc-byndr/src/main/resources/images/";
+
     private final String identification;
     private final String description;
     private final String name;
     private final Faction faction;
-    private final URL smallImageUrl;
-    private final URL largeImageUrl;
     private final Set<ExpansionInfo> expansionInfos;
     private final Rarity rarity;
 
 
-    AbstractCard(String identification, Faction faction, String name, Rarity rarity, String description, URL smallImageUrl, URL largeImageUrl, Set<ExpansionInfo> expansionInfos) {
+    AbstractCard(String identification, Faction faction, String name, Rarity rarity, String description, Set<ExpansionInfo> expansionInfos) {
         this.identification = identification;
         this.faction = faction;
         this.name = name;
         this.rarity = rarity;
         this.description = description;
-        this.smallImageUrl = smallImageUrl;
-        this.largeImageUrl = largeImageUrl;
         this.expansionInfos = expansionInfos;
     }
 
@@ -59,17 +58,45 @@ abstract class AbstractCard implements Card {
     }
 
     @Override
-    public Optional<URL> smallImageUrl() {
-        return Optional.fromNullable(smallImageUrl);
+    public URL smallImageUrl() {
+        return getUrl(this, "small/");
     }
 
     @Override
-    public Optional<URL> largeImageUrl() {
-        return Optional.fromNullable(largeImageUrl);
+    public URL largeImageUrl() {
+        return getUrl(this, "large/");
     }
 
     @Override
     public String getIdentification() {
         return identification;
     }
+
+    @Override
+    public Expansion getExpansion() {
+        return expansionInfos.stream().map(ExpansionInfo::getExpansion).findFirst().orElse(null);
+    }
+
+    private URL getUrl(Card card, String sizeFolder) {
+        String resourceName = buildResourceName(card);
+        if (resourceName == null) {
+            return null;
+        }
+        String urlString = BASE_RESOURCE_PATH + sizeFolder + resourceName;
+        try {
+            return new URL(urlString);
+        } catch (MalformedURLException e) {
+            throw new UnderlyingUrlException(e);
+        }
+    }
+
+    private String buildResourceName(Card card) {
+        StringBuilder fileName = new StringBuilder();
+        fileName.append(card.getExpansion().getExpansionCode())
+                .append('_')
+                .append(card.getIdentification())
+                .append(".jpg");
+        return fileName.toString();
+    }
+
 }

@@ -8,7 +8,7 @@ import java.net.URL;
 class CardBuilderImpl implements CardBuilder {
 
     private String identification = "";
-    private String description = "";
+    private StringBuilder description = new StringBuilder();
     private String name = null;
     private Faction faction = null;
 
@@ -33,6 +33,7 @@ class CardBuilderImpl implements CardBuilder {
     private int health;
     private CardType cardType;
     private Rarity rarity;
+    private PlayType playType = PlayType.INSTANT;
 
     private final ImmutableSet.Builder<MagicSchool> schools = ImmutableSet.builder();
 
@@ -44,7 +45,7 @@ class CardBuilderImpl implements CardBuilder {
 
     @Override
     public CardBuilder description(String description) {
-        this.description = description;
+        this.description.append(description);
         return this;
     }
 
@@ -91,21 +92,21 @@ class CardBuilderImpl implements CardBuilder {
     }
 
     @Override
-    public CreatureBuilder attack(int attack) {
+    public CardBuilder attack(int attack) {
         this.attack = attack;
-        return new InternalCreatureBuilder();
+        return this;
     }
 
     @Override
-    public CreatureBuilder health(int health) {
+    public CardBuilder health(int health) {
         this.health = health;
-        return new InternalCreatureBuilder();
+        return this;
     }
 
     @Override
-    public CreatureBuilder retaliation(int retaliation) {
+    public CardBuilder retaliation(int retaliation) {
         this.retaliation = retaliation;
-        return new InternalCreatureBuilder();
+        return this;
     }
 
     @Override
@@ -124,14 +125,23 @@ class CardBuilderImpl implements CardBuilder {
         return this;
     }
 
-    public CardBuilder expansionInfo(ExpansionInfo expansionInfo) {
-        expansionInfos.add(expansionInfo);
+    public CardBuilder expansion(Expansion expansion) {
+        expansionInfos.add(new ExpansionInfoImpl(expansion, rarity));
         return this;
     }
 
     @Override
     public CardBuilder type(CardType cardType) {
         this.cardType = cardType;
+        if (CardType.CREATURE.equals(cardType)) {
+            return new InternalCreatureBuilder();
+        }
+        return this;
+    }
+
+    @Override
+    public CardBuilder addSchool(MagicSchool magicSchool) {
+        schools.add(magicSchool);
         return this;
     }
 
@@ -139,9 +149,42 @@ class CardBuilderImpl implements CardBuilder {
     public Card build() {
         switch (cardType) {
             case HERO:
-                return new HeroImpl(identification, faction, name, rarity, description, schools.build(), smallImageUrl, largeImageUrl, expansionInfos.build(), might, magic, destiny);
+                return new HeroImpl(identification, faction, name, rarity, description.toString(), schools.build(), smallImageUrl, largeImageUrl, expansionInfos.build(), might, magic, destiny);
+            case FORTUNE:
+                return new FortuneImpl(identification, faction, name, rarity, description.toString(), cost, might, magic, destiny, unique, playType, smallImageUrl, largeImageUrl, expansionInfos.build());
+            case SPELL:
+                return new SpellImpl(identification, faction, name, rarity, description.toString(), cost, might, magic, destiny, unique, schools.build().iterator().next(), playType, smallImageUrl, largeImageUrl, expansionInfos.build());
+            case EVENT:
+                return new EventImpl(identification, faction, name, rarity, description.toString(), smallImageUrl, largeImageUrl, expansionInfos.build());
+            case BUILDING:
+                return new BuildingImpl(identification, faction, name, rarity, description.toString(), cost, might, magic, destiny, unique, smallImageUrl, largeImageUrl, expansionInfos.build());
+            default:
+                throw new IllegalStateException();
         }
-        return null;
+    }
+
+    @Override
+    public CardBuilder position(PositionType positionType) {
+        positionTypes.add(positionType);
+        return this;
+    }
+
+    @Override
+    public CardBuilder creatureType(CreatureType creatureType) {
+        creatureTypes.add(creatureType);
+        return this;
+    }
+
+    @Override
+    public CardBuilder ability(Ability ability) {
+        abilities.add(ability);
+        return this;
+    }
+
+    @Override
+    public CardBuilder playType(PlayType playType) {
+        this.playType = playType;
+        return this;
     }
 
     private class InternalCreatureBuilder implements CreatureBuilder {
@@ -237,7 +280,7 @@ class CardBuilderImpl implements CardBuilder {
 
         @Override
         public Creature build() {
-            return new CreatureImpl(identification, faction, name, rarity, description, cost, might, magic, destiny, unique, positionTypes.build(), creatureTypes.build(), abilities.build(), attack, retaliation, health, smallImageUrl, expansionInfos.build(), largeImageUrl);
+            return new CreatureImpl(identification, faction, name, rarity, description.toString(), cost, might, magic, destiny, unique, positionTypes.build(), creatureTypes.build(), abilities.build(), attack, retaliation, health, smallImageUrl, expansionInfos.build(), largeImageUrl);
         }
 
         @Override
@@ -259,16 +302,28 @@ class CardBuilderImpl implements CardBuilder {
         }
 
         @Override
-        public CreatureBuilder expansionInfo(ExpansionInfo expansionInfo) {
-            CardBuilderImpl.this.expansionInfos.add(expansionInfo);
+        public CreatureBuilder expansion(Expansion expansion) {
+            CardBuilderImpl.this.expansion(expansion);
             return this;
         }
 
         @Override
         public CardBuilder type(CardType cardType) {
+            if (!CardType.CREATURE.equals(cardType)) {
+                throw new IllegalStateException();
+            }
             CardBuilderImpl.this.cardType = cardType;
             return this;
         }
 
+        @Override
+        public CreatureBuilder addSchool(MagicSchool magicSchool) {
+            throw new IllegalStateException();
+        }
+
+        @Override
+        public CardBuilder playType(PlayType playType) {
+            return this;
+        }
     }
 }

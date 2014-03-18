@@ -14,19 +14,19 @@ import java.net.URL;
 
 public class GlyphController {
 
-    @FXML ImageView imageView;
-    @FXML Label cardName;
+    @FXML
+    ImageView imageView;
+    @FXML
+    Label cardName;
 
     public void set(CardOwnership ownership) {
         cardName.setText(ownership.getCard().getName());
-        Optional<URL> smallImageUrl = ownership.getCard().smallImageUrl();
-        if (smallImageUrl.isPresent()) {
-            try (InputStream inputStream = smallImageUrl.get().openStream()) {
-                Image image = new Image(inputStream);
-                imageView.setImage(image);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        URL smallImageUrl = ownership.getCard().smallImageUrl();
+        try (InputStream inputStream = smallImageUrl.openStream()) {
+            Image image = new Image(inputStream);
+            imageView.setImage(image);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

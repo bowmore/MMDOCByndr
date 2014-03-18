@@ -48,6 +48,7 @@ public class SpellImpl extends AbstractHandCard implements Spell {
         if (other instanceof Spell) {
             Spell otherSpell = (Spell) other;
             builder.add(getCost(), otherSpell.getCost())
+                    .add(getExpansion(), otherSpell.getExpansion())
                     .add(getMagicSchool(), otherSpell.getMagicSchool());
         }
         return builder

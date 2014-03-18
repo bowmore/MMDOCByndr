@@ -20,15 +20,27 @@ public interface CardBuilder {
 
     CardBuilder unique();
 
-    CreatureBuilder attack(int attack);
+    CardBuilder attack(int attack);
 
-    CreatureBuilder health(int health);
+    CardBuilder health(int health);
 
-    CreatureBuilder retaliation(int retaliation);
+    CardBuilder retaliation(int retaliation);
 
     CardBuilder type(CardType cardType);
 
     Card build();
 
     CardBuilder rarity(Rarity rarity);
+
+    CardBuilder addSchool(MagicSchool magicSchool);
+
+    CardBuilder position(PositionType positionType);
+
+    CardBuilder creatureType(CreatureType creatureType);
+
+    CardBuilder ability(Ability ability);
+
+    CardBuilder playType(PlayType playType);
+
+    CardBuilder expansion(Expansion expansion);
 }

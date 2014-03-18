@@ -17,7 +17,8 @@ public class ByndrApplication extends Application {
     public void start(Stage primaryStage) throws Exception {
         Injector injector = Guice.createInjector(new ByndrServicesModule(),
                 new CardProviderModule(),
-                new DataModelModule());
+                new DataModelModule(),
+                new CardProviderModule());
         try {
             FXMLLoader myLoader = new FXMLLoader(getClass().getResource("/be/degreyt/mmdoc/ui/MMDOCByndr.fxml"));
             myLoader.setControllerFactory(new GuiceControllerFactory(injector));

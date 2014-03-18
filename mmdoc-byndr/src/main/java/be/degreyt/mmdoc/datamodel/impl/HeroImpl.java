@@ -17,7 +17,7 @@ public class HeroImpl extends AbstractCard implements Hero {
     private Set<MagicSchool> magicSchools;
 
     public HeroImpl(String identification, Faction faction, String name, Rarity rarity, String description, Set<MagicSchool> magicSchools, URL smallImageUrl, URL largeImageUrl, Set<ExpansionInfo> expansionInfos, int might, int magic, int destiny) {
-        super(identification, faction, name, rarity, description, smallImageUrl, largeImageUrl, expansionInfos);
+        super(identification, faction, name, rarity, description, expansionInfos);
         this.magicSchools = magicSchools;
         this.might = might;
         this.magic = magic;

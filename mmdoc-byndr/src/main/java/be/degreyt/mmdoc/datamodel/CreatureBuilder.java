@@ -29,15 +29,9 @@ public interface CreatureBuilder extends CardBuilder {
 
     Creature build();
 
-    CreatureBuilder position(PositionType positionType);
-
-    CreatureBuilder creatureType(CreatureType creatureType);
-
-    CreatureBuilder ability(Ability ability);
-
     CreatureBuilder setSmallImageUrl(URL smallImageUrl);
 
     CreatureBuilder setLargeImageUrl(URL largeImageUrl);
 
-    CreatureBuilder expansionInfo(ExpansionInfo expansionInfo);
+    CreatureBuilder expansion(Expansion expansion);
 }

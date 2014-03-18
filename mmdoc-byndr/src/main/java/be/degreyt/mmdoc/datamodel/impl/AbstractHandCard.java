@@ -14,7 +14,7 @@ abstract class AbstractHandCard extends AbstractCard implements HandCard {
     private final boolean unique;
 
     AbstractHandCard(String identification, Faction faction, String name, Rarity rarity, String description, int cost, int might, int magic, int destiny, boolean unique, URL smallImageUrl, URL largeImageUrl, Set<ExpansionInfo> expansionInfos) {
-        super(identification, faction, name, rarity, description, smallImageUrl, largeImageUrl, expansionInfos);
+        super(identification, faction, name, rarity, description, expansionInfos);
         this.cost = cost;
         this.might = might;
         this.magic = magic;

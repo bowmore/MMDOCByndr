@@ -14,13 +14,14 @@ public interface Card extends Comparable<Card> {
     int getWildCardCost();
     Set<Format> getAllowedFormats();
     CardType getCardType();
+    Expansion getExpansion();
 
     String getDescription();
 
     Rarity getRarity();
 
-    Optional<URL> smallImageUrl();
-    Optional<URL> largeImageUrl();
+    URL smallImageUrl();
+    URL largeImageUrl();
 
     default int compareTo(Card other) {
         return new ComparisonBuilder()

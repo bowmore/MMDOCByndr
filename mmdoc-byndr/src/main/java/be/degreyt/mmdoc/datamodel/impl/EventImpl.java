@@ -10,7 +10,7 @@ import java.util.Set;
  */
 public class EventImpl extends AbstractCard implements Event {
     public EventImpl(String identification, Faction faction, String name, Rarity rarity, String description, URL smallImageUrl, URL largeImageUrl, Set<ExpansionInfo> expansionInfos) {
-        super(identification, faction, name, rarity, description, smallImageUrl, largeImageUrl, expansionInfos);
+        super(identification, faction, name, rarity, description, expansionInfos);
     }
 
     @Override
