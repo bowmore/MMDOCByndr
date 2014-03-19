@@ -49,6 +49,16 @@ public class FilterProviderImpl implements FilterProvider {
     }
 
     @Override
+    public Predicate<CardOwnership> hasExpansion(Expansion expansion) {
+        return ownership -> ownership.getCard().getExpansion().equals(expansion);
+    }
+
+    @Override
+    public Predicate<CardOwnership> hasFaction(Faction faction) {
+        return ownership -> faction.equals(ownership.getCard().getFaction());
+    }
+
+    @Override
     public NameMatcher nameMatches(String text) {
         return new NameMatcher(text);
     }

@@ -23,4 +23,8 @@ public interface FilterProvider {
     Predicate<CardOwnership> xor(Predicate<CardOwnership> first, Predicate<CardOwnership> second);
 
     Predicate<CardOwnership> nameMatches(String text);
+
+    Predicate<CardOwnership> hasExpansion(Expansion expansion);
+
+    Predicate<CardOwnership> hasFaction(Faction faction);
 }

@@ -22,6 +22,5 @@
 
     <modules>
         <module>mmdoc-byndr</module>
-        <module>mmdoc-datafiles</module>
     </modules>
 </project>

@@ -21,6 +21,6 @@ class RarityFilter extends CardOwnershipAttributeFilter<Rarity> {
 
     @Override
     public boolean test(CardOwnership cardOwnership) {
-        return cardOwnership.getCard().getExpansionInfo().stream().map(ExpansionInfo::getRarity).anyMatch(validValues()::contains);
+        return validValues().contains(cardOwnership.getCard().getRarity());
     }
 }
