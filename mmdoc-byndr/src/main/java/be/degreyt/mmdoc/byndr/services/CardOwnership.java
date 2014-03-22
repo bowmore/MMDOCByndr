@@ -18,4 +18,8 @@ public interface CardOwnership extends Comparable<CardOwnership> {
                 .add(getCard(), other.getCard())
                 .compare();
     }
+
+    void addOwned(int i);
+
+    void addWanted(int i);
 }

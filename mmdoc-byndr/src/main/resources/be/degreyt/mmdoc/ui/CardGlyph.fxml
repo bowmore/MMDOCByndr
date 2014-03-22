@@ -2,13 +2,29 @@
 
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="212.0" prefWidth="191.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.degreyt.mmdoc.ui.javafx.GlyphController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="212.0" prefWidth="161.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.degreyt.mmdoc.ui.javafx.GlyphController">
 <center><StackPane prefHeight="266.0" prefWidth="424.0" BorderPane.alignment="CENTER">
-<children>
-<ImageView fx:id="imageView" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+<children><Pane prefHeight="200.0" prefWidth="200.0" />
+<ImageView fx:id="imageView" fitHeight="173.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+<effect>
+<Glow />
+</effect></ImageView><BorderPane prefHeight="200.0" prefWidth="200.0">
+<bottom><GridPane BorderPane.alignment="CENTER">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+<children><Label fx:id="ownedLabel" onMouseClicked="#mouseClickedOnOwned" GridPane.halignment="RIGHT" /><Label fx:id="wantedLabel" onMouseClicked="#mouseClickedOnWanted" text="/" GridPane.columnIndex="1" />
+</children>
+</GridPane>
+</bottom></BorderPane>
 </children>
 </StackPane>
 </center>

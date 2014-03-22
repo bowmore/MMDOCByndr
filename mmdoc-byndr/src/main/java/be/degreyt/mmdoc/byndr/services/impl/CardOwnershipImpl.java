@@ -35,4 +35,13 @@ class CardOwnershipImpl implements CardOwnership {
         return Math.max(0, wanted - owned);
     }
 
+    @Override
+    public void addOwned(int i) {
+        owned = Math.max(0, owned + i);
+    }
+
+    @Override
+    public void addWanted(int i) {
+        wanted = Math.max(0, wanted + i);
+    }
 }
