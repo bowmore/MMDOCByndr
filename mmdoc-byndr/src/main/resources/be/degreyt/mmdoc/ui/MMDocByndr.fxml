@@ -110,7 +110,7 @@
 </top>
 </BorderPane>
 </content></TitledPane>
-                    <TitledPane prefHeight="200.0" prefWidth="200.0" text="Faction">
+                    <TitledPane animated="false" prefHeight="200.0" prefWidth="200.0" text="Faction">
 <content><BorderPane prefHeight="200.0" prefWidth="200.0">
 <top>
 <GridPane BorderPane.alignment="CENTER">
@@ -139,7 +139,7 @@
 </top>
 </BorderPane>
 </content></TitledPane>
-                    <TitledPane prefHeight="200.0" prefWidth="200.0" text="Spell School">
+                    <TitledPane animated="false" prefHeight="200.0" prefWidth="200.0" text="Spell School">
 <content><BorderPane prefHeight="200.0" prefWidth="200.0">
 <top>
 <GridPane BorderPane.alignment="CENTER">
@@ -171,7 +171,20 @@
                   </panes>
                 </Accordion>
               </children>
-            </AnchorPane>
+            </AnchorPane><BorderPane prefHeight="200.0" prefWidth="200.0">
+<center>
+<StackPane fx:id="viewStackPane" BorderPane.alignment="CENTER">
+<children><BorderPane prefHeight="200.0" prefWidth="200.0">
+<center><TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+  <columns>
+    <TableColumn minWidth="220.0" prefWidth="220.0" text="Name" />
+    <TableColumn minWidth="120.0" prefWidth="120.0" text="Type" /><TableColumn minWidth="120.0" prefWidth="120.0" text="Rarity" /><TableColumn minWidth="120.0" prefWidth="120.0" text="Faction" /><TableColumn minWidth="120.0" prefWidth="120.0" text="Spell School" /><TableColumn minWidth="80.0" text="Owned" /><TableColumn minWidth="80.0" text="Wanted" /><TableColumn minWidth="80.0" text="Required" />
+  </columns>
+<columnResizePolicy>
+<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+</columnResizePolicy>
+</TableView>
+</center></BorderPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
               <children>
 <ScrollPane fitToWidth="true" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefViewportHeight="849.0" prefViewportWidth="950.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -181,6 +194,19 @@
 </ScrollPane>
               </children>
             </AnchorPane>
+</children>
+</StackPane>
+</center>
+<bottom><FlowPane alignment="CENTER_LEFT" columnHalignment="RIGHT" hgap="5.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="32.0" prefWidth="950.0" BorderPane.alignment="CENTER">
+<children><CheckBox mnemonicParsing="false" onAction="#viewChanged" text="Table View">
+<opaqueInsets>
+<Insets />
+</opaqueInsets></CheckBox>
+</children>
+<padding>
+<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+</padding></FlowPane>
+</bottom></BorderPane>
           </items>
         </SplitPane>
       </center>

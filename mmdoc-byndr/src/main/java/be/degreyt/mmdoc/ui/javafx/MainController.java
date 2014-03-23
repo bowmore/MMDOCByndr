@@ -15,6 +15,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.StackPane;
 
 import javax.inject.Inject;
 import java.io.IOException;
@@ -29,6 +30,7 @@ public class MainController {
     private final ByndrService byndrService;
 
     @FXML private FlowPane resultPane;
+    @FXML private StackPane viewStackPane;
 
     private Predicate<CardOwnership> cardTypes = new OrPredicate();
 
@@ -225,5 +227,11 @@ public class MainController {
 
     public void waterSelectionChanged(ActionEvent actionEvent) {
         handleCheckBoxFilterEvent(actionEvent, schoolGroup, node -> byndrService.getFilterProvider().hasMagicSchool(MagicSchool.WATER));
+    }
+
+    public void viewChanged(ActionEvent actionEvent) {
+        CheckBox checkBox = (CheckBox) actionEvent.getSource();
+        Node bottom = viewStackPane.getChildren().remove(0);
+        viewStackPane.getChildren().add(bottom);
     }
 }
