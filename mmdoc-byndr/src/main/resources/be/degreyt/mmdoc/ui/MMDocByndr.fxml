@@ -6,217 +6,253 @@
 <?import javafx.scene.layout.*?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="951.0" prefWidth="1299.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.degreyt.mmdoc.ui.javafx.MainController">
-  <center>
-    <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-      <center>
-        <SplitPane dividerPositions="0.26522744795682346" focusTraversable="true" prefHeight="160.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-          <items>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-              <children>
-                <Accordion prefHeight="849.0" prefWidth="341.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                  <panes><TitledPane animated="false" text="Text">
-<content><BorderPane prefHeight="200.0" prefWidth="200.0">
-<top><GridPane BorderPane.alignment="CENTER">
-  <columnConstraints>
-    <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="153.0" minWidth="10.0" prefWidth="117.0" />
-<ColumnConstraints hgrow="SOMETIMES" maxWidth="233.0" minWidth="10.0" prefWidth="203.0" />
-  </columnConstraints>
-  <rowConstraints>
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-  </rowConstraints>
-<children><Label text="Card Name">
-<GridPane.margin>
-<Insets right="10.0" />
-</GridPane.margin></Label><TextField onKeyReleased="#cardNameFilterChanged" GridPane.columnIndex="1" />
-</children>
-</GridPane>
-</top></BorderPane>
-</content>
-</TitledPane>
-                    <TitledPane animated="false" text="Card Type">
-<content><BorderPane prefHeight="200.0" prefWidth="200.0">
-<top><GridPane BorderPane.alignment="CENTER">
-  <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-  </columnConstraints>
-  <rowConstraints>
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-  </rowConstraints>
-<children><CheckBox mnemonicParsing="false" onAction="#heroCardTypeSelectionChanged" text="Hero" /><CheckBox mnemonicParsing="false" onAction="#eventCardTypeSelectionChanged" text="Event" GridPane.rowIndex="1" />
-<CheckBox layoutX="10.0" layoutY="47.0" mnemonicParsing="false" onAction="#creatureCardTypeSelectionChanged" text="Creature" GridPane.rowIndex="2" />
-<CheckBox layoutX="10.0" layoutY="77.0" mnemonicParsing="false" onAction="#spellCardTypeSelectionChanged" text="Spell" GridPane.rowIndex="3" />
-<CheckBox layoutX="10.0" layoutY="107.0" mnemonicParsing="false" onAction="#fortuneCardTypeSelectionChanged" text="Fortune" GridPane.rowIndex="4" />
-<CheckBox layoutX="10.0" layoutY="17.0" mnemonicParsing="false" onAction="#buildingCardTypeSelectionChanged" text="Building" GridPane.rowIndex="5" />
-</children>
-</GridPane>
-</top></BorderPane>
-</content></TitledPane>
-                    <TitledPane animated="false" text="Set">
-<content><BorderPane prefHeight="200.0" prefWidth="200.0">
-<top>
-<GridPane BorderPane.alignment="CENTER">
-<children>
-<CheckBox mnemonicParsing="false" onAction="#baseSet1SelectionChanged" text="Base Set 1" />
-<CheckBox mnemonicParsing="false" onAction="#baseSet2SelectionChanged" text="Base Set 2" GridPane.rowIndex="1" />
-<CheckBox layoutX="10.0" layoutY="47.0" mnemonicParsing="false" onAction="#voidRisingSelectionChanged" text="Void Rising" GridPane.rowIndex="2" />
-<CheckBox layoutX="10.0" layoutY="77.0" mnemonicParsing="false" onAction="#heraldOfTheVoidSelectionChanged" text="Herald of the Void" GridPane.rowIndex="3" />
-<CheckBox layoutX="10.0" layoutY="107.0" mnemonicParsing="false" onAction="#forgottenWarsSelectionChanged" text="Forgotten Wars" GridPane.rowIndex="4" />
-<CheckBox layoutX="10.0" layoutY="17.0" mnemonicParsing="false" onAction="#fiveTowersSelectionChanged" text="Five Towers" GridPane.rowIndex="5" />
-<CheckBox layoutX="10.0" layoutY="167.0" mnemonicParsing="false" onAction="#rewardsSelectionChanged" text="Rewards" GridPane.rowIndex="6" />
-</children>
-<columnConstraints>
-<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-</columnConstraints>
-<rowConstraints>
-<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-</rowConstraints>
-</GridPane>
-</top>
-</BorderPane>
-</content></TitledPane>
-                    <TitledPane animated="false" text="Rarity">
-<content><BorderPane prefHeight="200.0" prefWidth="200.0">
-<top>
-<GridPane BorderPane.alignment="CENTER">
-<children>
-<CheckBox mnemonicParsing="false" onAction="#commonSelectionChanged" text="Common" />
-<CheckBox mnemonicParsing="false" onAction="#uncommonSelectionChanged" text="Uncommon" GridPane.rowIndex="1" />
-<CheckBox layoutX="10.0" layoutY="47.0" mnemonicParsing="false" onAction="#rareSelectionChanged" text="Rare" GridPane.rowIndex="2" />
-<CheckBox layoutX="10.0" layoutY="77.0" mnemonicParsing="false" onAction="#epicSelectionChanged" text="Epic" GridPane.rowIndex="3" />
-<CheckBox layoutX="10.0" layoutY="107.0" mnemonicParsing="false" onAction="#heroicSelectionChanged" text="Heroic" GridPane.rowIndex="4" />
-</children>
-<columnConstraints>
-<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-</columnConstraints>
-<rowConstraints>
-<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-</rowConstraints>
-</GridPane>
-</top>
-</BorderPane>
-</content></TitledPane>
-                    <TitledPane animated="false" prefHeight="200.0" prefWidth="200.0" text="Faction">
-<content><BorderPane prefHeight="200.0" prefWidth="200.0">
-<top>
-<GridPane BorderPane.alignment="CENTER">
-<children>
-<CheckBox mnemonicParsing="false" onAction="#academySelectionChanged" text="Academy" />
-<CheckBox mnemonicParsing="false" onAction="#havenSelectionChanged" text="Haven" GridPane.rowIndex="1" />
-<CheckBox layoutX="10.0" layoutY="47.0" mnemonicParsing="false" onAction="#infernoSelectionChanged" text="Inferno" GridPane.rowIndex="2" />
-<CheckBox layoutX="10.0" layoutY="77.0" mnemonicParsing="false" onAction="#necropolisSelectionChanged" text="Necropolis" GridPane.rowIndex="3" />
-<CheckBox layoutX="10.0" layoutY="107.0" mnemonicParsing="false" onAction="#sanctuarySelectionChanged" text="Sanctuary" GridPane.rowIndex="4" />
-<CheckBox layoutX="10.0" layoutY="17.0" mnemonicParsing="false" onAction="#strongholdSelectionChanged" text="Stronghold" GridPane.rowIndex="5" />
-<CheckBox layoutX="10.0" layoutY="167.0" mnemonicParsing="false" onAction="#neutralSelectionChanged" text="Neutral" GridPane.rowIndex="6" />
-</children>
-<columnConstraints>
-<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-</columnConstraints>
-<rowConstraints>
-<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-</rowConstraints>
-</GridPane>
-</top>
-</BorderPane>
-</content></TitledPane>
-                    <TitledPane animated="false" prefHeight="200.0" prefWidth="200.0" text="Spell School">
-<content><BorderPane prefHeight="200.0" prefWidth="200.0">
-<top>
-<GridPane BorderPane.alignment="CENTER">
-<children>
-<CheckBox mnemonicParsing="false" onAction="#airSelectionChanged" text="Air" />
-<CheckBox mnemonicParsing="false" onAction="#darkSelectionChanged" text="Dark" GridPane.rowIndex="1" />
-<CheckBox layoutX="10.0" layoutY="47.0" mnemonicParsing="false" onAction="#earthSelectionChanged" text="Earth" GridPane.rowIndex="2" />
-<CheckBox layoutX="10.0" layoutY="77.0" mnemonicParsing="false" onAction="#fireSelectionChanged" text="Fire" GridPane.rowIndex="3" />
-<CheckBox layoutX="10.0" layoutY="107.0" mnemonicParsing="false" onAction="#lightSelectionChanged" text="Light" GridPane.rowIndex="4" />
-<CheckBox layoutX="10.0" layoutY="17.0" mnemonicParsing="false" onAction="#primeSelectionChanged" text="Prime" GridPane.rowIndex="5" />
-<CheckBox layoutX="10.0" layoutY="167.0" mnemonicParsing="false" onAction="#waterSelectionChanged" text="Water" GridPane.rowIndex="6" />
-</children>
-<columnConstraints>
-<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-</columnConstraints>
-<rowConstraints>
-<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-</rowConstraints>
-</GridPane>
-</top>
-</BorderPane>
-</content></TitledPane>
-                  </panes>
-                </Accordion>
-              </children>
-            </AnchorPane><BorderPane prefHeight="200.0" prefWidth="200.0">
-<center>
-<StackPane fx:id="viewStackPane" BorderPane.alignment="CENTER">
-<children><BorderPane prefHeight="200.0" prefWidth="200.0">
-<center><TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-  <columns>
-    <TableColumn minWidth="220.0" prefWidth="220.0" text="Name" />
-    <TableColumn minWidth="120.0" prefWidth="120.0" text="Type" /><TableColumn minWidth="120.0" prefWidth="120.0" text="Rarity" /><TableColumn minWidth="120.0" prefWidth="120.0" text="Faction" /><TableColumn minWidth="120.0" prefWidth="120.0" text="Spell School" /><TableColumn minWidth="80.0" text="Owned" /><TableColumn minWidth="80.0" text="Wanted" /><TableColumn minWidth="80.0" text="Required" />
-  </columns>
-<columnResizePolicy>
-<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-</columnResizePolicy>
-</TableView>
-</center></BorderPane>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-              <children>
-<ScrollPane fitToWidth="true" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefViewportHeight="849.0" prefViewportWidth="950.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-<content>
-                <FlowPane fx:id="resultPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-</content>
-</ScrollPane>
-              </children>
-            </AnchorPane>
-</children>
-</StackPane>
-</center>
-<bottom><FlowPane alignment="CENTER_LEFT" columnHalignment="RIGHT" hgap="5.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="32.0" prefWidth="950.0" BorderPane.alignment="CENTER">
-<children><CheckBox mnemonicParsing="false" onAction="#viewChanged" text="Table View">
-<opaqueInsets>
-<Insets />
-</opaqueInsets></CheckBox>
-</children>
-<padding>
-<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-</padding></FlowPane>
-</bottom></BorderPane>
-          </items>
-        </SplitPane>
-      </center>
-    </BorderPane>
-  </center>
-  <top>
-    <BorderPane prefHeight="100.0" prefWidth="1299.0" BorderPane.alignment="CENTER">
-      <center>
-        <Label text="MMDOC Byndr" BorderPane.alignment="CENTER" />
-      </center>
-    </BorderPane>
-  </top>
+    <center>
+        <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <center>
+                <SplitPane dividerPositions="0.26522744795682346" focusTraversable="true" prefHeight="160.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                    <items>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                            <children>
+                                <Accordion prefHeight="849.0" prefWidth="341.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <panes>
+                                        <TitledPane animated="false" text="Text">
+                                            <content>
+                                                <BorderPane prefHeight="200.0" prefWidth="200.0">
+                                                    <top>
+                                                        <GridPane BorderPane.alignment="CENTER">
+                                                            <columnConstraints>
+                                                                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="153.0" minWidth="10.0" prefWidth="117.0" />
+                                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="233.0" minWidth="10.0" prefWidth="203.0" />
+                                                            </columnConstraints>
+                                                            <rowConstraints>
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            </rowConstraints>
+                                                            <children>
+                                                                <Label text="Card Name">
+                                                                    <GridPane.margin>
+                                                                        <Insets right="10.0" />
+                                                                    </GridPane.margin>
+                                                                </Label>
+                                                                <TextField onKeyReleased="#cardNameFilterChanged" GridPane.columnIndex="1" />
+                                                            </children>
+                                                        </GridPane>
+                                                    </top>
+                                                </BorderPane>
+                                            </content>
+                                        </TitledPane>
+                                        <TitledPane animated="false" text="Card Type">
+                                            <content>
+                                                <BorderPane prefHeight="200.0" prefWidth="200.0">
+                                                    <top>
+                                                        <GridPane BorderPane.alignment="CENTER">
+                                                            <columnConstraints>
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                            </columnConstraints>
+                                                            <rowConstraints>
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            </rowConstraints>
+                                                            <children>
+                                                                <CheckBox mnemonicParsing="false" onAction="#heroCardTypeSelectionChanged" text="Hero" />
+                                                                <CheckBox mnemonicParsing="false" onAction="#eventCardTypeSelectionChanged" text="Event" GridPane.rowIndex="1" />
+                                                                <CheckBox layoutX="10.0" layoutY="47.0" mnemonicParsing="false" onAction="#creatureCardTypeSelectionChanged" text="Creature" GridPane.rowIndex="2" />
+                                                                <CheckBox layoutX="10.0" layoutY="77.0" mnemonicParsing="false" onAction="#spellCardTypeSelectionChanged" text="Spell" GridPane.rowIndex="3" />
+                                                                <CheckBox layoutX="10.0" layoutY="107.0" mnemonicParsing="false" onAction="#fortuneCardTypeSelectionChanged" text="Fortune" GridPane.rowIndex="4" />
+                                                                <CheckBox layoutX="10.0" layoutY="17.0" mnemonicParsing="false" onAction="#buildingCardTypeSelectionChanged" text="Building" GridPane.rowIndex="5" />
+                                                            </children>
+                                                        </GridPane>
+                                                    </top>
+                                                </BorderPane>
+                                            </content>
+                                        </TitledPane>
+                                        <TitledPane animated="false" text="Set">
+                                            <content>
+                                                <BorderPane prefHeight="200.0" prefWidth="200.0">
+                                                    <top>
+                                                        <GridPane BorderPane.alignment="CENTER">
+                                                            <children>
+                                                                <CheckBox mnemonicParsing="false" onAction="#baseSet1SelectionChanged" text="Base Set 1" />
+                                                                <CheckBox mnemonicParsing="false" onAction="#baseSet2SelectionChanged" text="Base Set 2" GridPane.rowIndex="1" />
+                                                                <CheckBox layoutX="10.0" layoutY="47.0" mnemonicParsing="false" onAction="#voidRisingSelectionChanged" text="Void Rising" GridPane.rowIndex="2" />
+                                                                <CheckBox layoutX="10.0" layoutY="77.0" mnemonicParsing="false" onAction="#heraldOfTheVoidSelectionChanged" text="Herald of the Void" GridPane.rowIndex="3" />
+                                                                <CheckBox layoutX="10.0" layoutY="107.0" mnemonicParsing="false" onAction="#forgottenWarsSelectionChanged" text="Forgotten Wars" GridPane.rowIndex="4" />
+                                                                <CheckBox layoutX="10.0" layoutY="17.0" mnemonicParsing="false" onAction="#fiveTowersSelectionChanged" text="Five Towers" GridPane.rowIndex="5" />
+                                                                <CheckBox layoutX="10.0" layoutY="167.0" mnemonicParsing="false" onAction="#rewardsSelectionChanged" text="Rewards" GridPane.rowIndex="6" />
+                                                            </children>
+                                                            <columnConstraints>
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                            </columnConstraints>
+                                                            <rowConstraints>
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            </rowConstraints>
+                                                        </GridPane>
+                                                    </top>
+                                                </BorderPane>
+                                            </content>
+                                        </TitledPane>
+                                        <TitledPane animated="false" text="Rarity">
+                                            <content>
+                                                <BorderPane prefHeight="200.0" prefWidth="200.0">
+                                                    <top>
+                                                        <GridPane BorderPane.alignment="CENTER">
+                                                            <children>
+                                                                <CheckBox mnemonicParsing="false" onAction="#commonSelectionChanged" text="Common" />
+                                                                <CheckBox mnemonicParsing="false" onAction="#uncommonSelectionChanged" text="Uncommon" GridPane.rowIndex="1" />
+                                                                <CheckBox layoutX="10.0" layoutY="47.0" mnemonicParsing="false" onAction="#rareSelectionChanged" text="Rare" GridPane.rowIndex="2" />
+                                                                <CheckBox layoutX="10.0" layoutY="77.0" mnemonicParsing="false" onAction="#epicSelectionChanged" text="Epic" GridPane.rowIndex="3" />
+                                                                <CheckBox layoutX="10.0" layoutY="107.0" mnemonicParsing="false" onAction="#heroicSelectionChanged" text="Heroic" GridPane.rowIndex="4" />
+                                                            </children>
+                                                            <columnConstraints>
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                            </columnConstraints>
+                                                            <rowConstraints>
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            </rowConstraints>
+                                                        </GridPane>
+                                                    </top>
+                                                </BorderPane>
+                                            </content>
+                                        </TitledPane>
+                                        <TitledPane animated="false" prefHeight="200.0" prefWidth="200.0" text="Faction">
+                                            <content>
+                                                <BorderPane prefHeight="200.0" prefWidth="200.0">
+                                                    <top>
+                                                        <GridPane BorderPane.alignment="CENTER">
+                                                            <children>
+                                                                <CheckBox mnemonicParsing="false" onAction="#academySelectionChanged" text="Academy" />
+                                                                <CheckBox mnemonicParsing="false" onAction="#havenSelectionChanged" text="Haven" GridPane.rowIndex="1" />
+                                                                <CheckBox layoutX="10.0" layoutY="47.0" mnemonicParsing="false" onAction="#infernoSelectionChanged" text="Inferno" GridPane.rowIndex="2" />
+                                                                <CheckBox layoutX="10.0" layoutY="77.0" mnemonicParsing="false" onAction="#necropolisSelectionChanged" text="Necropolis" GridPane.rowIndex="3" />
+                                                                <CheckBox layoutX="10.0" layoutY="107.0" mnemonicParsing="false" onAction="#sanctuarySelectionChanged" text="Sanctuary" GridPane.rowIndex="4" />
+                                                                <CheckBox layoutX="10.0" layoutY="17.0" mnemonicParsing="false" onAction="#strongholdSelectionChanged" text="Stronghold" GridPane.rowIndex="5" />
+                                                                <CheckBox layoutX="10.0" layoutY="167.0" mnemonicParsing="false" onAction="#neutralSelectionChanged" text="Neutral" GridPane.rowIndex="6" />
+                                                            </children>
+                                                            <columnConstraints>
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                            </columnConstraints>
+                                                            <rowConstraints>
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            </rowConstraints>
+                                                        </GridPane>
+                                                    </top>
+                                                </BorderPane>
+                                            </content>
+                                        </TitledPane>
+                                        <TitledPane animated="false" prefHeight="200.0" prefWidth="200.0" text="Spell School">
+                                            <content>
+                                                <BorderPane prefHeight="200.0" prefWidth="200.0">
+                                                    <top>
+                                                        <GridPane BorderPane.alignment="CENTER">
+                                                            <children>
+                                                                <CheckBox mnemonicParsing="false" onAction="#airSelectionChanged" text="Air" />
+                                                                <CheckBox mnemonicParsing="false" onAction="#darkSelectionChanged" text="Dark" GridPane.rowIndex="1" />
+                                                                <CheckBox layoutX="10.0" layoutY="47.0" mnemonicParsing="false" onAction="#earthSelectionChanged" text="Earth" GridPane.rowIndex="2" />
+                                                                <CheckBox layoutX="10.0" layoutY="77.0" mnemonicParsing="false" onAction="#fireSelectionChanged" text="Fire" GridPane.rowIndex="3" />
+                                                                <CheckBox layoutX="10.0" layoutY="107.0" mnemonicParsing="false" onAction="#lightSelectionChanged" text="Light" GridPane.rowIndex="4" />
+                                                                <CheckBox layoutX="10.0" layoutY="17.0" mnemonicParsing="false" onAction="#primeSelectionChanged" text="Prime" GridPane.rowIndex="5" />
+                                                                <CheckBox layoutX="10.0" layoutY="167.0" mnemonicParsing="false" onAction="#waterSelectionChanged" text="Water" GridPane.rowIndex="6" />
+                                                            </children>
+                                                            <columnConstraints>
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                            </columnConstraints>
+                                                            <rowConstraints>
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            </rowConstraints>
+                                                        </GridPane>
+                                                    </top>
+                                                </BorderPane>
+                                            </content>
+                                        </TitledPane>
+                                    </panes>
+                                </Accordion>
+                            </children>
+                        </AnchorPane>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0">
+                            <center>
+                                <StackPane fx:id="viewStackPane" BorderPane.alignment="CENTER">
+                                    <children>
+                                        <BorderPane prefHeight="200.0" prefWidth="200.0">
+                                            <center>
+                                                <TableView fx:id="table" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                                    <columns>
+                                                        <TableColumn fx:id="nameColumn" minWidth="220.0" prefWidth="220.0" text="Name" />
+                                                        <TableColumn fx:id="typeColumn" minWidth="120.0" prefWidth="120.0" text="Type" />
+                                                        <TableColumn fx:id="rarityColumn" minWidth="120.0" prefWidth="120.0" text="Rarity" />
+                                                        <TableColumn fx:id="factionColumn" minWidth="120.0" prefWidth="120.0" text="Faction" />
+                                                        <TableColumn fx:id="spellSchoolColumn" minWidth="120.0" prefWidth="120.0" text="Spell School" />
+                                                        <TableColumn fx:id="ownedColumn" minWidth="80.0" text="Owned" />
+                                                        <TableColumn fx:id="wantedColumn" minWidth="80.0" text="Wanted" />
+                                                        <TableColumn fx:id="requiredColumn" minWidth="80.0" text="Required" />
+                                                    </columns>
+                                                    <columnResizePolicy>
+                                                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                    </columnResizePolicy>
+                                                </TableView>
+                                            </center>
+                                        </BorderPane>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                            <children>
+                                                <ScrollPane fitToWidth="true" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefViewportHeight="849.0" prefViewportWidth="950.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                    <content>
+                                                        <FlowPane fx:id="resultPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                    </content>
+                                                </ScrollPane>
+                                            </children>
+                                        </AnchorPane>
+                                    </children>
+                                </StackPane>
+                            </center>
+                            <bottom>
+                                <FlowPane alignment="CENTER_LEFT" columnHalignment="RIGHT" hgap="5.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="32.0" prefWidth="950.0" BorderPane.alignment="CENTER">
+                                    <children>
+                                        <CheckBox mnemonicParsing="false" onAction="#viewChanged" text="Table View">
+                                            <opaqueInsets>
+                                                <Insets />
+                                            </opaqueInsets>
+                                        </CheckBox>
+                                    </children>
+                                    <padding>
+                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                    </padding>
+                                </FlowPane>
+                            </bottom>
+                        </BorderPane>
+                    </items>
+                </SplitPane>
+            </center>
+        </BorderPane>
+    </center>
+    <top>
+        <BorderPane prefHeight="100.0" prefWidth="1299.0" BorderPane.alignment="CENTER">
+            <center>
+                <Label text="MMDOC Byndr" BorderPane.alignment="CENTER" />
+            </center>
+        </BorderPane>
+    </top>
 </BorderPane>

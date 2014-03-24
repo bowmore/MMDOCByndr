@@ -6,20 +6,30 @@ import be.degreyt.mmdoc.byndr.services.CardOwnership;
 import be.degreyt.mmdoc.byndr.services.NameMatcher;
 import be.degreyt.mmdoc.datamodel.*;
 import be.degreyt.mmdoc.exceptions.UnderlyingIOException;
+import javafx.animation.FadeTransition;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
+import javafx.util.Duration;
 
 import javax.inject.Inject;
 import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.Semaphore;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -28,9 +38,33 @@ import static java.util.Arrays.asList;
 public class MainController {
 
     private final ByndrService byndrService;
+    @FXML
+    public TableColumn<CardOwnership, String> nameColumn;
+    @FXML
+    public TableColumn<CardOwnership, String> typeColumn;
+    @FXML
+    public TableColumn<CardOwnership, String> rarityColumn;
+    @FXML
+    public TableColumn<CardOwnership, String> factionColumn;
+    @FXML
+    public TableColumn<CardOwnership, String> spellSchoolColumn;
+    @FXML
+    public TableColumn<CardOwnership, String> ownedColumn;
+    @FXML
+    public TableColumn<CardOwnership, String> wantedColumn;
+    @FXML
+    public TableColumn<CardOwnership, String> requiredColumn;
+    @FXML
+    public TableView<CardOwnership> table;
 
-    @FXML private FlowPane resultPane;
-    @FXML private StackPane viewStackPane;
+    @FXML
+    private FlowPane resultPane;
+    @FXML
+    private StackPane viewStackPane;
+
+    private ObservableList<CardOwnership> tableData = FXCollections.observableArrayList();
+
+    private Semaphore animationSemaphore = new Semaphore(1);
 
     private Predicate<CardOwnership> cardTypes = new OrPredicate();
 
@@ -51,8 +85,27 @@ public class MainController {
     }
 
     public void initScreen() {
+        table.setItems(tableData);
+        nameColumn.setCellValueFactory(new StringValueExtractor(ownership -> ownership.getCard().getName()));
+        typeColumn.setCellValueFactory(new StringValueExtractor(ownership -> ownership.getCard().getCardType().toString()));
+        rarityColumn.setCellValueFactory(new StringValueExtractor(ownership -> ownership.getCard().getRarity().toString()));
+        factionColumn.setCellValueFactory(new StringValueExtractor(ownership -> ownership.getCard().getFaction() == null ? "" : ownership.getCard().getFaction().toString()));
+        spellSchoolColumn.setCellValueFactory(new StringValueExtractor(new Function<CardOwnership, String>() {
+            @Override
+            public String apply(CardOwnership ownership) {
+                return ownership.getCard() instanceof Spell ? ((Spell) ownership.getCard()).getMagicSchool().toString() : "";
+            }
+        }));
+        ownedColumn.setCellValueFactory(new StringValueExtractor(ownership -> String.valueOf(ownership.ownedCopies())));
+        wantedColumn.setCellValueFactory(new StringValueExtractor(ownership -> String.valueOf(ownership.wantedCopies())));
+        requiredColumn.setCellValueFactory(new StringValueExtractor(ownership -> String.valueOf(ownership.required())));
         cardCollection = byndrService.load();
-        cardCollection.ownerships().stream().sorted().forEach(this::addGlyph);
+        cardCollection.ownerships().stream().sorted().forEach(this::addOwnership);
+    }
+
+    private void addOwnership(CardOwnership ownership) {
+        tableData.add(ownership);
+        addGlyph(ownership);
     }
 
     private void addGlyph(CardOwnership ownership) {
@@ -122,7 +175,8 @@ public class MainController {
 
     private void applyFilter() {
         resultPane.getChildren().clear();
-        cardCollection.ownerships(mainFilter).stream().sorted().forEach(this::addGlyph);
+        tableData.clear();
+        cardCollection.ownerships(mainFilter).stream().sorted().forEach(this::addOwnership);
     }
 
     public void baseSet1SelectionChanged(ActionEvent actionEvent) {
@@ -230,8 +284,39 @@ public class MainController {
     }
 
     public void viewChanged(ActionEvent actionEvent) {
-        CheckBox checkBox = (CheckBox) actionEvent.getSource();
-        Node bottom = viewStackPane.getChildren().remove(0);
-        viewStackPane.getChildren().add(bottom);
+        if (!animationSemaphore.tryAcquire()) {
+            CheckBox checkBox = (CheckBox) actionEvent.getSource();
+            checkBox.setSelected(!checkBox.isSelected());
+            return;
+        }
+        assert viewStackPane.getChildren().size() == 2;
+        Node node = viewStackPane.getChildren().get(1);
+        FadeTransition fadeTransition = new FadeTransition(Duration.millis(400), node);
+        fadeTransition.setFromValue(1.0d);
+        fadeTransition.setToValue(0.0d);
+        fadeTransition.play();
+        fadeTransition.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                viewStackPane.getChildren().remove(1);
+                node.setOpacity(1.0d);
+                viewStackPane.getChildren().add(0, node);
+                animationSemaphore.release();
+            }
+        });
+    }
+
+    private static class StringValueExtractor implements javafx.util.Callback<TableColumn.CellDataFeatures<CardOwnership, String>,ObservableValue<String>> {
+
+        private final Function<CardOwnership, String> extraction;
+
+        private StringValueExtractor(Function<CardOwnership, String> extraction) {
+            this.extraction = extraction;
+        }
+
+        @Override
+        public ObservableValue<String> call(TableColumn.CellDataFeatures<CardOwnership, String> features) {
+            return new SimpleStringProperty(extraction.apply(features.getValue()));
+        }
     }
 }
