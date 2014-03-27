@@ -1,4 +1,4 @@
-package be.degreyt.mmdoc.cardprovider;
+package be.degreyt.mmdoc.cardlibrary;
 
 import java.io.File;
 import java.util.stream.Stream;

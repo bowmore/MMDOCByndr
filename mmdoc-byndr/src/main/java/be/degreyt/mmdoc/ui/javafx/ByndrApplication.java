@@ -1,7 +1,7 @@
 package be.degreyt.mmdoc.ui.javafx;
 
 import be.degreyt.mmdoc.byndr.services.impl.ByndrServicesModule;
-import be.degreyt.mmdoc.cardprovider.impl.CardProviderModule;
+import be.degreyt.mmdoc.cardlibrary.impl.CardProviderModule;
 import be.degreyt.mmdoc.datamodel.impl.DataModelModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;

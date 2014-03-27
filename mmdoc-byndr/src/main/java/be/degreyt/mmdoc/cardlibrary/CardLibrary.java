@@ -1,9 +1,9 @@
-package be.degreyt.mmdoc.cardprovider;
+package be.degreyt.mmdoc.cardlibrary;
 
 import be.degreyt.mmdoc.datamodel.*;
 
 import java.util.List;
 
-public interface CardProvider {
+public interface CardLibrary {
     List<Card> getCards();
 }

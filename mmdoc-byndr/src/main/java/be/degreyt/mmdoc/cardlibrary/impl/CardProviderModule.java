@@ -1,9 +1,8 @@
-package be.degreyt.mmdoc.cardprovider.impl;
+package be.degreyt.mmdoc.cardlibrary.impl;
 
-import be.degreyt.mmdoc.cardprovider.CardLoader;
-import be.degreyt.mmdoc.cardprovider.CardParser;
-import be.degreyt.mmdoc.cardprovider.CardProvider;
-import be.degreyt.mmdoc.cardprovider.DataFileEnumerator;
+import be.degreyt.mmdoc.cardlibrary.CardLoader;
+import be.degreyt.mmdoc.cardlibrary.CardParser;
+import be.degreyt.mmdoc.cardlibrary.DataFileEnumerator;
 import com.google.inject.AbstractModule;
 
 public class CardProviderModule extends AbstractModule {

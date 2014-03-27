@@ -1,6 +1,6 @@
-package be.degreyt.mmdoc.cardprovider.impl;
+package be.degreyt.mmdoc.cardlibrary.impl;
 
-import be.degreyt.mmdoc.cardprovider.DataFileEnumerator;
+import be.degreyt.mmdoc.cardlibrary.DataFileEnumerator;
 
 import java.io.File;
 import java.util.Arrays;

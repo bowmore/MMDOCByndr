@@ -1,6 +1,6 @@
-package be.degreyt.mmdoc.cardprovider.impl;
+package be.degreyt.mmdoc.cardlibrary.impl;
 
-import be.degreyt.mmdoc.cardprovider.CardParser;
+import be.degreyt.mmdoc.cardlibrary.CardParser;
 import be.degreyt.mmdoc.datamodel.*;
 import com.google.inject.Provider;
 import org.codehaus.stax2.XMLInputFactory2;

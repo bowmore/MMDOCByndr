@@ -1,8 +1,7 @@
-package be.degreyt.mmdoc.cardprovider.impl;
+package be.degreyt.mmdoc.cardlibrary.impl;
 
-import be.degreyt.mmdoc.cardprovider.CardProvider;
+import be.degreyt.mmdoc.cardlibrary.CardLibrary;
 import be.degreyt.mmdoc.datamodel.*;
-import com.google.common.collect.ImmutableList;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,12 +10,12 @@ import java.util.List;
 /**
  * Created by WDH on 09/03/14.
  */
-class CardProviderImpl implements CardProvider {
+class CardLibraryImpl implements CardLibrary {
     private List<Card> cards = new ArrayList<>();
 
-    public CardProviderImpl() {
+    public CardLibraryImpl() {
     }
-    public CardProviderImpl(List<Card> cards) {
+    public CardLibraryImpl(List<Card> cards) {
         this.cards.addAll(cards);
     }
 

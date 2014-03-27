@@ -4,10 +4,8 @@ import be.degreyt.mmdoc.byndr.services.ByndrService;
 import be.degreyt.mmdoc.byndr.services.CardCollection;
 import be.degreyt.mmdoc.byndr.services.CardOwnership;
 import be.degreyt.mmdoc.byndr.services.FilterProvider;
-import be.degreyt.mmdoc.cardprovider.CardLoader;
-import be.degreyt.mmdoc.cardprovider.CardProvider;
-import be.degreyt.mmdoc.datamodel.Card;
-import be.degreyt.mmdoc.datamodel.CardBuilder;
+import be.degreyt.mmdoc.cardlibrary.CardLibrary;
+import be.degreyt.mmdoc.cardlibrary.CardLoader;
 import com.google.common.collect.ImmutableSet;
 
 import javax.inject.Inject;
@@ -23,9 +21,9 @@ class ByndrServiceImpl implements ByndrService{
 
     @Override
     public CardCollection load() {
-        CardProvider cardProvider = cardLoader.loadCards();
+        CardLibrary cardLibrary = cardLoader.loadCards();
         ImmutableSet.Builder<CardOwnership> builder = ImmutableSet.builder();
-        cardProvider.getCards().stream().map((card) -> new CardOwnershipImpl(card, 0, 0)).forEach(builder::add);
+        cardLibrary.getCards().stream().map((card) -> new CardOwnershipImpl(card, 0, 0)).forEach(builder::add);
         return new CardCollectionImpl(builder.build());
     }
 

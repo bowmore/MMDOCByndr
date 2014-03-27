@@ -1,8 +1,7 @@
-package be.degreyt.mmdoc.cardprovider;
+package be.degreyt.mmdoc.cardlibrary;
 
 import be.degreyt.mmdoc.datamodel.Card;
 import be.degreyt.mmdoc.datamodel.Expansion;
-import be.degreyt.mmdoc.datamodel.ExpansionInfo;
 
 import java.io.InputStream;
 import java.util.List;

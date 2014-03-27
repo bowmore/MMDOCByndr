@@ -1,19 +1,15 @@
-package be.degreyt.mmdoc.cardprovider.impl;
+package be.degreyt.mmdoc.cardlibrary.impl;
 
-import be.degreyt.mmdoc.cardprovider.CardLoader;
-import be.degreyt.mmdoc.cardprovider.CardParser;
-import be.degreyt.mmdoc.cardprovider.CardProvider;
-import be.degreyt.mmdoc.cardprovider.DataFileEnumerator;
+import be.degreyt.mmdoc.cardlibrary.CardLibrary;
+import be.degreyt.mmdoc.cardlibrary.CardLoader;
+import be.degreyt.mmdoc.cardlibrary.CardParser;
+import be.degreyt.mmdoc.cardlibrary.DataFileEnumerator;
 import be.degreyt.mmdoc.datamodel.*;
-import be.degreyt.mmdoc.exceptions.MissingExpansionCode;
 import be.degreyt.mmdoc.exceptions.UnderlyingIOException;
-import be.degreyt.mmdoc.exceptions.UnderlyingUrlException;
 import com.google.inject.Provider;
 
 import javax.inject.Inject;
 import java.io.*;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -41,8 +37,8 @@ class CardLoaderImpl implements CardLoader {
     }
 
     @Override
-    public CardProvider loadCards() {
-        CardProviderImpl cardProvider = new CardProviderImpl();
+    public CardLibrary loadCards() {
+        CardLibraryImpl cardProvider = new CardLibraryImpl();
         dataFileEnumerator.dataFiles(ROOT_PATH).parallel().map(this::getCards).forEach(cardProvider::add);
         return cardProvider;
     }
